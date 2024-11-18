@@ -1,0 +1,5 @@
+json/ts/
+node_modules/
+ssl/gets/
+
+package-lock.json

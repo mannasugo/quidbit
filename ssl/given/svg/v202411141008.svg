@@ -1,0 +1,16 @@
+<svg class="icon-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <style>
+    g, circle {
+      fill: none;
+      stroke-width: 2; //#00e53f;
+    }
+  </style>
+  <g transform="rotate(16 89)">
+    <!--path stroke="#00e53f" stroke-width="2" d="M12 6 6 12 18 12 12 18"></path-->
+    <path stroke="#07073c" stroke-width="2" d="M10 8 8 10 M8 12 16 12 M16 14 14 16"></path>
+    <circle stroke="#07073c" fill="none" r="2.5" cx="12" cy="6"></circle>
+    <circle stroke="#07073c" fill="none" r="2.5" cx="6" cy="12"></circle>
+    <circle stroke="#07073c" fill="none" r="2.5" cx="18" cy="12"></circle>
+    <circle stroke="#07073c" fill="none" r="2.5" cx="12" cy="18"></circle>
+  </g>
+  </svg>

@@ -1,0 +1,589 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+	font-family: arcane;
+	src: url(/ssl/given/glyphs/v202112201738___gotham___round.otf) format('opentype');
+	font-style: normal;
+	font-weight: 100;
+}
+
+@font-face {
+  font-family: 'consola';
+  src: url('/ssl/given/glyphs/consolas.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'din';
+  src: url('/ssl/given/glyphs/din.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: geometria;
+	src: url(/ssl/given/glyphs/v202203251236.geometria.ttf) format('truetype');
+	font-style: normal;
+	font-weight: 100;
+}
+
+@font-face {
+  font-family: 'litera';
+  src: url('/ssl/given/glyphs/litera.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: naut;
+  src: url(/ssl/given/glyphs/63e613c1e565b81f95046014_neworder-medium.otf) format('opentype');
+  font-style: normal;
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: intext;
+  src: url(/ssl/given/glyphs/PFDinTextUniversalLight.otf) format('opentype');
+  font-style: normal;
+  font-weight: 100;
+}
+
+a, article, body, div, footer, form, h1, h2, h3, h4, header, html, img, label, li, nav, p, section, span, time, ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+a, a:visited {
+  color: #003569;
+  text-decoration: none;
+}
+
+#app, article, div, footer, header, main, nav, section {
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border: 0 solid #000;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#app, body, html {
+  height: 100%;  
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+body, button, input, textarea {
+  letter-spacing: .16px;
+}
+
+body {  
+  color: #191414;
+  font-family: cula;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+#app {
+  z-index: 0;
+  /*background: #000000eb;*/
+}
+
+._xC2 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-ordinal-group: 5;
+  -webkit-order: 4;
+  -ms-flex-order: 4;
+  order: 4;
+}
+
+._gxM, ._gcQ {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+._eYG {
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  margin-left: 12px;
+  overflow: hidden;
+}
+
+._geQ {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 0%;
+  -ms-flex: 1 0 0%;
+  flex: 1 0 0%;
+  margin: 0;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+._-tY, ._aXz {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+._-tY {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.0975);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 22;
+  -webkit-transition: height .2s ease-in-out;
+  transition: height .2s ease-in-out;
+  height: 55px;
+}
+
+._aXz {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 55px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  max-width: 1010px;
+  padding: 26px 40px;
+  -webkit-transition: height .2s ease-in-out;
+  transition: height .2s ease-in-out;
+  width: 100%;
+}
+
+._gZz {
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 0%;
+  -ms-flex: 1 0 0%;
+  flex: 1 0 0%;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+._-Xg {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 9999 0%;
+  -ms-flex: 1 9999 0%;
+  flex: 1 9999 0%;
+  min-width: 40px;
+}
+
+.v202201180941, .v202202122052, .v202203171249, .v202203191304, .v202203261943, .v202203262148, .v202204261406, .v202204282015, .v202205042043, 
+.v202205081343, .v202205081426, .v202205081410, .v202206131254, .v202206131256, .v202206271427, .v202207071159, .v202207071206, .v202207161737,
+.v202301071417, .v202303311456, .v202304191915, .v202310281744, .v202310282005, .v202311051955, .v202311102200, .v202311261657, .v202312061631,
+.v202312231641, .v202312231716, .v202312301635, .v202312301653, .v202401121208, .v202401121214, .v202401121218, .v202410121221, .v20240221434,
+.v202411111124, .v202411141235, .v202411161551 {
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+.v202201180941 {background-image: url(/ssl/given/svg/202201262123.svg);}
+
+.v202202122052 {background-image: url(/ssl/given/svg/202202122052.svg);}
+
+.v202203171249 {background-image: url(/ssl/given/svg/mug___202203171249.svg);}
+
+.v202203191304 {background-image: url(/ssl/given/svg/append___202203191304.svg);}
+
+.v202203261943 {background-image: url(/ssl/given/svg/put_202203261943.svg);}
+
+.v202203262148 {background-image: url(/ssl/given/svg/take_202203262148.svg);}
+
+.v202204261406 {background-image: url(/ssl/given/svg/mug_202204261406.svg); width: 21px; height: 21px}
+
+.v202204282015 {background-image: url(/ssl/given/svg/append_202204282015.svg);}
+
+.v202205042043 {background-image: url(/ssl/given/svg/margin_202205042043.svg);}
+
+.v202205081343 {background-image: url(/ssl/given/svg/wallet_202205081343.svg);}
+
+.v202205081410 {background-image: url(/ssl/given/svg/vault_202205081410.svg);}
+
+.v202205081426 {background-image: url(/ssl/given/svg/pay_202205081426.svg);}
+
+.v202206131254 {background-image: url(/ssl/given/svg/wallet_000_202206131254.svg);}
+
+.v202206131256 {background-image: url(/ssl/given/svg/walletify_000_202206131256.svg);}
+
+.v202206271427 {background-image: url(/ssl/given/svg/pay_202206271427.svg);}
+
+.v202207071159 {background-image: url(/ssl/given/svg/take_202207071159.svg);}
+
+.v202207071206 {background-image: url(/ssl/given/svg/put_202207071206.svg);}
+
+.v202207161737 {background-image: url(/ssl/given/svg/find_202207161737.svg);}
+
+.v202301071417 {background-image: url(/ssl/given/svg/recent_202301071417.svg);}
+
+.v202303311456 {background-image: url(/ssl/given/svg/bin_202303311456.svg);}
+
+.v202304191915 {background-image: url(/ssl/given/svg/joltnaut_202304191915.svg);}
+
+.v202310281744 {background-image: url(/ssl/given/svg/io_202310281744.svg);}
+
+.v202310282005 {background-image: url(/ssl/given/svg/bag_202310282005.svg);}
+
+.v202311051955 {background-image: url(/ssl/given/svg/exit_202311051955.svg);}
+
+.v202311102200 {background-image: url(/ssl/given/svg/filter_202311102200.svg);}
+
+.v202311261657 {background-image: url(/ssl/given/svg/last_202311261657.svg);}
+
+.v202312061631 {background-image: url(/ssl/given/svg/to_202312061631.svg);}
+
+.v202312231641 {background-image: url(/ssl/given/svg/margin_202312231641.svg);}
+
+.v202312231716 {background-image: url(/ssl/given/svg/io_202312231716.svg);}
+
+.v202312301635 {background-image: url(/ssl/given/svg/wallet_202312301635.svg);}
+
+.v202312301653 {background-image: url(/ssl/given/svg/vault_202312301653.svg);}
+
+.v202401121208 {background-image: url(/ssl/given/svg/bag_202401121208.svg);}
+
+.v202401121214 {background-image: url(/ssl/given/svg/io_202401121214.svg);}
+
+.v202401121218 {background-image: url(/ssl/given/svg/put_202401121218.svg);}
+
+.v202410121221 {background-image: url(/ssl/given/svg/take_202410121221.svg);}
+
+.v20240221434 {background-image: url(/ssl/given/svg/bull_20240221434.svg);}
+
+.v202411111124 {background-image: url(/ssl/given/svg/v202411111124.svg);}
+
+.v202411141235 {background-image: url(/ssl/given/svg/v202411141235.svg);}
+
+.v202411161551 {background-image: url(/ssl/given/svg/v202411161551.svg);}
+
+._aA2, ._aA2:visited {color: #000;}
+
+._gZ + ._gZ {border-top: 1px solid #f4f4f4}
+
+._aXZ {width: 100%;}
+
+._-Zz {display: none}
+
+._sZ2 {margin-bottom: 24px;}
+
+#file {display: none !important;}
+
+._tXx {font-weight: 600;}
+
+#cellSlots h2, #inVaultSlot h2 {text-transform: uppercase;font-size: 11px;font-weight: 900;}
+
+#cellSlots #tip {background:#fffbbf; border-radius: 8px;color: #a69c00;font-weight: 900;line-height: 17px;margin-top: 24px; padding: 8px 16px}
+
+#idVaultSlot h2, #inletWallet h2 {padding: 32px 0 8px;width: 100%;margin: 0;text-transform: uppercase;font-size: 11px;font-weight: 900; text-align: center;}
+
+#idVaultSlot h2 {text-align: left}
+
+#idVaultSlot h4 {color: #666;font-size: 12px;text-align: left}
+
+#inVaultSlot #rateSwap, #p2p #rateSwap {color: #666;font-family: geometria;font-weight: 300;margin-top: 12px;text-transform: uppercase;}
+
+#vaults > div {margin-top: 12px}
+
+#vaultOpt > div {border: 1px solid #e3e3e3; border-radius: 12px;font-weight: 600; margin-top: 12px; padding: 12px 14px}
+
+#vaultSlots > div {font-weight: 600; margin-top: 12px; padding: 12px 14px}
+
+#vaultSlots #slotMug {font-size: 11px;font-weight: 300; margin-left: 12px}
+
+#vaultSlots #slotCell {font-family: geometria;font-weight: 300}
+
+#cellSlots #OptColor, #vaultOpt #OptColor, #vaultSlots #slotColor {height: 14px;margin-right: 8px;width: 4px}
+
+#clientSlot h2, #mugin h2, #vowCoin h2 {padding: 32px 0 8px;width: 100%;margin: 0;text-transform: capitalize;font-weight: normal;}
+
+#clientSlot input, #mugin input {font-family: litera;}
+
+#cellSlots input, #clientSlot input, #contactSlot input, #inletWallet input, #inVaultSlot input, #mugin input, #pitvalue, #wallet input, #inlet, #vow, textarea, #getFloat, 
+#putFloat, #viafloat, #vialet {
+  block-size: 40px;
+  background-color:#f4f4f4;
+  color:#171a20;
+  font-size: 12px;
+  line-height: 1.414;
+  font-weight: 500;
+  padding: 10px 20px;
+  border:1px solid transparent;
+  border-radius: 20px;
+  letter-spacing: 1.21px;
+}
+
+#pitvalue {padding: 0 12px; font-size: 12px}
+
+#pitvalue input {padding: 10px 8px; text-align: right; font-family: geometria; font-size: 12px}
+
+#clientSlot input:focus, #inletWallet input:focus, #mugin input:focus, #inlet:focus, #vow:focus, textarea:focus, #getFloat:focus, #putFloat:focus, #viafloat:focus, #vialet:focus {
+  border: 1px solid #d0d1d2;
+  outline: none;
+}
+
+#inletWallet input, #inVaultSlot input{font-family: geometria;font-weight: 600}
+
+#pitvalue input:focus {outline: none}
+
+._tY0 {letter-spacing: 1.2px;line-height: 1.5rem;}
+
+._gM_a { border: 1px solid #1185fe;border-radius: 6px;}
+
+._guZ { background: none; }
+
+._agM { background: #1185fe; border-radius: 100px; }
+
+._aWz { width: 100%;height: 100%; }
+
+._UQe, ._dMG, ._ZVP {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+._-xQy > ._dMG, ._4tx { font-size: 24px; line-height: 30px; }
+
+._TX_a, ._TX_a:visited {
+  min-width: 92px;
+  text-align: center;
+  box-sizing: border-box;
+  color: #1185fe;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 8.5px 16px;
+}
+
+._TX_a:active { background: rgba(17,133,254,.1); }
+
+._atX, ._atX:visited { color: #fff; }
+
+._glyph_202203191319 { font-family: arcane;letter-spacing: normal; }
+
+._limit_202203261823 + ._limit_202203261823 {border-top: 1px solid #f4f4f4}
+
+._wrap_202203262208 {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 24px 0;
+  overflow: hidden;
+}
+
+._wrap_202203262208 #coin { width: 60% }
+
+._wrap_202203262208 #coin-meta { width: 40% }
+
+._wrap_202203262208 #pitaxis { width: 65% }
+
+._wrap_202203262208 #pittools { width: 35% }
+
+._wrap_202203262208 #put, ._wrap_202203262208 #take { width: 50%; }
+
+._wrap_202203262208 #coin, ._wrap_202203262208 #pitaxis, ._wrap_202203262208 #put { padding-right: 15px }
+
+._wrap_202203262208 #coin-meta, ._wrap_202203262208 #pittools, ._wrap_202203262208 #take { padding-left: 15px; }
+
+#reals a, #reals a:visited, #reals span { color: #5841d8; font-weight: 600; cursor: pointer; }
+
+#pitmove span { width: 100%; padding: 12px 0; color: #1bd401; font-size: 13px; font-weight: 600; opacity: .3; cursor: pointer; text-align: center; }
+
+#pittype span {padding: 1px 8px; line-height: 13px; color: #1bd401; font-size: 12px; font-weight: 300; opacity: .3; cursor: pointer; }
+
+.sort + .sort { border-left: 1px solid #a6a6a6 }
+
+#pitamount input { width: 65%; font-family: geometria; font-size: 12px; text-align: right;}
+
+#pittile span {/*padding: 1px 8px; line-height: 13px; color: #1bd401; */font-size: 12px; opacity: .3; }
+
+#pitmoves span, .asset {font-family: geometria; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+#buy {width: 65%;}
+
+#buyline {width: 35%; /*padding-left: 24px*/}
+
+#buy div {align-items: start}
+
+.parallelo { padding: 12px 24px; background: #1bd401; color: #fff; font-family: geometria; font-size: 13px; cursor: pointer; text-align: center; }
+
+#quant, #bitpitsvg {width: 60%}
+
+#quantsvg, #bitpit {width: 40%}
+
+#bitpitsvg {margin-bottom: 24px; padding-right: 96px}
+
+.foot {width: 33.333333%; margin-bottom: 24px}
+
+.foot-title {margin-bottom: 12px; font-weight: 600; opacity: .5}
+
+.foot a, .foot a:visited {width: max-content; margin-top: 6px; font-size: 11px; font-weight: 600; color: #262626}
+
+#foot {padding: 24px; background: #fff; color: #262626;}
+
+#holds #foot {background: #262626; color: #fff;}
+
+#holds #foot .foot a {color: #fff; font-size: 12px; font-weight: 300}
+
+.spot-title-box {width: 30%}
+
+.spot-margin-box, .spot-wallet-box {width: 35%}
+
+.flex-z {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 0%;
+  -ms-flex: 1 0 0%;
+  flex: 1 0 0%;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.spot-margin-box, .spot-wallet-box, .trail-z-box {padding-left: 24px}
+
+.trail-a-box {width: 40%}
+
+.trail-z-box {width: 60%}
+
+.trail-svg {/*margin-right: 12px*/}
+
+.view-box {position: absolute; top: 0; right: 0; bottom: 0; left: 0}
+
+.title-box {height: 33px; border-bottom: 1px solid #ffffff26}
+
+.top-slide {line-height: 13px; margin-left: 8px; font-family: geometria;}
+
+.wallet-text {padding: 6px 24px; background: #f4f4f4; border-radius: 20px; font-family: consola; font-size: 13px; color: #48007c;}
+
+#vialet, #tx {font-family: consola; font-size: 11px}
+
+#tx, #tx:visited {color: #48007c;}
+
+@media (min-width: 600px) {
+
+  #mugs {justify-content: center;}
+
+  #mugs > ._aXZ {border: 1px solid #f4f4f4;border-radius: 4px;margin: 55px 0}
+
+  #clientSlot h2, #mugin h2, #vowCoin h2 {letter-spacing: -.5px;font-size: 28px;font-weight:normal;line-height: 36px;color:#000;}
+}
+
+@media (max-width: 920px) {
+
+	._wrap_202203262208 #coin, ._wrap_202203262208 #coin-meta, ._wrap_202203262208 #pitaxis, ._wrap_202203262208 #pittools, 
+	._wrap_202203262208 #put, ._wrap_202203262208 #take {
+		width: 100%; padding: 0 }
+
+	._wrap_202203262208 #coin-meta, ._wrap_202203262208 #pittools, ._wrap_202203262208 #take { margin-top: 45px }
+}
+
+@media (max-width: 620px) {
+
+  .spot-margin-box, .spot-title-box, .spot-wallet-box, .trail-a-box, .trail-z-box {width: 100%}
+
+  .spot-margin-box, .spot-wallet-box, .trail-z-box {padding-left: 0}
+
+  .flex-y {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 599px) {
+
+  #clientSlot h2, #mugin h2, #vowCoin h2 {font-size: 25px;line-height: 28px}
+
+  #buy, #buyline {width: 100%; padding: 0; text-align: center;}
+
+  #buyline {margin-top: 24px}
+
+  #buy div {align-items: unset;}
+
+  #quant, #quantsvg {width: 100%}
+
+  #bitpit, #bitpitsvg {width: 100%; padding: 0}
+
+  .unsqueeze {align-items: unset; flex: unset;}
+
+  .foot {width: 50%}
+
+  .wallet-text {padding: 6px 8px; font-size: 11px; text-align: center;}
+}
