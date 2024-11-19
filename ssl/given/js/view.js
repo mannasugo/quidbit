@@ -159,9 +159,29 @@ let Models = {
 							[[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, `-`]]], 
 						[`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
 							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `-`]]]]])
-		});
+			});
+		}
 
+		if (Arg[0][0] === `fiat` && Arg[0][1] === `index`) {
 
+			Arg[1].utils.forEach(Fiat => {
+
+				DOM.push([`div`, {id: ``, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
+					[
+						[`div`, {class: `_geQ _gxM`, style: {overflow: `hidden`, [`width`]: `${20}%`}}, 
+							[
+								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Fiat.fiat]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
+								[`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Fiat.feat[3]}`]]]]], 
+						[`div`, {style: {width: `${10}%`}}, [[`span`, {style: {color: `#fff`, [`font-size`]: `${12}px`, [`font-weight`]: 600, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Fiat.fiat}`]]], 
+						[`div`, {style: {width: `${22.5}%`}}, 
+							[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, `${Fiat.column[0]}`]]], 
+						[`div`, {style: {width: `${15}%`}}, 
+							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `${Fiat.column[1]}%`]]], 
+						[`div`, {style: {width: `${15}%`}}, 
+							[[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, `-`]]], 
+						[`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
+							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `-`]]]]])
+			});
 		}
 
 		return DOM;

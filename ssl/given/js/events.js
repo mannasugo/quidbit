@@ -53,6 +53,29 @@ class Event {
 						View.DOM([`#row div`, Models.utilApp([[`tokens`, `index`], Web])]);
 					}
 				}
+
+				if (this.getSource(S).getAttribute(`for`) === `fiat`) {
+
+					document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `currency`;
+
+					document.querySelector(`#row div`).innerHTML = ``;
+
+					let Puts = Tools.pull([
+						`/json/web`, {
+							flag: [`fiat`, `index`],
+							mug: (Clients.mug) ? Clients.mug: false,
+							pull: `util`
+					}]);
+
+					Puts.onload = () => {
+
+						let Web = Tools.typen(Puts.response);
+
+						View.pop();
+
+						View.DOM([`#row div`, Models.utilApp([[`fiat`, `index`], Web])]);
+					}
+				}
 			}]);});
 	}
 }
