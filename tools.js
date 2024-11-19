@@ -84,13 +84,23 @@ class Tools {
 
 	utils (Arg) {
 
-		if (Arg[0] === `index` && Arg[1] === `fiat`) {
+		let Util = [];
 
-			let Util = [];
+		if (Arg[0] === `index` && Arg[1] === `fiat`) {
 
 			Constants.fiat.forEach(Fiat => {
 
 				Util.push({fiat: Fiat[0], column: [Fiat[4].toFixed(Fiat[1]), (0).toFixed(2), 0, 0], feat: Fiat});
+			});
+
+			return Util;
+		}
+
+		if (Arg[0] === `index` && Arg[1] === `tokens`) {
+
+			Constants.tokens.forEach(Coin => {
+
+				Util.push({token: Coin[0], column: [Coin[4].toFixed(Coin[1]), (0).toFixed(2), 0, 0], feat: Coin});
 			});
 
 			return Util;
@@ -113,6 +123,20 @@ let Constants = {
 		[`SEK`, 5, hold, `swedish krone`, 1/10.47923],
 		[`ZAR`, 5, hold, `south african rand`, 1/18.18274]
 		//[`us`, `USD`, `us dollar`]
+	], 
+
+	tokens: [
+		[`BNB`, 3, hold, `binance coin`, 0],
+		[`BTC`, 2, hold, `bitcoin`, 0],
+		[`DOGE`, 5, hold, `dogecoin`, 0],
+		[`ETH`, 2, hold, `ethereum`, 0],
+		/*[`GBP`, 5, hold, `sterling pound`, 1.26926],
+		[`JPY`, 5, hold, `japanese yen`, 1/156],
+		[`KES`, 5, hold, `kenyan shilling`, 1/127],
+		[`NOK`, 5, hold, `norwegian krone`, 1/10.55071],
+		[`NZD`, 5, hold, `new zealand dollar`, .61226],
+		[`SEK`, 5, hold, `swedish krone`, 1/10.47923],
+		[`ZAR`, 5, hold, `south african rand`, 1/18.18274]*/
 	]
 }
 

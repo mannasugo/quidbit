@@ -84,6 +84,15 @@ class Route {
 
 								Arg[1].end(Tools.coats({
 									mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
+							}
+
+							if (Pulls.pull === `util`) {
+
+								if (Pulls.flag[0] === `tokens` && Pulls.flag[1] === `index`) {
+
+									Arg[1].end(Tools.coats({
+										mug: Pulls.mug, utils: Tools.utils([`index`, `tokens`])}));
+								}
 							}});}}});
 		}
 	}
