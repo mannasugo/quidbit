@@ -31,28 +31,7 @@ class Event {
 
 				this.getSource(S).style.opacity = 1;
 
-				if (this.getSource(S).getAttribute(`for`) === `tokens`) {
-
-					document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `token`;
-
-					document.querySelector(`#row div`).innerHTML = ``;
-
-					let Puts = Tools.pull([
-						`/json/web`, {
-							flag: [`tokens`, `index`],
-							mug: (Clients.mug) ? Clients.mug: false,
-							pull: `util`
-					}]);
-
-					Puts.onload = () => {
-
-						let Web = Tools.typen(Puts.response);
-
-						View.pop();
-
-						View.DOM([`#row div`, Models.utilApp([[`tokens`, `index`], Web])]);
-					}
-				}
+				document.querySelectorAll(`#column div`)[1].querySelector(`span`).innerHTML = `symbol`;
 
 				if (this.getSource(S).getAttribute(`for`) === `fiat`) {
 
@@ -74,6 +53,56 @@ class Event {
 						View.pop();
 
 						View.DOM([`#row div`, Models.utilApp([[`fiat`, `index`], Web])]);
+					}
+				}
+
+				if (this.getSource(S).getAttribute(`for`) === `spot`) {
+
+					document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `pair`;
+
+					document.querySelectorAll(`#column div`)[1].querySelector(`span`).innerHTML = ``;
+
+					document.querySelectorAll(`#column div`)[2].querySelector(`span`).innerHTML = `last trade`;
+
+					document.querySelector(`#row div`).innerHTML = ``;
+
+					let Puts = Tools.pull([
+						`/json/web`, {
+							flag: [`spot`, `index`],
+							mug: (Clients.mug) ? Clients.mug: false,
+							pull: `util`
+					}]);
+
+					Puts.onload = () => {
+
+						let Web = Tools.typen(Puts.response);
+
+						View.pop();
+
+						View.DOM([`#row div`, Models.utilApp([[`spot`, `index`], Web])]);
+					}
+				}
+
+				if (this.getSource(S).getAttribute(`for`) === `tokens`) {
+
+					document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `token`;
+
+					document.querySelector(`#row div`).innerHTML = ``;
+
+					let Puts = Tools.pull([
+						`/json/web`, {
+							flag: [`tokens`, `index`],
+							mug: (Clients.mug) ? Clients.mug: false,
+							pull: `util`
+					}]);
+
+					Puts.onload = () => {
+
+						let Web = Tools.typen(Puts.response);
+
+						View.pop();
+
+						View.DOM([`#row div`, Models.utilApp([[`tokens`, `index`], Web])]);
 					}
 				}
 			}]);});

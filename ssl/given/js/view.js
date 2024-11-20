@@ -120,7 +120,7 @@ let Models = {
 										[
 											[`span`, {class: `A0`, for: `fiat`, style: {[`font-weight`]: 600, margin: `${6}px ${12}px ${6}px ${0}`}}, `Currencies`],
 											[`span`, {class: `A0`, for: `tokens`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Tokens`],
-											[`span`, {class: `A0`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Spot`],
+											[`span`, {class: `A0`, for: `spot`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Spot`],
 											[`span`, {class: `A0`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Commodities`]]],
 									[`div`, {class: `_gxM _geQ`, style: {}}, 
 										[
@@ -140,28 +140,6 @@ let Models = {
 
 		let DOM = [];
 
-		if (Arg[0][0] === `tokens` && Arg[0][1] === `index`) {
-
-			Arg[1].utils.forEach(Coin => {
-
-				DOM.push([`div`, {id: ``, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
-					[
-						[`div`, {class: `_geQ _gxM`, style: {overflow: `hidden`, [`width`]: `${20}%`}}, 
-							[
-								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Coin.token]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
-								[`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Coin.feat[3]}`]]]]], 
-						[`div`, {style: {width: `${10}%`}}, [[`span`, {style: {color: `#fff`, [`font-size`]: `${12}px`, [`font-weight`]: 600, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Coin.token}`]]], 
-						[`div`, {style: {width: `${22.5}%`}}, 
-							[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, `${Coin.column[0]}`]]], 
-						[`div`, {style: {width: `${15}%`}}, 
-							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `${Coin.column[1]}%`]]], 
-						[`div`, {style: {width: `${15}%`}}, 
-							[[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, `-`]]], 
-						[`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
-							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `-`]]]]])
-			});
-		}
-
 		if (Arg[0][0] === `fiat` && Arg[0][1] === `index`) {
 
 			Arg[1].utils.forEach(Fiat => {
@@ -177,6 +155,53 @@ let Models = {
 							[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, `${Fiat.column[0]}`]]], 
 						[`div`, {style: {width: `${15}%`}}, 
 							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `${Fiat.column[1]}%`]]], 
+						[`div`, {style: {width: `${15}%`}}, 
+							[[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, `-`]]], 
+						[`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
+							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `-`]]]]])
+			});
+		}
+
+		if (Arg[0][0] === `spot` && Arg[0][1] === `index`) {
+
+			Arg[1].utils.forEach(Spot => {
+
+				DOM.push([`div`, {id: ``, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
+					[
+						[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${30}%`}}, 
+							[
+								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[0]]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}],
+								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[1]]}.svg`, style: {height: `${20}px`,[`max-width`]: `${20}px`, transform: `translateX(${-6.6667}px)`}}], 
+								[`div`, {class: `_gxM`, style: {[`align-items`]: `baseline`}}, 
+									[ 
+										[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Spot.pair[0]}`], 
+										[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Spot.pair[1]}`]]]]], 
+						[`div`, {style: {width: `${22.5}%`}}, 
+							[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, `${Spot.column[0]}`]]], 
+						[`div`, {style: {width: `${15}%`}}, 
+							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `${Spot.column[1]}%`]]], 
+						[`div`, {style: {width: `${15}%`}}, 
+							[[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, `-`]]], 
+						[`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
+							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `-`]]]]])
+			});
+		}
+
+		if (Arg[0][0] === `tokens` && Arg[0][1] === `index`) {
+
+			Arg[1].utils.forEach(Coin => {
+
+				DOM.push([`div`, {id: ``, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
+					[
+						[`div`, {class: `_geQ _gxM`, style: {overflow: `hidden`, [`width`]: `${20}%`}}, 
+							[
+								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Coin.token]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
+								[`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Coin.feat[3]}`]]]]], 
+						[`div`, {style: {width: `${10}%`}}, [[`span`, {style: {color: `#fff`, [`font-size`]: `${12}px`, [`font-weight`]: 600, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Coin.token}`]]], 
+						[`div`, {style: {width: `${22.5}%`}}, 
+							[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, `${Coin.column[0]}`]]], 
+						[`div`, {style: {width: `${15}%`}}, 
+							[[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, `${Coin.column[1]}%`]]], 
 						[`div`, {style: {width: `${15}%`}}, 
 							[[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, `-`]]], 
 						[`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 

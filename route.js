@@ -88,16 +88,22 @@ class Route {
 
 							if (Pulls.pull === `util`) {
 
-								if (Pulls.flag[0] === `tokens` && Pulls.flag[1] === `index`) {
-
-									Arg[1].end(Tools.coats({
-										mug: Pulls.mug, utils: Tools.utils([`index`, `tokens`])}));
-								}
-
 								if (Pulls.flag[0] === `fiat` && Pulls.flag[1] === `index`) {
 
 									Arg[1].end(Tools.coats({
 										mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
+								}
+
+								if (Pulls.flag[0] === `spot` && Pulls.flag[1] === `index`) {
+
+									Arg[1].end(Tools.coats({
+										mug: Pulls.mug, utils: Tools.utils([`index`, `spot`])}));
+								}
+
+								if (Pulls.flag[0] === `tokens` && Pulls.flag[1] === `index`) {
+
+									Arg[1].end(Tools.coats({
+										mug: Pulls.mug, utils: Tools.utils([`index`, `tokens`])}));
 								}
 							}});}}});
 		}

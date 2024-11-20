@@ -96,6 +96,16 @@ class Tools {
 			return Util;
 		}
 
+		if (Arg[0] === `index` && Arg[1] === `spot`) {
+
+			Constants.plot.forEach(Plot => {
+
+				Util.push({pair: Plot[0], column: [(0).toFixed(Plot[1]), (0).toFixed(2), 0, 0]});
+			});
+
+			return Util;
+		}
+
 		if (Arg[0] === `index` && Arg[1] === `tokens`) {
 
 			Constants.tokens.forEach(Coin => {
@@ -122,7 +132,34 @@ let Constants = {
 		[`NZD`, 5, hold, `new zealand dollar`, .61226],
 		[`SEK`, 5, hold, `swedish krone`, 1/10.47923],
 		[`ZAR`, 5, hold, `south african rand`, 1/18.18274]
-		//[`us`, `USD`, `us dollar`]
+	],
+
+	plot: [
+		[[`AUD`, `USD`], 5, hold],
+		[[`BNB`, `USD`], 3, hold],
+		[[`BTC`, `AUD`], 2, hold],
+		[[`BTC`, `EUR`], 2, hold],
+		[[`BTC`, `USD`], 2, hold],
+		[[`BTC`, `USDT`], 2, hold],
+		[[`DOGE`, `USD`], 5, hold],
+		[[`ETH`, `BTC`], 5, hold]
+		/*[`ETH`, `USD`], 
+		[`EUR`, `USD`], 
+		[`GBP`, `USD`], 
+		[`USD`, `KES`], 
+		[`LTC`, `USD`],  
+		[`NZD`, `USD`], 
+		[`SOL`, `USD`],  
+		[`USD`, `CAD`], 
+		[`USD`, `CHF`], 
+		[`USD`, `JPY`], 
+		[`USD`, `NOK`], 
+		[`USD`, `SEK`], 
+		[`USDC`, `USD`], 
+		[`USDT`,`USD`], 
+		[`XMR`, `USD`], 
+		[`XRP`, `USD`], 
+		[`USD`, `ZAR`]*/
 	], 
 
 	tokens: [
@@ -130,11 +167,12 @@ let Constants = {
 		[`BTC`, 2, hold, `bitcoin`, 0],
 		[`DOGE`, 5, hold, `dogecoin`, 0],
 		[`ETH`, 2, hold, `ethereum`, 0],
-		/*[`GBP`, 5, hold, `sterling pound`, 1.26926],
-		[`JPY`, 5, hold, `japanese yen`, 1/156],
-		[`KES`, 5, hold, `kenyan shilling`, 1/127],
-		[`NOK`, 5, hold, `norwegian krone`, 1/10.55071],
-		[`NZD`, 5, hold, `new zealand dollar`, .61226],
+		[`LTC`, 2, hold, `litecoin`, 0],
+		[`SOL`, 2, hold, `solana`, 0],
+		[`USDC`, 5, hold, `USD Coin`, 0],
+		[`USDT`, 5, hold, `tether`, 0],
+		[`XRP`, 5, hold, `ripple`, 0],
+		/*[`NZD`, 5, hold, `new zealand dollar`, .61226],
 		[`SEK`, 5, hold, `swedish krone`, 1/10.47923],
 		[`ZAR`, 5, hold, `south african rand`, 1/18.18274]*/
 	]
