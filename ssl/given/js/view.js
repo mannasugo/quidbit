@@ -101,11 +101,11 @@ let Models = {
 		return [
 			`main`, {id: `app`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
 				[
-					[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #1e1e1e`, padding: `${10}px ${24}px`, position: `fixed`, width: `${100}%`, [`z-index`]: 11}}, 
+					[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #1e1e1e`, height: `${48}px`, padding: `${0}px ${24}px`, position: `fixed`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
-								[`span`, {class: `v202411161551`, style: {height: `${24}px`, width: `${24}px`}}], 
-								[`div`, {class: `_eYG`}, 
+								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 600, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`, [`margin-left`]: `${24}px`}}, 
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]],  
 								[`div`, {class: `_eYG`}, []], 
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
@@ -134,6 +134,65 @@ let Models = {
 								[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300}}, `Quidbit ®`],
 								[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 600}}, `2024`], 
 								[`div`, {class: `_gZz`}, [[`span`, {style: {color: `#535353`, [`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 300}}, `v0.24.3`]]]]]]]]];
+	},
+
+	plot: (Arg) => {
+
+		return [
+			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
+				[
+					[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
+						[[`div`, {class: `_gxM _geQ`}, 
+							[
+								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 600, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
+									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
+								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
+									[[`a`, {class: `v202204261406`, href: (!Clients.mug)? `/signin`: `javascript:;`, style: {height: `${16}px`, width: `${16}px`}}]]]]]]],
+					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
+						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
+							[
+								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: 0, padding: `${6}px ${12}px`}}, `${1}M`]]]]],
+					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
+						[
+							[`div`, {style: {width: `${80}%`}}, 
+								[[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {}/*{transform: `translateX(${(X > 540)? -20: -670}px)`}*/}, 
+									[ 
+										//[`g`, {}, Plot[0]],
+										//[`g`, {id: `XYKline`}, Plot[1]], 
+										[`g`, {}, 
+											[
+												[`path`, {id: `bullseye`, stroke: `#6a6a6a`, d: ``}], 
+												[`path`, {id: `spotline`, [`stroke-dasharray`]: 2, d: ``}]]]]]]], 
+							[`div`, {style: {width: `${20}%`}}, 
+								[[`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
+									[
+										[`g`, {id: `spotY`}, 
+											[
+												[`rect`, {id: `a`, x: 0, height: 20, width: 80}], 
+												[`path`, {id: `c`, stroke: `#fff`, d: ``}],
+												/*Plot[2]*/]], 
+										[`g`, {id: `floatY`, style: {display: `none`}}, 
+											[
+												[`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#ffffff3b`}],
+												[`path`, {id: `c`, stroke: `#fff`, d: ``}],
+												[`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: 0}, ``]]]]]]]]], 
+					//this.plotform([Arg.pair.split(`-`)]),
+					[`div`, {id: `collapsible`, style: {background: `#000000c9`, top: `${77}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
+						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
+					[`div`, {id: `collapsible`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, height: `${27}px`, overflow: `hidden`, position: `absolute`, width: `${80}%`}}, 
+						[[`svg`, {id: `time`, width: `${24*172}px`, style: {/*transform: `translateX(${(X > 540)? -20: -670}px)`*/}}, 
+								[[`g`, {}, /*Plot[3]*/]]]]], 
+					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
+						[[`div`, {class: `_gxM _geQ`}, 
+							[
+								[`a`, {id: `form`, class: `v202312231716`, href: `javascript:;`, style: {height: `${18}px`, width: `${18}px`}}], 
+								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
+									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `order form`]]],
+								[`a`, {id: `chart`, class: `v202312231641`, href: `javascript:;`, style: {height: `${18}px`, [`margin-left`]: `${24}px`, width: `${18}px`}}], 
+								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
+									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `charts`]]]]]]]]];	
 	},
 
 	utilApp: (Arg) => {
@@ -172,7 +231,7 @@ let Models = {
 							[
 								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[0]]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}],
 								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[1]]}.svg`, style: {height: `${20}px`,[`max-width`]: `${20}px`, transform: `translateX(${-6.6667}px)`}}], 
-								[`a`, {href: `javascript:;`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`}}, 
+								[`a`, {href: `/trade/${Spot.pair[0]}_${Spot.pair[1]}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`}}, 
 									[ 
 										[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Spot.pair[0]}`], 
 										[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Spot.pair[1]}`]]]]], 

@@ -32,6 +32,13 @@ class Tools {
 		return this.call;
 	}
 
+  	slim (String) {
+
+		if (!String || String.length < 1 || String.match(/^(\s+)$/)) return;
+
+		return String;
+  	}
+
 	typen (coat) { return JSON.parse(coat); }
 }
 

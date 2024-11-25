@@ -86,6 +86,21 @@ class Route {
 									mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
 							}
 
+							if (Pulls.pull === `plot`) {
+
+								let S = {};
+
+								Constants.plot.forEach(Plot => {
+
+									if (Plot[0][0] === Pulls.plot[0] && Plot[0][1] === Pulls.plot[1]) S.plot = Plot;
+								});
+
+								if (!S.plot) return;
+
+								Arg[1].end(Tools.coats({
+									plot: S.plot}));
+							}
+
 							if (Pulls.pull === `util`) {
 
 								if (Pulls.flag[0] === `fiat` && Pulls.flag[1] === `index`) {
