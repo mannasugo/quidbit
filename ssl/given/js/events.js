@@ -33,6 +33,8 @@ class Event {
 
 				document.querySelectorAll(`#column div`)[1].querySelector(`span`).innerHTML = `symbol`;
 
+				document.querySelectorAll(`#column div`)[2].querySelector(`span`).innerHTML = `price(usd)`;
+
 				if (this.getSource(S).getAttribute(`for`) === `fiat`) {
 
 					document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `currency`;
@@ -80,6 +82,8 @@ class Event {
 						View.pop();
 
 						View.DOM([`#row div`, Models.utilApp([[`spot`, `index`], Web])]);
+
+						mouseup();
 					}
 				}
 
@@ -105,7 +109,23 @@ class Event {
 						View.DOM([`#row div`, Models.utilApp([[`tokens`, `index`], Web])]);
 					}
 				}
-			}]);});
+		}]);});
+
+		let mouseup = () => {
+
+			 document.querySelectorAll(`#row > div > div`).forEach(ROWDIV => {
+
+				this.listen([ROWDIV, `mouseover`, S => {
+
+					document.querySelectorAll(`#row > div > div  a`).forEach(A => {
+
+						A.style.textDecoration = `unset`;
+					});
+
+					if (!this.getSource(S).querySelector(`a`)) return;
+
+					this.getSource(S).querySelector(`a`).style.textDecoration = `underline`;}])});
+		}
 	}
 }
 

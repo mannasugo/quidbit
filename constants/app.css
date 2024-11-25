@@ -3,20 +3,6 @@
 }
 
 @font-face {
-	font-family: arcane;
-	src: url(/ssl/given/glyphs/v202112201738___gotham___round.otf) format('opentype');
-	font-style: normal;
-	font-weight: 100;
-}
-
-@font-face {
-  font-family: 'consola';
-  src: url('/ssl/given/glyphs/consolas.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'din';
   src: url('/ssl/given/glyphs/din.ttf') format('truetype');
   font-weight: 100;
@@ -101,7 +87,7 @@ body, button, input, textarea {
 
 body {  
   color: #191414;
-  font-family: cula;
+  font-family: litera;
   font-size: 16px;
   font-weight: 300;
 }
@@ -321,6 +307,12 @@ body {
 .v202411141235 {background-image: url(/ssl/given/svg/v202411141235.svg);}
 
 .v202411161551 {background-image: url(/ssl/given/svg/v202411161551.svg);}
+
+#row > div > div:hover {background: #4848481c}
+
+#row > div > div  a:hover {text-decoration: underline}
+
+/** **/
 
 ._aA2, ._aA2:visited {color: #000;}
 
