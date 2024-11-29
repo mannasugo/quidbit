@@ -126,7 +126,18 @@ class Route {
 
 	io (App) {
 
-		App.on(`connection`, Polling => {	});
+		App.on(`connection`, Polling => {
+
+			setInterval(() => {
+
+				readFile(`json/SPOT_BOOK.json`, {encoding: `utf8`}, (flaw, Coat) => {
+
+					Coat = Tools.typen(Coat);
+
+					if (Coat.length > 0) App.emit(`SPOT_BOOK`, Coat);
+				});
+
+			}, 4000);});
 	}
 }
 

@@ -22,3 +22,5 @@ App.on(`error`, (err) => console.error(err));
 App.listen(8124);
 
 io(require(`socket.io`)(App));
+
+Tools.plot([(Spot) => {}]);

@@ -16,6 +16,18 @@ class Event {
 
 	app () {
 
+		io().on(`SPOT_BOOK`, Spot => {
+
+			let Plot = {};
+
+			Spot.forEach(AB => { 
+
+				Plot[AB[0]] = [AB[1]];
+
+				if (document.querySelector(`#${AB[0]}`)) document.querySelector(`#${AB[0]} #COST`).innerHTML = AB[1];
+			});
+		});
+
 		document.querySelectorAll(`.A0`).forEach(A0 => {
 
 			this.listen([A0, `click`, S => {

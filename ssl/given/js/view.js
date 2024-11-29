@@ -225,7 +225,7 @@ let Models = {
 
 			Arg[1].utils.forEach(Spot => {
 
-				DOM.push([`div`, {id: ``, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
+				DOM.push([`div`, {id: `${Spot.pair.toString().replace(`,`, `-`)}`, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
 					[
 						[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${30}%`}}, 
 							[

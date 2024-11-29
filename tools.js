@@ -6,9 +6,11 @@ const { mkdir, readFile, readFileSync, stat, writeFileSync } = require(`fs`);
 
 const { createHash } = require(`crypto`);
 
-//const RQ = require(`request`);
+const RQ = require(`request`);
 
 const hold = new Date(`1996-01-20`).valueOf();
+
+const DAY = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf();
 
 class Sql {
 	
@@ -81,6 +83,92 @@ class Tools {
 	constructor () {}
 
 	coats (types) { return JSON.stringify(types); }
+
+	plot (Raw) {
+
+		Constants.plot.forEach(Plot => {
+
+			stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, (bug, Stat) => {
+
+				if (bug) writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+			});
+		});
+
+			//let Spot = [];
+
+		setInterval(() => {
+
+			let Spot = [];
+
+			//{"data":{"amount":"3483.535","base":"ETH","currency":"USD"}}
+
+			Constants.plot.forEach(Plot => {
+
+				stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, (bug, Stat) => {
+
+					if (bug) writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, this.coats([]));
+
+					RQ(`https://api.coinbase.com/v2/prices/${Plot[0][0]}-${Plot[0][1]}/spot`, (flaw, State, coat) => {
+
+						if (!flaw && State.statusCode === 200 && this.typen(coat) && this.typen(coat).data 
+							&& parseFloat(this.typen(coat).data.amount) > 0) {
+		
+							let COST = parseFloat(this.typen(coat).data.amount).toFixed(Plot[1]), STAMP = new Date().valueOf();
+
+							let Pair = {
+								allocate: 1,
+								ilk: `market`,
+								md: createHash(`md5`).update(`${STAMP}`, `utf8`).digest(`hex`),
+								mug: hold,
+								pair: [[Plot[0][0], Plot[0][1]], [0, COST]],
+								side: `buy`,
+								ts: STAMP,
+								ts_z: STAMP
+							};
+
+							Spot.push([Plot[0].toString().replace(`,`, `-`), COST]);
+
+							let Execute = this.typen(readFileSync(`json/EXECUTE_BOOK.json`, {encoding: `utf8`}));
+
+							if (typeof Execute === `object`) Execute.push(Pair);
+
+							writeFileSync(`json/EXECUTE_BOOK.json`, this.coats(Execute));
+
+							//if (Spot.length > 20) {
+
+								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));				
+							//}
+						}
+					});
+				});	
+			});
+		}, 6000);
+
+		//setInterval(() => { console.log(Spot.length); writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot)); }, 7500);
+
+		setInterval(() => {
+
+			let Plot = this.typen(readFileSync(`json/EXECUTE_BOOK.json`, {encoding: `utf8`}));
+
+			writeFileSync(`json/EXECUTE_BOOK.json`, this.coats([]));
+
+			if (typeof Plot !== `object`) return;
+
+			Plot.forEach(B => {
+
+				let Dayplot = this.typen(readFileSync(`json/plot/${B.pair[0][0]}_${B.pair[0][1]}_${DAY}.json`, {encoding: `utf8`}));
+
+				if (typeof Dayplot === `object`) {
+
+					Dayplot.push(B);
+
+					writeFileSync(`json/plot/${B.pair[0][0]}_${B.pair[0][1]}_${DAY}.json`, this.coats(Dayplot));
+				}
+			});	
+		}, 50000)
+	}
+
+	typen (coat) { return JSON.parse(coat); }
 
 	utils (Arg) {
 
