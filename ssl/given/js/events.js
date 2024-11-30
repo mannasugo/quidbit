@@ -22,7 +22,9 @@ class Event {
 
 			Spot.forEach(AB => { 
 
-				Plot[AB[0]] = [AB[1]];
+				Plot[AB[0]] = [AB[1]]; 
+
+				Clients.plot = Tools.coats(Plot)
 
 				if (document.querySelector(`#${AB[0]}`)) document.querySelector(`#${AB[0]} #COST`).innerHTML = AB[1];
 			});

@@ -240,6 +240,7 @@ let Constants = {
 		[[`USD`, `CAD`], 5, hold],
 		[[`USD`, `CHF`], 5, hold],
 		[[`USD`, `JPY`], 5, hold],
+		[[`USD`, `KES`], 5, hold],
 		[[`USDT`, `USD`], 5, hold]
 		/*[`USD`, `KES`], 
 		[`LTC`, `USD`],  
