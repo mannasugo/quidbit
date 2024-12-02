@@ -223,7 +223,10 @@ let Constants = {
 	],
 
 	plot: [
+		[[`ADA`, `USD`], 4, hold],
 		[[`AUD`, `USD`], 5, hold],
+		[[`AVAX`, `USD`], 2, hold],
+		[[`BCH`, `USD`], 2, hold],
 		[[`BNB`, `USD`], 3, hold],
 		[[`BTC`, `AUD`], 2, hold],
 		[[`BTC`, `CAD`], 2, hold],
@@ -231,17 +234,21 @@ let Constants = {
 		[[`BTC`, `USD`], 2, hold],
 		[[`BTC`, `USDT`], 2, hold],
 		[[`DOGE`, `USD`], 5, hold],
+		[[`DOT`, `USD`], 3, hold],
 		[[`ETH`, `BTC`], 5, hold],
 		[[`ETH`, `USD`], 2, hold],
 		[[`EUR`, `CAD`], 5, hold],
 		[[`EUR`, `CHF`], 5, hold],
 		[[`EUR`, `USD`], 5, hold],
+		[[`FDUSD`, `USD`], 5, hold],
 		[[`GBP`, `USD`], 5, hold],
+		[[`SHIB`, `USD`], 8, hold],
 		[[`USD`, `CAD`], 5, hold],
 		[[`USD`, `CHF`], 5, hold],
 		[[`USD`, `JPY`], 5, hold],
 		[[`USD`, `KES`], 5, hold],
-		[[`USDT`, `USD`], 5, hold]
+		[[`USDT`, `USD`], 5, hold],
+		[[`XTZ`, `USD`], 3, hold]
 		/*[`USD`, `KES`], 
 		[`LTC`, `USD`],  
 		[`NZD`, `USD`], 
@@ -255,18 +262,22 @@ let Constants = {
 	], 
 
 	tokens: [
+		[`ADA`, 4, hold, `cardano`, 0],
+		[`AVAX`, 2, hold, `avalanche`, 0],
 		[`BNB`, 3, hold, `binance coin`, 0],
+		[`BCH`, 2, hold, `bitcoin cash`, 0],
 		[`BTC`, 2, hold, `bitcoin`, 0],
 		[`DOGE`, 5, hold, `dogecoin`, 0],
+		[`DOT`, 3, hold, `polkadot`, 0],
 		[`ETH`, 2, hold, `ethereum`, 0],
+		[`FDUSD`, 5, hold, `first digital USD`, 0],
 		[`LTC`, 2, hold, `litecoin`, 0],
+		[`SHIB`, 3, hold, `shiba inu`, 0],
 		[`SOL`, 2, hold, `solana`, 0],
+		[`XTZ`, 3, hold, `tezos`, 0],
 		[`USDC`, 5, hold, `USD Coin`, 0],
 		[`USDT`, 5, hold, `tether`, 0],
-		[`XRP`, 5, hold, `ripple`, 0],
-		/*[`NZD`, 5, hold, `new zealand dollar`, .61226],
-		[`SEK`, 5, hold, `swedish krone`, 1/10.47923],
-		[`ZAR`, 5, hold, `south african rand`, 1/18.18274]*/
+		[`XRP`, 5, hold, `ripple`, 0]
 	]
 }
 

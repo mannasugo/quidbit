@@ -49,14 +49,19 @@ let Clients = sessionStorage;
 const Constants = {
 
 	SVG: {
+		ADA: `tokens/ada`,
 		AUD: `flags/au`,
+		AVAX: `tokens/avax`,
+		BCH: `tokens/bch`,
 		CAD: `flags/ca`,
 		CHF: `flags/ch`,
 		BTC: `tokens/btc`,
 		BNB: `tokens/bnb`,
 		DOGE: `tokens/doge`,
+		DOT: `tokens/dot`,
 		ETH: `tokens/eth`,
 		EUR: `flags/eu`,
+		FDUSD: `tokens/fdusd`,
 		GBP: `flags/uk`,
 		JPY: `flags/jp`,
 		KES: `flags/ke`,
@@ -65,10 +70,12 @@ const Constants = {
 		NOK: `flags/no`,
 		NZD: `flags/nz`, 
 		SEK: `flags/se`,
+		SHIB: `tokens/shib`,
 		USD: `flags/us`,
 		USDC: `tokens/usdc`,
 		USDT: `tokens/usdt`,
 		XRP: `tokens/xrp`,
+		XTZ: `tokens/xtz`,
 		ZAR: `flags/za`
 	}
 }
