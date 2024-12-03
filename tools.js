@@ -178,7 +178,7 @@ class Tools {
 
 			Constants.fiat.forEach(Fiat => {
 
-				Util.push({fiat: Fiat[0], column: [Fiat[4].toFixed(Fiat[1]), (0).toFixed(2), 0, 0], feat: Fiat});
+				Util.push({fiat: Fiat[0], column: [(0).toFixed(Fiat[1]), (0).toFixed(2), 0, 0], feat: Fiat});
 			});
 
 			return Util;
@@ -209,17 +209,17 @@ class Tools {
 let Constants = {
 
 	fiat: [
-		[`AUD`, 5, hold, `australian dollar`, .66599],
-		[`CAD`, 5, hold, `canadian dollar`, 1/1.36572],
-		[`CHF`, 5, hold, `swiss franc`, 1/.89335],
-		[`EUR`, 5, hold, `euro`, 1.07296],
-		[`GBP`, 5, hold, `sterling pound`, 1.26926],
-		[`JPY`, 5, hold, `japanese yen`, 1/156],
-		[`KES`, 5, hold, `kenyan shilling`, 1/127],
-		[`NOK`, 5, hold, `norwegian krone`, 1/10.55071],
-		[`NZD`, 5, hold, `new zealand dollar`, .61226],
-		[`SEK`, 5, hold, `swedish krone`, 1/10.47923],
-		[`ZAR`, 5, hold, `south african rand`, 1/18.18274]
+		[`AUD`, 5, hold, `australian dollar`, `AUD-USD`],
+		[`CAD`, 5, hold, `canadian dollar`, `USD-CAD`],
+		[`CHF`, 5, hold, `swiss franc`, `USD-CHF`],
+		[`EUR`, 5, hold, `euro`, `EUR-USD`],
+		[`GBP`, 5, hold, `sterling pound`, `GBP-USD`],
+		[`JPY`, 5, hold, `japanese yen`, `USD-JPY`],
+		[`KES`, 8, hold, `kenyan shilling`, `USD-KES`],
+		[`NOK`, 5, hold, `norwegian krone`, `USD-NOK`],
+		[`NZD`, 5, hold, `new zealand dollar`, `NZD-USD`],
+		[`SEK`, 5, hold, `swedish krone`, `USD-SEK`],
+		[`ZAR`, 5, hold, `south african rand`, `USD-ZAR`]
 	],
 
 	plot: [
@@ -242,22 +242,20 @@ let Constants = {
 		[[`EUR`, `USD`], 5, hold],
 		[[`FDUSD`, `USD`], 5, hold],
 		[[`GBP`, `USD`], 5, hold],
+		[[`LTC`, `USD`], 2, hold],
 		[[`SHIB`, `USD`], 8, hold],
+		[[`SOL`, `USD`], 2, hold],
 		[[`USD`, `CAD`], 5, hold],
 		[[`USD`, `CHF`], 5, hold],
 		[[`USD`, `JPY`], 5, hold],
 		[[`USD`, `KES`], 5, hold],
+		[[`USDC`, `USD`], 5, hold],
 		[[`USDT`, `USD`], 5, hold],
+		[[`XRP`, `USD`], 5, hold],
 		[[`XTZ`, `USD`], 3, hold]
-		/*[`USD`, `KES`], 
-		[`LTC`, `USD`],  
-		[`NZD`, `USD`], 
-		[`SOL`, `USD`], 
+		/*[`NZD`, `USD`],  
 		[`USD`, `NOK`], 
 		[`USD`, `SEK`], 
-		[`USDC`, `USD`],
-		[`XMR`, `USD`], 
-		[`XRP`, `USD`], 
 		[`USD`, `ZAR`]*/
 	], 
 
