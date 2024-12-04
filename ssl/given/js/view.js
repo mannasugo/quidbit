@@ -132,7 +132,7 @@ let Models = {
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
 								[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300}}, `Quidbit ®`],
-								[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 600}}, `2024`], 
+								[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 300}}, `2024`], 
 								[`div`, {class: `_gZz`}, [[`span`, {style: {color: `#535353`, [`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 300}}, `v0.24.3`]]]]]]]]];
 	},
 
@@ -149,6 +149,53 @@ let Models = {
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
 									[[`a`, {class: `v202204261406`, href: (!Clients.mug)? `/signin`: `javascript:;`, style: {height: `${16}px`, width: `${16}px`}}]]]]]]],
+					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
+						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
+							[
+								[`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
+									[
+										[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
+											[
+												[`img`, {src: `/ssl/given/svg/tokens/btc.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
+												[`span`, {style: {[`margin-left`]: `${10}px`}}, `BTC`], 
+												[`div`, {class: `_gxM`}, 
+													[
+														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
+															[
+																[`span`, {}, `BTC/EUR`],
+																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`BTC-EUR`][0]).toLocaleString()}`],
+																[`span`, {}, ``]]],
+														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
+															[
+																[`span`, {}, `BTC/USD`],
+																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`BTC-USD`][0]).toLocaleString()}`],
+																[`span`, {}, ``]]]]]]]]],
+								[`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
+									[
+										[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
+											[
+												[`img`, {src: `/ssl/given/svg/tokens/eth.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
+												[`span`, {style: {[`margin-left`]: `${10}px`}}, `ETH`], 
+												[`div`, {class: `_gxM`}, 
+													[
+														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
+															[
+																[`span`, {}, `ETH/BTC`],
+																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`ETH-BTC`][0])}`],
+																[`span`, {}, ``]]]]]]]]],
+								[`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
+									[
+										[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
+											[
+												[`img`, {src: `/ssl/given/svg/flags/uk.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
+												[`span`, {style: {[`margin-left`]: `${10}px`}}, `GBP`], 
+												[`div`, {class: `_gxM`}, 
+													[
+														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
+															[
+																[`span`, {}, `GBP/USD`],
+																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${Tools.typen(Clients.plot)[`GBP-USD`][0]}`],
+																[`span`, {}, ``]]]]]]]]]]]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
@@ -179,7 +226,7 @@ let Models = {
 												[`path`, {id: `c`, stroke: `#fff`, d: ``}],
 												[`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: 0}, ``]]]]]]]]], 
 					//this.plotform([Arg.pair.split(`-`)]),
-					[`div`, {id: `collapsible`, style: {background: `#000000c9`, top: `${77}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
+					[`div`, {id: `collapsible`, style: {background: `#000000c9`, top: `${107}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
 						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
 					[`div`, {id: `collapsible`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, height: `${27}px`, overflow: `hidden`, position: `absolute`, width: `${80}%`}}, 
 						[[`svg`, {id: `time`, width: `${24*172}px`, style: {/*transform: `translateX(${(X > 540)? -20: -670}px)`*/}}, 
@@ -187,12 +234,12 @@ let Models = {
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
-								[`a`, {id: `form`, class: `v202312231716`, href: `javascript:;`, style: {height: `${18}px`, width: `${18}px`}}], 
+								/*[`a`, {id: `form`, class: `v202312231716`, href: `javascript:;`, style: {height: `${18}px`, width: `${18}px`}}], 
 								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `order form`]]],
 								[`a`, {id: `chart`, class: `v202312231641`, href: `javascript:;`, style: {height: `${18}px`, [`margin-left`]: `${24}px`, width: `${18}px`}}], 
 								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
-									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `charts`]]]]]]]]];	
+									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `charts`]]]*/]]]]]];	
 	},
 
 	utilApp: (Arg) => {
