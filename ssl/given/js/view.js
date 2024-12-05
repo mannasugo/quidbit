@@ -136,7 +136,46 @@ let Models = {
 								[`div`, {class: `_gZz`}, [[`span`, {style: {color: `#535353`, [`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 300}}, `v0.24.3`]]]]]]]]];
 	},
 
-	plot: (Arg) => {
+	faveplots: () => {
+
+		//if (!Clients.faveplots) {
+
+			Clients.faveplots = Tools.coats({
+				AUD: [`USD`],
+				BTC: [`CAD`, `EUR`, `USD`],
+				//ETH: [`BTC`, `USD`],
+				EUR: [`CAD`, `CHF`],
+				USD: [`CAD`, `CHF`, `JPY`]
+			});
+		//}
+
+		let DOM = [];
+
+		for (let fave in Tools.typen(Clients.faveplots)) {
+
+			let DOM2 = [];
+
+			Tools.typen(Clients.faveplots)[fave].forEach(b => {
+
+				DOM2.push([`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
+					[
+						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`}}, `${fave}/${b}`],
+						[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`],
+						[`span`, {}, ``]]]);
+			});
+
+			DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
+				[[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
+					[
+						[`img`, {src: `/ssl/given/svg/${Constants.SVG[fave]}.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
+						[`span`, {style: {[`margin-left`]: `${10}px`}}, fave], 
+						[`div`, {class: `_gxM`}, DOM2]]]]]);
+		}
+
+		return DOM;
+	},
+
+	plot: function (Arg) {
 
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
@@ -150,52 +189,7 @@ let Models = {
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
 									[[`a`, {class: `v202204261406`, href: (!Clients.mug)? `/signin`: `javascript:;`, style: {height: `${16}px`, width: `${16}px`}}]]]]]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
-						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
-							[
-								[`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
-									[
-										[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
-											[
-												[`img`, {src: `/ssl/given/svg/tokens/btc.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
-												[`span`, {style: {[`margin-left`]: `${10}px`}}, `BTC`], 
-												[`div`, {class: `_gxM`}, 
-													[
-														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
-															[
-																[`span`, {}, `BTC/EUR`],
-																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`BTC-EUR`][0]).toLocaleString()}`],
-																[`span`, {}, ``]]],
-														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
-															[
-																[`span`, {}, `BTC/USD`],
-																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`BTC-USD`][0]).toLocaleString()}`],
-																[`span`, {}, ``]]]]]]]]],
-								[`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
-									[
-										[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
-											[
-												[`img`, {src: `/ssl/given/svg/tokens/eth.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
-												[`span`, {style: {[`margin-left`]: `${10}px`}}, `ETH`], 
-												[`div`, {class: `_gxM`}, 
-													[
-														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
-															[
-																[`span`, {}, `ETH/BTC`],
-																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`ETH-BTC`][0])}`],
-																[`span`, {}, ``]]]]]]]]],
-								[`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
-									[
-										[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
-											[
-												[`img`, {src: `/ssl/given/svg/flags/uk.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
-												[`span`, {style: {[`margin-left`]: `${10}px`}}, `GBP`], 
-												[`div`, {class: `_gxM`}, 
-													[
-														[`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
-															[
-																[`span`, {}, `GBP/USD`],
-																[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${Tools.typen(Clients.plot)[`GBP-USD`][0]}`],
-																[`span`, {}, ``]]]]]]]]]]]]],
+						[[`div`, {id: `faves`, class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, this.faveplots()]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
@@ -240,7 +234,7 @@ let Models = {
 								[`a`, {id: `chart`, class: `v202312231641`, href: `javascript:;`, style: {height: `${18}px`, [`margin-left`]: `${24}px`, width: `${18}px`}}], 
 								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `charts`]]]*/]]]]]];	
-	},
+	}, 
 
 	utilApp: (Arg) => {
 
