@@ -138,7 +138,7 @@ let Models = {
 
 	faveplots: () => {
 
-		//if (!Clients.faveplots) {
+		if (!Clients.faveplots) {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
@@ -147,7 +147,7 @@ let Models = {
 				EUR: [`CAD`, `CHF`],
 				USD: [`CAD`, `CHF`, `JPY`]
 			});
-		//}
+		}
 
 		let DOM = [];
 
@@ -177,6 +177,29 @@ let Models = {
 
 	plot: function (Arg) {
 
+		let split = Clients.plotXSplit;
+
+		let Split = {
+			[`1M`]: {C: 15}
+		};
+    
+  		let X = parseFloat(document.querySelector(`body`).clientWidth);
+
+		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
+
+		let SVG = [[], [], [], []];
+
+		let Place = [0];
+
+		Place[0] = (Place[0] + Split[split].C*4);
+
+		for (let i = 0; i < 24; i++) {
+
+			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fill-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
+					
+			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+		}
+
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
 				[
@@ -189,7 +212,7 @@ let Models = {
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
 									[[`a`, {class: `v202204261406`, href: (!Clients.mug)? `/signin`: `javascript:;`, style: {height: `${16}px`, width: `${16}px`}}]]]]]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
-						[[`div`, {id: `faves`, class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, this.faveplots()]]],
+						[[`div`, {id: `faves`, class: `_gxM _geQ`, style: {cursor: `grab`, [`font-size`]: `${11}px`}}, this.faveplots()]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
@@ -198,9 +221,9 @@ let Models = {
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
 							[`div`, {style: {width: `${80}%`}}, 
-								[[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {}/*{transform: `translateX(${(X > 540)? -20: -670}px)`}*/}, 
+								[[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 									[ 
-										//[`g`, {}, Plot[0]],
+										[`g`, {}, SVG[0]],
 										//[`g`, {id: `XYKline`}, Plot[1]], 
 										[`g`, {}, 
 											[
@@ -223,8 +246,8 @@ let Models = {
 					[`div`, {id: `collapsible`, style: {background: `#000000c9`, top: `${107}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
 						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
 					[`div`, {id: `collapsible`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, height: `${27}px`, overflow: `hidden`, position: `absolute`, width: `${80}%`}}, 
-						[[`svg`, {id: `time`, width: `${24*172}px`, style: {/*transform: `translateX(${(X > 540)? -20: -670}px)`*/}}, 
-								[[`g`, {}, /*Plot[3]*/]]]]], 
+						[[`svg`, {id: `time`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+								[[`g`, {}, SVG[3]]]]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[

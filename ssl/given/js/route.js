@@ -54,10 +54,12 @@ class Route {
 
     		if (State[4] && !State[5] && !Tools.slim[State[5]]) {
 
+				if (!Clients.plotXSplit) Clients.plotXSplit = `1M`;
+
 				let Puts = Tools.pull([
 					`/json/web/`, {
 						mug: (Clients.mug) ? Clients.mug: false,
-						pull: `plot`, plot: State[4].split(`_`)}]);	
+						pull: `plot`, plot: State[4].split(`_`), plotXSplit: Clients.plotXSplit}]);	
 
 				Puts.onload = () => {
 

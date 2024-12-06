@@ -84,6 +84,36 @@ class Tools {
 
 	coats (types) { return JSON.stringify(types); }
 
+	plotXY (Arg) {
+
+		let PlotXY = [];
+
+		if (Arg[1] === `1M`) {
+
+			let XY = this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY}.json`, {encoding: `utf8`}));
+
+			let X_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
+
+			for (let A = 0; A < 140; A++) {
+
+				let Plot = [];
+										
+				XY.forEach(X_Y => {
+
+					if (X_Y.ts_z > X_Z - 60000*A && X_Y.ts_z < (X_Z - 60000*A) + 60000) Plot.push([X_Y.pair[1][1], X_Y.ts_z])
+				});
+
+				let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
+
+				let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
+										
+				PlotXY.push([X_Z - 60000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: []]) //OCHL
+			}
+		}
+
+		return PlotXY;
+	}
+
 	plot (Raw) {
 
 		Constants.plot.forEach(Plot => {
@@ -166,6 +196,27 @@ class Tools {
 				}
 			});	
 		}, 50000)
+	}
+
+	plot24 () {
+
+		let Plot24 = {};
+
+		Constants.plot.forEach(Plot => {
+
+			let XY24 = [];
+
+			let XY = Tools.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`}));
+			
+			XY.forEach(X_Y => {
+
+				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) XY24[0].push([X_Y.pair[1][1], X_Y.ts_z]);
+			});
+
+			Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;
+		});
+
+		return Plot24;
 	}
 
 	typen (coat) { return JSON.parse(coat); }
