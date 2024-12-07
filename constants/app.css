@@ -3,7 +3,7 @@
 }
 
 @font-face {
-  font-family: 'din';
+  font-family: 'intext';
   src: url('/ssl/given/glyphs/din.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
@@ -31,7 +31,7 @@
 }
 
 @font-face {
-  font-family: intext;
+  font-family: inext;
   src: url(/ssl/given/glyphs/PFDinTextUniversalLight.otf) format('opentype');
   font-style: normal;
   font-weight: 100;

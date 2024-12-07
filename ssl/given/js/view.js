@@ -159,8 +159,8 @@ let Models = {
 
 				DOM2.push([`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
 					[
-						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`}}, `${fave}/${b}`],
-						[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${12}px`, [`margin`]: `${-2}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`],
+						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `intext`}}, `${fave}/${b}`],
+						[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`],
 						[`span`, {}, ``]]]);
 			});
 
@@ -168,7 +168,7 @@ let Models = {
 				[[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
 					[
 						[`img`, {src: `/ssl/given/svg/${Constants.SVG[fave]}.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
-						[`span`, {style: {[`margin-left`]: `${10}px`}}, fave], 
+						[`span`, {style: {[`font-family`]: `intext`, [`margin-left`]: `${10}px`}}, fave], 
 						[`div`, {class: `_gxM`}, DOM2]]]]]);
 		}
 
@@ -184,6 +184,17 @@ let Models = {
 		};
     
   		let X = parseFloat(document.querySelector(`body`).clientWidth);
+    
+  		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
+
+		let HL = [];
+
+		Arg.XY.forEach(K => {
+
+			if (K[2].length > 0) {HL.push(K[2][0]); HL.push(K[2][1])}
+		});
+
+		HL.sort((A, B) => {return B - A});
 
 		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
 
@@ -191,11 +202,27 @@ let Models = {
 
 		let Place = [0];
 
+		Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
+
+			if (K[2].length > 0) {
+
+				SVG[1].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
+
+                let OC = Tools.typen(Tools.coats(K[1]));
+
+                OC.sort((A, B) => {return B - A});
+				
+				SVG[1].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+			}
+
+			if (K[0] === Day[0]) Place[0] = i;
+		});
+
 		Place[0] = (Place[0] + Split[split].C*4);
 
 		for (let i = 0; i < 24; i++) {
 
-			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fill-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
+			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
 					
 			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		}
@@ -224,7 +251,7 @@ let Models = {
 								[[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 									[ 
 										[`g`, {}, SVG[0]],
-										//[`g`, {id: `XYKline`}, Plot[1]], 
+										[`g`, {id: `XYKline`}, SVG[1]], 
 										[`g`, {}, 
 											[
 												[`path`, {id: `bullseye`, stroke: `#6a6a6a`, d: ``}], 
@@ -236,7 +263,7 @@ let Models = {
 											[
 												[`rect`, {id: `a`, x: 0, height: 20, width: 80}], 
 												[`path`, {id: `c`, stroke: `#fff`, d: ``}],
-												/*Plot[2]*/]], 
+												SVG[2]]], 
 										[`g`, {id: `floatY`, style: {display: `none`}}, 
 											[
 												[`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#ffffff3b`}],

@@ -67,7 +67,7 @@ class Route {
 
 					if (Web.plot) {
 
-						document.title = `${(0).toFixed(Web.plot[1])} ${State[4]}`;
+						document.title = `${Tools.typen(Clients.plot)[State[4].replace(`_`, `-`)] || (0).toFixed(Web.plot[1])} ${State[4]}`;
 
 						View.DOM([`div`, [Models.plot(Web)]]);
 
