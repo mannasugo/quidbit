@@ -87,7 +87,7 @@ let Models = {
 						[
 							[`img`, {src: `/ssl/given/svg/${Constants.SVG[Fiat.fiat]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
 							[`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Fiat.feat[3]}`]]]]], 
-					[`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 600, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Fiat.fiat}`]]], 
+					[`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Fiat.fiat}`]]], 
 					[`div`, {style: {width: `${22.5}%`}}, 
 						[[`span`, {id: `COST`, decimal: Fiat.feat[1], style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, ``]]], 
 					[`div`, {style: {width: `${15}%`}}, 
@@ -157,18 +157,18 @@ let Models = {
 
 			Tools.typen(Clients.faveplots)[fave].forEach(b => {
 
-				DOM2.push([`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${12}px`}}, 
+				DOM2.push([`div`, {class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`margin-left`]: `${12}px`}}, 
 					[
-						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `intext`}}, `${fave}/${b}`],
-						[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`],
+						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `qb`}}, `${fave}/${b}`],
+						[`span`, {style: {[`letter-spacing`]: `${.25}px`, [`font-family`]: `intext`, [`font-size`]: `${13}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`],
 						[`span`, {}, ``]]]);
 			});
 
-			DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`}}, 
-				[[`div`, {class: `_gxM _geQ`, style: {padding: `${2}px ${12}px`}}, 
+			DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`, [`font-size`]: `11px`}}, 
+				[[`div`, {class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, padding: `${2}px ${12}px`}}, 
 					[
-						[`img`, {src: `/ssl/given/svg/${Constants.SVG[fave]}.svg`, style: {[`min-height`]: `${16}px`, [`width`]: `${16}px`}}],
-						[`span`, {style: {[`font-family`]: `intext`, [`margin-left`]: `${10}px`}}, fave], 
+						[`img`, {src: `/ssl/given/svg/${Constants.SVG[fave]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${16}px`, [`width`]: `${16}px`}}],
+						[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${10}px`}}, fave], 
 						[`div`, {class: `_gxM`}, DOM2]]]]]);
 		}
 
@@ -243,7 +243,7 @@ let Models = {
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
-								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `qb`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
 								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: 0, padding: `${6}px ${12}px`}}, `${1}M`]]]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
@@ -300,7 +300,7 @@ let Models = {
 							[
 								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Fiat.fiat]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
 								[`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Fiat.feat[3]}`]]]]], 
-						[`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 600, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Fiat.fiat}`]]], 
+						[`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-family`]: ``, [`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Fiat.fiat}`]]], 
 						[`div`, {style: {width: `${22.5}%`}}, 
 							[[`span`, {id: `COST`, decimal: Fiat.feat[1], style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, ``]]], 
 						[`div`, {style: {width: `${15}%`}}, 
@@ -322,7 +322,7 @@ let Models = {
 							[
 								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[0]]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}],
 								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[1]]}.svg`, style: {height: `${20}px`,[`max-width`]: `${20}px`, transform: `translateX(${-6.6667}px)`}}], 
-								[`a`, {href: `/trade/${Spot.pair[0]}_${Spot.pair[1]}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`}}, 
+								[`a`, {href: `/trade/${Spot.pair[0]}_${Spot.pair[1]}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `qb`, }}, 
 									[ 
 										[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Spot.pair[0]}`], 
 										[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Spot.pair[1]}`]]]]], 
@@ -347,7 +347,7 @@ let Models = {
 							[
 								[`img`, {src: `/ssl/given/svg/${Constants.SVG[Coin.token]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
 								[`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Coin.feat[3]}`]]]]], 
-						[`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 600, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Coin.token}`]]], 
+						[`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Coin.token}`]]], 
 						[`div`, {style: {width: `${22.5}%`}}, 
 							[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, ``]]], 
 						[`div`, {style: {width: `${15}%`}}, 
