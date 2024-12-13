@@ -14,7 +14,7 @@ class Event {
 
 	/** **/
 
-	app () {
+	app (Arg) {
 
 		io().on(`SPOT_BOOK`, Spot => {
 
@@ -29,6 +29,20 @@ class Event {
 				if (document.querySelector(`#${AB[0]}`)) document.querySelector(`#${AB[0]} #COST`).innerHTML = AB[1];
 
 				if (document.querySelector(`#${AB[0]}_CONVERT`)) document.querySelector(`#${AB[0]}_CONVERT #COST`).innerHTML = parseFloat(1/AB[1]).toFixed(document.querySelector(`#${AB[0]}_CONVERT #COST`).getAttribute(`decimal`));
+
+				let P24 = [];
+
+				Arg.ago[AB[0]].forEach(XY => {
+
+					if (XY[1] > (new Date().valueOf() - 3600000*24) - 3000 && XY[1] < (new Date().valueOf() - 3600000*24) + 3000) P24.push(XY);
+				});
+
+				if (P24.length > 0) {
+
+					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).innerHTML = `${(((AB[1] - P24[0][0])/AB[1])*100).toFixed(2)}%`
+
+					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).style.color = (AB[1] > parseFloat(P24[0][0]))? `#02ff02`: `red`;
+				}
 			});
 		});
 
@@ -143,6 +157,38 @@ class Event {
 					this.getSource(S).querySelector(`a`).style.textDecoration = `underline`;}])});
 		}
 	}
+
+	plot (Arg) {
+
+		io().on(`SPOT_BOOK`, Spot => {
+
+			let Plot = {};
+
+			Spot.forEach(AB => { 
+
+				Plot[AB[0]] = [AB[1]]; 
+
+				Clients.plot = Tools.coats(Plot)
+
+				if (document.querySelector(`#${AB[0]}`)) document.querySelector(`#${AB[0]} #COST`).innerHTML = AB[1];
+
+				//if (document.querySelector(`#${AB[0]}_CONVERT`)) document.querySelector(`#${AB[0]}_CONVERT #COST`).innerHTML = parseFloat(1/AB[1]).toFixed(document.querySelector(`#${AB[0]}_CONVERT #COST`).getAttribute(`decimal`));
+
+				let P24 = [];
+
+				Arg.ago[AB[0]].forEach(XY => {
+
+					if (XY[1] > (new Date().valueOf() - 3600000*24) - 3000 && XY[1] < (new Date().valueOf() - 3600000*24) + 3000) P24.push(XY);
+				});
+
+				if (P24.length > 0) {
+
+					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).innerHTML = `${(((AB[1] - P24[0][0])/AB[1])*100).toFixed(2)}%`
+
+					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).style.color = (AB[1] > parseFloat(P24[0][0]))? `#02ff02`: `red`;
+				}
+			});
+		});}
 }
 
 Event = new Event;

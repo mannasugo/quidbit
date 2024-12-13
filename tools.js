@@ -272,7 +272,7 @@ class Tools {
 			});
 
 			Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;
-		});//console.log(Plot24[`AUD-USD`].slice(0))
+		});
 
 		return Plot24;
 	}

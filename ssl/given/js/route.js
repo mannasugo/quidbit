@@ -46,7 +46,7 @@ class Route {
 
 				document.querySelector(`#app`).style.height = `unset`;
 
-				Event.app();
+				Event.app(Web);
 			}
 		}
 
@@ -79,7 +79,7 @@ class Route {
 
 						//document.querySelector(`#app`).style.height = `unset`;
 
-						//Events.plot([Web, Web.pair]);
+						Event.plot(Web);
 					}
 				}	
     		}
