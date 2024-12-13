@@ -129,7 +129,7 @@ class Tools {
 
 				if (!flaw) {
 
-					let Obj = this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`})), 
+					let Obj = [], //this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`})), 
 
 						CSV = readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${PREDAY.getMonth() + 1}${PREDAY.getDate()}.csv`, {encoding: `utf8`});
 
@@ -137,43 +137,43 @@ class Tools {
 
 					CSV = CSV.slice(2);
 
+					//CSV = CSV.pop();console.log(CSV)
+
 					CSV.forEach(Value => {
 
 						Value = Value.split(`,`); //OHLC
 
-						let Slip = {
+						Obj.push({
 							allocate: 1,
 							ilk: `market`,
 							md: createHash(`md5`).update(`${new Date(Value[0]).valueOf()}`, `utf8`).digest(`hex`),
 							mug: hold,
-							pair: [[Plot[0][0], Plot[0][1]], [0, parseFloat(Value[1])]],
+							pair: [[Plot[0][0], Plot[0][1]], [0, Value[1]]],
 							side: `buy`,
 							ts: new Date(Value[0]).valueOf(),
-							ts_z: new Date(Value[0]).valueOf()};
+							ts_z: new Date(Value[0]).valueOf()});
 
-						Obj.push(Slip);
-
-						Slip.md = createHash(`md5`).update(`${new Date(Value[0]).valueOf() + 59975}`, `utf8`).digest(`hex`);
-
-						Slip.pair[1][1] = parseFloat(Value[4]);
-
-						Slip.ts = new Date(Value[0]).valueOf() + 59975;
-
-						Slip.ts_z = new Date(Value[0]).valueOf() + 59975;
-
-						Obj.push(Slip);
+						Obj.push({
+							allocate: 1,
+							ilk: `market`,
+							md: createHash(`md5`).update(`${new Date(Value[0]).valueOf() + 59975}`, `utf8`).digest(`hex`),
+							mug: hold,
+							pair: [[Plot[0][0], Plot[0][1]], [0, Value[4]]],
+							side: `buy`,
+							ts: new Date(Value[0]).valueOf() + 59975,
+							ts_z: new Date(Value[0]).valueOf() + 59975});
 
 						for (let A = 0; A < 2; A++) {
 
-							Slip.md = createHash(`md5`).update(`${new Date(Value[0]).valueOf() + 60000*(A+1)/4}`, `utf8`).digest(`hex`);
-
-							Slip.pair[1][1] = parseFloat(Value[A+2]);
-
-							Slip.ts = new Date(Value[0]).valueOf() + 60000*(A+1)/4;
-
-							Slip.ts_z = new Date(Value[0]).valueOf() + 60000*(A+1)/4;
-
-							Obj.push(Slip);	
+							Obj.push({
+								allocate: 1,
+								ilk: `market`,
+								md: createHash(`md5`).update(`${new Date(Value[0]).valueOf() + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
+								mug: hold,
+								pair: [[Plot[0][0], Plot[0][1]], [0, Value[A+2]]],
+								side: `buy`,
+								ts: new Date(Value[0]).valueOf() + 60000*(A+1)/4,
+								ts_z: new Date(Value[0]).valueOf() + 60000*(A+1)/4});
 						}
 					});
 
@@ -264,15 +264,15 @@ class Tools {
 
 			let XY24 = [];
 
-			let XY = Tools.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`}));
+			let XY = this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`}));
 			
 			XY.forEach(X_Y => {
 
-				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) XY24[0].push([X_Y.pair[1][1], X_Y.ts_z]);
+				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) XY24.push([X_Y.pair[1][1], X_Y.ts_z]);
 			});
 
 			Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;
-		});
+		});//console.log(Plot24[`AUD-USD`].slice(0))
 
 		return Plot24;
 	}

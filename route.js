@@ -83,7 +83,7 @@ class Route {
 							if (Pulls.pull === `app`) { 
 
 								Arg[1].end(Tools.coats({
-									mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
+									ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
 							}
 
 							if (Pulls.pull === `plot`) {
