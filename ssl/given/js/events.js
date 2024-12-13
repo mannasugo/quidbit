@@ -43,7 +43,7 @@ class Event {
 					A0.style.opacity = .5
 				});
 
-				this.getSource(S).style.fontWeight = 600;
+				this.getSource(S).style.fontWeight = 300;
 
 				this.getSource(S).style.opacity = 1;
 

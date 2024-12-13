@@ -104,7 +104,7 @@ let Models = {
 					[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #1e1e1e`, height: `${48}px`, padding: `${0}px ${24}px`, position: `fixed`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
-								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 600, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
 								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`, [`margin-left`]: `${24}px`}}, 
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]],  
 								[`div`, {class: `_eYG`}, []], 
@@ -118,7 +118,7 @@ let Models = {
 								[
 									[`div`, {class: `_gxM _geQ`, style: {cursor: `pointer`}}, 
 										[
-											[`span`, {class: `A0`, for: `fiat`, style: {[`font-weight`]: 600, margin: `${6}px ${12}px ${6}px ${0}`}}, `Currencies`],
+											[`span`, {class: `A0`, for: `fiat`, style: {[`font-weight`]: 300, margin: `${6}px ${12}px ${6}px ${0}`}}, `Currencies`],
 											[`span`, {class: `A0`, for: `tokens`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Tokens`],
 											[`span`, {class: `A0`, for: `spot`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Spot`],
 											[`span`, {class: `A0`, style: {margin: `${6}px ${12}px`, opacity: 0.5}}, `Commodities`]]],
@@ -164,8 +164,8 @@ let Models = {
 						[`span`, {}, ``]]]);
 			});
 
-			DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`, [`font-size`]: `11px`}}, 
-				[[`div`, {class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, padding: `${2}px ${12}px`}}, 
+			DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`, [`font-size`]: `12px`}}, 
+				[[`div`, {class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`ltter-spacing`]: 0, padding: `${2}px ${12}px`}}, 
 					[
 						[`img`, {src: `/ssl/given/svg/${Constants.SVG[fave]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${16}px`, [`width`]: `${16}px`}}],
 						[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${10}px`}}, fave], 
@@ -233,7 +233,7 @@ let Models = {
 					[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
-								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 600, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
 								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
@@ -243,8 +243,8 @@ let Models = {
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
-								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `qb`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
-								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: 0, padding: `${6}px ${12}px`}}, `${1}M`]]]]],
+								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `qb`, [`font-size`]: `${12}px`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `intext`, [`font-size`]: `${13}px`, [`letter-spacing`]: 0, padding: `${6}px ${12}px`}}, `${1}M`]]]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
 							[`div`, {style: {width: `${80}%`}}, 
