@@ -160,6 +160,11 @@ class Event {
 
 	plot (Arg) {
 
+		this.listen([document.querySelector(`#splitX`), `click`, S => {
+
+			document.querySelector(`#splits`).style.display = (document.querySelector(`#splits`).style.display === `flex`)? `none`: `flex`
+		}]);
+
 		io().on(`SPOT_BOOK`, Spot => {
 
 			let Plot = {};

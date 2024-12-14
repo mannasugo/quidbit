@@ -180,12 +180,22 @@ let Models = {
 		let split = Clients.plotXSplit;
 
 		let Split = {
-			[`1M`]: {C: 15}
+			[`1M`]: {C: 15},
+			[`3M`]: {C: 20},
+			[`5M`]: {C: 24},
+			[`1H`]: {C: 24}
 		};
     
   		let X = parseFloat(document.querySelector(`body`).clientWidth);
     
   		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
+
+  		let DOM = {split: []};
+
+  		for (let span in Split) {
+
+  			DOM.split.push([`a`, {href: `javascript:;`, style: {[`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
+  		}
 
 		let HL = [];
 
@@ -243,8 +253,12 @@ let Models = {
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
-								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `qb`, [`font-size`]: `${12}px`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
-								[`span`, {style: {[`border-right`]: `${1}px solid #353535`, [`font-family`]: `intext`, [`font-size`]: `${13}px`, [`letter-spacing`]: 0, padding: `${6}px ${12}px`}}, `${1}M`]]]]],
+								[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${12}px`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+								[`div`, {style: {}}, 
+									[
+										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`}}, `${1}H`], 
+										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
+								[`div`, {style: {[`border-left`]: `${1}px solid #353535`}}]]]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
 							[`div`, {style: {width: `${80}%`}}, 
