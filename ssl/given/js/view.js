@@ -136,9 +136,9 @@ let Models = {
 								[`div`, {class: `_gZz`}, [[`span`, {style: {color: `#535353`, [`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 300}}, `v0.24.3`]]]]]]]]];
 	},
 
-	faveplots: () => {
+	faveplots: () => { //rgb(35 156 105)
 
-		//if (!Clients.faveplots) {
+		if (!Clients.faveplots) {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
@@ -147,7 +147,7 @@ let Models = {
 				EUR: [`CAD`, `CHF`],
 				USD: [`CAD`, `CHF`, `JPY`]
 			});
-		//}
+		}
 
 		let DOM = [];
 
@@ -217,7 +217,7 @@ let Models = {
 			if (K[2].length > 0) {
 
 				SVG[1].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
-
+				
                 let OC = Tools.typen(Tools.coats(K[1]));
 
                 OC.sort((A, B) => {return B - A});
@@ -232,9 +232,13 @@ let Models = {
 
 		for (let i = 0; i < 24; i++) {
 
-			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
+			//SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
 					
-			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			//SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+		
+			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) + 22, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*3600000) - (i - 1)*Split[split].C*3600000).toDateString().substr(8, 2)}`])
+
+			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 28.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 28.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		}
 
 		return [
@@ -243,7 +247,7 @@ let Models = {
 					[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
-								[`span`, {class: `202411161551`, style: {[`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+								[`a`, {href: `/`, class: `202411161551`, style: {color: `#fff`, [`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
 								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
@@ -256,7 +260,7 @@ let Models = {
 								[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${12}px`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
 								[`div`, {style: {}}, 
 									[
-										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`}}, `${1}H`], 
+										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`}}, Clients.plotXSplit], 
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {style: {[`border-left`]: `${1}px solid #353535`}}]]]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
