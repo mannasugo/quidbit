@@ -118,9 +118,16 @@ class Tools {
 
 		Constants.plot.forEach(Plot => {
 
+			//writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+
 			stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, (bug, Stat) => {
 
-				if (bug) writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+				if (bug) {
+
+					writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+
+					writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+				}
 			});
 
 			let PREDAY = new Date(DAY - 3600000*24);
@@ -129,15 +136,13 @@ class Tools {
 
 				if (!flaw) {
 
-					let Obj = [], //this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`})), 
+					let Obj = [], 
 
 						CSV = readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${PREDAY.getMonth() + 1}${PREDAY.getDate()}.csv`, {encoding: `utf8`});
 
 					CSV = CSV.split(`\n`);
 
 					CSV = CSV.slice(2);
-
-					//CSV = CSV.pop();console.log(CSV)
 
 					CSV.forEach(Value => {
 
@@ -177,7 +182,7 @@ class Tools {
 						}
 					});
 
-					writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats(Obj));
+					writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats(Obj));
 				}
 			});
 		});
@@ -269,6 +274,11 @@ class Tools {
 			XY.forEach(X_Y => {
 
 				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) XY24.push([X_Y.pair[1][1], X_Y.ts_z]);
+			});
+
+			this.typen(readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`})).forEach(X_Y => {
+
+				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) {XY24.push([X_Y.pair[1][1], X_Y.ts_z]);}
 			});
 
 			Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;

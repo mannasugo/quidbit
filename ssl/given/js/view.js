@@ -138,16 +138,16 @@ let Models = {
 
 	faveplots: () => {
 
-		if (!Clients.faveplots) {
+		//if (!Clients.faveplots) {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [`CAD`, `EUR`, `USD`],
-				//ETH: [`BTC`, `USD`],
+				BTC: [/*`CAD`, `EUR`,*/ `USD`],
+				ETH: [/*`BTC`,*/ `USD`],
 				EUR: [`CAD`, `CHF`],
 				USD: [`CAD`, `CHF`, `JPY`]
 			});
-		}
+		//}
 
 		let DOM = [];
 
