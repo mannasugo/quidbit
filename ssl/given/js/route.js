@@ -79,8 +79,6 @@ class Route {
 
 						document.querySelector(`body`).style.background = `#000`;
 
-						//document.querySelector(`#app`).style.height = `unset`;
-
 						Event.plot(Web);
 					}
 				}	

@@ -192,19 +192,19 @@ class Event {
 				}
 			});
 
-			let ZY = Spot[Arg.plot[0].toString().replace(`,`, `-`)];
+			//let ZY = Spot[Arg.plot[0].toString().replace(`,`, `-`)];
 
-			HL.push(ZY[1]);
+			//HL.push(ZY[1]);
 
-			HL.sort((A, B) => {return B - A});
+			//HL.sort((A, B) => {return B - A});
 
             //document.querySelector(`#spotline`).setAttribute(`stroke`, (Open[1] > SPOT[1])? `red`: `lime`);
 
 			//document.querySelector(`#spotline`).setAttribute(`d`, `M${parseFloat(X)} ${.15*Y + ((HL[0] - SPOT[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - SPOT[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`)
 
-			document.querySelector(`#ZY`).innerHTML = ZY[1];
+			//document.querySelector(`#ZY`).innerHTML = ZY[1];
 
-			document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4)
+			//document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4)
 
 		});}
 }
