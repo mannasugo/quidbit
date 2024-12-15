@@ -191,6 +191,21 @@ class Event {
 					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).style.color = (AB[1] > parseFloat(P24[0][0]))? /*`#02ff02`*/ `#519c58`: `#e3415d`;
 				}
 			});
+
+			let ZY = Spot[Arg.plot[0].toString().replace(`,`, `-`)];
+
+			HL.push(ZY[1]);
+
+			HL.sort((A, B) => {return B - A});
+
+            //document.querySelector(`#spotline`).setAttribute(`stroke`, (Open[1] > SPOT[1])? `red`: `lime`);
+
+			//document.querySelector(`#spotline`).setAttribute(`d`, `M${parseFloat(X)} ${.15*Y + ((HL[0] - SPOT[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - SPOT[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`)
+
+			document.querySelector(`#ZY`).innerHTML = ZY[1];
+
+			document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4)
+
 		});}
 }
 

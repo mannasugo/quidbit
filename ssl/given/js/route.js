@@ -54,7 +54,7 @@ class Route {
 
     		if (State[4] && !State[5] && !Tools.slim[State[5]]) {
 
-				if (!Clients.plotXSplit) 
+				//if (!Clients.plotXSplit) 
 
 					Clients.plotXSplit = `1H`;
 

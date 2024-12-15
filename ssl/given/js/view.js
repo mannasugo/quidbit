@@ -206,7 +206,9 @@ let Models = {
 
 		HL.sort((A, B) => {return B - A});
 
-		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
+		//let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
+
+		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
 
 		let SVG = [[], [], [], []];
 
@@ -228,7 +230,9 @@ let Models = {
 			if (K[0] === Day[0]) Place[0] = i;
 		});
 
-		Place[0] = (Place[0] + Split[split].C*4);
+		//Place[0] = (Place[0] + Split[split].C*4);
+
+		Place[0] = (Place[0] + Split[split].C*1);
 
 		for (let i = 0; i < 24; i++) {
 
@@ -236,10 +240,12 @@ let Models = {
 					
 			//SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		
-			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) + 22, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*3600000) - (i - 1)*Split[split].C*3600000).toDateString().substr(8, 2)}`])
+			SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] +  + Split[split].C*1*3600000) - i*Split[split].C*3600000).toDateString().substr(8, 2)}`])
 
-			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 28.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 28.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) - 20.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) - 20.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		}
+
+		SVG[2] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}];
 
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
