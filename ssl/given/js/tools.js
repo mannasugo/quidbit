@@ -53,6 +53,10 @@ class Tools {
 
   				if (Float[1][A] !== `0`) {B2 = A; break;}
   			}
+
+  			RH = Float[1][B2]/Math.pow(10, B2+1);
+
+  			AY = parseFloat(Arg[1].toString().substr(0, B2+3));
   		}
 
   		if (Arg[0] > 1) {
