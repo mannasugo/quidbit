@@ -206,7 +206,16 @@ class Event {
 
 			//document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4)
 
-		});}
+		});
+
+		setInterval(() => {
+
+			if (Clients.plotXSplit === `1H`) {
+
+				document.querySelector(`#lapse`).innerHTML = `${(59 - new Date().getMinutes() > 9)? ``: `0`}${59 - new Date().getMinutes()}:${(59 - new Date().getSeconds() > 9)? ``: `0`}${59 - new Date().getSeconds()}`;
+			}
+		}, 1000);
+	}
 }
 
 Event = new Event;

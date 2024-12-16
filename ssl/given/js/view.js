@@ -138,18 +138,18 @@ let Models = {
 
 	faveplots: () => { //rgb(35 156 105)
 
-		if (!Clients.faveplots) {
+		//if (!Clients.faveplots) {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
 				BTC: [/*`CAD`, `EUR`,*/ `USD`],
 				ETH: [/*`BTC`,*/ `USD`],
 				EUR: [`CAD`, `CHF`],
-				USD: [`CAD`, `CHF`, `JPY`]
+				//USD: [`CAD`, `CHF`, `JPY`]
 			});
-		}
+		//}
 
-		let DOM = [];
+		let DOM = [];console.log(Tools.typen(Clients.plot))
 
 		for (let fave in Tools.typen(Clients.faveplots)) {
 
@@ -221,13 +221,15 @@ let Models = {
 
 		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
 
-		let SVG = [[], [], [], [], [], [], [], []]; RH = HL[0] - HL[HL.length - 1]; CAV = 2;console.log(HL[0])
+		let SVG = [[], [], [], [], [], [], [], [], []]; 
+
+		RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
 		for (let A = 0; A < 25; A++) {
 
 			let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*8 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
 
-			SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
+			SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
 				
 			SVG[1].push([`line`, {x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
 		
@@ -258,16 +260,18 @@ let Models = {
 
 		for (let i = 0; i < 24; i++) {
 
-			//SVG[3].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
+			//SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
 					
 			//SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		
-			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 26, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] +  + Split[split].C*1*3600000) - i*Split[split].C*3600000).toDateString().substr(8, 2)}`])
+			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 26, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] +  + Split[split].C*1*3600000) - i*Split[split].C*3600000).toDateString().substr(8, 2)}`])
 
 			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) - 20.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) - 20.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		}
 
-		SVG[5] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}];
+		SVG[5] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}];
+
+		SVG[8] = [`text`, {id: `lapse`, x: Arg[`XY`].length*7.12 - 12, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, ``]
 
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
@@ -324,7 +328,7 @@ let Models = {
 						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
 					[`div`, {id: `collapsible`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, height: `${27}px`, overflow: `hidden`, position: `absolute`, width: `${80}%`}}, 
 						[[`svg`, {id: `time`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
-								[[`g`, {}, SVG[7]]]]]], 
+								[[`g`, {}, SVG[7]], SVG[8]]]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, 
 							[
