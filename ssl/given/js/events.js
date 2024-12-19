@@ -160,6 +160,13 @@ class Event {
 
 	plot (Arg) {
 
+		this.listen([document.querySelector(`#mutiple`), `click`, S => {
+
+			document.querySelector(`#mutiple2`).style.display = (document.querySelector(`#mutiple2`).style.display === `flex`)? `none`: `flex`;
+
+			document.querySelector(`#mutiple3`).style.display = (document.querySelector(`#mutiple3`).style.display === `flex`)? `none`: `flex`;
+		}]);
+
 		this.listen([document.querySelector(`#splitX`), `click`, S => {
 
 			document.querySelector(`#splits`).style.display = (document.querySelector(`#splits`).style.display === `flex`)? `none`: `flex`

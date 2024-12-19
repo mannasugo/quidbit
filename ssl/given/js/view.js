@@ -297,13 +297,16 @@ let Models = {
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
-								[`div`, {}, [[`a`, {href: `javascript:;`, style: {color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, padding: `${6}px ${12}px`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`]]],
+								[`div`, {}, 
+									[
+										[`a`, {id: `mutiple`, href: `javascript:;`, style: {color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, padding: `${6}px ${12}px`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`], 
+										[`div`, {id: `mutiple2`, style: {background: `#000`, bottom: `${-2}px`, display: `none`, height: `${3}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 36}}]]],
 								[`div`, {style: {}}, 
 									[
 										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`}}, Clients.plotXSplit], 
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {style: {[`border-left`]: `${1}px solid #353535`}}]]]]],
-					[`div`, {id: ``, style: {background: `#000`, border: `${1}px solid #353535`, position: `absolute`, top: `${107}px`, [`max-width`]: `${540}px`, width: `${100}%`, [`z-index`]: 16}}, 
+					[`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, display: `none`, position: `absolute`, top: `${107}px`, [`max-width`]: `${540}px`, width: `${100}%`, [`z-index`]: 16}}, 
 						[
 							[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 
 								[
@@ -311,7 +314,7 @@ let Models = {
 										[
 											[`span`, {class: `v202412192124`, style: {height: `${16}px`, width: `${16}px`}}],
 											[`input`, {id: `quiz`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${4}px ${12}px`, [`text-transform`]: `uppercase`, width: `${100}%`}}]]], 
-									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${10}px`, [`font-weight`]: 600}}, 
+									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`font-weight`]: 600}}, 
 										[
 											[`a`, {href: `javascript:;`, class: ``, for: ``, style: {color: `#fff`, margin: `${6}px ${12}px ${6}px ${0}`}}, `AUD`],
 											[`a`, {href: `javascript:;`,class: ``, for: ``, style: {color: `#fff`,margin: `${6}px ${6}px`, opacity: 0.5}}, `EUR`],
