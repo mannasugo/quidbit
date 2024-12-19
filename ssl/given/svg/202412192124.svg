@@ -1,0 +1,12 @@
+<svg class="icon-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <style>
+
+    path, circle {
+      fill: none;
+      stroke-width: 1;
+      stroke: #fff
+    }
+  </style>
+  <path d="M22 22 18 18"></path>
+  <circle r="8" cx="12" cy="12"></circle>
+  </svg>

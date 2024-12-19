@@ -76,7 +76,7 @@ let Models = {
 		};
 
 		let Pairs = [
-		[[`currency`, 20], [`symbol`, 10, true], [`price(usd)`, 22.5, true], [`24h%`, 15, true], [`vol.(24h)`, 15, true],, [`liquid`, 17.5, true]],
+		[[`currency`, 20], [`symbol`, 10, true], [`price(usd)`, 22.5, true], [`24h%`, 15, true], [`vol.(24h)`, 15, true], [`liquid`, 17.5, true]],
 		[], []];
 
 		Web.utils.forEach(Fiat => {
@@ -136,20 +136,20 @@ let Models = {
 								[`div`, {class: `_gZz`}, [[`span`, {style: {color: `#535353`, [`font-family`]: `geometria`, [`font-size`]: `${10}px`, [`font-weight`]: 300}}, `v0.24.3`]]]]]]]]];
 	},
 
-	faveplots: () => { //rgb(35 156 105)
+	faveplots: () => {
 
 		//if (!Clients.faveplots) {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [/*`CAD`, `EUR`,*/ `USD`],
-				ETH: [/*`BTC`,*/ `USD`],
-				EUR: [`CAD`, `CHF`],
-				//USD: [`CAD`, `CHF`, `JPY`]
+				BTC: [`CAD`, `EUR`, `USD`],
+				ETH: [`BTC`, `USD`],
+				EUR: [`CAD`, `CHF`, `USD`],
+				USD: [`CAD`, `CHF`, `JPY`]
 			});
 		//}
 
-		let DOM = [];console.log(Tools.typen(Clients.plot))
+		let DOM = [];
 
 		for (let fave in Tools.typen(Clients.faveplots)) {
 
@@ -175,14 +175,14 @@ let Models = {
 		return DOM;
 	},
 
-	plot: function (Arg) {
+	plot: function (Arg) { //`v202204282015`
 
 		let split = Clients.plotXSplit;
 
 		let Split = {
 			[`1M`]: {C: 15},
-			[`3M`]: {C: 20},
-			[`5M`]: {C: 24},
+			//[`3M`]: {C: 20},
+			//[`5M`]: {C: 24},
 			[`1H`]: {C: 24}
 		};
     
@@ -190,7 +190,15 @@ let Models = {
     
   		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
 
-  		let DOM = {split: []};
+  		let DOM = {column: [], split: []};
+
+		let Column = [[`pair`, 40], [`last trade`, 30, true], [`24h`, 30, true]];
+
+		Column.forEach(Feat => {
+
+			DOM.column.push([`div`, {style: {width: `${Feat[1]}%`}}, 
+				[[`span`, {style: {color: `#8e8e8e`, overflow: `hidden`, [`text-align`]: (Feat[2])? `right`: `left`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`, [`white-space`]: `nowrap`}}, Feat[0]]]]);
+		});
 
   		for (let span in Split) {
 
@@ -227,7 +235,7 @@ let Models = {
 
 		for (let A = 0; A < 25; A++) {
 
-			let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*8 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
+			let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*16 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
 
 			SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
 				
@@ -286,15 +294,31 @@ let Models = {
 									[[`a`, {class: `v202204261406`, href: (!Clients.mug)? `/signin`: `javascript:;`, style: {height: `${16}px`, width: `${16}px`}}]]]]]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
 						[[`div`, {id: `faves`, class: `_gxM _geQ`, style: {cursor: `grab`, [`font-size`]: `${11}px`}}, this.faveplots()]]],
-					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
+					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
-								[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${10}px`, padding: `${6}px ${12}px ${6}px 0`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+								[`div`, {}, [[`a`, {href: `javascript:;`, style: {color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, padding: `${6}px ${12}px`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`]]],
 								[`div`, {style: {}}, 
 									[
 										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`}}, Clients.plotXSplit], 
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {style: {[`border-left`]: `${1}px solid #353535`}}]]]]],
+					[`div`, {id: ``, style: {background: `#000`, border: `${1}px solid #353535`, position: `absolute`, top: `${107}px`, [`max-width`]: `${540}px`, width: `${100}%`, [`z-index`]: 16}}, 
+						[
+							[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 
+								[
+									[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1c`, [`mrgin-bottom`]: `${12}px`, padding: `${3}px ${6}px`}}, 
+										[
+											[`span`, {class: `v202412192124`, style: {height: `${16}px`, width: `${16}px`}}],
+											[`input`, {id: `quiz`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${4}px ${12}px`, [`text-transform`]: `uppercase`, width: `${100}%`}}]]], 
+									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${10}px`, [`font-weight`]: 600}}, 
+										[
+											[`a`, {href: `javascript:;`, class: ``, for: ``, style: {color: `#fff`, margin: `${6}px ${12}px ${6}px ${0}`}}, `AUD`],
+											[`a`, {href: `javascript:;`,class: ``, for: ``, style: {color: `#fff`,margin: `${6}px ${6}px`, opacity: 0.5}}, `EUR`],
+											[`a`, {href: `javascript:;`,class: ``, for: ``, style: {color: `#fff`,margin: `${6}px ${6}px`, opacity: 0.5}}, `USD`],
+											[`a`, {href: `javascript:;`,class: ``, style: {color: `#fff`, margin: `${6}px ${12}px`, opacity: 0.5}}, `BTC`]]]]], 
+							[`div`, {style: {margin: `${6}px ${12}px`}}, 
+								[[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${10}px`}}, DOM.column]]]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
 							[`div`, {style: {width: `${80}%`}}, 
