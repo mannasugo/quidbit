@@ -160,17 +160,53 @@ class Event {
 
 	plot (Arg) {
 
-		this.listen([document.querySelector(`#mutiple`), `click`, S => {
-
-			document.querySelector(`#mutiple2`).style.display = (document.querySelector(`#mutiple2`).style.display === `flex`)? `none`: `flex`;
-
-			document.querySelector(`#mutiple3`).style.display = (document.querySelector(`#mutiple3`).style.display === `flex`)? `none`: `flex`;
-		}]);
-
 		this.listen([document.querySelector(`#splitX`), `click`, S => {
 
-			document.querySelector(`#splits`).style.display = (document.querySelector(`#splits`).style.display === `flex`)? `none`: `flex`
+			document.querySelector(`#splits`).style.display = (document.querySelector(`#splits`).style.display === `flex`)? `none`: `flex`;
+
+			document.querySelector(`#mutiple2`).style.display = `none`;
+
+			document.querySelector(`#mutiple3`).style.display = `none`;
 		}]);
+
+		document.querySelectorAll(`#mutiple3 .A`).forEach(A => {
+
+			this.listen([A, `click`, S => {
+
+				document.querySelectorAll(`#mutiple3 .A`).forEach(A => {A.style.opacity = .5});
+
+				this.getSource(S).style.opacity = 1;
+
+				let DOM = [], Plot = [];
+
+				for (let plot in Arg.ago) {
+
+					if (plot.split(`-`).indexOf(this.getSource(S).innerHTML) > -1) Plot.push([plot, 0]);
+				};
+
+				Plot.sort((A, B) => {return A - B}).forEach(Stat => {
+
+					DOM.push([`div`, {id: Stat[0], class: `_geQ _gxM`, style: {padding: `${6}px ${12}px`}}, 
+						[
+							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${40}%`}}, 
+								[
+									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
+									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
+									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `qb`, }}, 
+										[ 
+											[`span`, {style: {[`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
+											[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Stat[0].split(`-`)[1]}`]]]]], 
+							[`div`, {style: {width: `${30}%`}}, 
+								[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
+							[`div`, {style: {width: `${30}%`}}, 
+								[[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]);
+				});
+
+				View.pop();
+
+				View.DOM([`#mutiple3 #list`, DOM]);
+			}]);
+		});
 
 		io().on(`SPOT_BOOK`, Spot => {
 
@@ -182,7 +218,10 @@ class Event {
 
 				Clients.plot = Tools.coats(Plot)
 
-				if (document.querySelector(`#${AB[0]}`)) document.querySelector(`#${AB[0]} #COST`).innerHTML = AB[1];
+				if (document.querySelector(`#${AB[0]}`)) {
+
+					document.querySelectorAll(`#${AB[0]} #COST`).forEach(A => {A.innerHTML = AB[1];});
+				}
 				
 				let P24 = [];
 
@@ -193,9 +232,9 @@ class Event {
 
 				if (P24.length > 0) {
 
-					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).innerHTML = `${(((AB[1] - P24[0][0])/AB[1])*100).toFixed(2)}%`
+					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelectorAll(`#${AB[0]} #MOD`).forEach( A => {A.innerHTML = `${(((AB[1] - P24[0][0])/AB[1])*100).toFixed(2)}%`;});
 
-					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelector(`#${AB[0]} #MOD`).style.color = (AB[1] > parseFloat(P24[0][0]))? /*`#02ff02`*/ `#519c58`: `#e3415d`;
+					if (document.querySelector(`#${AB[0]} #MOD`)) document.querySelectorAll(`#${AB[0]} #MOD`).forEach( A => {A.style.color = (AB[1] > parseFloat(P24[0][0]))? /*`#02ff02`*/ `#519c58`: `#e3415d`;});
 				}
 			});
 
@@ -214,6 +253,44 @@ class Event {
 			//document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4)
 
 		});
+
+		this.listen([document.querySelector(`#mutiple`), `click`, S => {
+
+			document.querySelector(`#mutiple2`).style.display = (document.querySelector(`#mutiple2`).style.display === `flex`)? `none`: `flex`;
+
+			document.querySelector(`#mutiple3`).style.display = (document.querySelector(`#mutiple3`).style.display === `flex`)? `none`: `flex`;
+
+			document.querySelector(`#splits`).style.display = `none`;
+
+			let DOM = [], Plot = [];
+
+			for (let plot in Arg.ago) {
+
+				if (plot.split(`-`).indexOf(`USD`) > -1) Plot.push([plot, 0]);
+			};
+
+			Plot.sort((A, B) => {return A - B}).forEach(Stat => {
+
+					DOM.push([`div`, {id: Stat[0], class: `_geQ _gxM`, style: {padding: `${6}px ${12}px`}}, 
+						[
+							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${40}%`}}, 
+								[
+									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
+									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
+									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `qb`, }}, 
+										[ 
+											[`span`, {style: {[`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
+											[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Stat[0].split(`-`)[1]}`]]]]], 
+							[`div`, {style: {width: `${30}%`}}, 
+								[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
+							[`div`, {style: {width: `${30}%`}}, 
+								[[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]);
+			});
+
+			View.pop();
+
+			View.DOM([`#mutiple3 #list`, DOM]);
+		}]);
 
 		setInterval(() => {
 

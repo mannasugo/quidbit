@@ -190,7 +190,7 @@ let Models = {
     
   		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
 
-  		let DOM = {column: [], split: []};
+  		let DOM = {column: [], multiple: [], split: []};
 
 		let Column = [[`pair`, 40], [`last trade`, 30, true], [`24h`, 30, true]];
 
@@ -198,6 +198,13 @@ let Models = {
 
 			DOM.column.push([`div`, {style: {width: `${Feat[1]}%`}}, 
 				[[`span`, {style: {color: `#8e8e8e`, overflow: `hidden`, [`text-align`]: (Feat[2])? `right`: `left`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`, [`white-space`]: `nowrap`}}, Feat[0]]]]);
+		});
+
+		let Multiple = [`AUD`, `CAD`, `CHF`, `BTC`, `EUR`, `USD`];
+
+		Multiple.forEach(A => {
+
+			DOM.multiple.push([`a`, {href: `javascript:;`, class: `A`, style: {color: `#fff`, [`margin-right`]: `${12}px`, opacity: (A != `USD`)? 0.5: 1}}, A]);
 		});
 
   		for (let span in Split) {
@@ -306,7 +313,7 @@ let Models = {
 										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`}}, Clients.plotXSplit], 
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {style: {[`border-left`]: `${1}px solid #353535`}}]]]]],
-					[`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${107}px`, [`max-width`]: `${540}px`, width: `${100}%`, [`z-index`]: 16}}, 
+					[`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${108}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
 						[
 							[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 
 								[
@@ -314,14 +321,10 @@ let Models = {
 										[
 											[`span`, {class: `v202412192124`, style: {height: `${16}px`, width: `${16}px`}}],
 											[`input`, {id: `quiz`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${4}px ${12}px`, [`text-transform`]: `uppercase`, width: `${100}%`}}]]], 
-									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`font-weight`]: 300}}, 
-										[
-											[`a`, {href: `javascript:;`, class: ``, for: ``, style: {color: `#fff`, margin: `${6}px ${12}px ${6}px ${0}`}}, `AUD`],
-											[`a`, {href: `javascript:;`,class: ``, for: ``, style: {color: `#fff`,margin: `${6}px ${6}px`, opacity: 0.5}}, `EUR`],
-											[`a`, {href: `javascript:;`,class: ``, for: ``, style: {color: `#fff`,margin: `${6}px ${6}px`, opacity: 0.5}}, `USD`],
-											[`a`, {href: `javascript:;`,class: ``, style: {color: `#fff`, margin: `${6}px ${12}px`, opacity: 0.5}}, `BTC`]]]]], 
+									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `qb`, [`font-size`]: `${10}px`, [`font-weight`]: 300, margin: `${3}px ${0}px`}}, DOM.multiple]]], 
 							[`div`, {style: {margin: `${6}px ${12}px`}}, 
-								[[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${10}px`}}, DOM.column]]]]],
+								[[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${10}px`}}, DOM.column]]], 
+							[`div`, {id: `list`, style: {[`max-height`]: `${300}px`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
 							[`div`, {style: {width: `${80}%`}}, 
