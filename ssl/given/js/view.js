@@ -331,7 +331,7 @@ let Models = {
 								[	
 									[`SVG`, {id: `pin`, style: {height: `${100}%`, position: `fixed`, width: `${100}%`}}, 
 										[[`path`, {id: ``, style: {}, stroke: `#6A6A6A`, d:``}]]],
-									[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+									[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {cursor: `none` /*`url(/ssl/given/svg/append_202204282015.svg), pointer !important`*/, transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 									[ 
 										[`g`, {}, SVG[0]],
 										[`g`, {}, SVG[1]],

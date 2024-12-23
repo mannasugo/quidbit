@@ -172,43 +172,45 @@ class Tools {
 
 					CSV = CSV.split(`\n`);
 
-					CSV = CSV.slice(2);
+					//if (parseInt(CSV[0][0][0]) === NaN) CSV = CSV.slice(2);
 
 					CSV.forEach(Value => {
 
 						Value = Value.split(`,`); //OHLC
 
-						Obj.push({
-							allocate: 1,
-							ilk: `market`,
-							md: createHash(`md5`).update(`${new Date(Value[0]).valueOf()}`, `utf8`).digest(`hex`),
-							mug: hold,
-							pair: [[Plot[0][0], Plot[0][1]], [0, Value[1]]],
-							side: `buy`,
-							ts: new Date(Value[0]).valueOf(),
-							ts_z: new Date(Value[0]).valueOf()});
+						(Value[0].indexOf(`/`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
 
 						Obj.push({
 							allocate: 1,
 							ilk: `market`,
-							md: createHash(`md5`).update(`${new Date(Value[0]).valueOf() + 59975}`, `utf8`).digest(`hex`),
+							md: createHash(`md5`).update(`${Value[0]}`, `utf8`).digest(`hex`),
+							mug: hold,
+							pair: [[Plot[0][0], Plot[0][1]], [0, Value[1]]],
+							side: `buy`,
+							ts: Value[0],
+							ts_z: Value[0]});
+
+						Obj.push({
+							allocate: 1,
+							ilk: `market`,
+							md: createHash(`md5`).update(`${Value[0] + 59975}`, `utf8`).digest(`hex`),
 							mug: hold,
 							pair: [[Plot[0][0], Plot[0][1]], [0, Value[4]]],
 							side: `buy`,
-							ts: new Date(Value[0]).valueOf() + 59975,
-							ts_z: new Date(Value[0]).valueOf() + 59975});
+							ts: Value[0] + 59975,
+							ts_z: Value[0] + 59975});
 
 						for (let A = 0; A < 2; A++) {
 
 							Obj.push({
 								allocate: 1,
 								ilk: `market`,
-								md: createHash(`md5`).update(`${new Date(Value[0]).valueOf() + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
+								md: createHash(`md5`).update(`${Value[0] + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
 								mug: hold,
 								pair: [[Plot[0][0], Plot[0][1]], [0, Value[A+2]]],
 								side: `buy`,
-								ts: new Date(Value[0]).valueOf() + 60000*(A+1)/4,
-								ts_z: new Date(Value[0]).valueOf() + 60000*(A+1)/4});
+								ts: Value[0] + 60000*(A+1)/4,
+								ts_z: Value[0] + 60000*(A+1)/4});
 						}
 					});
 
