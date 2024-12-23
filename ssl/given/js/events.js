@@ -184,21 +184,21 @@ class Event {
 					if (plot.split(`-`).indexOf(this.getSource(S).innerHTML) > -1) Plot.push([plot, 0]);
 				};
 
-				Plot.sort((A, B) => {return A - B}).forEach(Stat => {
+				Plot.sort((A, B) => {return A - B}).forEach((Stat, A) => {
 
-					DOM.push([`div`, {id: Stat[0], class: `_geQ _gxM`, style: {padding: `${6}px ${12}px`}}, 
+					DOM.push([`div`, {id: Stat[0], class: `_geQ _gxM`, style: {background: (A%2 === 1)? `#8888881c`: `none`, padding: `${6}px ${12}px`}}, 
 						[
-							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${40}%`}}, 
+							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${35}%`}}, 
 								[
 									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
 									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
-									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `qb`, }}, 
+									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
 										[ 
-											[`span`, {style: {[`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
-											[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Stat[0].split(`-`)[1]}`]]]]], 
-							[`div`, {style: {width: `${30}%`}}, 
+											[`span`, {style: {[`font-size`]: `${11}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
+											[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Stat[0].split(`-`)[1]}`]]]]], 
+							[`div`, {style: {width: `${25}%`}}, 
 								[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
-							[`div`, {style: {width: `${30}%`}}, 
+							[`div`, {style: {width: `${40}%`}}, 
 								[[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]);
 				});
 
@@ -208,11 +208,29 @@ class Event {
 			}]);
 		});
 
+		let HL = [];
+
+		Arg.XY.forEach(K => {
+
+			if (K[2].length > 0) {
+
+				HL.push(K[2][0]); 
+
+				HL.push(K[2][1]);
+			}
+		});
+    
+  		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
+
+  		let RECT = document.querySelectorAll(`#kline rect`);
+
+  		let X = RECT[RECT.length - 1].getAttribute(`x`);
+
 		io().on(`SPOT_BOOK`, Spot => {
 
 			let Plot = {};
 
-			Spot.forEach(AB => { 
+			Spot.forEach(AB => {
 
 				Plot[AB[0]] = [AB[1]]; 
 
@@ -238,20 +256,28 @@ class Event {
 				}
 			});
 
-			//let ZY = Spot[Arg.plot[0].toString().replace(`,`, `-`)];
+			let ZY = 0;
 
-			//HL.push(ZY[1]);
+			if (Plot[Arg.plot[0].toString().replace(`,`, `-`)]) ZY = Plot[Arg.plot[0].toString().replace(`,`, `-`)];
 
-			//HL.sort((A, B) => {return B - A});
+			if (ZY > 0) {
 
-            //document.querySelector(`#spotline`).setAttribute(`stroke`, (Open[1] > SPOT[1])? `red`: `lime`);
+				HL.push(ZY);
 
-			//document.querySelector(`#spotline`).setAttribute(`d`, `M${parseFloat(X)} ${.15*Y + ((HL[0] - SPOT[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - SPOT[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`)
+				HL.sort((A, B) => {return B - A});
 
-			//document.querySelector(`#ZY`).innerHTML = ZY[1];
+				document.querySelector(`#ZY`).innerHTML = ZY;
 
-			//document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY[1])*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4)
+				document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4);
 
+				document.querySelector(`#spotline`).setAttribute(`d`, `M${parseFloat(X)} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
+
+            	document.querySelector(`#spotY #a`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) - 10);
+
+           		//document.querySelector(`#spotY #a`).setAttribute(`fill`, (Open[1] > YZ)? `#ff000078`: `#05b5058c`);
+
+            	document.querySelector(`#spotY #c`).setAttribute(`d`, `M${0} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${8} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
+			}
 		});
 
 		this.listen([document.querySelector(`#mutiple`), `click`, S => {
@@ -269,21 +295,21 @@ class Event {
 				if (plot.split(`-`).indexOf(`USD`) > -1) Plot.push([plot, 0]);
 			};
 
-			Plot.sort((A, B) => {return A - B}).forEach(Stat => {
+			Plot.sort((A, B) => {return A - B}).forEach((Stat, A) => {
 
-					DOM.push([`div`, {id: Stat[0], class: `_geQ _gxM`, style: {padding: `${6}px ${12}px`}}, 
+					DOM.push([`div`, {id: Stat[0], class: `_geQ _gxM`, style: {background: (A%2 === 1)? `#8888881c`: `none`,  padding: `${6}px ${12}px`}}, 
 						[
-							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${40}%`}}, 
+							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${35}%`}}, 
 								[
 									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
 									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
-									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `qb`, }}, 
+									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
 										[ 
-											[`span`, {style: {[`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
+											[`span`, {style: {[`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
 											[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Stat[0].split(`-`)[1]}`]]]]], 
-							[`div`, {style: {width: `${30}%`}}, 
+							[`div`, {style: {width: `${25}%`}}, 
 								[[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
-							[`div`, {style: {width: `${30}%`}}, 
+							[`div`, {style: {width: `${40}%`}}, 
 								[[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]);
 			});
 
@@ -299,6 +325,30 @@ class Event {
 				document.querySelector(`#lapse`).innerHTML = `${(59 - new Date().getMinutes() > 9)? ``: `0`}${59 - new Date().getMinutes()}:${(59 - new Date().getSeconds() > 9)? ``: `0`}${59 - new Date().getSeconds()}`;
 			}
 		}, 1000);
+
+		this.listen([document.querySelector(`#kline`), `mousemove`, S => {
+
+			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
+
+            document.querySelector(`#floatY #c`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
+
+            document.querySelector(`#floatY #a`).setAttribute(`y`, S.layerY - 10);
+
+			document.querySelector(`#floatY text`).setAttribute(`y`, S.layerY + 4);
+
+			HL[0] = parseFloat(HL[0]);
+
+			HL[HL.length - 1] = parseFloat(HL[HL.length - 1]);
+
+			let Delta = [(HL[0] + (.15*Y*(HL[0] - HL[HL.length - 1]))/(.35*Y)) - S.layerY*(HL[0] - HL[HL.length - 1])/(.35*Y)];
+
+			document.querySelector(`#floatY text`).innerHTML = Delta[0].toFixed(Arg.plot[1] - 1);
+
+            document.querySelector(`#floatY rect`).setAttribute(`width`, Delta[0].toFixed(Arg.plot[1]).toString().length*8.5);
+	
+			document.querySelector(`#floatY`).style.display = `unset`;
+		
+		}]);	
 	}
 }
 

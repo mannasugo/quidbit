@@ -142,10 +142,10 @@ let Models = {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [`CAD`, `EUR`, `USD`],
-				ETH: [`BTC`, `USD`],
-				EUR: [`CAD`, `CHF`, `USD`],
-				USD: [`CAD`, `CHF`, `JPY`]
+				BTC: [`CAD`, /*`EUR`,*/ `USD`],
+				ETH: [/*`BTC`,*/ `USD`],
+				EUR: [`CAD`, `CHF`/*, `USD`*/],
+				USD: [/*`CAD`, `CHF`,*/ `JPY`]
 			});
 		//}
 
@@ -192,7 +192,7 @@ let Models = {
 
   		let DOM = {column: [], multiple: [], split: []};
 
-		let Column = [[`pair`, 40], [`last trade`, 30, true], [`24h`, 30, true]];
+		let Column = [[`pair`, 35], [`last trade`, 25, true], [`24h`, 40, true]];
 
 		Column.forEach(Feat => {
 
@@ -200,7 +200,7 @@ let Models = {
 				[[`span`, {style: {color: `#8e8e8e`, overflow: `hidden`, [`text-align`]: (Feat[2])? `right`: `left`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`, [`white-space`]: `nowrap`}}, Feat[0]]]]);
 		});
 
-		let Multiple = [`AUD`, `CAD`, `CHF`, `BTC`, `EUR`, `USD`];
+		let Multiple = [`AUD`, `CAD`, `CHF`, `BTC`, `ETH`, `EUR`, `USD`];
 
 		Multiple.forEach(A => {
 
@@ -321,53 +321,51 @@ let Models = {
 										[
 											[`span`, {class: `v202412192124`, style: {height: `${16}px`, width: `${16}px`}}],
 											[`input`, {id: `quiz`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${4}px ${12}px`, [`text-transform`]: `uppercase`, width: `${100}%`}}]]], 
-									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `qb`, [`font-size`]: `${10}px`, [`font-weight`]: 300, margin: `${3}px ${0}px`}}, DOM.multiple]]], 
-							[`div`, {style: {margin: `${6}px ${12}px`}}, 
-								[[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${10}px`}}, DOM.column]]], 
+									[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`font-weight`]: 300, margin: `${6}px ${0}px`}}, DOM.multiple]]], 
+							[`div`, {style: {margin: `${6}px ${12}px ${0}`}}, 
+								[[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${9}px`}}, DOM.column]]], 
 							[`div`, {id: `list`, style: {[`max-height`]: `${300}px`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}]]],
 					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
 							[`div`, {style: {width: `${80}%`}}, 
-								[[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+								[	
+									[`SVG`, {id: `pin`, style: {height: `${100}%`, position: `fixed`, width: `${100}%`}}, 
+										[[`path`, {id: ``, style: {}, stroke: `#6A6A6A`, d:``}]]],
+									[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 									[ 
 										[`g`, {}, SVG[0]],
 										[`g`, {}, SVG[1]],
 										[`g`, {}, SVG[2]], 
 										[`g`, {id: `XYKline`}, SVG[3]],
-										[`g`, {}, 
-											[
-												[`path`, {id: `bullseye`, stroke: `#6a6a6a`, d: ``}], 
-												[`path`, {id: `spotline`, [`stroke-dasharray`]: 2, d: ``}]]]]]]], 
+										[`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]]]]]], 
 							[`div`, {style: {width: `${20}%`}}, 
-								[[`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
-									[
-										[`g`, {id: `spotY`}, 
-											[
-												[`rect`, {id: `a`, x: 0, height: 20, width: 80}], 
-												[`path`, {id: `c`, stroke: `#fff`, d: ``}],
-												[`g`, {}, SVG[4]],
-												SVG[5],
-												[`g`, {}, SVG[6]]]], 
-										[`g`, {id: `floatY`, style: {display: `none`}}, 
-											[
-												[`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#ffffff3b`}],
-												[`path`, {id: `c`, stroke: `#fff`, d: ``}],
-												[`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: 0}, ``]]]]]]]]], 
-					//this.plotform([Arg.pair.split(`-`)]),
+								[
+									[`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
+										[
+											[`g`, {id: `spotY`}, 
+												[
+													[`rect`, {id: `a`, x: 0, height: 20, width: 80}], 
+													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
+													[`g`, {}, SVG[4]],
+													SVG[5],
+													[`g`, {}, SVG[6]]]], 
+											[`g`, {id: `floatY`, style: {display: `none`}}, 
+												[
+													[`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#FFFFFFA3`}],
+													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
+													[`text`, {fill: `#000`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
 					[`div`, {id: `collapsible`, style: {background: `#000000c9`, top: `${108}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
 						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
-					[`div`, {id: `collapsible`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, height: `${27}px`, overflow: `hidden`, position: `absolute`, width: `${80}%`}}, 
-						[[`svg`, {id: `time`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
-								[[`g`, {}, SVG[7]], SVG[8]]]]], 
+					[`div`, {id: `collapsible`, class: `_gxM`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, overflow: `hidden`, position: `absolute`, width: `${100}%`}}, 
+						[
+							[`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 
+								[
+									[`svg`, {id: `time`, height: `${27}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+										[[`g`, {}, SVG[7]], SVG[8]]], 
+									[`svg`, {height: 18, width: `${100}%`, style: {[`border-top`]: `${1}px solid #6A6A6A`}}]]], 
+							[`div`, {style: {[`border-left`]: `${1}px solid #353535`, width: `${20}%`}}, ]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
-						[[`div`, {class: `_gxM _geQ`}, 
-							[
-								/*[`a`, {id: `form`, class: `v202312231716`, href: `javascript:;`, style: {height: `${18}px`, width: `${18}px`}}], 
-								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
-									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `order form`]]],
-								[`a`, {id: `chart`, class: `v202312231641`, href: `javascript:;`, style: {height: `${18}px`, [`margin-left`]: `${24}px`, width: `${18}px`}}], 
-								[`div`, {style: {[`margin-left`]: `${8}px`}}, 
-									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, `charts`]]]*/]]]]]];	
+						[[`div`, {class: `_gxM _geQ`}, []]]]]];	
 	}, 
 
 	utilApp: (Arg) => {
