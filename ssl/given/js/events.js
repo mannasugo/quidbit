@@ -266,7 +266,7 @@ class Event {
 
 				HL.sort((A, B) => {return B - A});
 
-				document.querySelector(`#ZY`).innerHTML = ZY;
+				document.querySelector(`#ZY`).innerHTML = parseFloat(ZY).toFixed(Arg.plot[1] -1);
 
 				document.querySelector(`#ZY`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4);
 
