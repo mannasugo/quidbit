@@ -208,7 +208,7 @@ class Event {
 			}]);
 		});
 
-		let HL = [];
+		let HL = [], Vols = [];
 
 		Arg.XY.forEach(K => {
 
@@ -217,6 +217,8 @@ class Event {
 				HL.push(K[2][0]); 
 
 				HL.push(K[2][1]);
+
+				Vols.push(K[3]);
 			}
 		});
     
@@ -346,6 +348,8 @@ class Event {
 
             document.querySelector(`#floatY rect`).setAttribute(`width`, Delta[0].toFixed(Arg.plot[1]).toString().length*8.5);
 	
+			document.querySelector(`#floatVol`).style.display = `none`;
+	
 			document.querySelector(`#floatY`).style.display = `unset`;
 		
 		}]);
@@ -354,6 +358,16 @@ class Event {
 
 			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
 			
+			document.querySelector(`#floatVol`).setAttribute(`y`, S.layerY + 4);
+
+			Vols = Vols.sort((A, B) => {return B - A});
+
+			document.querySelector(`#floatVol`).innerHTML = (Vols[0] - (S.layerY*Vols[0])/(.115*Y)).toFixed(2);
+
+			document.querySelector(`#floatVol-`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
+	
+			document.querySelector(`#floatVol`).style.display = `unset`;
+
 			document.querySelector(`#floatY`).style.display = `none`;
 		}]);	
 	}

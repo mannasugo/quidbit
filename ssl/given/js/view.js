@@ -238,7 +238,7 @@ let Models = {
 
 		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
 
-		let SVG = [[], [], [], [], [], [], [], [], [], [], []]; 
+		let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []]; 
 
 		RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
@@ -269,8 +269,7 @@ let Models = {
 				
 				SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
 				
-				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
-			
+				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);			
 			}
 
 			if (K[0] === Day[0]) Place[0] = i;
@@ -296,6 +295,11 @@ let Models = {
 		SVG[8] = [`text`, {id: `lapse`, x: Arg[`XY`].length*7.12 - 12, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, ``]
 
 		SVG[9] = [`line`, { x1: 0, x2: 4000, y1: `${102 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, y2: `${102 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}];
+
+		SVG[11] = [`text`, {x: 20, y: `${106 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${Tools.yScale([.75*Vols[0], Vols[0]])[0]}`];
+				
+		SVG[12] = [`line`, {x1: 0, x2: 8, y1: `${102.5 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, y2: `${102.5 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}];
+		
 		
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
@@ -379,7 +383,12 @@ let Models = {
 										[`div`, {id: `vol`, style: {overflow: `hidden`, width: `${80}%`}}, 
 											[[`svg`, {id: ``, height: `${100}%`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 												[SVG[9], [`g`, {}, SVG[10]]]]]], 
-										[`div`, {style: {[`background`]: `#000`, [`border-left`]: `${1}px solid #353535`, width: `${20}%`}}],
+										[`div`, {style: {[`background`]: `#000`, [`border-left`]: `${1}px solid #353535`, width: `${20}%`}}, 
+											[[`svg`, {id: ``, height: `${100}%`, width: `${100}%`, style: {}}, 
+												[
+													[`g`, {}, [SVG[11], SVG[12]]],
+													[`path`, {id: `floatVol-`, stroke: `#fff`, d: ``}],
+													[`text`, {id: `floatVol`, fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]],
 										[`div`, {style: {background: `#000000D9`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`line-height`]: `${12}px`, margin: `${4}px`, padding: `${4}px`, position: `absolute`, top: 0}}, 
 											[[`div`, {class: `_gxM _geQ`}, 
 												[
