@@ -130,14 +130,14 @@ class Tools {
 										
 				XY.forEach(X_Y => {
 
-					if (X_Y.ts_z > X_Z - 3600000*A && X_Y.ts_z < (X_Z - 3600000*A) + 3600000) Plot.push([X_Y.pair[1][1], X_Y.ts_z])
+					if (X_Y.ts_z > X_Z - 3600000*A && X_Y.ts_z < (X_Z - 3600000*A) + 3600000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
 				});
 
 				let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
 
 				let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
 										
-				PlotXY.push([X_Z - 3600000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: []]) //OCHL
+				PlotXY.push([X_Z - 3600000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
 			}
 		}
 
@@ -170,9 +170,9 @@ class Tools {
 
 						CSV = readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${PREDAY.getMonth() + 1}${PREDAY.getDate()}.csv`, {encoding: `utf8`});
 
-					CSV = CSV.split(`\n`);
+					CSV = CSV.split(`\n`); 
 
-					//if (parseInt(CSV[0][0][0]) === NaN) CSV = CSV.slice(2);
+					//if (parseInt(CSV[0][0][0]) > 0) CSV = CSV.slice(2);
 
 					CSV.forEach(Value => {
 
@@ -181,7 +181,7 @@ class Tools {
 						(Value[0].indexOf(`/`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
 
 						Obj.push({
-							allocate: 1,
+							allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
 							ilk: `market`,
 							md: createHash(`md5`).update(`${Value[0]}`, `utf8`).digest(`hex`),
 							mug: hold,
@@ -191,7 +191,7 @@ class Tools {
 							ts_z: Value[0]});
 
 						Obj.push({
-							allocate: 1,
+							allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
 							ilk: `market`,
 							md: createHash(`md5`).update(`${Value[0] + 59975}`, `utf8`).digest(`hex`),
 							mug: hold,
@@ -203,7 +203,7 @@ class Tools {
 						for (let A = 0; A < 2; A++) {
 
 							Obj.push({
-								allocate: 1,
+								allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
 								ilk: `market`,
 								md: createHash(`md5`).update(`${Value[0] + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
 								mug: hold,
@@ -241,7 +241,7 @@ class Tools {
 							let COST = parseFloat(this.typen(coat).data.amount).toFixed(Plot[1]), STAMP = new Date().valueOf();
 
 							let Pair = {
-								allocate: 1,
+								allocate: 0,
 								ilk: `market`,
 								md: createHash(`md5`).update(`${STAMP}`, `utf8`).digest(`hex`),
 								mug: hold,
