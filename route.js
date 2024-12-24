@@ -95,7 +95,7 @@ class Route {
 									if (Plot[0][0] === Pulls.plot[0] && Plot[0][1] === Pulls.plot[1]) S.plot = Plot;
 								});
 
-								if (!S.plot) return;
+								if (!S.plot) return;//console.log(Tools.plotXY([S.plot[0], Pulls.splitX]))
 
 								Arg[1].end(Tools.coats({
 									ago: Tools.plot24(), plot: S.plot, XY: Tools.plotXY([S.plot[0], Pulls.splitX])}));

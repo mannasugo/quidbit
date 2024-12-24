@@ -143,7 +143,7 @@ let Models = {
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
 				BTC: [`CAD`, /*`EUR`,*/ `USD`],
-				ETH: [/*`BTC`,*/ `USD`],
+				ETH: [`BTC`, `USD`],
 				EUR: [`CAD`, `CHF`/*, `USD`*/],
 				USD: [/*`CAD`, `CHF`,*/ `JPY`]
 			});
@@ -212,7 +212,7 @@ let Models = {
   			DOM.split.push([`a`, {href: `javascript:;`, style: {[`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
   		}
 
-		let HL = [];
+		let HL = [], Vols = [];
 
 		let CAV = 0, RH = 0; //Row Height, Candle Average
 
@@ -223,6 +223,8 @@ let Models = {
 				HL.push(K[2][0]); 
 
 				HL.push(K[2][1]);
+
+				Vols.push(K[3]);
 
 				RH += K[2][0] - K[2][1];
 
@@ -236,7 +238,7 @@ let Models = {
 
 		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
 
-		let SVG = [[], [], [], [], [], [], [], [], []]; 
+		let SVG = [[], [], [], [], [], [], [], [], [], [], []]; 
 
 		RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
@@ -246,12 +248,14 @@ let Models = {
 
 			SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
 				
-			SVG[1].push([`line`, {x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
+			SVG[1].push([`line`, {style: {visibility: (.15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) > .70*Y)? `collapse`: `visible`}, x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
 		
 			SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
 		}
 
 		let Place = [0];
+
+		Vols = Vols.sort((A, B) => {return B - A});
 
 		Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
@@ -264,6 +268,9 @@ let Models = {
                 OC.sort((A, B) => {return B - A});
 				
 				SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				
+				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+			
 			}
 
 			if (K[0] === Day[0]) Place[0] = i;
@@ -288,6 +295,8 @@ let Models = {
 
 		SVG[8] = [`text`, {id: `lapse`, x: Arg[`XY`].length*7.12 - 12, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, ``]
 
+		SVG[9] = [`line`, { x1: 0, x2: 4000, y1: `${102 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, y2: `${102 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}];
+		
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
 				[
@@ -354,16 +363,31 @@ let Models = {
 													[`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#FFFFFFA3`}],
 													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
 													[`text`, {fill: `#000`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
-					[`div`, {id: `collapsible`, style: {background: `#000000c9`, top: `${108}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
+					[`div`, {id: ``, style: {background: `#000000c9`, top: `${108}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
 						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
-					[`div`, {id: `collapsible`, class: `_gxM`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, overflow: `hidden`, position: `absolute`, width: `${100}%`}}, 
+					[`div`, {id: ``, class: `_gxM`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, position: `absolute`, width: `${100}%`}}, 
 						[
 							[`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 
 								[
 									[`svg`, {id: `time`, height: `${27}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 										[[`g`, {}, SVG[7]], SVG[8]]], 
 									[`svg`, {height: 18, width: `${100}%`, style: {[`border-top`]: `${1}px solid #6A6A6A`}}]]], 
-							[`div`, {style: {[`border-left`]: `${1}px solid #353535`, width: `${20}%`}}, ]]], 
+							[`div`, {style: {[`border-left`]: `${1}px solid #353535`, width: `${20}%`}}], 
+							[`div`, {style: {background: `transparent`, bottom: `${46}px`, height: `calc(${10.5}vh)`, position: `absolute`, width: `${100}%`}}, 
+								[[`div`, {class: `_gxM`, style: {[`border-top`]: `${2}px solid #6A6A6A`, height: `${100}%`, width: `${100}%`}}, 
+									[ 
+										[`div`, {id: `vol`, style: {overflow: `hidden`, width: `${80}%`}}, 
+											[[`svg`, {id: ``, height: `${100}%`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+												[SVG[9], [`g`, {}, SVG[10]]]]]], 
+										[`div`, {style: {[`background`]: `#000`, [`border-left`]: `${1}px solid #353535`, width: `${20}%`}}],
+										[`div`, {style: {background: `#000000D9`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`line-height`]: `${12}px`, margin: `${4}px`, padding: `${4}px`, position: `absolute`, top: 0}}, 
+											[[`div`, {class: `_gxM _geQ`}, 
+												[
+													[`span`, {style: {[`font-family`]: `qb`}}, `Volume`],
+													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `(base, 15)`],
+													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `${Arg.XY[0][3]}`],
+													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `0`],
+													[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`margin-left`]: `${8}px`}}, Arg.plot[0][0]]]]]]]]]]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, []]]]]];	
 	}, 

@@ -348,6 +348,13 @@ class Event {
 	
 			document.querySelector(`#floatY`).style.display = `unset`;
 		
+		}]);
+
+		this.listen([document.querySelector(`#vol`), `mousemove`, S => {
+
+			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
+			
+			document.querySelector(`#floatY`).style.display = `none`;
 		}]);	
 	}
 }
