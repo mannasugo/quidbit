@@ -238,7 +238,7 @@ let Models = {
 
 		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
 
-		let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []]; 
+		let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []], G = [[]]; 
 
 		RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
@@ -269,7 +269,11 @@ let Models = {
 				
 				SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
 				
-				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);			
+				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				
+				G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);
+				
+							
 			}
 
 			if (K[0] === Day[0]) Place[0] = i;
@@ -314,7 +318,7 @@ let Models = {
 									[[`a`, {class: `v202204261406`, href: (!Clients.mug)? `/signin`: `javascript:;`, style: {height: `${16}px`, width: `${16}px`}}]]]]]]],
 					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
 						[[`div`, {id: `faves`, class: `_gxM _geQ`, style: {cursor: `grab`, [`font-size`]: `${11}px`}}, this.faveplots()]]],
-					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
+					[`div`, {id: ``, style: {[`border-bottom`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
 								[`div`, {}, 
@@ -350,7 +354,7 @@ let Models = {
 										[`g`, {}, SVG[1]],
 										[`g`, {}, SVG[2]], 
 										[`g`, {id: `XYKline`}, SVG[3]],
-										[`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]]]]]], 
+										[`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]], [`g`, {}, G[0]]]]]], 
 							[`div`, {style: {width: `${20}%`}}, 
 								[
 									[`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
@@ -368,7 +372,7 @@ let Models = {
 													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
 													[`text`, {fill: `#000`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
 					[`div`, {id: ``, style: {background: `#000000c9`, top: `${108}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
-						[[`span`, {id: `ohlc`, style: {[`font-family`]: `intext`, [`font-size`]: `${12}px`, [`letter-spacing`]: 0}}, ``]]], 
+						[[`span`, {id: `info`, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
 					[`div`, {id: ``, class: `_gxM`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, position: `absolute`, width: `${100}%`}}, 
 						[
 							[`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 
@@ -394,7 +398,7 @@ let Models = {
 												[
 													[`span`, {style: {[`font-family`]: `qb`}}, `Volume`],
 													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `(base, 15)`],
-													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `${Arg.XY[0][3]}`],
+													[`span`, {id: `volbase`, style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `${Arg.XY[0][3]}`],
 													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `0`],
 													[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`margin-left`]: `${8}px`}}, Arg.plot[0][0]]]]]]]]]]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 

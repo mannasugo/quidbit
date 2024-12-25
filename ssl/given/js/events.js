@@ -369,7 +369,20 @@ class Event {
 			document.querySelector(`#floatVol`).style.display = `unset`;
 
 			document.querySelector(`#floatY`).style.display = `none`;
-		}]);	
+		}]);
+
+		document.querySelectorAll(`.info`).forEach(SVG => {
+
+			this.listen([SVG, `mouseover`, S => {
+
+				let Stat = Tools.typen(this.getSource(S).id);
+
+				document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
+			
+				document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
+
+				document.querySelector(`#volbase`).innerHTML = Stat[3];
+			}])});
 	}
 }
 
