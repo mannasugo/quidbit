@@ -181,7 +181,7 @@ let Models = {
 
 		let Split = {
 			[`1M`]: {C: 15},
-			//[`3M`]: {C: 20},
+			[`3M`]: {C: 20},
 			//[`5M`]: {C: 24},
 			[`1H`]: {C: 24}
 		};
@@ -236,7 +236,9 @@ let Models = {
 
 		//let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
 
-		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
+		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
+
+		//let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
 
 		let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []], G = [[]]; 
 
@@ -271,17 +273,17 @@ let Models = {
 				
 				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
 				
-				G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);
-				
-							
+				G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
 			}
 
 			if (K[0] === Day[0]) Place[0] = i;
 		});
 
-		//Place[0] = (Place[0] + Split[split].C*4);
+		//Place[0] = (Place[0] + Split[split].C*4); //1M
 
-		Place[0] = (Place[0] + Split[split].C*1);
+		Place[0] = (Place[0] + Split[split].C*7); //3M
+
+		//Place[0] = (Place[0] + Split[split].C*1); //1H
 
 		for (let i = 0; i < 24; i++) {
 

@@ -45,7 +45,7 @@ class Tools {
 
   		Arg[1] = parseFloat(Arg[1]);
 
-  		if (Arg[0] < 1) {
+  		if (Arg[0] < 1 && Arg[0] !== 0) {
 
   			let Float = Arg[0].toString().split(`.`);
 
@@ -68,6 +68,13 @@ class Tools {
   			B1 = Arg[1].toFixed().length;
 
   			AY = parseInt(Arg[1].toString().substr(0, B1-B2))*Math.pow(10, B2);
+  		}
+
+  		if (Arg[0] === 0) {
+
+  			RH = 0; 
+
+  			AY = 0
   		}
 
   		return [RH, AY];

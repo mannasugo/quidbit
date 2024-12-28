@@ -56,7 +56,7 @@ class Route {
 
 				//if (!Clients.plotXSplit) 
 
-					Clients.plotXSplit = `1H`;
+					Clients.plotXSplit = `3M`;
 
 				let Puts = Tools.pull([
 					`/json/web/`, {
