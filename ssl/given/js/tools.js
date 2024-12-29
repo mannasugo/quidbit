@@ -81,6 +81,15 @@ class Tools {
   	}
 
 	typen (coat) { return JSON.parse(coat); }
+
+	DateString (Arg) {
+
+		let String = new Date((Arg[0] + Arg[1]*Arg[2]) - Arg[3]*Arg[1]).toTimeString();
+
+		if (Arg[1] === 60000*60*24) String = new Date((Arg[0] + Arg[1]*Arg[2]) - Arg[3]*Arg[1]).toDateString();
+
+		return `${String.substr(Arg[4], Arg[5])}`;
+	}
 }
 
 Tools = new Tools();

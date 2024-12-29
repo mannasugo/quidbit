@@ -142,10 +142,10 @@ let Models = {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [`CAD`, /*`EUR`,*/ `USD`],
+				BTC: [`CAD`, `EUR`, `USD`],
 				ETH: [`BTC`, `USD`],
-				EUR: [`CAD`, `CHF`/*, `USD`*/],
-				USD: [/*`CAD`, `CHF`,*/ `JPY`]
+				EUR: [`CAD`, `CHF`, `USD`],
+				//USD: [/*`CAD`, `CHF`,*/ `JPY`]
 			});
 		//}
 
@@ -180,10 +180,30 @@ let Models = {
 		let split = Clients.plotXSplit;
 
 		let Split = {
-			[`1M`]: {C: 15},
-			[`3M`]: {C: 20},
-			//[`5M`]: {C: 24},
-			[`1H`]: {C: 24}
+			[`1M`]: {
+				abs: 60000,
+				C: 15, 
+				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf(), 
+				lox: .4, //line offset x
+				place: 4, 
+				sub: [0, 5],
+				tox: -14 /*text offset x*/},
+			[`3M`]: {
+				abs: 60000*3,
+				C: 20, 
+				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf(), 
+				lox: 1,
+				place: 8, 
+				sub: [0, 5], 
+				tox: -14},
+			[`1H`]: {
+				abs: 60000*60,
+				C: 24, 
+				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf(),
+				lox: -20.6,
+				place: 1, 
+				sub: [8, 2],
+				tox: -24}
 		};
     
   		let X = parseFloat(document.querySelector(`body`).clientWidth);
@@ -234,12 +254,6 @@ let Models = {
 
 		HL.sort((A, B) => {return B - A});
 
-		//let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
-
-		let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf()];
-
-		//let Day = [new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf()];
-
 		let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []], G = [[]]; 
 
 		RH = HL[0] - HL[HL.length - 1]; CAV = 2;
@@ -276,14 +290,10 @@ let Models = {
 				G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
 			}
 
-			if (K[0] === Day[0]) Place[0] = i;
+			if (K[0] === Split[split].day) Place[0] = i;
 		});
 
-		//Place[0] = (Place[0] + Split[split].C*4); //1M
-
-		Place[0] = (Place[0] + Split[split].C*7); //3M
-
-		//Place[0] = (Place[0] + Split[split].C*1); //1H
+		Place[0] = (Place[0] + Split[split].C*Split[split].place); 
 
 		for (let i = 0; i < 24; i++) {
 
@@ -291,9 +301,9 @@ let Models = {
 					
 			//SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		
-			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 26, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] +  + Split[split].C*1*3600000) - i*Split[split].C*3600000).toDateString().substr(8, 2)}`])
+			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) + Split[split].tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split[split].day, Split[split].C*Split[split].abs, Split[split].place, i, Split[split].sub[0], Split[split].sub[1]])]);
 
-			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) - 20.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) - 20.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + Split[split].lox, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + Split[split].lox, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		}
 
 		SVG[5] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}];
