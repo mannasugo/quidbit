@@ -177,34 +177,7 @@ let Models = {
 
 	plot: function (Arg) { //`v202204282015`
 
-		let split = Clients.plotXSplit;
-
-		let Split = {
-			[`1M`]: {
-				abs: 60000,
-				C: 15, 
-				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf(), 
-				lox: .4, //line offset x
-				place: 4, 
-				sub: [0, 5],
-				tox: -14 /*text offset x*/},
-			[`3M`]: {
-				abs: 60000*3,
-				C: 20, 
-				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf(), 
-				lox: 1,
-				place: 8, 
-				sub: [0, 5], 
-				tox: -14},
-			[`1H`]: {
-				abs: 60000*60,
-				C: 24, 
-				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf(),
-				lox: -20.6,
-				place: 1, 
-				sub: [8, 2],
-				tox: -24}
-		};
+		let Split = Constants.ival[Clients.plotXSplit];
     
   		let X = parseFloat(document.querySelector(`body`).clientWidth);
     
@@ -227,9 +200,9 @@ let Models = {
 			DOM.multiple.push([`a`, {href: `javascript:;`, class: `A`, style: {color: `#fff`, [`margin-right`]: `${12}px`, opacity: (A != `USD`)? 0.5: 1}}, A]);
 		});
 
-  		for (let span in Split) {
+  		for (let span in Constants.ival) {
 
-  			DOM.split.push([`a`, {href: `javascript:;`, style: {[`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
+  			DOM.split.push([`a`, {href: `javascript:;`, class: `ival`, style: {background: (Clients.plotXSplit === span)? `#8888881C`: `#000`, [`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
   		}
 
 		let HL = [], Vols = [];
@@ -290,16 +263,16 @@ let Models = {
 				G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
 			}
 
-			if (K[0] === Split[split].day) Place[0] = i;
+			if (K[0] === Split.day) Place[0] = i;
 		});
 
-		Place[0] = (Place[0] + Split[split].C*Split[split].place); 
+		Place[0] = (Place[0] + Split.C*Split.place); 
 
 		for (let i = 0; i < 24; i++) {
 
-			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) + Split[split].tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split[split].day, Split[split].C*Split[split].abs, Split[split].place, i, Split[split].sub[0], Split[split].sub[1]])]);
+			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split.C) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split.day, Split.C*Split.abs, Split.place, i, Split.sub[0], Split.sub[1]])]);
 
-			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + Split[split].lox, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + Split[split].lox, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split.C) + Split.lox, y1: 0, x2: 7.12*(Place[0] - i*Split.C) + Split.lox, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 		}
 
 		SVG[5] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}];

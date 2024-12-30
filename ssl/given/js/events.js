@@ -389,6 +389,19 @@ class Event {
 
 				document.querySelector(`#volbase`).innerHTML = Stat[3];
 			}])});
+
+		document.querySelectorAll(`.ival`).forEach(Val => {
+
+			this.listen([Val, `click`, S => {
+
+				Clients.plotXSplit = Val.innerHTML;
+
+				document.querySelectorAll(`.ival`).forEach(A => {A.style.background = `#000`;});
+
+				Val.style.background = `#8888881C`;
+
+				document.querySelector(`#splitX`).innerHTML = Val.innerHTML;
+			}])});
 	}
 }
 

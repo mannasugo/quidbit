@@ -98,6 +98,33 @@ let Clients = sessionStorage;
 
 const Constants = {
 
+	ival: {
+		[`1M`]: {
+				abs: 60000,
+				C: 15, 
+				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf(), 
+				lox: .4, //line offset x
+				place: 4, 
+				sub: [0, 5],
+				tox: -14 /*text offset x*/},
+		[`3M`]: {
+				abs: 60000*3,
+				C: 20, 
+				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours()}:00`).valueOf(), 
+				lox: 1,
+				place: 8, 
+				sub: [0, 5], 
+				tox: -14},
+		[`1H`]: {
+				abs: 60000*60,
+				C: 24, 
+				day: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf(),
+				lox: -20.6,
+				place: 1, 
+				sub: [8, 2],
+				tox: -24}
+	},
+
 	SVG: {
 		ADA: `tokens/ada`,
 		AUD: `flags/au`,

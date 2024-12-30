@@ -310,7 +310,7 @@ body {
 
 .v202412192124 {background-image: url(/ssl/given/svg/202412192124.svg);}
 
-#row > div > div:hover, #list > div:hover {background: #4848481c}
+.ival:hover, #row > div > div:hover, #list > div:hover {background: #4848481c}
 
 #faves a:hover, #row > div > div  a:hover {text-decoration: underline}
 
