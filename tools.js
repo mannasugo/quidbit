@@ -259,9 +259,7 @@ class Tools {
 
 		setInterval(() => {
 
-			let Spot = [];
-
-			//{"data":{"amount":"3483.535","base":"ETH","currency":"USD"}}
+			let Spot = []; //{"data":{"amount":"3483.535","base":"ETH","currency":"USD"}}
 
 			Constants.plot.forEach(Plot => {
 
@@ -270,6 +268,20 @@ class Tools {
 					if (bug) writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, this.coats([]));
 
 					RQ(`https://api.coinbase.com/v2/prices/${Plot[0][0]}-${Plot[0][1]}/spot`, (flaw, State, coat) => {
+
+						if (flaw || State.statusCode !== 200) {
+
+							let XY = this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, {encoding: `utf8`}));
+
+							XY = XY.sort((A, B) => {return B.ts_z - A.ts_z});
+
+							if (XY[0]) {
+
+								Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
+
+								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
+							}
+						}
 
 						if (!flaw && State.statusCode === 200 && this.typen(coat) && this.typen(coat).data 
 							&& parseFloat(this.typen(coat).data.amount) > 0) {

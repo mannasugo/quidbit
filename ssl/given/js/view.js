@@ -138,16 +138,16 @@ let Models = {
 
 	faveplots: () => {
 
-		//if (!Clients.faveplots) {
+		if (!Clients.faveplots) {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
 				BTC: [`CAD`, `EUR`, `USD`],
 				ETH: [`BTC`, `USD`],
 				EUR: [`CAD`, `CHF`, `USD`],
-				//USD: [/*`CAD`, `CHF`,*/ `JPY`]
+				USD: [`CAD`, `CHF`, `JPY`]
 			});
-		//}
+		}
 
 		let DOM = [];
 
@@ -297,10 +297,6 @@ let Models = {
 
 		for (let i = 0; i < 24; i++) {
 
-			//SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) - 14, y: 17, fill: `#fff`, [`fll-opacity`]: `context-stroke-opacity`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`}}, `${new Date((Day[0] + Split[split].C*4*60000) - i*Split[split].C*60000).toTimeString().substr(0, 5)}`])
-					
-			//SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + 0.4, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + 0.4, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
-		
 			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split[split].C) + Split[split].tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split[split].day, Split[split].C*Split[split].abs, Split[split].place, i, Split[split].sub[0], Split[split].sub[1]])]);
 
 			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split[split].C) + Split[split].lox, y1: 0, x2: 7.12*(Place[0] - i*Split[split].C) + Split[split].lox, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
