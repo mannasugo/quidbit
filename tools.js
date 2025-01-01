@@ -151,7 +151,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 7; A++) {
+			for (let A = 0; A < 2; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -279,7 +279,7 @@ class Tools {
 
 								Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
 
-								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
+								//writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
 							}
 						}
 

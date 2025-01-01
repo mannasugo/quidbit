@@ -284,8 +284,7 @@ let Models = {
 		SVG[11] = [`text`, {x: 20, y: `${106 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${Tools.yScale([.75*Vols[0], Vols[0]])[0]}`];
 				
 		SVG[12] = [`line`, {x1: 0, x2: 8, y1: `${102.5 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, y2: `${102.5 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}];
-		
-		
+			
 		return [
 			`main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
 				[
@@ -323,55 +322,58 @@ let Models = {
 							[`div`, {style: {margin: `${6}px ${12}px ${0}`}}, 
 								[[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${9}px`}}, DOM.column]]], 
 							[`div`, {id: `list`, style: {[`max-height`]: `${300}px`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}]]],
-					[`section`, {id: `collapsible`, class: `_gxM`, style: {width: `${100}%`}}, 
+					[`section`, {id: ``, class: `_gxM`, style: {width: `${100}%`}}, 
 						[
-							[`div`, {style: {width: `${80}%`}}, 
+							[`div`, {class: `ival-alt`, style: {width: `${80}%`}}, 
 								[	
 									[`SVG`, {id: `pin`, style: {height: `${100}%`, position: `fixed`, width: `${100}%`}}, 
 										[[`path`, {id: ``, style: {}, stroke: `#6A6A6A`, d:``}]]],
 									[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {cursor: `none` /*`url(/ssl/given/svg/append_202204282015.svg), pointer !important`*/, transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
 									[ 
-										[`g`, {}, SVG[0]],
-										[`g`, {}, SVG[1]],
-										[`g`, {}, SVG[2]], 
-										[`g`, {id: `XYKline`}, SVG[3]],
-										[`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]], [`g`, {}, G[0]]]]]], 
+										[`g`, {class: `g`}, SVG[0]],
+										[`g`, {class: `g`}, SVG[1]],
+										[`g`, {class: `g`}, SVG[2]], 
+										[`g`, {id: `XYKline`, class: `g`}, SVG[3]],
+										[`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]], 
+										[`g`, {id: `g`}, G[0]]]]]], 
 							[`div`, {style: {width: `${20}%`}}, 
 								[
 									[`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
 										[
-											[`g`, {id: `spotY`}, 
+											[`g`, {class: `ival-alt`, id: `spotY`}, 
 												[
 													[`rect`, {id: `a`, x: 0, height: 20, width: 80}], 
 													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
-													[`g`, {}, SVG[4]],
-													SVG[5],
-													[`g`, {}, SVG[6]]]], 
-											[`g`, {id: `floatY`, style: {display: `none`}}, 
+													[`g`, {class: `g`}, SVG[4]],
+													[`g`, {class: `g`}, [SVG[5]]],
+													[`g`, {class: `g`}, SVG[6]]]], 
+											[`g`, {class: `ival-alt`, id: `floatY`, style: {display: `none`}}, 
 												[
 													[`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#FFFFFFA3`}],
 													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
 													[`text`, {fill: `#000`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
 					[`div`, {id: ``, style: {background: `#000000c9`, top: `${108}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
 						[[`span`, {id: `info`, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
-					[`div`, {id: ``, class: `_gxM`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, position: `absolute`, width: `${100}%`}}, 
+					[`div`, {id: ``, class: `_gxM ival-alt`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${30}px`, position: `absolute`, width: `${100}%`}}, 
 						[
 							[`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 
 								[
 									[`svg`, {id: `time`, height: `${27}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
-										[[`g`, {}, SVG[7]], SVG[8]]], 
+										[[`g`, {class: `g`}, SVG[7]], [`g`, {class: `g`}, [SVG[8]]]]], 
 									[`svg`, {height: 18, width: `${100}%`, style: {[`border-top`]: `${1}px solid #6A6A6A`}}]]], 
-							[`div`, {style: {[`border-left`]: `${1}px solid #353535`, width: `${20}%`}}], 
+							[`div`, {style: {[`border-left`]: `${1}px solid #353535`, height: `auto`, width: `${20}%`}}], 
 							[`div`, {style: {background: `transparent`, bottom: `${46}px`, height: `calc(${10.5}vh)`, position: `absolute`, width: `${100}%`}}, 
 								[[`div`, {class: `_gxM`, style: {[`border-top`]: `${2}px solid #6A6A6A`, height: `${100}%`, width: `${100}%`}}, 
 									[ 
 										[`div`, {id: `vol`, style: {overflow: `hidden`, width: `${80}%`}}, 
 											[[`svg`, {id: ``, height: `${100}%`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
-												[SVG[9], [`g`, {}, SVG[10]]]]]], 
+												[[`g`, {class: `g`}, [SVG[9]]], [`g`, {class: `g`}, SVG[10]]]]]], 
 										[`div`, {style: {[`background`]: `#000`, [`border-left`]: `${1}px solid #353535`, width: `${20}%`}}, 
 											[[`svg`, {id: ``, height: `${100}%`, width: `${100}%`, style: {}}, 
 												[
-													[`g`, {}, [SVG[11], SVG[12]]],
+													//[`g`, {}, [SVG[11], SVG[12]]],
+													[`g`, {class: `g`}, [SVG[11]]],
+													[`g`, {class: `g`}, [SVG[12]]],
 													[`path`, {id: `floatVol-`, stroke: `#fff`, d: ``}],
 													[`text`, {id: `floatVol`, fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]],
 										[`div`, {style: {background: `#000000D9`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`line-height`]: `${12}px`, margin: `${4}px`, padding: `${4}px`, position: `absolute`, top: 0}}, 
