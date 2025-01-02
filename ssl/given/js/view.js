@@ -268,7 +268,7 @@ let Models = {
 
 		Place[0] = (Place[0] + Split.C*Split.place); 
 
-		for (let i = 0; i < 24; i++) {
+		for (let i = 0; i < 48; i++) {
 
 			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split.C) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split.day, Split.C*Split.abs, Split.place, i, Split.sub[0], Split.sub[1]])]);
 
@@ -328,7 +328,7 @@ let Models = {
 								[	
 									[`SVG`, {id: `pin`, style: {height: `${100}%`, position: `fixed`, width: `${100}%`}}, 
 										[[`path`, {id: ``, style: {}, stroke: `#6A6A6A`, d:``}]]],
-									[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {cursor: `none` /*`url(/ssl/given/svg/append_202204282015.svg), pointer !important`*/, transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+									[`svg`, {id: `kline`, height: `${1000}px`, width: `${24*172}px`, style: {cursor: `none` /*`url(/ssl/given/svg/append_202204282015.svg), pointer !important`*/, transform: `translateX(${-20}px)`}}, 
 									[ 
 										[`g`, {class: `g`}, SVG[0]],
 										[`g`, {class: `g`}, SVG[1]],
@@ -358,7 +358,7 @@ let Models = {
 						[
 							[`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 
 								[
-									[`svg`, {id: `time`, height: `${27}px`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+									[`svg`, {id: `time`, height: `${27}px`, width: `${24*172}px`, style: {transform: `translateX(${-20}px)`}}, 
 										[[`g`, {class: `g`}, SVG[7]], [`g`, {class: `g`}, [SVG[8]]]]], 
 									[`svg`, {height: 18, width: `${100}%`, style: {[`border-top`]: `${1}px solid #6A6A6A`}}]]], 
 							[`div`, {style: {[`border-left`]: `${1}px solid #353535`, height: `auto`, width: `${20}%`}}], 
@@ -366,7 +366,7 @@ let Models = {
 								[[`div`, {class: `_gxM`, style: {[`border-top`]: `${2}px solid #6A6A6A`, height: `${100}%`, width: `${100}%`}}, 
 									[ 
 										[`div`, {id: `vol`, style: {overflow: `hidden`, width: `${80}%`}}, 
-											[[`svg`, {id: ``, height: `${100}%`, width: `${24*172}px`, style: {transform: `translateX(${(X > 540)? -20: -670}px)`}}, 
+											[[`svg`, {id: ``, height: `${100}%`, width: `${24*172}px`, style: {transform: `translateX(${-20}px)`}}, 
 												[[`g`, {class: `g`}, [SVG[9]]], [`g`, {class: `g`}, SVG[10]]]]]], 
 										[`div`, {style: {[`background`]: `#000`, [`border-left`]: `${1}px solid #353535`, width: `${20}%`}}, 
 											[[`svg`, {id: ``, height: `${100}%`, width: `${100}%`, style: {}}, 

@@ -355,6 +355,93 @@ class Event {
 				}
 			}])});
 
+		this.listen([document.querySelector(`#kline`), `mousemove`, S => {
+
+			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
+
+            document.querySelector(`#floatY #c`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
+
+            document.querySelector(`#floatY #a`).setAttribute(`y`, S.layerY - 10);
+
+			document.querySelector(`#floatY text`).setAttribute(`y`, S.layerY + 4);
+
+			HL[0] = parseFloat(HL[0]);
+
+			HL[HL.length - 1] = parseFloat(HL[HL.length - 1]);
+
+			let Delta = [(HL[0] + (.15*Y*(HL[0] - HL[HL.length - 1]))/(.35*Y)) - S.layerY*(HL[0] - HL[HL.length - 1])/(.35*Y)];
+
+			document.querySelector(`#floatY text`).innerHTML = Delta[0].toFixed(Arg.plot[1] - 1);
+
+            document.querySelector(`#floatY rect`).setAttribute(`width`, Delta[0].toFixed(Arg.plot[1]).toString().length*8.5);
+	
+			document.querySelector(`#floatVol`).style.display = `none`;
+	
+			document.querySelector(`#floatY`).style.display = `unset`;		
+		}]);
+
+		this.listen([document.querySelector(`#vol`), `mousemove`, S => {
+
+			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
+			
+			document.querySelector(`#floatVol`).setAttribute(`y`, S.layerY + 4);
+
+			Vols = Vols.sort((A, B) => {return B - A});
+
+			document.querySelector(`#floatVol`).innerHTML = (Vols[0] - (S.layerY*Vols[0])/(.115*Y)).toFixed(2);
+
+			document.querySelector(`#floatVol-`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
+	
+			document.querySelector(`#floatVol`).style.display = `unset`;
+
+			document.querySelector(`#floatY`).style.display = `none`;
+		}]);
+
+		//let OffX = -20
+
+		let Split = Constants.ival[Clients.plotXSplit];
+
+		let ts_a = Arg.XY.sort((A, B) => {return A[0] - B[0]})[0][0];
+
+		let Pan = [0, 0];
+
+		this.listen([document.querySelector(`#kline`), `mousedown`, S => { Pan = [0, S.layerX] }]);
+
+		this.listen([document.querySelector(`#kline`), `mouseup`, S => {
+
+			Pan = [S.layerX, Pan[1]];
+
+			if ((Pan[1] - Pan[0]) < 0) {
+
+				//OffX = OffX - (Pan[1] - Pan[0])
+
+				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
+
+				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
+
+				ts_a = ts_a - Split.abs*move;
+
+				let XY = [];
+
+				for (let A = 0; A < move; A++) { 
+
+					XY.push([ts_a + Split.abs*A]);
+				}
+
+				Arg.XY.sort((A, B) => {return B[0] - A[0]}).forEach(Kline => {
+
+					XY.push([Kline[0]])
+				});console.log(XY.length)
+			}
+
+			if ((Pan[1] - Pan[0]) > 1) {
+
+				//OffX = OffX - (Pan[1] - Pan[0]);
+
+				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
+			}
+		}]);
+
 		this.plotState(Arg);
 	}
 
@@ -481,48 +568,6 @@ class Event {
 		});
     
   		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
-
-		this.listen([document.querySelector(`#kline`), `mousemove`, S => {
-
-			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
-
-            document.querySelector(`#floatY #c`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
-
-            document.querySelector(`#floatY #a`).setAttribute(`y`, S.layerY - 10);
-
-			document.querySelector(`#floatY text`).setAttribute(`y`, S.layerY + 4);
-
-			HL[0] = parseFloat(HL[0]);
-
-			HL[HL.length - 1] = parseFloat(HL[HL.length - 1]);
-
-			let Delta = [(HL[0] + (.15*Y*(HL[0] - HL[HL.length - 1]))/(.35*Y)) - S.layerY*(HL[0] - HL[HL.length - 1])/(.35*Y)];
-
-			document.querySelector(`#floatY text`).innerHTML = Delta[0].toFixed(Arg.plot[1] - 1);
-
-            document.querySelector(`#floatY rect`).setAttribute(`width`, Delta[0].toFixed(Arg.plot[1]).toString().length*8.5);
-	
-			document.querySelector(`#floatVol`).style.display = `none`;
-	
-			document.querySelector(`#floatY`).style.display = `unset`;		
-		}]);
-
-		this.listen([document.querySelector(`#vol`), `mousemove`, S => {
-
-			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
-			
-			document.querySelector(`#floatVol`).setAttribute(`y`, S.layerY + 4);
-
-			Vols = Vols.sort((A, B) => {return B - A});
-
-			document.querySelector(`#floatVol`).innerHTML = (Vols[0] - (S.layerY*Vols[0])/(.115*Y)).toFixed(2);
-
-			document.querySelector(`#floatVol-`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
-	
-			document.querySelector(`#floatVol`).style.display = `unset`;
-
-			document.querySelector(`#floatY`).style.display = `none`;
-		}]);
 
 		document.querySelectorAll(`.info`).forEach(SVG => {
 
