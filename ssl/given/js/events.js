@@ -162,8 +162,6 @@ class Event {
 
 	plot (Arg) {
 
-		//const HL = [], Vols = [];
-
 		Arg.XY.forEach(K => {
 
 			if (K[2].length > 0) {

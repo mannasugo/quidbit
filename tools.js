@@ -151,7 +151,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 2; A++) {
+			for (let A = 0; A < 3; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -198,13 +198,15 @@ class Tools {
 
 			let PREDAY = new Date(DAY - 3600000*24);
 
-			stat(`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${PREDAY.getMonth() + 1}${PREDAY.getDate()}.csv`, (flaw, Stat) => {
+			let file = (`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${((PREDAY.getMonth() + 1) > 9)? ``: `0`}${PREDAY.getMonth() + 1}${(PREDAY.getDate() > 9)? ``: `0`}${PREDAY.getDate()}.csv`)
+
+			stat(file, (flaw, Stat) => {
 
 				if (!flaw) {
 
 					let Obj = [], 
 
-						CSV = readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${PREDAY.getMonth() + 1}${PREDAY.getDate()}.csv`, {encoding: `utf8`});
+						CSV = readFileSync(file, {encoding: `utf8`});
 
 					CSV = CSV.split(`\n`); 
 
@@ -215,6 +217,8 @@ class Tools {
 						Value = Value.split(`,`); //OHLC
 
 						(Value[0].indexOf(`/`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
+
+						if (Value[0].toString().length > 13) {Value[0] = parseFloat(Value[0].toString().substr(0, 13));}
 
 						Obj.push({
 							allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
