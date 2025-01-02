@@ -401,7 +401,9 @@ class Event {
 
 		let Split = Constants.ival[Clients.plotXSplit];
 
-		let ts_a = Arg.XY.sort((A, B) => {return A[0] - B[0]})[0][0];
+		//let ts_a = Arg.XY.sort((A, B) => {return A[0] - B[0]})[0][0];
+
+		let ts_z = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
 
 		let Pan = [0, 0];
 
@@ -417,21 +419,103 @@ class Event {
 
 				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
 
+				//let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
+
+				//ts_a = ts_a - Split.abs*move;
+
+				//let XY = [];
+
+				//for (let A = 0; A < move; A++) { 
+
+				//	XY.push([ts_a + Split.abs*A]);
+				//}
+
+				//Arg.XY.sort((A, B) => {return B[0] - A[0]}).forEach(Kline => {
+
+				//	XY.push([Kline[0]])
+				//});console.log(XY.length)
+
 				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
 
-				ts_a = ts_a - Split.abs*move;
+				ts_z = ts_z - Split.abs*move;
 
-				let XY = [];
+				let ts = new Date().valueOf();
 
-				for (let A = 0; A < move; A++) { 
+				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0)), ts_z, ts]);
 
-					XY.push([ts_a + Split.abs*A]);
-				}
+				io().on(`az`, AZ => {
 
-				Arg.XY.sort((A, B) => {return B[0] - A[0]}).forEach(Kline => {
+					if (ts === AZ[0]) {
+    
+  						let X = parseFloat(document.querySelector(`body`).clientWidth);
+    
+  						let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
 
-					XY.push([Kline[0]])
-				});console.log(XY.length)
+						HL = [], Vols = [];
+
+						let CAV = 0, RH = 0;
+
+						AZ[1].forEach(K => {
+
+							if (K[2].length > 0) {
+
+								HL.push(K[2][0]); 
+
+								HL.push(K[2][1]);
+
+								Vols.push(K[3]);
+							}
+						});
+
+						HL.sort((A, B) => {return B - A});
+
+						RH = HL[0] - HL[HL.length - 1]; CAV = 2;
+
+						 let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
+
+						for (let A = 0; A < 25; A++) {
+
+							let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*16 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
+
+							SVG[1].push([`line`, {style: {visibility: (.15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) > .70*Y)? `collapse`: `visible`}, x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
+		
+							SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
+				
+							SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
+						}
+
+						let Place = [0];
+
+						Vols = Vols.sort((A, B) => {return B - A});
+
+						AZ[1].sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
+
+							if (K[2].length > 0) {
+
+								SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
+				
+                				let OC = Tools.typen(Tools.coats(K[1]));
+
+                				OC.sort((A, B) => {return B - A});
+				
+								SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				
+								SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				
+								SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
+							}
+
+							if (K[0] === Split.day) Place[0] = i;
+						});
+
+						G.forEach((Vect, i) => {
+
+							View.pop();
+
+							Vect.innerHTML = View.ModelDOM(SVG[i]);
+						});
+					}
+				});
 			}
 
 			if ((Pan[1] - Pan[0]) > 1) {

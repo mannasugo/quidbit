@@ -98,7 +98,8 @@ class Route {
 								if (!S.plot) return;
 
 								Arg[1].end(Tools.coats({
-									ago: Tools.plot24(), plot: S.plot, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf() - 60000*60*24])}));
+									ago: Tools.plot24(), 
+									plot: S.plot, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf() - 60000*60*11])}));
 							}
 
 							if (Pulls.pull === `util`) {
@@ -137,7 +138,12 @@ class Route {
 					if (Coat.length > 0) App.emit(`SPOT_BOOK`, Coat);
 				});
 
-			}, 4000);});
+			}, 4000);
+
+			Polling.on(`az`, Arg => {
+
+				App.emit(`az`, [Arg[4], Tools.plotXY([Arg[0], Arg[1], Arg[2], Arg[3]])]);
+			});});
 	}
 }
 
