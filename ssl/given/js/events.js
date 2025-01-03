@@ -434,17 +434,13 @@ class Event {
 
 				let ts = new Date().valueOf();
 
-				/**
+				/**/
 
 				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0)), ts_z, ts]);
 
 				io().on(`az`, AZ => {
 
 					if (ts === AZ[0]) {
-    
-  						let X = parseFloat(document.querySelector(`body`).clientWidth);
-    
-  						let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
 
 						HL = [], Vols = [];
 
@@ -466,7 +462,7 @@ class Event {
 
 						RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
-						 let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
+						let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
 
 						for (let A = 0; A < 25; A++) {
 
@@ -479,9 +475,17 @@ class Event {
 							SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
 						}
 
-						let Place = [0];
-
 						Vols = Vols.sort((A, B) => {return B - A});
+
+						let tsz = AZ[1].sort((A, B) => {return B[0] - A[0]})[0][0];
+
+						tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C*4;
+
+						if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
+
+						let Xlet = [];
+
+						for (let i = 0; i < X/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
 
 						AZ[1].sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
@@ -500,7 +504,12 @@ class Event {
 								SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
 							}
 
-							if (K[0] === Split.day) Place[0] = i;
+							if (Xlet.indexOf(K[0]) > -1) {
+
+								SVG[7].push([`text`, {x: (i*7.12) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.formatplanex([K[0], Split.abs, Split.sub])]);
+
+								SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+							}
 						});
 
 						G.forEach((Vect, i) => {
@@ -512,7 +521,7 @@ class Event {
 					}
 				});
 
-				**/
+				/**/
 			}
 
 			if ((Pan[1] - Pan[0]) > 1) {
@@ -571,7 +580,7 @@ class Event {
 
 		let tsz = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
 
-		tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C;
+		tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C*4;
 
 		if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
 
@@ -638,6 +647,8 @@ class Event {
 			}
 		}, 1000);
 
+		/**
+
 		HL = []; Vols = [];
 
 		Arg.XY.forEach(K => {
@@ -651,6 +662,8 @@ class Event {
 				Vols.push(K[3]);
 			}
 		});
+
+		/**/
 
 		document.querySelectorAll(`.info`).forEach(SVG => {
 

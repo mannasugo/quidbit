@@ -99,7 +99,7 @@ class Route {
 
 								Arg[1].end(Tools.coats({
 									ago: Tools.plot24(), 
-									plot: S.plot, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf() - 60000*60*7])}));
+									plot: S.plot, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf() - 60000*60*18])}));
 							}
 
 							if (Pulls.pull === `util`) {

@@ -90,7 +90,14 @@ class Tools {
 
 		if (Arg[1] === `1M`) {
 
-			let XY = this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY}.json`, {encoding: `utf8`}));
+			let XY = [];
+
+			for (let A = 0; A < 4; A++) {
+
+				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+
+				XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+			}
 
 			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:${new Date(Arg[3]).getMinutes()}`).valueOf();
 
