@@ -174,7 +174,7 @@ class Event {
 			}
 		});
     
-  		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
+  		let Y = parseFloat(document.body.clientHeight - 70);
 
   		let RECT = document.querySelectorAll(`#kline rect`);
 
@@ -214,7 +214,7 @@ class Event {
 
 			if (Plot[Arg.plot[0].toString().replace(`,`, `-`)]) ZY = Plot[Arg.plot[0].toString().replace(`,`, `-`)];
 
-			if (ZY > 0 && document.querySelector(`#ZY`)) {
+			if (RECT.length > 0 && ZY > 0 && document.querySelector(`#ZY`)) {
 
 				HL.push(ZY);
 
@@ -530,9 +530,9 @@ class Event {
 
 		let Split = Constants.ival[Clients.plotXSplit];
     
-  		let X = parseFloat(document.querySelector(`body`).clientWidth);
+  		let X = parseFloat(document.body.clientWidth);
     
-  		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
+  		let Y = parseFloat(document.body.clientHeight - 70);
 
 		let HL = [], Vols = [];
 
@@ -567,9 +567,17 @@ class Event {
 			SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
 		}
 
-		let Place = [0];
-
 		Vols = Vols.sort((A, B) => {return B - A});
+
+		let tsz = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
+
+		tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C;
+
+		if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
+
+		let Xlet = [];
+
+		for (let i = 0; i < X/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
 
 		Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
@@ -588,17 +596,13 @@ class Event {
 				SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
 			}
 
-			if (K[0] === Split.day) Place[0] = i;
+			if (Xlet.indexOf(K[0]) > -1) {
+
+				SVG[7].push([`text`, {x: (i*7.12) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.formatplanex([K[0], Split.abs, Split.sub])]);
+
+				SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			}
 		});
-
-		Place[0] = (Place[0] + Split.C*Split.place); 
-
-		for (let i = 0; i < 24; i++) {
-
-			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split.C) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split.day, Split.C*Split.abs, Split.place, i, Split.sub[0], Split.sub[1]])]);
-
-			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split.C) + Split.lox, y1: 0, x2: 7.12*(Place[0] - i*Split.C) + Split.lox, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
-		}
 
 		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
 
@@ -647,8 +651,6 @@ class Event {
 				Vols.push(K[3]);
 			}
 		});
-    
-  		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
 
 		document.querySelectorAll(`.info`).forEach(SVG => {
 
