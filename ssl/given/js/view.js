@@ -179,9 +179,9 @@ let Models = {
 
 		let Split = Constants.ival[Clients.plotXSplit];
     
-  		let X = parseFloat(document.querySelector(`body`).clientWidth);
+  		let X = parseFloat(document.body.clientWidth);
     
-  		let Y = parseFloat(document.querySelector(`body`).clientHeight - 70);
+  		let Y = parseFloat(document.body.clientHeight - 70);
 
   		let DOM = {column: [], multiple: [], split: []};
 
@@ -246,6 +246,14 @@ let Models = {
 
 		Vols = Vols.sort((A, B) => {return B - A});
 
+		let tsz = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
+
+		if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
+
+		let Xlet = [];
+
+		for (let i = 0; i < X/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
+
 		Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
 			if (K[2].length > 0) {
@@ -263,17 +271,13 @@ let Models = {
 				G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
 			}
 
-			if (K[0] === Split.day) Place[0] = i;
+			if (Xlet.indexOf(K[0]) > -1) {
+
+				SVG[7].push([`text`, {x: (i*7.12) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.formatplanex([K[0], Split.abs, Split.sub])]);
+
+				SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			}
 		});
-
-		Place[0] = (Place[0] + Split.C*Split.place); 
-
-		for (let i = 0; i < 48; i++) {
-
-			SVG[7].push([`text`, {x: 7.12*(Place[0] - i*Split.C) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.DateString([Split.day, Split.C*Split.abs, Split.place, i, Split.sub[0], Split.sub[1]])]);
-
-			SVG[0].push([`line`, {x1: 7.12*(Place[0] - i*Split.C) + Split.lox, y1: 0, x2: 7.12*(Place[0] - i*Split.C) + Split.lox, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
-		}
 
 		SVG[5] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}];
 

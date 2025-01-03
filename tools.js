@@ -92,9 +92,9 @@ class Tools {
 
 			let XY = this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY}.json`, {encoding: `utf8`}));
 
-			let X_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
+			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:${new Date(Arg[3]).getMinutes()}`).valueOf();
 
-			for (let A = 0; A < 140; A++) {
+			for (let A = 0; A < Arg[2]; A++) {
 
 				let Plot = [];
 										
@@ -115,7 +115,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 2; A++) {
+			for (let A = 0; A < 4; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -151,7 +151,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 3; A++) {
+			for (let A = 0; A < 4; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 

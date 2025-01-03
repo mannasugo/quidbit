@@ -82,13 +82,13 @@ class Tools {
 
 	typen (coat) { return JSON.parse(coat); }
 
-	DateString (Arg) {
+	formatplanex (Arg) {
 
-		let String = new Date((Arg[0] + Arg[1]*Arg[2]) - Arg[3]*Arg[1]).toTimeString();
+		let String = new Date(Arg[0]).toTimeString();
 
-		if (Arg[1] === 60000*60*24) String = new Date((Arg[0] + Arg[1]*Arg[2]) - Arg[3]*Arg[1]).toDateString();
+		if (Arg[1] === 60000*60) String = new Date(Arg[0]).toDateString();
 
-		return `${String.substr(Arg[4], Arg[5])}`;
+		return `${String.substr(Arg[2][0], Arg[2][1])}`;
 	}
 }
 
@@ -122,7 +122,7 @@ const Constants = {
 				lox: -20.6,
 				place: 1, 
 				sub: [8, 2],
-				tox: -24}
+				tox: -6}
 	},
 
 	SVG: {

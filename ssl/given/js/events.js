@@ -345,7 +345,7 @@ class Event {
 				let Puts = Tools.pull([
 					`/json/web/`, {
 						mug: (Clients.mug) ? Clients.mug: false,
-						pull: `plot`, plot: Arg.plot[0], splitX: Clients.plotXSplit}]);	
+						pull: `plot`, plot: Arg.plot[0], splitX: Clients.plotXSplit, x: parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0))}]);	
 
 				Puts.onload = () => {
 
@@ -356,6 +356,8 @@ class Event {
 			}])});
 
 		this.listen([document.querySelector(`#kline`), `mousemove`, S => {
+
+			this.getSource(S).style.cursor = `none`
 
 			document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
 
@@ -407,9 +409,16 @@ class Event {
 
 		let Pan = [0, 0];
 
-		this.listen([document.querySelector(`#kline`), `mousedown`, S => { Pan = [0, S.layerX] }]);
+		this.listen([document.querySelector(`#kline`), `mousedown`, S => { 
+
+			this.getSource(S).style.cursor = `grab`
+
+			Pan = [0, S.layerX];
+		}]);
 
 		this.listen([document.querySelector(`#kline`), `mouseup`, S => {
+
+			this.getSource(S).style.cursor = `none`;
 
 			Pan = [S.layerX, Pan[1]];
 
@@ -419,27 +428,13 @@ class Event {
 
 				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
 
-				//let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
-
-				//ts_a = ts_a - Split.abs*move;
-
-				//let XY = [];
-
-				//for (let A = 0; A < move; A++) { 
-
-				//	XY.push([ts_a + Split.abs*A]);
-				//}
-
-				//Arg.XY.sort((A, B) => {return B[0] - A[0]}).forEach(Kline => {
-
-				//	XY.push([Kline[0]])
-				//});console.log(XY.length)
-
 				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
 
 				ts_z = ts_z - Split.abs*move;
 
 				let ts = new Date().valueOf();
+
+				/**
 
 				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0)), ts_z, ts]);
 
@@ -516,6 +511,8 @@ class Event {
 						});
 					}
 				});
+
+				**/
 			}
 
 			if ((Pan[1] - Pan[0]) > 1) {
@@ -633,7 +630,7 @@ class Event {
 
 			if (Clients.plotXSplit === `1H`) {
 
-				document.querySelector(`#lapse`).innerHTML = `${(59 - new Date().getMinutes() > 9)? ``: `0`}${59 - new Date().getMinutes()}:${(59 - new Date().getSeconds() > 9)? ``: `0`}${59 - new Date().getSeconds()}`;
+				if (document.querySelector(`#lapse`)) document.querySelector(`#lapse`).innerHTML = `${(59 - new Date().getMinutes() > 9)? ``: `0`}${59 - new Date().getMinutes()}:${(59 - new Date().getSeconds() > 9)? ``: `0`}${59 - new Date().getSeconds()}`;
 			}
 		}, 1000);
 
