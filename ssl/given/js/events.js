@@ -428,7 +428,7 @@ class Event {
 
 				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
 
-				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
+				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));Split = Constants.ival[Clients.plotXSplit];
 
 				ts_z = ts_z - Split.abs*move;
 
@@ -436,7 +436,7 @@ class Event {
 
 				/**/
 
-				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0)), ts_z, ts]);
+				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), ts_z, ts]);
 
 				io().on(`az`, AZ => {
 
