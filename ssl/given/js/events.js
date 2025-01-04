@@ -403,8 +403,6 @@ class Event {
 
 		let Split = Constants.ival[Clients.plotXSplit];
 
-		//let ts_a = Arg.XY.sort((A, B) => {return A[0] - B[0]})[0][0];
-
 		let ts_z = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
 
 		let Pan = [0, 0];
@@ -428,7 +426,9 @@ class Event {
 
 				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
 
-				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));Split = Constants.ival[Clients.plotXSplit];
+				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
+
+				Split = Constants.ival[Clients.plotXSplit];
 
 				ts_z = ts_z - Split.abs*move;
 
@@ -518,6 +518,23 @@ class Event {
 
 							Vect.innerHTML = View.ModelDOM(SVG[i]);
 						});
+
+						document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13]);
+
+			document.querySelectorAll(`.info`).forEach(SVG => {
+
+				this.listen([SVG, `mouseover`, S => {
+
+					let Stat = Tools.typen(this.getSource(S).id);
+
+					document.querySelector(`#info`).style.display = `flex`;
+
+					document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
+			
+					document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
+
+					document.querySelector(`#volbase`).innerHTML = Stat[3];
+			}])});
 					}
 				});
 
