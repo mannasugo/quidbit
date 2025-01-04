@@ -420,21 +420,37 @@ class Event {
 
 			Pan = [S.layerX, Pan[1]];
 
+			Split = Constants.ival[Clients.plotXSplit];
+
+			let move, ts;
+
 			if ((Pan[1] - Pan[0]) < 0) {
 
 				//OffX = OffX - (Pan[1] - Pan[0])
 
 				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
 
-				let move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
-
-				Split = Constants.ival[Clients.plotXSplit];
+				move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
 
 				ts_z = ts_z - Split.abs*move;
 
-				let ts = new Date().valueOf();
+				ts = new Date().valueOf();
+			}
 
-				/**/
+			if ((Pan[1] - Pan[0]) > 1) {
+
+				//OffX = OffX - (Pan[1] - Pan[0]);
+
+				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`;
+
+				move = parseFloat(((Pan[1] - Pan[0])/5).toFixed(0));
+
+				ts_z = ts_z + Split.abs*move;
+
+				ts = new Date().valueOf();
+			}
+
+			if ((Pan[1] - Pan[0]) < 0 || (Pan[1] - Pan[0]) > 1) {
 
 				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), ts_z, ts]);
 
@@ -521,31 +537,22 @@ class Event {
 
 						document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13]);
 
-			document.querySelectorAll(`.info`).forEach(SVG => {
+						document.querySelectorAll(`.info`).forEach(SVG => {
 
-				this.listen([SVG, `mouseover`, S => {
+							this.listen([SVG, `mouseover`, S => {
 
-					let Stat = Tools.typen(this.getSource(S).id);
+								let Stat = Tools.typen(this.getSource(S).id);
 
-					document.querySelector(`#info`).style.display = `flex`;
+								document.querySelector(`#info`).style.display = `flex`;
 
-					document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
+								document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
 			
-					document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
+								document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
 
-					document.querySelector(`#volbase`).innerHTML = Stat[3];
-			}])});
+								document.querySelector(`#volbase`).innerHTML = Stat[3];
+							}])});
 					}
-				});
-
-				/**/
-			}
-
-			if ((Pan[1] - Pan[0]) > 1) {
-
-				//OffX = OffX - (Pan[1] - Pan[0]);
-
-				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
+				});		
 			}
 		}]);
 
