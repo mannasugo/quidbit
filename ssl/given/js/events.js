@@ -497,11 +497,11 @@ class Event {
 
 						tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C*4;
 
-						if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
+						if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() - Split.abs*Split.C;
 
 						let Xlet = [];
 
-						for (let i = 0; i < X/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
+						for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
 
 						AZ[1].sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
@@ -671,7 +671,7 @@ class Event {
 			}
 		}, 1000);
 
-		/**
+		/**/
 
 		HL = []; Vols = [];
 

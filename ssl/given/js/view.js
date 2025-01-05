@@ -252,7 +252,7 @@ let Models = {
 
 		let Xlet = [];
 
-		for (let i = 0; i < X/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
+		for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
 
 		Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
