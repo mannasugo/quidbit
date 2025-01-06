@@ -165,17 +165,9 @@ class Tools {
 				XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 			}
 
-			/**
+			let Z = Math.floor(new Date(Arg[3]).getMinutes()/5)*5*60000;
 
-			let Z = new Date(Arg[3]).getMinutes();
-
-			if (new Date(Arg[3]).getMinutes()%5 === 1) Z = new Date().getMinutes() - 1;
-
-			if (new Date(Arg[3]).getMinutes()%5 === 2) Z = new Date().getMinutes() - 2;
-			
-			/**/
-
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf();
+			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
 			for (let A = 0; A < Arg[2]; A++) {
 
