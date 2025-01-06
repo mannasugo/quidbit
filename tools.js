@@ -186,6 +186,38 @@ class Tools {
 			}
 		}
 
+		if (Arg[1] === `15M`) {
+
+			let XY = [];
+
+			for (let A = 0; A < 6; A++) {
+
+				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+
+				XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+			}
+
+			let Z = Math.floor(new Date(Arg[3]).getMinutes()/15)*15*60000;
+
+			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
+
+			for (let A = 0; A < Arg[2]; A++) {
+
+				let Plot = [];
+										
+				XY.forEach(X_Y => {
+
+					if (X_Y.ts_z > X_Z - 900000*A && X_Y.ts_z < (X_Z - 900000*A) + 900000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
+				});
+
+				let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
+
+				let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
+										
+				PlotXY.push([X_Z - 900000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
+			}
+		}
+
 		if (Arg[1] === `1H`) {
 
 			let XY = [];
