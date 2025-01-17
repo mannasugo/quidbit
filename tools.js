@@ -92,7 +92,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 6; A++) {
+			for (let A = 0; A < 9; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -122,7 +122,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 6; A++) {
+			for (let A = 0; A < 9; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -158,7 +158,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 6; A++) {
+			for (let A = 0; A < 9; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -190,7 +190,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 6; A++) {
+			for (let A = 0; A < 9; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -222,7 +222,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 6; A++) {
+			for (let A = 0; A < 9; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -285,14 +285,35 @@ class Tools {
 
 					CSV.forEach(Value => {
 
-						Value = Value.split(`,`); //OHLC
+						if (Value.indexOf(`,`) === -1) {
 
-						(Value[0].indexOf(`/`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
+							Value = Value.split(`\t`);
+
+							/*
+
+							Value[0] = `${Value[0]} ${Value[1]}`;console.log(Value)
+
+							Value[1] = Value[2];
+
+							Value[2] = Value[3];
+
+							Value[3] = Value[4];
+
+							Value[4] = Value[5];
+
+							Value[5] = Value[6];
+
+							*/
+						}
+
+						else { Value = Value.split(`,`) } //OHLC
+
+						(Value[0].indexOf(`/`) > -1 || Value[0].indexOf(`-`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
 
 						if (Value[0].toString().length > 13) {Value[0] = parseFloat(Value[0].toString().substr(0, 13));}
 
 						Obj.push({
-							allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
+							allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
 							ilk: `market`,
 							md: createHash(`md5`).update(`${Value[0]}`, `utf8`).digest(`hex`),
 							mug: hold,
@@ -302,7 +323,7 @@ class Tools {
 							ts_z: Value[0]});
 
 						Obj.push({
-							allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
+							allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
 							ilk: `market`,
 							md: createHash(`md5`).update(`${Value[0] + 59975}`, `utf8`).digest(`hex`),
 							mug: hold,
@@ -314,7 +335,7 @@ class Tools {
 						for (let A = 0; A < 2; A++) {
 
 							Obj.push({
-								allocate: (parseInt(CSV[0][0][0]) > 0)? parseFloat(Value[5]): 0,
+								allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
 								ilk: `market`,
 								md: createHash(`md5`).update(`${Value[0] + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
 								mug: hold,
