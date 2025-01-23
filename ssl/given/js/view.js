@@ -208,9 +208,9 @@ let Models = {
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 													[
 														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `din`}}, 
+														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
 															[
-																[`span`, {style: {[`font-size`]: `${13}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
+																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
 																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
@@ -220,9 +220,9 @@ let Models = {
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 													[
 														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `din`}}, 
+														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
 															[
-																[`input`, {id: `quantity`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `din`, [`font-size`]: `${13}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
+																[`input`, {id: `quantity`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
 																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][0]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
@@ -232,9 +232,9 @@ let Models = {
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 													[
 														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `din`}}, 
+														[`div`, {id: `${Arg[0].toString().replace(`,`, `-`)}`, class: `_gZz`, style: {[`font-family`]: `intext`}}, 
 															[
-																[`span`, {id: `marketCost`, style: {[`font-size`]: `${13}px`, [`letter-spacing`]: 0, [`padding-right`]: `${12}px`}}, ``],
+																[`span`, {id: `COST`, style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, [`padding-right`]: `${12}px`}}, ``],
 																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
 									[
@@ -244,9 +244,9 @@ let Models = {
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 													[
 														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `din`}}, 
+														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
 															[
-																[`input`, {id: `total`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `din`, [`font-size`]: `${13}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
+																[`input`, {id: `total`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
 																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
@@ -400,7 +400,7 @@ let Models = {
 									[[`div`, {class: `_gxM`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
 										[
 											[`a`, {id: `modalSwap`, href: `javascript:;`, class: `v202501181301`, style: {[`align-self`]: `center`, height: `${17}px`, margin: `0 ${12}px`, width: `${17}px`}}], 
-											[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: `none`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: 0, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputSwap([[``, ``], [``, ``]])]]]]]]]]]],
+											[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: ``, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: 0, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputSwap(Arg.plot)]]]]]]]]]],
 					[`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${108}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
 						[
 							[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 
