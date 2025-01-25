@@ -142,7 +142,7 @@ let Models = {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [`CAD`, `EUR`, `USD`],
+				BTC: [/*`CAD`, */`EUR`, `USD`],
 				ETH: [`BTC`, `USD`],
 				EUR: [`CAD`, `CHF`, `USD`],
 				USD: [`CAD`, `CHF`, `JPY`]
@@ -179,7 +179,7 @@ let Models = {
 
 		return [`section`, {style: {height: `${100}%`}}, 
 			[
-				[`div`, {style: {[`border-right`]: `${1}px solid #353535`, [`fnt-size`]: `${12}px`, height: `inherit`, wdth: `${30}%`}}, 
+				[`div`, {style: {height: `inherit`}}, 
 					[
 						[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
 							[[`div`, {class: `_gxM _geQ`, style: {[`fnt-size`]: `${12}px`}}, 
@@ -255,6 +255,70 @@ let Models = {
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`a`, {id: `buy`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Review & Buy`]]]]]]]]]]]]];													
+	},
+
+	inputWallet: function (Arg) {
+
+		return [`section`, {style: {height: `${100}%`}}, 
+			[
+				[`div`, {style: {height: `inherit`}}, 
+					[
+						[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
+							[[`div`, {class: `_gxM _geQ`, style: {}}, 
+								[[`span`, {style: {padding: `${6}px ${12}px ${6}px 0`}}, `Funding`]]]]], 
+						[`div`, {style: {padding: `${24}px ${12}px`}}, 
+							[
+								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+									[
+										[`span`, {style: {width: `${30}%`}}, `Action`],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+												[
+													[`a`, {id: `action`, for: `buy`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`margin-right`]: `${1.5}px`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${50}%`}}, `Deposit`],
+													[`a`, {id: `action`, for: `sell`, href: `javascript:;`, style: {background: `#0b0b48`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`margin-left`]: `${1.5}px`, width: `${50}%`}}, `Withdraw`]]]]]]],
+								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+									[
+										[`span`, {style: {width: `${30}%`}}, `Wallet`],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+												[[`a`, {href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `USDT`]]]]]]],
+								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
+									[
+										[`span`, {style: {width: `${30}%`}}, `Funds`],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+													[
+														[`div`, {class: `_eYG`}],
+														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
+															[
+																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
+																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `USDT`]]]]]]]]]]],
+								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+									[
+										[`span`, {style: {width: `${30}%`}}, `Network`],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+												[[`a`, {href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `TRX Tron (TRC20)`]]]]]]],
+								[`div`, {class: `_gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
+									[
+										[`span`, {style: {width: `${30}%`}}, `Quantity`],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+												[[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+													[
+														[`div`, {class: `_eYG`}],
+														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
+															[
+																[`input`, {id: `quantity`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
+																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `USDT`]]]]]]]]]]],
+								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+									[
+										[`div`, {style: {width: `${30}%`}}, 
+											[[`a`, {id: `liquid`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, overflow: `hidden`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`text-overflow`]: `ellipsis`, [`white-space`]: `nowrap`, width: `${75}%`}}, `Deposit ${Arg[0][1]}`]]],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+												[[`a`, {id: `buy`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Generate Deposit Address`]]]]]]]]]]]]];													
 	},
 
 	plot: function (Arg) { //`v202204282015`
@@ -397,10 +461,15 @@ let Models = {
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, [`text-align`]: `center`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`}}],
 								[`div`, {class: `_gZz`, style: {height: `${100}%`}}, 
-									[[`div`, {class: `_gxM`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
-										[
-											[`a`, {id: `modalSwap`, href: `javascript:;`, class: `v202501181301`, style: {[`align-self`]: `center`, height: `${17}px`, margin: `0 ${12}px`, width: `${17}px`}}], 
-											[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: ``, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: 0, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputSwap(Arg.plot)]]]]]]]]]],
+									[
+										[`div`, {class: `_gxM`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
+											[
+												[`a`, {id: `modalSwap`, href: `javascript:;`, class: `v202501181301`, style: {[`align-self`]: `center`, height: `${17}px`, margin: `0 ${12}px`, width: `${17}px`}}], 
+												[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: `none`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputSwap(Arg.plot)]]]], 
+										[`div`, {class: `_gxM`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
+											[
+												[`a`, {id: `modalWallet`, href: `javascript:;`, class: `v202312301635`, style: {[`align-self`]: `center`, height: `${24}px`, margin: `0 ${12}px`, width: `${24}px`}}], 
+												[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: ``, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputWallet(Arg.plot)]]]]]]]]]],
 					[`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${108}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
 						[
 							[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 
