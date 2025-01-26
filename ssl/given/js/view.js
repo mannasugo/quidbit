@@ -280,8 +280,14 @@ let Models = {
 									[
 										[`span`, {style: {width: `${30}%`}}, `Wallet`],
 										[`div`, {style: {width: `${70}%`}}, 
-											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-												[[`a`, {href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `USDT`]]]]]]],
+											[[`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+												[
+													[`img`, {src: `/ssl/given/svg/${Constants.SVG[`BTC`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+													[`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
+														[[`span`, {}, `BTC`], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, `Bitcoin`]]], 
+													[`div`, {class: `_gZz`}, 
+														[[`svg`, {viewbox: `0 0 24 24`, style: {height: `${12}px`, wdth: `${12}px`}}, 
+															[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Funds`],
@@ -293,13 +299,13 @@ let Models = {
 														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
 															[
 																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
-																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `USDT`]]]]]]]]]]],
+																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `BTC`]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Network`],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-												[[`a`, {href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `TRX Tron (TRC20)`]]]]]]],
+												[[`a`, {href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `BTC`]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Quantity`],
