@@ -238,6 +238,11 @@ class Event {
 			}
 		});
 
+		this.listen([document.querySelector(`#walletSelect`), `click`, S => {
+
+			document.querySelector(`#walletOptions`).style.display = (document.querySelector(`#walletOptions`).style.display === `flex`)? `none`: `flex`;
+		}]);
+
 		this.listen([document.querySelector(`#splitX`), `click`, S => {
 
 			document.querySelector(`#splits`).style.display = (document.querySelector(`#splits`).style.display === `flex`)? `none`: `flex`;

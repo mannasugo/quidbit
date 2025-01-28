@@ -259,6 +259,19 @@ let Models = {
 
 	inputWallet: function (Arg) {
 
+		let DOM = [[]];
+
+		let Wallet = {BTC: [`Bitcoin`, `BTC`], ETH: [`Ethereum`, `ERC20`], USDT: [`TetherUS`, `TRC20`]}
+
+  		for (let hold in Wallet) {
+
+  			DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #6a6a6a`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+				[
+					[`img`, {src: `/ssl/given/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+					[`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
+						[[`span`, {}, hold], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, Wallet[hold][0]]]]]]);
+  		}
+
 		return [`section`, {style: {height: `${100}%`}}, 
 			[
 				[`div`, {style: {height: `inherit`}}, 
@@ -280,14 +293,15 @@ let Models = {
 									[
 										[`span`, {style: {width: `${30}%`}}, `Wallet`],
 										[`div`, {style: {width: `${70}%`}}, 
-											[[`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+											[[`a`, {id: `walletSelect`, href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 												[
 													[`img`, {src: `/ssl/given/svg/${Constants.SVG[`BTC`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
 													[`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
 														[[`span`, {}, `BTC`], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, `Bitcoin`]]], 
 													[`div`, {class: `_gZz`}, 
 														[[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, width: `${8}px`}}, 
-															[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]]]]]],
+															[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]], 
+												[`div`, {id: `walletOptions`, style: {background: `#0b0b48`, display: `none`, position: `absolute`, top: `${28}px`, width: `${100}%`, [`z-index`]: 64}}, DOM[0]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Funds`],
