@@ -288,22 +288,6 @@ class Tools {
 						if (Value.indexOf(`,`) === -1) {
 
 							Value = Value.split(`\t`);
-
-							/*
-
-							Value[0] = `${Value[0]} ${Value[1]}`;console.log(Value)
-
-							Value[1] = Value[2];
-
-							Value[2] = Value[3];
-
-							Value[3] = Value[4];
-
-							Value[4] = Value[5];
-
-							Value[5] = Value[6];
-
-							*/
 						}
 
 						else { Value = Value.split(`,`) } //OHLC
@@ -367,7 +351,12 @@ class Tools {
 
 						if (flaw || State.statusCode !== 200) {
 
-							let XY = this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, {encoding: `utf8`}));
+							let XY = [];
+
+							for (let A = 0; A < 3; A++) {
+
+								XY = XY.concat(this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+							}
 
 							XY = XY.sort((A, B) => {return B.ts_z - A.ts_z});
 
