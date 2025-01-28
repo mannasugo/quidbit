@@ -489,7 +489,7 @@ let Models = {
 										[`div`, {class: `_gxM`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
 											[
 												[`a`, {id: `modalWallet`, href: `javascript:;`, class: `v202312301635`, style: {[`align-self`]: `center`, height: `${24}px`, margin: `0 ${12}px`, width: `${24}px`}}], 
-												[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: ``, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputWallet(Arg.plot)]]]]]]]]]],
+												[`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: `none`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputWallet(Arg.plot)]]]]]]]]]],
 					[`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${108}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
 						[
 							[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 

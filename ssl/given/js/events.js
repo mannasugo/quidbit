@@ -238,6 +238,20 @@ class Event {
 			}
 		});
 
+		this.listen([document.querySelector(`#modalSwap`), `click`, S => {
+
+			let Obj = this.getSource(S).parentNode.querySelector(`div`);
+
+			Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
+		}]);
+
+		this.listen([document.querySelector(`#modalWallet`), `click`, S => {
+
+			let Obj = this.getSource(S).parentNode.querySelector(`div`);
+
+			Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
+		}]);
+
 		this.listen([document.querySelector(`#walletSelect`), `click`, S => {
 
 			document.querySelector(`#walletOptions`).style.display = (document.querySelector(`#walletOptions`).style.display === `flex`)? `none`: `flex`;

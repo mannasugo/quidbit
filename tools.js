@@ -30,16 +30,21 @@ class Sql {
 
 		this.Sql([readFileSync(`constants/tables.sql`, {encoding: `utf8`}), (Raw) => {
 
-			let Put = [`mugs`];
+			let Fields = {};
 
-			let Puts = {};
+			Raw[2].forEach((Field, field) => {
 
-			Put.forEach(put => Puts[put] = [[], {}]);
+				Fields[Field[0].table] = [[], {}];
 
-			Raw[1].forEach((Put, put) => {console.log(Put[put])});
+				Raw[1][field].forEach(Obj => {
 
-			Arg(Puts);
+					Fields[Field[0].table][0].push(JSON.parse(Obj.json));
 
+					Fields[Field[0].table][1][JSON.parse(Obj.json).md] = JSON.parse(Obj.json);
+				});
+			});
+
+			Arg(Fields);
 		}]);
 	}
 
