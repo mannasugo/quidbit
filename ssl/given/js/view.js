@@ -265,7 +265,7 @@ let Models = {
 
   		for (let hold in Wallet) {
 
-  			DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #6a6a6a`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+  			DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #393939ad`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 				[
 					[`img`, {src: `/ssl/given/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
 					[`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
@@ -320,6 +320,17 @@ let Models = {
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`a`, {href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `BTC`]]]]]]],
+								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+									[
+										[`span`, {style: {width: `${30}%`}}, `Deposit to`],
+										[`div`, {style: {width: `${70}%`}}, 
+											[[`div`, {class: `_gxM _geQ`, style: {border: `${1}px solid #3a3a3a`, width: `${100}%`}}, 
+												[
+													[`div`, {class: `_eYG`, style: {[`border-right`]: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `intext`, [`margin-left`]: 0, [`padding`]: `${2}px ${12}px`}}, 
+														[[`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`, width: `${100}%`}}, `34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`]]],
+													[`div`, {class: `_gZz`}, 
+														[[`svg`, {viewbox: `0 0 24 24`, style: {height: `${14}px`, margin: `0 ${8}px`, width: `${14}px`}}, 
+															[[`path`, {fill: `none`, stroke: `#5dad69`, [`stroke-width`]: 2, d: `M2 22 16 22 16 6 2 6z M8 6 8 2 22 2 22 18 16 18`}]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Quantity`],
