@@ -484,7 +484,11 @@ let Models = {
 							[
 								[`div`, {}, 
 									[
-										[`a`, {id: `mutiple`, href: `javascript:;`, style: {color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, padding: `${6}px ${12}px`}}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`], 
+										[`a`, {id: `mutiple`, href: `javascript:;`, class: `_gxM _geQ`, style: {color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, padding: `${6}px ${12}px`}}, 
+											[
+												[`span`, {}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, [`margin-left`]: `${8}px`, width: `${8}px`}}, 
+													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 3, d: `M0 6 12 18 24 6`}]]]]], 
 										[`div`, {id: `mutiple2`, style: {background: `#000`, bottom: `${-2}px`, display: `none`, height: `${3}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 36}}]]],
 								[`div`, {style: {}}, 
 									[
