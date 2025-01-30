@@ -482,17 +482,21 @@ let Models = {
 					[`div`, {id: ``, style: {[`border-bottom`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
-								[`div`, {}, 
+								[`div`, {},
 									[
 										[`a`, {id: `mutiple`, href: `javascript:;`, class: `_gxM _geQ`, style: {color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, padding: `${6}px ${12}px`}}, 
 											[
 												[`span`, {}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
-												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, [`margin-left`]: `${8}px`, width: `${8}px`}}, 
+												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, [`margin-left`]: `${6}px`, width: `${8}px`}}, 
 													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 3, d: `M0 6 12 18 24 6`}]]]]], 
 										[`div`, {id: `mutiple2`, style: {background: `#000`, bottom: `${-2}px`, display: `none`, height: `${3}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 36}}]]],
-								[`div`, {style: {}}, 
+								[`div`, {style: {}},
 									[
-										[`a`, {id: `splitX`, href: `javascript:;`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`text-align`]: `center`, width: `${50}px`}}, Clients.plotXSplit], 
+										[`a`, {id: `splitX`, href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`text-align`]: `center`}}, 
+											[
+												[`span`, {}, Clients.plotXSplit],
+												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, [`margin-left`]: `${4}px`, width: `${8}px`}}, 
+													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 3, d: `M0 6 12 18 24 6`}]]]]], 
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, [`text-align`]: `center`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`}}],
 								[`div`, {class: `_gZz`, style: {height: `${100}%`}}, 
