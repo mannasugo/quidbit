@@ -173,6 +173,21 @@ let Models = {
 		}
 
 		return DOM;
+	}, 
+
+	inputMug: function () {
+
+		return [`main`, {style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
+			[[`section`, {style: {[`font-family`]: `qb`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
+				[
+					[`h1`, {style: {color: `#6bc679`, [`font-family`]: `litera`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
+					[`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Quidbit`],
+					[`section`, {style: {[`margin-top`]: `${22}px`}}, 
+						[
+							[`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
+							[`input`, {placeholder: `Email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+					[`a`, {href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
+					[`a`, {href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]]]]
 	},
 
 	inputSwap: function (Arg) {
@@ -584,7 +599,8 @@ let Models = {
 													[`span`, {style: {[`font-family`]: `qb`, [`margin-left`]: `${8}px`}}, `0`],
 													[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`margin-left`]: `${8}px`}}, Arg.plot[0][0]]]]]]]]]]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
-						[[`div`, {class: `_gxM _geQ`}, []]]]]];	
+						[[`div`, {class: `_gxM _geQ`}, []]]], 
+					[`div`, {id: `modal`, style: {background: `#000000ab`, display: ``, height: `${100}%`, position: `absolute`, width: `${100}%`}}, [this.inputMug()]]]];	
 	}, 
 
 	utilApp: (Arg) => {

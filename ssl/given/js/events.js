@@ -359,7 +359,7 @@ class Event {
 
 				Val.style.background = `#8888881C`;
 
-				document.querySelector(`#splitX`).innerHTML = Val.innerHTML;
+				document.querySelector(`#splitX span`).innerHTML = Val.innerHTML;
 
 				let Puts = Tools.pull([
 					`/json/web/`, {
