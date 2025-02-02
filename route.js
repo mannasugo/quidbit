@@ -86,6 +86,24 @@ class Route {
 									ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
 							}
 
+							if (Pulls.pull === `mug`) { 
+
+								if (Pulls.flag === `emailAvail`) {
+
+									let Mail = [];
+
+									Raw.mugs[0].forEach(Mug => {
+
+										if (Mug.email === Pulls.email) Mail.push(Pulls.email);
+									});
+
+									if (Mail.length === 0) {
+
+										Arg[1].end(Tools.coats({email: Pulls.email}));
+									}
+								}
+							}
+
 							if (Pulls.pull === `plot`) {
 
 								let S = {};

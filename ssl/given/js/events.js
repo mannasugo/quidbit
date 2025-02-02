@@ -575,6 +575,26 @@ class Event {
 			}
 		}]);
 
+		this.listen([document.querySelector(`#emailAvail`), `click`, S => {
+
+			if (!Tools.slim(document.querySelector(`input#email`).value) === true) return;
+
+			let XHR = Tools.pull([
+				`/json/web`, {email: document.querySelector(`input#email`).value, flag: `emailAvail`, pull: `mug`}]);
+
+			document.querySelector(`input#email`).value = ``;
+
+			XHR.onload = () => {
+
+				let Obj = Tools.typen(XHR.response);
+
+				if (Obj.email) {
+
+					console.log(Obj)
+				}
+			}
+		}]);
+
 		this.plotState(Arg);
 	}
 

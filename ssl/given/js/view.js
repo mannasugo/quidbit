@@ -175,19 +175,34 @@ let Models = {
 		return DOM;
 	}, 
 
-	inputMug: function () {
+	inputMug: function (Arg) {
+
+		let DOM = [];
+
+		DOM[0] = [`section`, {}, 
+			[
+				[`div`, {style: {[`margin-top`]: `${22}px`}}, 
+					[
+						[`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
+						[`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+				[`a`, {id: `emailAvail`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
+				[`a`, {href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]];
+
+		DOM[1] = [`section`, {}, 
+			[
+				[`div`, {style: {[`margin-top`]: `${22}px`}}, 
+					[
+						[`label`, {style: {[`font-size`]: `${10.88}px`}}, `Password`], 
+						[`input`, {id: `lock`, placeholder: `Create password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+				[`a`, {id: `saltAvail`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
+				[`a`, {href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]];
 
 		return [`main`, {style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
 			[[`section`, {style: {[`font-family`]: `qb`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
 				[
 					[`h1`, {style: {color: `#6bc679`, [`font-family`]: `litera`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
 					[`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Quidbit`],
-					[`section`, {style: {[`margin-top`]: `${22}px`}}, 
-						[
-							[`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
-							[`input`, {placeholder: `Email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
-					[`a`, {href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
-					[`a`, {href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]]]]
+					DOM[Arg[0]]]]]]
 	},
 
 	inputSwap: function (Arg) {
@@ -502,16 +517,16 @@ let Models = {
 										[`a`, {id: `mutiple`, href: `javascript:;`, class: `_gxM _geQ`, style: {color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, padding: `${6}px ${12}px`}}, 
 											[
 												[`span`, {}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
-												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, [`margin-left`]: `${6}px`, width: `${8}px`}}, 
-													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 3, d: `M0 6 12 18 24 6`}]]]]], 
+												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${6}px`, [`margin-left`]: `${6}px`, width: `${6}px`}}, 
+													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 6, d: `M0 6 12 18 24 6`}]]]]], 
 										[`div`, {id: `mutiple2`, style: {background: `#000`, bottom: `${-2}px`, display: `none`, height: `${3}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 36}}]]],
 								[`div`, {style: {}},
 									[
 										[`a`, {id: `splitX`, href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`text-align`]: `center`}}, 
 											[
 												[`span`, {}, Clients.plotXSplit],
-												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, [`margin-left`]: `${4}px`, width: `${8}px`}}, 
-													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 3, d: `M0 6 12 18 24 6`}]]]]], 
+												[`svg`, {viewbox: `0 0 24 24`, style: {height: `${6}px`, [`margin-left`]: `${4}px`, width: `${6}px`}}, 
+													[[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 6, d: `M0 6 12 18 24 6`}]]]]], 
 										[`div`, {id: `splits`, style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, [`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, display: `none`, position: `absolute`, [`text-align`]: `center`, top: `${36}px`, width: `${100}%`, [`z-index`]: 16}}, DOM.split]]], 
 								[`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`}}],
 								[`div`, {class: `_gZz`, style: {height: `${100}%`}}, 
@@ -600,7 +615,7 @@ let Models = {
 													[`span`, {style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`margin-left`]: `${8}px`}}, Arg.plot[0][0]]]]]]]]]]]], 
 					[`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
 						[[`div`, {class: `_gxM _geQ`}, []]]], 
-					[`div`, {id: `modal`, style: {background: `#000000ab`, display: ``, height: `${100}%`, position: `absolute`, width: `${100}%`}}, [this.inputMug()]]]];	
+					[`div`, {id: `modal`, style: {background: `#000000ab`, display: `none`, height: `${100}%`, position: `absolute`, width: `${100}%`}}, ]]];	
 	}, 
 
 	utilApp: (Arg) => {
