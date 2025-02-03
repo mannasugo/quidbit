@@ -581,37 +581,87 @@ class Event {
 
 				View.pop();
 
-				View.DOM([`#modal`, [Models.inputMug([0])]]);
+				View.DOM([`#modal`, [Models.inputMug([2])]]);
+
+				this.emailSalt();
 
 				document.querySelector(`#modal`).style.display = `flex`;
 			}]);
 		}
 
-		/**
-
-		this.listen([document.querySelector(`#emailAvail`), `click`, S => {
-
-			if (!Tools.slim(document.querySelector(`input#email`).value) === true) return;
-
-			let XHR = Tools.pull([
-				`/json/web`, {email: document.querySelector(`input#email`).value, flag: `emailAvail`, pull: `mug`}]);
-
-			document.querySelector(`input#email`).value = ``;
-
-			XHR.onload = () => {
-
-				let Obj = Tools.typen(XHR.response);
-
-				if (Obj.email) {
-
-					console.log(Obj)
-				}
-			}
-		}]);
-
-		**/
-
 		this.plotState(Arg);
+	}
+
+	emailSalt () {
+
+		if (document.querySelector(`#modalMugin`)) {
+
+			this.listen([document.querySelector(`#modalMugin`), `click`, S => {
+
+				View.pop();
+
+				View.DOM([`#modal`, [Models.inputMug([2])]]);
+
+				this.emailSalt()
+			}]);
+		}
+
+		if (document.querySelector(`#modalMugup`)) {
+
+			this.listen([document.querySelector(`#modalMugup`), `click`, S => {
+
+				View.pop();
+
+				View.DOM([`#modal`, [Models.inputMug([0])]]);
+
+				this.emailSalt()
+			}]);
+		}
+
+		if (document.querySelector(`#emailAvail`)) {
+
+			this.listen([document.querySelector(`#emailAvail`), `click`, S => {
+
+				if (!Tools.slim(document.querySelector(`input#email`).value) === true) return;
+
+				let XHR = Tools.pull([
+					`/json/web`, {email: document.querySelector(`input#email`).value, flag: `emailAvail`, pull: `mug`}]);
+
+				document.querySelector(`input#email`).value = ``;
+
+				XHR.onload = () => {
+
+					let Obj = Tools.typen(XHR.response);
+
+					if (Obj.email) {
+
+						View.pop();
+
+						View.DOM([`#modal`, [Models.inputMug([1])]]);
+
+						this.listen([document.querySelector(`#saltAvail`), `click`, S => {
+
+							if (!Tools.slim(document.querySelector(`input#lock`).value) === true) return;
+
+							let XHR = Tools.pull([
+								`/json/web`, {email: Obj.email, salt: document.querySelector(`input#lock`).value, flag: `saltAvail`, pull: `mug`}]);
+
+							XHR.onload = () => {
+
+								let Obj = Tools.typen(XHR.response);
+
+								if (Obj && Obj.md) {
+
+									Clients.mug = Obj.md;
+
+									window.location = window.location;
+								}
+							}
+						}]);
+					}
+				}
+			}]);
+		}
 	}
 
 	altSplit (Arg) {
