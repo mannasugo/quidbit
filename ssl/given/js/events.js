@@ -575,6 +575,20 @@ class Event {
 			}
 		}]);
 
+		if (document.querySelector(`#modalMug`)) {
+
+			this.listen([document.querySelector(`#modalMug`), `click`, S => {
+
+				View.pop();
+
+				View.DOM([`#modal`, [Models.inputMug([0])]]);
+
+				document.querySelector(`#modal`).style.display = `flex`;
+			}]);
+		}
+
+		/**
+
 		this.listen([document.querySelector(`#emailAvail`), `click`, S => {
 
 			if (!Tools.slim(document.querySelector(`input#email`).value) === true) return;
@@ -594,6 +608,8 @@ class Event {
 				}
 			}
 		}]);
+
+		**/
 
 		this.plotState(Arg);
 	}
