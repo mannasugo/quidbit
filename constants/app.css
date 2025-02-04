@@ -3,7 +3,7 @@
 }
 
 @font-face {
-  font-family: 'intext';
+  font-family: 'insvg';
   src: url('/ssl/given/glyphs/din.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
@@ -28,6 +28,13 @@
   src: url(/ssl/given/glyphs/63e613c1e565b81f95046014_neworder-medium.otf) format('opentype');
   font-style: normal;
   font-weight: 100;
+}
+
+@font-face {
+  font-family: intext;
+  font-style: normal;
+  font-weight: 100;
+  src: url(/ssl/given/glyphs/PFDinTextUniversalLight.otf) format("opentype")
 }
 
 a, article, body, div, footer, form, h1, h2, h3, h4, header, html, img, label, li, nav, p, section, span, time, ul {
