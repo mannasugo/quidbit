@@ -662,6 +662,30 @@ class Event {
 				}
 			}]);
 		}
+
+		if (document.querySelector(`#emailSalt`)) {
+
+			this.listen([document.querySelector(`#emailSalt`), `click`, S => {
+
+				if (!Tools.slim(document.querySelector(`input#email`).value) === true || !Tools.slim(document.querySelector(`input#salt`).value) === true) return;
+
+				let XHR = Tools.pull([
+					`/json/web`, {
+						email: document.querySelector(`input#email`).value, flag: `emailSalt`, pull: `mug`, salt: document.querySelector(`input#salt`).value}]);
+
+				XHR.onload = () => {
+
+					let Obj = Tools.typen(XHR.response);
+
+					if (Obj && Obj.md) {
+
+						Clients.mug = Obj.md;
+
+						window.location = window.location;
+					}
+				}
+			}]);
+		}
 	}
 
 	altSplit (Arg) {
@@ -742,7 +766,7 @@ class Event {
 			}
 		});
 
-		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
+		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
 
 		SVG[8] = [[`text`, {id: `lapse`, x: Arg[`XY`].length*7.12 - 12, y: 17, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, ``]]
 

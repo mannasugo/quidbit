@@ -103,6 +103,25 @@ class Route {
 									}
 								}
 
+								if (Pulls.flag === `emailSalt`) {
+
+									let Obj = [];
+
+									Raw.mugs[0].forEach(Mug => {
+
+										if (Mug.email === Pulls.email 
+											&& Mug.lock === createHash(`md5`).update(`${Pulls.salt}`, `utf8`).digest(`hex`)) {
+
+											Obj = [Mug.md];
+										}
+									});
+
+									if (Obj.length > 0) {
+
+										Arg[1].end(Tools.coats({md: Obj[0]}));
+									}
+								}
+
 								if (Pulls.flag === `saltAvail`) {
 
 									let Mail = [];

@@ -227,7 +227,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 19; A++) {
+			for (let A = 0; A < 9; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
