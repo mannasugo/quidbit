@@ -1,1 +1,3 @@
-select * from `mugs`;select * from `b4`;
+select * from `mugs`;
+
+select * from `wallets`;

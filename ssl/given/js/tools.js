@@ -157,5 +157,8 @@ const Constants = {
 		ZAR: `flags/za`
 	},
 
-	wallet: {BTC: [`Bitcoin`, `BTC`], ETH: [`Ethereum`, `ERC20`], USDT: [`TetherUS`, `TRC20`]}
+	wallet: {
+		BTC: [`Bitcoin`, `BTC`], 
+		//ETH: [`Ethereum`, `ERC20`], 
+		USDT: [`TetherUS`, `Tron (TRC20)`]}
 }

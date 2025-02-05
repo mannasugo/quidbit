@@ -368,7 +368,7 @@ let Models = {
 											[[`div`, {class: `_gxM _geQ`, style: {border: `${1}px solid #3a3a3a`, width: `${100}%`}}, 
 												[
 													[`div`, {class: `_eYG`, style: {[`border-right`]: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `intext`, [`margin-left`]: 0, [`padding`]: `${2}px ${12}px`}}, 
-														[[`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`, width: `${100}%`}}, `34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`]]],
+														[[`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`, width: `${100}%`}}, ``]]],
 													[`div`, {class: `_gZz`}, 
 														[[`svg`, {viewbox: `0 0 24 24`, style: {height: `${14}px`, margin: `0 ${8}px`, width: `${14}px`}}, 
 															[[`path`, {fill: `none`, stroke: `#5dad69`, [`stroke-width`]: 2, d: `M2 22 16 22 16 6 2 6z M8 6 8 2 22 2 22 18 16 18`}]]]]]]]]]]],
@@ -386,11 +386,10 @@ let Models = {
 																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `USDT`]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
-										[`div`, {style: {width: `${30}%`}}, 
-											[[`a`, {id: `liquid`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, display: `none`, overflow: `hidden`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`text-overflow`]: `ellipsis`, [`white-space`]: `nowrap`, width: `${75}%`}}, `Deposit ${Arg[0][1]}`]]],
+										[`div`, {style: {width: `${30}%`}}],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-												[[`a`, {id: `buy`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Generate Deposit Address`]]]]]]]]]]]]];													
+												[[`a`, {id: `initWallet`, for: ``, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Generate Deposit Address`]]]]]]]]]]]]];													
 	},
 
 	plot: function (Arg) { //`v202204282015`

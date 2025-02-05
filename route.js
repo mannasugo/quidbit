@@ -159,9 +159,20 @@ class Route {
 
 								if (!S.plot) return;
 
+								let Client = {wallets: {}};
+
+								if (Raw.mugs[1][Pulls.mug]) {
+
+									Raw.wallets[0].forEach(Obj => {
+
+										if (Obj.mug === Pulls.mug) Mail.push(Pulls.email);
+									});
+								}
+
 								Arg[1].end(Tools.coats({
 									ago: Tools.plot24(), 
-									plot: S.plot, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf()])}));
+									plot: S.plot, wallets: Client.wallets, 
+									XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf()])}));
 							}
 
 							if (Pulls.pull === `util`) {
