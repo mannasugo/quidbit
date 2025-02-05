@@ -589,6 +589,28 @@ class Event {
 			}]);
 		}
 
+		document.querySelectorAll(`#walletOptions a`).forEach(Child => {
+
+			this.listen([Child, `click`, S => {
+
+				document.querySelectorAll(`#walletOptions a`).forEach(A => {A.style.background = `none`;});
+
+				Child.style.background = `#242471`;
+
+				document.querySelector(`#walletSelect img`).src = `/ssl/given/svg/${Constants.SVG[Child.querySelectorAll(`span`)[0].innerHTML]}.svg`;
+
+				document.querySelectorAll(`#walletSelect span`)[0].innerHTML = Child.querySelectorAll(`span`)[0].innerHTML;
+
+				document.querySelectorAll(`#walletSelect span`)[1].innerHTML = Child.querySelectorAll(`span`)[1].innerHTML;
+
+				document.querySelector(`#walletOptions`).style.display = `none`
+
+				document.querySelectorAll(`#balance`)[1].innerHTML = Child.querySelectorAll(`span`)[0].innerText;
+
+				document.querySelector(`#viaSelect`).innerHTML = Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1];
+			}]);
+		});
+
 		this.plotState(Arg);
 	}
 

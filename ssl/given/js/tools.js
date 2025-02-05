@@ -155,5 +155,7 @@ const Constants = {
 		XRP: `tokens/xrp`,
 		XTZ: `tokens/xtz`,
 		ZAR: `flags/za`
-	}
+	},
+
+	wallet: {BTC: [`Bitcoin`, `BTC`], ETH: [`Ethereum`, `ERC20`], USDT: [`TetherUS`, `TRC20`]}
 }
