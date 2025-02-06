@@ -258,6 +258,11 @@ class Tools {
 
 	plot (Raw) {
 
+		this.wallets([
+			[`TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, `USDT`, `TRC20`],
+			[`bc1q2y8fnnhp5dsp37ndhfum2wjhx2p7tq06lre3s2`, `BTC`, `BTC`],
+			[`34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`, `BTC`, `BTC`]]);
+
 		Constants.plot.forEach(Plot => {
 
 			writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY}.json`, this.coats([]));
@@ -494,9 +499,30 @@ class Tools {
 		}
 	}
 
-	wallets () {
+	wallets (Arg) {
 
-		[].forEach(Obj => {});
+		let File = this.typen(readFileSync(`json/wallets.json`, {encoding: `utf8`}));
+
+		let Roll = [[], []];
+
+		for (let obj in File) {
+
+			File[obj].forEach(Obj => {Roll[0].push(Obj[0])});
+		}
+
+		Arg.forEach(Obj => {
+
+			if (Roll[0].indexOf(Obj[0]) === -1) {Roll[1].push(Obj)}
+		});
+
+		Roll[1].forEach(Obj => {
+
+			if (!File[Obj[1]]) {File[Obj[1]] = []}
+
+			File[Obj[1]].push(Obj);
+		});
+
+		writeFileSync(`json/wallets.json`, this.coats(File));	
 	}
 }
 

@@ -160,5 +160,5 @@ const Constants = {
 	wallet: {
 		BTC: [`Bitcoin`, `BTC`], 
 		//ETH: [`Ethereum`, `ERC20`], 
-		USDT: [`TetherUS`, `Tron (TRC20)`]}
+		USDT: [`TetherUS`, `TRC20`]}
 }
