@@ -165,7 +165,10 @@ class Route {
 
 									Raw.wallets[0].forEach(Obj => {
 
-										if (Obj.mug === Pulls.mug) Mail.push(Pulls.email);
+										if (Obj.mug === Pulls.mug) {
+
+											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = [];}
+										}
 									});
 								}
 
@@ -194,7 +197,30 @@ class Route {
 									Arg[1].end(Tools.coats({
 										mug: Pulls.mug, utils: Tools.utils([`index`, `tokens`])}));
 								}
-							}});}}});
+							}
+
+							if (Pulls.pull === `wallets`) {
+
+								let Client = {wallets: {}};
+
+								if (Raw.mugs[1][Pulls.mug]) {
+
+									if (Pulls.flag === `init`) {
+									
+									}
+
+									Raw.wallets[0].forEach(Obj => {
+
+										if (Obj.mug === Pulls.mug) {
+
+											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = [];}
+										}
+									});
+								}
+
+								Arg[1].end(Tools.coats({wallets: Client.wallets}));
+							}
+						});}}});
 		}
 	}
 

@@ -608,8 +608,25 @@ class Event {
 				document.querySelectorAll(`#balance`)[1].innerHTML = Child.querySelectorAll(`span`)[0].innerText;
 
 				document.querySelector(`#viaSelect`).innerHTML = Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1];
+
+				document.querySelector(`#initWallet a`).setAttribute(`for`, `${Tools.coats([Child.querySelectorAll(`span`)[0].innerText, Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1]])}`)
+			
+				document.querySelector(`#initWallet`).style.display = (!Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? `flex`: `none`;
 			}]);
 		});
+
+		this.listen([document.querySelector(`#initWallet a`), `click`, S => {
+
+			let XHR = Tools.pull([
+				`/json/web`, {flag: `init`, pull: `wallets`, wallet: Tools.typen(this.getSource(S).getAttribute(`for`))}]);
+
+			XHR.onload = () => {
+
+				let Obj = Tools.typen(XHR.response);
+
+				if (Obj && Obj.wallets) {}
+			}
+		}]);
 
 		this.plotState(Arg);
 	}

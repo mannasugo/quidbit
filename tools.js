@@ -493,6 +493,11 @@ class Tools {
 			return Util;
 		}
 	}
+
+	wallets () {
+
+		[].forEach(Obj => {});
+	}
 }
 
 let Constants = {
