@@ -603,7 +603,7 @@ class Event {
 
 				document.querySelectorAll(`#walletSelect span`)[1].innerHTML = Child.querySelectorAll(`span`)[1].innerHTML;
 
-				document.querySelector(`#walletOptions`).style.display = `none`
+				document.querySelector(`#walletOptions`).style.display = `none`;
 
 				document.querySelectorAll(`#balance`)[1].innerHTML = Child.querySelectorAll(`span`)[0].innerText;
 
@@ -612,19 +612,29 @@ class Event {
 				document.querySelector(`#initWallet a`).setAttribute(`for`, `${Tools.coats([Child.querySelectorAll(`span`)[0].innerText, Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1]])}`)
 			
 				document.querySelector(`#initWallet`).style.display = (!Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? `flex`: `none`;
+			
+				document.querySelector(`#toAddress`).style.display = (!Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? `none`: `flex`;
+			
+				document.querySelectorAll(`#toAddress span`)[1].innerText = (Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText][0][0]: ``;
 			}]);
 		});
 
 		this.listen([document.querySelector(`#initWallet a`), `click`, S => {
 
+			document.querySelector(`#initWallet`).style.display = `none`;
+
+			document.querySelector(`#toAddress`).style.display = `flex`;
+
 			let XHR = Tools.pull([
-				`/json/web`, {flag: `init`, pull: `wallets`, wallet: Tools.typen(this.getSource(S).getAttribute(`for`))}]);
+				`/json/web`, {
+					flag: `init`,
+					mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`, wallet: Tools.typen(this.getSource(S).getAttribute(`for`))}]);
 
 			XHR.onload = () => {
 
 				let Obj = Tools.typen(XHR.response);
 
-				if (Obj && Obj.wallets) {}
+				if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
 			}
 		}]);
 

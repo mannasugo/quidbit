@@ -167,7 +167,9 @@ class Route {
 
 										if (Obj.mug === Pulls.mug) {
 
-											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = [];}
+											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = []}
+
+											Client.wallets[Obj.asset].push([Obj.address, Obj.nettype]);
 										}
 									});
 								}
@@ -205,20 +207,51 @@ class Route {
 
 								if (Raw.mugs[1][Pulls.mug]) {
 
-									if (Pulls.flag === `init`) {
-									
-									}
+									let File = Tools.typen(readFileSync(`json/wallets.json`, {encoding: `utf8`}));
+
+									let Roll = [[], [], []];
 
 									Raw.wallets[0].forEach(Obj => {
 
+										if (Pulls.wallet[1] === Obj.nettype) {Roll[1].push(Obj.address)}
+
 										if (Obj.mug === Pulls.mug) {
 
-											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = [];}
+											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = []}
 										}
 									});
+
+									if (Pulls.flag === `init`) {
+
+										File[Pulls.wallet[0]].forEach(Obj => {
+
+											if (Obj[2] === Pulls.wallet[1]) {Roll[0].push(Obj[0])}
+										});
+
+										Roll[0].forEach(address => {
+
+											if (Roll[1].indexOf(address) === -1) {Roll[2].push(address)}
+										});
+
+										if (Roll[2].length === 0) return;
+
+										let TZ = new Date().valueOf();
+
+										Sql.puts([`wallets`, {
+											address: Roll[2][0],
+											asset: Pulls.wallet[0],
+											md: createHash(`md5`).update(`${TZ}`, `utf8`).digest(`hex`),
+											mug: Pulls.mug,
+											nettype: Pulls.wallet[1],
+											stamp: TZ
+										}, (SqlObj) => {
+
+											Arg[1].end(Tools.coats({address: Roll[2][0]}));
+										}]);			
+									}
 								}
 
-								Arg[1].end(Tools.coats({wallets: Client.wallets}));
+								//Arg[1].end(Tools.coats({wallets: Client.wallets}));
 							}
 						});}}});
 		}
