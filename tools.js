@@ -195,7 +195,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 19; A++) {
+			for (let A = 0; A < 6; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -227,7 +227,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 9; A++) {
+			for (let A = 0; A < 5; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -262,6 +262,8 @@ class Tools {
 			[`TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, `USDT`, `TRC20`],
 			[`bc1q2y8fnnhp5dsp37ndhfum2wjhx2p7tq06lre3s2`, `BTC`, `BTC`],
 			[`34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`, `BTC`, `BTC`]]);
+
+		this.txscan([{in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, nettype: `trc20`, out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, token: `USDT`, ts: 1656534249000, txmd: `3354a2d6c3719364a5fdc178bd5b58b4bbcc33ef2d708fc10b2e03cba87358e6`, value: 21.18}]);
 
 		Constants.plot.forEach(Plot => {
 
@@ -461,6 +463,26 @@ class Tools {
 
 		return Plot24;
 	}
+
+	txscan (Arg) {
+
+		let File = this.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
+
+		//if (File.length === 0) File.push(Arg[0]);
+
+		Arg.forEach(Obj => {
+
+			File.forEach(Tx => {
+
+				if (Tx.txmd !== Obj.txmd && Tx.out !== Obj.out && Tx.in !== Obj.in) {
+
+					File.push(Obj);
+				}
+			});
+		});
+
+		writeFileSync(`json/txscan.json`, this.coats(File));
+	}			
 
 	typen (coat) { return JSON.parse(coat); }
 

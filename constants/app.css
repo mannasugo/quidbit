@@ -34,6 +34,7 @@
   font-family: intext;
   font-style: normal;
   font-weight: 100;
+  /*src: url(/ssl/given/glyphs/dinweb.woff2) format("woff2")*/    
   src: url(/ssl/given/glyphs/PFDinTextUniversalLight.otf) format("opentype")
 }
 
