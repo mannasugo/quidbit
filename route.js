@@ -211,17 +211,37 @@ class Route {
 
 									let Roll = [[], [], []];
 
-									Raw.wallets[0].forEach(Obj => {
+									if (Pulls.flag === `balance`) {
 
-										if (Pulls.wallet[1] === Obj.nettype) {Roll[1].push(Obj.address)}
+										let Hold = [[], {}];
 
-										if (Obj.mug === Pulls.mug) {
+										Raw.wallets[0].forEach(Obj => {
 
-											if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = []}
-										}
-									});
+											if (Obj.mug === Pulls.mug) {Hold[0].push(Obj.address)}
+										});
+
+										let File = Tools.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
+
+										Hold[0].forEach(Wallet => {
+
+											File.forEach(TX => {
+
+												if (TX.in === Wallet) console.log(TX)
+											});
+										});
+									}
 
 									if (Pulls.flag === `init`) {
+
+										Raw.wallets[0].forEach(Obj => {
+
+											if (Pulls.wallet[1] === Obj.nettype) {Roll[1].push(Obj.address)}
+
+											if (Obj.mug === Pulls.mug) {
+
+												if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = []}
+											}
+										});
 
 										File[Pulls.wallet[0]].forEach(Obj => {
 

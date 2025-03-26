@@ -227,7 +227,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 5; A++) {
+			for (let A = 0; A < 2; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -263,7 +263,15 @@ class Tools {
 			[`bc1q2y8fnnhp5dsp37ndhfum2wjhx2p7tq06lre3s2`, `BTC`, `BTC`],
 			[`34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`, `BTC`, `BTC`]]);
 
-		this.txscan([{in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, nettype: `trc20`, out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, token: `USDT`, ts: 1656534249000, txmd: `3354a2d6c3719364a5fdc178bd5b58b4bbcc33ef2d708fc10b2e03cba87358e6`, value: 21.18}]);
+		this.txscan([
+			{
+				in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, 
+				nettype: `trc20`, 
+				out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, 
+				token: `USDT`, 
+				ts: 1656534249000, 
+				txmd: `3354a2d6c3719364a5fdc178bd5b58b4bbcc33ef2d708fc10b2e03cba87358e6`, 
+				value: 21.18}]);
 
 		Constants.plot.forEach(Plot => {
 
@@ -365,7 +373,7 @@ class Tools {
 
 							let XY = [];
 
-							for (let A = 0; A < 3; A++) {
+							for (let A = 0; A < 1; A++) {
 
 								XY = XY.concat(this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 							}

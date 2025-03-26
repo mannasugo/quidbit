@@ -250,6 +250,23 @@ class Event {
 			let Obj = this.getSource(S).parentNode.querySelector(`div`);
 
 			Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
+
+			if (Clients.mug) {
+
+				let XHR = Tools.pull([
+					`/json/web`, {
+						flag: `balance`,
+						mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`}]);
+
+				XHR.onload = () => {
+
+					let Obj = Tools.typen(XHR.response);
+
+					//if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+				}
+
+
+			}
 		}]);
 
 		this.listen([document.querySelector(`#walletSelect`), `click`, S => {
