@@ -220,15 +220,40 @@ class Route {
 											if (Obj.mug === Pulls.mug) {Hold[0].push(Obj.address)}
 										});
 
-										let File = Tools.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
+										let File = Tools.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`})), Tofile = [[], []];
 
-										Hold[0].forEach(Wallet => {
+										File.forEach(FileObj => { 
 
-											File.forEach(TX => {
+											Raw.ledge[0].forEach(Obj => {
 
-												if (TX.in === Wallet) console.log(TX)
+												if (FileObj.txmd !== Obj.info.txmd && FileObj.out !== Obj.info.out && FileObj.in !== Obj.info.in) {
+
+													Tofile[0].push(FileObj);
+												}
 											});
 										});
+
+										if (Raw.ledge[0].length === 0) { Tofile[0] = File; }
+
+										Tofile[0].forEach(Obj => {
+
+											if (Hold[0].indexOf(Obj.in) > -1) { 
+
+												Tofile[1].push({
+													ilk: `deposit`, 
+													info: Obj, 
+													ledge: {
+														[hold]: 0,
+														[Pulls.mug]: [0, Obj.value]}, 
+													md: createHash(`md5`).update(`${Obj.ts}`, `utf8`).digest(`hex`),
+													ts: Obj.ts}); 
+											}
+										});console.log(Tofile[1], Raw.ledge[0])
+
+										Sql.putlist([`ledge`, Tofile[1], (SQ) => {
+
+											//Arg[1].end(Tools.coats(Put));
+										}]);
 									}
 
 									if (Pulls.flag === `init`) {
