@@ -89,6 +89,28 @@ class Tools {
 
 	coats (types) { return JSON.stringify(types); }
 
+	holding (Arg) {
+
+		let Hold = [Constants.fiat.concat(Constants.tokens), {}];
+
+		Hold[0].forEach(Obj => {
+
+			let cumulate = 0;
+
+			Arg[0].ledge[0].sort((A, B) => {return A.ts - B.ts}).forEach(Objtx => {
+
+				if (Objtx.info.token === Obj[0] && Objtx.ledge[Arg[1]]) {
+
+					cumulate += Objtx.ledge[Arg[1]][1]
+				}
+			});
+
+			Hold[1][Obj[0]] = cumulate;
+		});
+
+		return Hold[1];
+	}
+
 	plotXY (Arg) {
 
 		let PlotXY = [];
@@ -227,7 +249,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 3; A++) {
+			for (let A = 0; A < 5; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -373,7 +395,7 @@ class Tools {
 
 							let XY = [];
 
-							for (let A = 0; A < 1; A++) {
+							for (let A = 0; A < 3; A++) {
 
 								XY = XY.concat(this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 							}

@@ -262,10 +262,10 @@ class Event {
 
 					let Obj = Tools.typen(XHR.response);
 
-					//if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+					Clients.hold = Tools.coats(Obj.hold);
+
+					document.querySelectorAll(`#balance`)[1].previousElementSibling.innerText = Obj.hold[document.querySelectorAll(`#balance`)[1].innerText];
 				}
-
-
 			}
 		}]);
 
@@ -623,6 +623,8 @@ class Event {
 				document.querySelector(`#walletOptions`).style.display = `none`;
 
 				document.querySelectorAll(`#balance`)[1].innerHTML = Child.querySelectorAll(`span`)[0].innerText;
+
+				document.querySelectorAll(`#balance`)[1].previousElementSibling.innerText = Tools.typen(Clients.hold)[document.querySelectorAll(`#balance`)[1].innerText];
 
 				document.querySelector(`#viaSelect`).innerHTML = Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1];
 
