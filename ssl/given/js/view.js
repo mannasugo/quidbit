@@ -142,7 +142,7 @@ let Models = {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [/*`CAD`, */`EUR`, `USD`],
+				BTC: [`CAD`, `EUR`, `USD`, `USDT`],
 				ETH: [`BTC`, `USD`],
 				EUR: [`CAD`, `CHF`, `USD`],
 				USD: [`CAD`, `CHF`, `JPY`]
@@ -355,7 +355,7 @@ let Models = {
 														[`div`, {class: `_eYG`}],
 														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
 															[
-																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
+																[`span`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
 																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `BTC`]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
