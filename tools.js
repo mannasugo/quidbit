@@ -251,7 +251,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 6; A++) {
+			for (let A = 0; A < 8; A++) {
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -295,7 +295,15 @@ class Tools {
 				token: `USDT`, 
 				ts: 1656534249000, 
 				txmd: `3354a2d6c3719364a5fdc178bd5b58b4bbcc33ef2d708fc10b2e03cba87358e6`, 
-				value: 21.18}]);
+				value: 21.18}, 
+			{
+				in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, 
+				nettype: `trc20`, 
+				out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, 
+				token: `USDT`, 
+				ts: 1655888859000, 
+				txmd: `a448461d459fdffab3629af091d9b699083e7d08b49d11f9cf7366d3d823530d`, 
+				value: 156.79}]);
 
 		Constants.plot.forEach(Plot => {
 
@@ -500,17 +508,15 @@ class Tools {
 
 		let File = this.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
 
+		let Roll = [[]];
+
 		//if (File.length === 0) File.push(Arg[0]);
+
+		File.forEach(Tx => {Roll[0].push(`${Tx.ts}_${Tx.txmd}`);});
 
 		Arg.forEach(Obj => {
 
-			File.forEach(Tx => {
-
-				if (Tx.txmd !== Obj.txmd && Tx.out !== Obj.out && Tx.in !== Obj.in) {
-
-					File.push(Obj);
-				}
-			});
+			if (Roll[0].indexOf(`${Obj.ts}_${Obj.txmd}`) === -1) {File.push(Obj)}
 		});
 
 		writeFileSync(`json/txscan.json`, this.coats(File));

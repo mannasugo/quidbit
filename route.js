@@ -222,15 +222,13 @@ class Route {
 
 										let File = Tools.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`})), Tofile = [[], []];
 
-										File.forEach(FileObj => { 
+										let Poll = [[]];
 
-											Raw.ledge[0].forEach(Obj => {
+										Raw.ledge[0].forEach(Obj => {Poll[0].push(`${Obj.info.ts}_${Obj.info.txmd}`)});
 
-												if (FileObj.txmd !== Obj.info.txmd && FileObj.out !== Obj.info.out && FileObj.in !== Obj.info.in) {
+										File.forEach(Obj => {
 
-													Tofile[0].push(FileObj);
-												}
-											});
+											if (Poll[0].indexOf(`${Obj.ts}_${Obj.txmd}`) === -1) {Tofile[0].push(Obj)}
 										});
 
 										if (Raw.ledge[0].length === 0) { Tofile[0] = File; }
