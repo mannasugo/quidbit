@@ -231,7 +231,7 @@ class Route {
 											if (Poll[0].indexOf(`${Obj.ts}_${Obj.txmd}`) === -1) {Tofile[0].push(Obj)}
 										});
 
-										if (Raw.ledge[0].length === 0) { Tofile[0] = File; }
+										if (Raw.ledge[0].length === 0) { Tofile[0] = File }
 
 										Tofile[0].forEach(Obj => {
 

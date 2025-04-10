@@ -657,6 +657,18 @@ class Event {
 			}
 		}]);
 
+		this.listen([document.querySelector(`#toAddress a`), `click`, S => {
+
+  			navigator.clipboard.writeText(document.querySelectorAll(`#toAddress span`)[1].innerText);
+
+  			document.querySelector(`#toAddress path`).style.strokeOpacity = 1;
+
+  			setTimeout(() => {
+
+  				document.querySelector(`#toAddress path`).style.strokeOpacity = .5;
+			}, 3000);
+		}]);
+
 		this.plotState(Arg);
 	}
 

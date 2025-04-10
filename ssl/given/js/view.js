@@ -371,7 +371,7 @@ let Models = {
 												[
 													[`div`, {class: `_eYG`, style: {[`border-right`]: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `intext`, [`margin-left`]: 0, [`padding`]: `${2}px ${12}px`}}, 
 														[[`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`, width: `${100}%`}}, (!Arg.wallets.BTC)? ``: Arg.wallets.BTC[0][0]]]],
-													[`div`, {class: `_gZz`}, 
+													[`a`, {href: `javascript:;`, class: `_gZz`, style: {display: `flex`}}, 
 														[[`svg`, {viewbox: `0 0 24 24`, style: {height: `${14}px`, margin: `0 ${8}px`, width: `${14}px`}}, 
 															[[`path`, {fill: `none`, stroke: `#5dad69`, [`stroke-width`]: 2, d: `M2 22 16 22 16 6 2 6z M8 6 8 2 22 2 22 18 16 18`}]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
