@@ -599,6 +599,7 @@ let Constants = {
 		[`NOK`, 5, hold, `norwegian krone`, `USD-NOK`],
 		[`NZD`, 5, hold, `new zealand dollar`, `NZD-USD`],
 		[`SEK`, 5, hold, `swedish krone`, `USD-SEK`],
+		[`USD`, 5, hold, `american dollar`, `USD-USD`],
 		[`ZAR`, 5, hold, `south african rand`, `USD-ZAR`]
 	],
 

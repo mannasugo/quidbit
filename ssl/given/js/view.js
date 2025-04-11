@@ -249,52 +249,44 @@ let Models = {
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-													[
-														//[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`, width: `${100}%`}}, 
-															[
-																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, (Clients.hold)? `${Tools.typen(Clients.hold)[Arg[0][1]]}`: `0.00`],
-																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
+													[[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`, width: `${100}%`}}, 
+														[
+															[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, (Clients.hold)? `${Tools.typen(Clients.hold)[Arg[0][1]]}`: `0.00`],
+															[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`, width: `${25}%`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Quantity`],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-													[
-														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
-															[
-																[`input`, {id: `quantity`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
-																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][0]]]]]]]]]]]],
+													[[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`, width: `${100}%`}}, 
+														[
+															[`input`, {id: `quantity`, info: Arg[0].toString().replace(`,`, `-`), style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`, width: `${75}%`}}],
+															[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`, width: `${25}%`}}, Arg[0][0]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Price`],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-													[
-														[`div`, {class: `_eYG`}],
-														[`div`, {id: `${Arg[0].toString().replace(`,`, `-`)}`, class: `_gZz`, style: {[`font-family`]: `intext`}}, 
-															[
-																[`span`, {id: `COST`, style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, [`padding-right`]: `${12}px`}}, ``],
-																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
+													[[`div`, {id: `${Arg[0].toString().replace(`,`, `-`)}`, class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
+														[
+															[`span`, {id: `COST`, style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, [`padding-right`]: `${12}px`}}, ``],
+															[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`, width: `${25}%`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Total`],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-													[
-														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
-															[
-																[`input`, {id: `total`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`}}],
-																[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
+													[[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`, width: `${100}%`}}, 
+														[
+															[`input`, {id: `total`, info: Arg[0].toString().replace(`,`, `-`), style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`padding-right`]: `${12}px`, [`text-align`]: `right`, width: `${75}%`}}],
+															[`span`, {style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`, width: `${25}%`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
 										[`div`, {style: {width: `${30}%`}}, 
-											[[`a`, {id: `liquid`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, overflow: `hidden`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`text-overflow`]: `ellipsis`, [`white-space`]: `nowrap`, width: `${75}%`}}, `Deposit ${Arg[0][1]}`]]],
+											[[`a`, {id: `liquid`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, display: `none`, overflow: `hidden`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`text-overflow`]: `ellipsis`, [`white-space`]: `nowrap`, width: `${75}%`}}, `Deposit ${Arg[0][1]}`]]],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`a`, {id: `buy`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Review & Buy`]]]]]]]]]]]]];													

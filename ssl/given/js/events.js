@@ -669,6 +669,32 @@ class Event {
 			}, 3000);
 		}]);
 
+		this.listen([document.querySelector(`#total`), `keyup`, S => {
+
+			let Slot = this.getSource(S);
+
+			let a = Slot.value[Slot.value.length - 1];
+
+			if (a === `.` && Slot.value.indexOf(`.`) !== Slot.value.length - 1) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
+
+			else if (!parseInt(a) && parseInt(a) !== 0 && a !== `.`) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
+
+			document.querySelector(`#quantity`).value = (Slot.value/Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
+		}]);
+
+		this.listen([document.querySelector(`#quantity`), `keyup`, S => {
+
+			let Slot = this.getSource(S);
+
+			let a = Slot.value[Slot.value.length - 1];
+
+			if (a === `.` && Slot.value.indexOf(`.`) !== Slot.value.length - 1) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
+
+			else if (!parseInt(a) && parseInt(a) !== 0 && a !== `.`) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
+
+			document.querySelector(`#total`).value = (Slot.value*Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
+		}]);
+
 		this.plotState(Arg);
 	}
 
@@ -912,6 +938,9 @@ class Event {
 
 				document.querySelector(`#volbase`).innerHTML = Stat[3];
 			}])});	
+	}
+
+	Slots () {
 	}
 }
 
