@@ -38,6 +38,20 @@
   src: url(/ssl/given/glyphs/PFDinTextUniversalLight.otf) format("opentype")
 }
 
+@font-face {
+  font-family: generica;
+  src: url(/ssl/given/glyphs/Generica_0.otf) format('opentype');
+  font-style: normal;
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: aspergit;
+  src: url(/ssl/given/glyphs/Aspergit.otf) format('opentype');
+  font-style: normal;
+  font-weight: 100;
+}
+
 a, article, body, div, footer, form, h1, h2, h3, h4, header, html, img, label, li, nav, p, section, span, time, ul {
   margin: 0;
   padding: 0;

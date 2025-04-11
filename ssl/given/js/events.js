@@ -661,11 +661,11 @@ class Event {
 
   			navigator.clipboard.writeText(document.querySelectorAll(`#toAddress span`)[1].innerText);
 
-  			document.querySelector(`#toAddress path`).style.strokeOpacity = 1;
+  			document.querySelector(`#toAddress path`).style.strokeOpacity = .5;
 
   			setTimeout(() => {
 
-  				document.querySelector(`#toAddress path`).style.strokeOpacity = .5;
+  				document.querySelector(`#toAddress path`).style.strokeOpacity = 1;
 			}, 3000);
 		}]);
 

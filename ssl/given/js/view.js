@@ -250,10 +250,10 @@ let Models = {
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 													[
-														[`div`, {class: `_eYG`}],
-														[`div`, {class: `_gZz`, style: {[`font-family`]: `intext`}}, 
+														//[`div`, {class: `_eYG`}],
+														[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`, width: `${100}%`}}, 
 															[
-																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
+																[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, (Clients.hold)? `${Tools.typen(Clients.hold)[Arg[0][1]]}`: `0.00`],
 																[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[
@@ -362,14 +362,14 @@ let Models = {
 										[`span`, {style: {width: `${30}%`}}, `Network`],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-												[[`a`, {id: `viaSelect`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`font-family`]: `intext`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `BTC`]]]]]]],
+												[[`a`, {id: `viaSelect`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`font-family`]: `generica`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `BTC`]]]]]]],
 								[`div`, {id: `toAddress`, class: `_gxM _geQ`, style: {display: (!Arg.wallets.BTC)? `none`: `flex`, [`margin-bottom`]: `${8}px`}}, 
 									[
 										[`span`, {style: {width: `${30}%`}}, `Deposit to`],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {border: `${1}px solid #3a3a3a`, width: `${100}%`}}, 
 												[
-													[`div`, {class: `_eYG`, style: {[`border-right`]: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `intext`, [`margin-left`]: 0, [`padding`]: `${2}px ${12}px`}}, 
+													[`div`, {class: `_eYG`, style: {[`border-right`]: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `aspergit`, [`margin-left`]: 0, [`padding`]: `${2}px ${12}px`}}, 
 														[[`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`, width: `${100}%`}}, (!Arg.wallets.BTC)? ``: Arg.wallets.BTC[0][0]]]],
 													[`a`, {href: `javascript:;`, class: `_gZz`, style: {display: `flex`}}, 
 														[[`svg`, {viewbox: `0 0 24 24`, style: {height: `${14}px`, margin: `0 ${8}px`, width: `${14}px`}}, 
