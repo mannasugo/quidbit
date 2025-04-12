@@ -695,6 +695,34 @@ class Event {
 			document.querySelector(`#total`).value = (Slot.value*Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
 		}]);
 
+		this.listen([document.querySelector(`#buy`), `click`, S => {
+
+			if (!Clients.mug) {
+
+				View.pop();
+
+				View.DOM([`#modal`, [Models.inputMug([2])]]);
+
+				this.emailSalt();
+
+				document.querySelector(`#modal`).style.display = `flex`;
+
+			}
+
+			let Values = [(!Tools.slim(document.querySelector(`#total`).value))? false: Tools.slim(document.querySelector(`#total`).value)];
+
+			if (Values[0] === false || typeof parseFloat(Values[0]) !== `number`) return;
+
+			let Puts = Tools.pull([
+				`/json/web/`, { 
+					mug: Clients.mug, 
+					float: parseFloat(Values[0]), 
+					pair: Arg[0].pair, 
+					pull: `buy`}]);
+
+			Values = [];
+		}]);
+
 		this.plotState(Arg);
 	}
 
@@ -938,9 +966,6 @@ class Event {
 
 				document.querySelector(`#volbase`).innerHTML = Stat[3];
 			}])});	
-	}
-
-	Slots () {
 	}
 }
 
