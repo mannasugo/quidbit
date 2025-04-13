@@ -709,18 +709,21 @@ class Event {
 
 			}
 
-			let Values = [(!Tools.slim(document.querySelector(`#total`).value))? false: Tools.slim(document.querySelector(`#total`).value)];
+			if (Clients.mug) {
+				
+				let Values = [(!Tools.slim(document.querySelector(`#total`).value))? false: Tools.slim(document.querySelector(`#total`).value)];
 
-			if (Values[0] === false || typeof parseFloat(Values[0]) !== `number`) return;
+				if (Values[0] === false || typeof parseFloat(Values[0]) !== `number`) return;
 
-			let Puts = Tools.pull([
-				`/json/web/`, { 
-					mug: Clients.mug, 
-					float: parseFloat(Values[0]), 
-					pair: Arg[0].pair, 
-					pull: `buy`}]);
+				let Puts = Tools.pull([
+					`/json/web/`, { 
+						mug: Clients.mug, flag: `buy`, 
+						float: parseFloat(Values[0]), 
+						plot: Arg.plot[0], 
+						pull: `trade`}]);
 
-			Values = [];
+				Values = [];
+			}
 		}]);
 
 		this.plotState(Arg);
