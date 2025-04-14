@@ -251,7 +251,7 @@ let Models = {
 												[[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
 													[[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`, width: `${100}%`}}, 
 														[
-															[`span`, {style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, (Clients.hold)? `${Tools.typen(Clients.hold)[Arg[0][1]]}`: `0.00`],
+															[`span`, {id: `hold`, style: {[`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, (Clients.hold)? `${Tools.typen(Clients.hold)[Arg[0][1]]}`: `0.00`],
 															[`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`, width: `${25}%`}}, Arg[0][1]]]]]]]]]]]],
 								[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
 									[

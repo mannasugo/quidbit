@@ -695,6 +695,58 @@ class Event {
 			document.querySelector(`#total`).value = (Slot.value*Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
 		}]);
 
+		document.querySelectorAll(`#action`).forEach(SPAN => {
+
+			this.listen([SPAN, `click`, S => {
+
+				let idSlot = this.getSource(S).getAttribute(`for`);
+
+				if (idSlot === `buy`) {
+
+					this.getSource(S).style.background = `#242471`;
+
+					document.querySelectorAll(`#action`)[1].style.background = `#0b0b48`;
+
+					document.querySelector(`#hold`).innerText = (Clients.hold)? `${Tools.typen(Clients.hold)[Arg.plot[0][1]]}`: `0.00`;
+
+					document.querySelector(`#balance`).innerText = Arg.plot[0][1];
+
+					if (document.querySelector(`#sell`)) {
+
+						document.querySelector(`#sell`).style.border = `${1}px solid lime`;
+
+						document.querySelector(`#sell`).style.background = `#00ff001a`;
+
+						document.querySelector(`#sell`).innerHTML = `Review & Buy`;
+
+						document.querySelector(`#sell`).setAttribute(`id`, `buy`);
+					}
+				}
+
+				if (idSlot === `sell`) {
+
+					this.getSource(S).style.background = `#242471`;
+
+					document.querySelectorAll(`#action`)[0].style.background = `#0b0b48`;
+
+					document.querySelector(`#hold`).innerText = (Clients.hold)? `${Tools.typen(Clients.hold)[Arg.plot[0][0]]}`: `0.00`;
+
+					document.querySelector(`#balance`).innerHTML = Arg.plot[0][0];
+
+					if (document.querySelector(`#buy`)) {
+
+						document.querySelector(`#buy`).style.border = `${1}px solid red`;
+
+						document.querySelector(`#buy`).style.background = `#ff00001a`;
+
+						document.querySelector(`#buy`).innerHTML = `Review & Sell`;
+
+						document.querySelector(`#buy`).setAttribute(`id`, `sell`);
+					}
+				}
+			}]);
+		});
+
 		this.listen([document.querySelector(`#buy`), `click`, S => {
 
 			if (!Clients.mug) {
