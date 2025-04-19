@@ -777,8 +777,6 @@ class Event {
 
 			if (this.getSource(S).getAttribute(`role`) === `sell`) {
 
-				this.listen([document.querySelector(`#execute`), `click`, S => {
-
 					if (!Clients.mug) {
 
 								View.pop();
@@ -805,7 +803,6 @@ class Event {
 
 								Values = [];
 							}
-				}]);
 			}
 		}]);
 
