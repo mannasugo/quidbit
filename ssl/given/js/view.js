@@ -289,7 +289,7 @@ let Models = {
 											[[`a`, {id: `liquid`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, display: `none`, overflow: `hidden`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`text-overflow`]: `ellipsis`, [`white-space`]: `nowrap`, width: `${75}%`}}, `Deposit ${Arg[0][1]}`]]],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-												[[`a`, {id: `buy`, for: Arg[0][1], href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Review & Buy`]]]]]]]]]]]]];													
+												[[`a`, {id: `execute`, role: `buy`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Review & Buy`]]]]]]]]]]]]];													
 	},
 
 	inputWallet: function (Arg) {

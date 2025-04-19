@@ -711,16 +711,14 @@ class Event {
 
 					document.querySelector(`#balance`).innerText = Arg.plot[0][1];
 
-					if (document.querySelector(`#sell`)) {
+					document.querySelector(`#execute`).style.border = `${1}px solid lime`;
 
-						document.querySelector(`#sell`).style.border = `${1}px solid lime`;
+					document.querySelector(`#execute`).style.background = `#00ff001a`;
 
-						document.querySelector(`#sell`).style.background = `#00ff001a`;
+					document.querySelector(`#execute`).innerHTML = `Review & Buy`;
 
-						document.querySelector(`#sell`).innerHTML = `Review & Buy`;
-
-						document.querySelector(`#sell`).setAttribute(`id`, `buy`);
-					}
+					document.querySelector(`#execute`).setAttribute(`role`, `buy`);
+					
 				}
 
 				if (idSlot === `sell`) {
@@ -733,48 +731,81 @@ class Event {
 
 					document.querySelector(`#balance`).innerHTML = Arg.plot[0][0];
 
-					if (document.querySelector(`#buy`)) {
+					document.querySelector(`#execute`).style.border = `${1}px solid red`;
 
-						document.querySelector(`#buy`).style.border = `${1}px solid red`;
+					document.querySelector(`#execute`).style.background = `#ff00001a`;
 
-						document.querySelector(`#buy`).style.background = `#ff00001a`;
+					document.querySelector(`#execute`).innerHTML = `Review & Sell`;
 
-						document.querySelector(`#buy`).innerHTML = `Review & Sell`;
-
-						document.querySelector(`#buy`).setAttribute(`id`, `sell`);
-					}
+					document.querySelector(`#execute`).setAttribute(`role`, `sell`);
 				}
 			}]);
 		});
 
-		this.listen([document.querySelector(`#buy`), `click`, S => {
+		this.listen([document.querySelector(`#execute`), `click`, S => {
 
-			if (!Clients.mug) {
+			if (this.getSource(S).getAttribute(`role`) === `buy`) {
 
-				View.pop();
+				if (!Clients.mug) {
 
-				View.DOM([`#modal`, [Models.inputMug([2])]]);
+					View.pop();
 
-				this.emailSalt();
+					View.DOM([`#modal`, [Models.inputMug([2])]]);
 
-				document.querySelector(`#modal`).style.display = `flex`;
+					this.emailSalt();
 
+					document.querySelector(`#modal`).style.display = `flex`;
+
+				}
+
+				if (Clients.mug) {
+				
+					let Values = [(!Tools.slim(document.querySelector(`#total`).value))? false: Tools.slim(document.querySelector(`#total`).value)];
+
+					if (Values[0] === false || typeof parseFloat(Values[0]) !== `number`) return;
+
+					let Puts = Tools.pull([
+						`/json/web/`, { 
+							mug: Clients.mug, flag: `buy`, 
+							float: parseFloat(Values[0]), 
+							plot: Arg.plot[0], 
+							pull: `trade`}]);
+
+					Values = [];
+				}
 			}
 
-			if (Clients.mug) {
-				
-				let Values = [(!Tools.slim(document.querySelector(`#total`).value))? false: Tools.slim(document.querySelector(`#total`).value)];
+			if (this.getSource(S).getAttribute(`role`) === `sell`) {
 
-				if (Values[0] === false || typeof parseFloat(Values[0]) !== `number`) return;
+				this.listen([document.querySelector(`#execute`), `click`, S => {
 
-				let Puts = Tools.pull([
-					`/json/web/`, { 
-						mug: Clients.mug, flag: `buy`, 
-						float: parseFloat(Values[0]), 
-						plot: Arg.plot[0], 
-						pull: `trade`}]);
+					if (!Clients.mug) {
 
-				Values = [];
+								View.pop();
+
+								View.DOM([`#modal`, [Models.inputMug([2])]]);
+
+								this.emailSalt();
+
+								document.querySelector(`#modal`).style.display = `flex`;
+							}
+
+							if (Clients.mug) {
+
+								let Values = [(!Tools.slim(document.querySelector(`#quantity`).value))? false: Tools.slim(document.querySelector(`#quantity`).value)];
+
+								if (Values[0] === false || typeof parseFloat(Values[0]) !== `number`) return;
+
+								let Puts = Tools.pull([
+									`/json/web/`, { 
+										mug: Clients.mug, flag: `sell`,
+										float: parseFloat(Values[0]), 
+										plot: Arg.plot[0], 
+										pull: `trade`}]);
+
+								Values = [];
+							}
+				}]);
 			}
 		}]);
 

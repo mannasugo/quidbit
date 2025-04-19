@@ -246,6 +246,41 @@ class Route {
 											Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({mug: Pulls.mug}))}]);
 										}
 									}
+
+									if (Pulls.flag === `sell`) {
+
+										let OB = [Tools.typen(readFileSync(`json/SPOT_BOOK.json`, {encoding: `utf8`})), {}];
+
+										OB[0].forEach(Obj => {OB[1][Obj[0]] = Obj[1]});
+
+										if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.plot[0]] > Pulls.float 
+											&& OB[1][`${Pulls.plot[0]}-${Pulls.plot[1]}`]) {
+
+											let ts = new Date().valueOf();
+
+											let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`), 
+
+												value = OB[1][`${Pulls.plot[0]}-${Pulls.plot[1]}`];
+
+											let Row = [{
+												ilk: `trade`,
+												info: {token: Pulls.plot[1]}, 
+												ledge: {
+													[hold]: 0,	
+													[Pulls.mug]: [0, Pulls.float*value]},
+												md: md, 
+												ts: ts}, {
+												ilk: `trade`,
+												info: {token: Pulls.plot[0]},
+												ledge: {
+													[hold]: 0,
+													[Pulls.mug]: [0, -(Pulls.float)]},
+												md: md, 
+												ts: ts}];
+
+											Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({mug: Pulls.mug}))}]);
+										}
+									}
 								}
 							}
 
