@@ -368,7 +368,7 @@ class Event {
 
 			this.listen([Val, `click`, S => {
 
-				Clients.plotXSplit = Val.innerHTML;
+				Clients.plotXSplit = Val.innerText;
 
 				document.querySelectorAll(`.ival`).forEach(A => {A.style.background = `#000`;});
 
@@ -1007,13 +1007,122 @@ class Event {
 		this.plotState(Arg);
 	}
 
+	plotSVG (Arg) {
+
+		let CAV = 0, HL = [], RH = 0, Vols = [];
+
+		Arg[0][1].forEach(K => {
+
+			if (K[2].length > 0) {
+
+				HL.push(K[2][0]); 
+
+				HL.push(K[2][1]);
+
+				Vols.push(K[3]);
+			}
+		});
+
+		HL.sort((A, B) => {return B - A});
+
+		RH = HL[0] - HL[HL.length - 1]; CAV = 2;
+    
+  		let Y = parseFloat(document.body.clientHeight - 70);
+
+		let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
+
+		for (let A = 0; A < 25; A++) {
+
+			let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*16 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
+
+			SVG[1].push([`line`, {style: {visibility: (.15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) > .70*Y)? `collapse`: `visible`}, x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
+		
+			SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
+				
+			SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);		
+		}
+
+		Vols = Vols.sort((A, B) => {return B - A});
+
+		let Split = Constants.ival[Clients.plotXSplit];
+
+		let tSZ = Arg[0][1].sort((A, B) => {return B[0] - A[0]})[0][0];
+
+		tSZ = new Date(`${new Date(tSZ).toLocaleDateString()} ${new Date(tSZ).getHours()}:00`).valueOf() + Split.abs*Split.C*4;
+
+		if (Split.abs === 60000*60) tSZ = new Date(new Date(tSZ).toLocaleDateString()).valueOf() - Split.abs*Split.C;
+
+		let Xlet = [];
+
+		for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) {Xlet.push(tSZ - i*Split.abs*Split.C);}
+
+		Arg[0][1].sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
+
+			if (K[2].length > 0) {
+
+				SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
+				
+                let OC = Tools.typen(Tools.coats(K[1]));
+
+                OC.sort((A, B) => {return B - A});
+				
+				SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				
+				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				
+				SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);						
+			}
+
+			if (Xlet.indexOf(K[0]) > -1) {
+
+				SVG[7].push([`text`, {x: (i*7.12) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.formatplanex([K[0], Split.abs, Split.sub])]);
+
+				SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+			}
+		});
+
+		G.forEach((Vect, i) => {
+
+			View.pop();
+
+			Vect.innerHTML = View.ModelDOM(SVG[i]);
+		});
+
+		document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13]);
+
+	}
+
 	plotState (Arg) {
 
+		let M_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
+
 		setInterval(() => {
+
+			if (Clients.plotXSplit === `1M`) {
+
+				if (new Date().valueOf() > M_Z + 60000) {
+
+					M_Z = M_Z + 60000;
+
+					let tS = new Date().valueOf();
+
+					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), tS, tS]);
+
+					io().on(`az`, AZ => {
+
+						if (tS === AZ[0]) {
+
+							this.plotSVG([AZ]);
+						}
+					});
+				}
+			}
 
 			if (Clients.plotXSplit === `1H`) {
 
 				if (document.querySelector(`#lapse`)) document.querySelector(`#lapse`).innerHTML = `${(59 - new Date().getMinutes() > 9)? ``: `0`}${59 - new Date().getMinutes()}:${(59 - new Date().getSeconds() > 9)? ``: `0`}${59 - new Date().getSeconds()}`;
+
+				
 			}
 		}, 1000);
 
