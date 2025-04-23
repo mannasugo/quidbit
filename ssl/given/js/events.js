@@ -1081,6 +1081,8 @@ class Event {
 			}
 		});
 
+		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
+
 		G.forEach((Vect, i) => {
 
 			View.pop();
@@ -1106,7 +1108,7 @@ class Event {
 
 					let tS = new Date().valueOf();
 
-					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), tS, tS]);
+					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), M_Z + 60000, tS]);
 
 					io().on(`az`, AZ => {
 

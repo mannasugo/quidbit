@@ -401,6 +401,8 @@ class Tools {
 
 					RQ(`https://api.coinbase.com/v2/prices/${Plot[0][0]}-${Plot[0][1]}/spot`, (flaw, State, coat) => {
 
+						/**/
+
 						if (flaw || State.statusCode !== 200) {
 
 							let XY = [];
@@ -416,9 +418,11 @@ class Tools {
 
 								Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
 
-								//writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
+								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
 							}
 						}
+
+						/**/
 
 						if (!flaw && State.statusCode === 200 && this.typen(coat) && this.typen(coat).data 
 							&& parseFloat(this.typen(coat).data.amount) > 0) {

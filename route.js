@@ -391,9 +391,12 @@ class Route {
 
 				readFile(`json/SPOT_BOOK.json`, {encoding: `utf8`}, (flaw, Coat) => {
 
-					Coat = Tools.typen(Coat);
+					if (Coat[Coat.length - 1] === `]`) {
 
-					if (Coat.length > 0) App.emit(`SPOT_BOOK`, Coat);
+						Coat = Tools.typen(Coat);
+
+						if (Coat.length > 0) App.emit(`SPOT_BOOK`, Coat)
+					}
 				});
 
 			}, 4000);
