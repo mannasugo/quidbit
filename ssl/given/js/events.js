@@ -470,7 +470,7 @@ class Event {
 
 				ts_z = ts_z - Split.abs*move;
 
-				ts = new Date().valueOf();
+				ts = new Date().valueOf(); Clients.tSZ = ts_z
 			}
 
 			if ((Pan[1] - Pan[0]) > 1) {
@@ -479,11 +479,11 @@ class Event {
 
 				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`;
 
-				move = parseFloat(((Pan[1] - Pan[0])/5).toFixed(0));
+				move = parseFloat(((Pan[1] - Pan[0])/5).toFixed(0)); Clients.move = move
 
 				ts_z = ts_z + Split.abs*move;
 
-				ts = new Date().valueOf();
+				ts = new Date().valueOf(); Clients.tSZ = ts_z
 			}
 
 			if ((Pan[1] - Pan[0]) < 0 || (Pan[1] - Pan[0]) > 1) {
@@ -1096,6 +1096,8 @@ class Event {
 
 	plotState (Arg) {
 
+		//let tSZ = Clients
+
 		let M_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
 
 		setInterval(() => {
@@ -1104,11 +1106,22 @@ class Event {
 
 				if (new Date().valueOf() > M_Z + 60000) {
 
+					let tSZ = M_Z;
+
+					if (Clients.tSZ) {
+
+						tSZ = parseInt(Clients.tSZ);
+
+						tSZ = tSZ + 60000;
+
+						Clients.tSZ = tSZ;
+					}
+
 					M_Z = M_Z + 60000;
 
 					let tS = new Date().valueOf();
 
-					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), M_Z + 60000, tS]);
+					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), tSZ + 60000*2, tS]);
 
 					io().on(`az`, AZ => {
 

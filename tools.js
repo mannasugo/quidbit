@@ -418,7 +418,7 @@ class Tools {
 
 								Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
 
-								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
+								//writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
 							}
 						}
 
