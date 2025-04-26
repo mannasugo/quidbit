@@ -418,7 +418,7 @@ class Tools {
 
 								Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
 
-								//writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
+								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
 							}
 						}
 
@@ -669,7 +669,7 @@ module.exports = {
 	Constants: Constants,
 	
 	Sql : new Sql([{
-		host: `localhost`,
+		host: `127.0.0.1`,
 		user: `root`,
 		password: `Mann2asugo`,
 		multipleStatements: true
