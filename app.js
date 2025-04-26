@@ -8,7 +8,7 @@ const { readFileSync, statSync, writeFileSync } = require(`fs`);
 
 const { Sql, Tools } = require(`./tools`);
 
-//const { Call, io, pollPay} = require(`./route`);
+const { Call, io, pollPay} = require(`./route`);
 
 Sql.Sql([readFileSync(`constants/sql.sql`, {encoding: `utf8`}), () => {}]);
 
