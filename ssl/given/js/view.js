@@ -160,7 +160,7 @@ let Models = {
 				DOM2.push([`div`, {id: `${fave}-${b}`, class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`margin-left`]: `${12}px`}}, 
 					[
 						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `qb`}}, `${fave}/${b}`],
-						[`span`, {id: `COST`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, `${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`],
+						[`span`, {id: `COST`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, /*`${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`*/],
 						[`span`, {id: `MOD`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`}}, ``]]]);
 			});
 

@@ -28,6 +28,8 @@ class Route {
 
 		if (State.length === 4 && State[3] === ``) { 
 
+			/**
+
 			document.title = `Quidbit`;
 
 			let Puts = Tools.pull([
@@ -48,6 +50,22 @@ class Route {
 
 				Event.app(Web);
 			}
+
+			**/
+
+			io().on(`SPOT_BOOK`, Spot => {
+
+				let Plot = {};
+
+				Spot.forEach(AB => {
+
+					Plot[AB[0]] = [AB[1]]; 
+
+					Clients.plot = Tools.coats(Plot)
+				});
+
+				if (Clients.plot) window.location = `/trade/BTC_USD`;
+			});
 		}
 
 		else if (this.State[3] === `trade`) {
@@ -66,9 +84,7 @@ class Route {
 
 					let Web = Tools.typen(Puts.response);
 
-					if (Web.plot) {
-
-						document.title = `${Tools.typen(Clients.plot)[State[4].replace(`_`, `-`)] || (0).toFixed(Web.plot[1])} ${State[4]}`;
+					if (Web.plot) {;
 
 						View.DOM([`div`, [Models.plot(Web)]]);
 
@@ -79,6 +95,8 @@ class Route {
 						document.querySelector(`body`).style.background = `#000`;
 
 						Event.plot(Web);
+
+						document.title = `${Tools.typen(Clients.plot)[State[4].replace(`_`, `-`)] || (0).toFixed(Web.plot[1])} ${State[4]}`
 					}
 				}	
     		}
