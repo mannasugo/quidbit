@@ -142,9 +142,9 @@ let Models = {
 
 			Clients.faveplots = Tools.coats({
 				AUD: [`USD`],
-				BTC: [`CAD`, `EUR`, `USD`, `USDT`],
+				BTC: [/*`CAD`, `EUR`,*/ `USD`, `USDT`],
 				ETH: [`BTC`, `USD`],
-				EUR: [`CAD`, `CHF`, `USD`],
+				EUR: [/*`CAD`, `CHF`, */`USD`],
 				USD: [`CAD`, `CHF`, `JPY`]
 			});
 		}
@@ -159,7 +159,7 @@ let Models = {
 
 				DOM2.push([`div`, {id: `${fave}-${b}`, class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`margin-left`]: `${12}px`}}, 
 					[
-						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `insvg`, [`letter-spacing`]: `${.88}px`}}, `${fave}/${b}`],
+						[`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `insvg`, [`letter-spacing`]: `${.88}px`, opcity: .75, [`white-space`]: `nowrap`}}, `${fave}/${b}`],
 						[`span`, {id: `COST`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, /*`${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`*/],
 						[`span`, {id: `MOD`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`}}, ``]]]);
 			});
