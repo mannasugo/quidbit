@@ -235,6 +235,43 @@ class Event {
            		//document.querySelector(`#spotY #a`).setAttribute(`fill`, (Open[1] > YZ)? `#ff000078`: `#05b5058c`);
 
             	document.querySelector(`#spotY #c`).setAttribute(`d`, `M${0} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${8} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
+			
+				let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:00`).valueOf();
+
+				if (Clients.plotXSplit === `1M`) {
+
+					tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
+				}
+
+				if (document.querySelector(`rect#g${tSZ}`)) {
+
+					ZY = parseFloat(ZY);
+
+					let Candle = [document.querySelector(`rect#g${tSZ}`)];
+
+					if (Tools.typen(Candle[0].getAttribute(`info`)).length === 0) {
+
+						Candle[0].setAttribute(`info`, Tools.coats([ZY, ZY]))
+					}
+
+					let K = Tools.typen(Candle[0].getAttribute(`info`));
+
+					K[0] = parseFloat(K[0])
+
+					K[1] = parseFloat(ZY);
+
+					let OC = Tools.typen(Tools.coats(K));
+
+                	OC.sort((A, B) => {return B - A});
+
+                	Candle[0].setAttribute(`y`, .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]));
+
+                	Candle[0].setAttribute(`height`, ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]));
+
+                	Candle[0].setAttribute(`fill`, (K[0] > K[1])? `#e3415d`: `#000`);
+				
+					Candle[0].setAttribute(`stroke`, (K[0] > K[1])? `#e3415d`: `#6bc679`);
+				}
 			}
 		});
 
@@ -1066,7 +1103,7 @@ class Event {
 
                 OC.sort((A, B) => {return B - A});
 				
-				SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+				SVG[3].push([`rect`, {id: `g${K[0]}`, info: Tools.coats(K[1]), x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
 				
 				SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
 				
@@ -1080,6 +1117,13 @@ class Event {
 				SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
 			}
 		});
+
+		if (Clients.plotXSplit === `1M`) {
+
+			let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();				
+
+			SVG[3].push([`rect`, {id: `g${tSZ}`, info: Tools.coats(Arg[0][1][0][1]), x: (Arg[0][1].length - 2)*7.125 - 2, width: 4.25}]);
+		}
 
 		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
 
@@ -1106,14 +1150,31 @@ class Event {
 
 				document.querySelector(`#volbase`).innerHTML = Stat[3];
 			}])});
-
 	}
 
 	plotState (Arg) {
 
-		//let tSZ = Clients
+		/**/
+
+		HL = []; Vols = [];
+
+		Arg.XY.forEach(K => {
+
+			if (K[2].length > 0) {
+
+				HL.push(K[2][0]); 
+
+				HL.push(K[2][1]);
+
+				Vols.push(K[3]);
+			}
+		});
+
+		/**/
 
 		let M_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
+
+		let H_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:00`).valueOf();
 
 		setInterval(() => {
 
@@ -1152,27 +1213,26 @@ class Event {
 
 				if (document.querySelector(`#lapse`)) document.querySelector(`#lapse`).innerHTML = `${(59 - new Date().getMinutes() > 9)? ``: `0`}${59 - new Date().getMinutes()}:${(59 - new Date().getSeconds() > 9)? ``: `0`}${59 - new Date().getSeconds()}`;
 
-				
+				//if (new Date().valueOf() < H_Z + (60000*60)) {}
+
+				if (new Date().valueOf() > H_Z + (60000*60)) {
+
+					H_Z = H_Z + (60000*60);
+
+					let tS = new Date().valueOf();
+
+					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), H_Z, tS]);
+
+					io().on(`az`, AZ => {
+
+						if (tS === AZ[0]) {
+
+							this.plotSVG([AZ]);
+						}
+					});
+				}
 			}
 		}, 1000);
-
-		/**/
-
-		HL = []; Vols = [];
-
-		Arg.XY.forEach(K => {
-
-			if (K[2].length > 0) {
-
-				HL.push(K[2][0]); 
-
-				HL.push(K[2][1]);
-
-				Vols.push(K[3]);
-			}
-		});
-
-		/**/
 
 		document.querySelectorAll(`.info`).forEach(SVG => {
 

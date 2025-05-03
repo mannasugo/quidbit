@@ -39,6 +39,13 @@
 }
 
 @font-face {
+  font-family: es;
+  font-style: normal;
+  font-weight: 100;
+  src: url(/ssl/given/glyphs/ES.woff2) format("woff2")
+}
+
+@font-face {
   font-family: generica;
   src: url(/ssl/given/glyphs/Generica_0.otf) format('opentype');
   font-style: normal;
