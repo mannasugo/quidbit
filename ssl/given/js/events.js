@@ -1122,7 +1122,7 @@ class Event {
 
 			let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();				
 
-			SVG[3].push([`rect`, {id: `g${tSZ}`, info: Tools.coats(Arg[0][1][0][1]), x: (Arg[0][1].length - 2)*7.125 - 2, width: 4.25}]);
+			SVG[3].push([`rect`, {id: `g${tSZ}`, info: Tools.coats([]), x: (Arg[0][1].length - 2)*7.125 - 2, width: 4.25}]);
 		}
 
 		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
