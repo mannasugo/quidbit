@@ -754,8 +754,24 @@ class Event {
 
 					document.querySelector(`#execute`).innerHTML = `Review & Buy`;
 
-					document.querySelector(`#execute`).setAttribute(`role`, `buy`);
-					
+					document.querySelector(`#execute`).setAttribute(`role`, `buy`);			
+				}
+
+				if (idSlot === `deposit`) {
+
+					this.getSource(S).style.background = `#242471`;
+
+					this.getSource(S).nextElementSibling.style.background = `#0b0b48`;
+
+					document.querySelectorAll(`.wallet-in`).forEach(DOM => {
+
+						DOM.style.display = `flex`;
+					});
+
+					document.querySelectorAll(`.wallet-out`).forEach(DOM => {
+
+						DOM.style.display = `none`;
+					});
 				}
 
 				if (idSlot === `sell`) {
@@ -775,6 +791,23 @@ class Event {
 					document.querySelector(`#execute`).innerHTML = `Review & Sell`;
 
 					document.querySelector(`#execute`).setAttribute(`role`, `sell`);
+				}
+
+				if (idSlot === `withdraw`) {
+
+					this.getSource(S).style.background = `#242471`;
+
+					this.getSource(S).previousElementSibling.style.background = `#0b0b48`;
+
+					document.querySelectorAll(`.wallet-out`).forEach(DOM => {
+
+						DOM.style.display = `flex`;
+					});
+
+					document.querySelectorAll(`.wallet-in`).forEach(DOM => {
+
+						DOM.style.display = `none`;
+					});
 				}
 			}]);
 		});
