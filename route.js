@@ -375,9 +375,35 @@ class Route {
 											Arg[1].end(Tools.coats({address: Roll[2][0]}));
 										}]);			
 									}
-								}
 
-								//Arg[1].end(Tools.coats({wallets: Client.wallets}));
+									if (Pulls.flag === `walletto`) {
+
+										if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.wallet[1][0]] > Pulls.float) {
+
+											let ts = new Date().valueOf();
+
+											let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`);
+
+											Sql.puts([`walletto`,  {
+          										complete: false,
+          										float: Pulls.float,
+          										md: md,
+          										mug: Pulls.mug,
+          										ts: ts,
+          										walletto: Pulls.wallet}, (Q) => {
+
+          											Sql.puts([`ledge`, {
+														ilk: `withdraw`, 
+														info: {to: Pulls.wallet, token: Pulls.wallet[1][0]}, 
+														ledge: {
+															[hold]: 0,
+															[Pulls.mug]: [0, -(Pulls.float)]}, 
+														md: md,
+														ts: ts}, (Pay) => {Arg[1].end(Tools.coats({mug: Pulls.mug}))}]);
+          										}]);
+										}
+									}
+								}
 							}
 						});}}});
 		}

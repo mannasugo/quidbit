@@ -710,16 +710,39 @@ class Event {
 
 		this.listen([document.querySelector(`#walletout`), `click`, S => {
 
-			let XHR = Tools.pull([
-				`/json/web`, {
-					flag: `walletto`,
-					mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`, wallet: [Tools.typen(this.getSource(S).getAttribute(`for`))]}]);
+			if (!Clients.mug) {
 
-			XHR.onload = () => {
+				View.pop();
 
-				let Obj = Tools.typen(XHR.response);
+				View.DOM([`#modal`, [Models.inputMug([2])]]);
 
-				if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+				this.emailSalt();
+
+				document.querySelector(`#modal`).style.display = `flex`;
+
+			}
+
+			if (Clients.mug) {
+				
+				let Values = [
+					(!Tools.slim(document.querySelector(`#amountto`).value))? false: Tools.slim(document.querySelector(`#amountto`).value),
+					(!Tools.slim(document.querySelector(`#walletto`).value))? false: Tools.slim(document.querySelector(`#walletto`).value)];
+
+				if (Values[0] === false || Values[1] === false || typeof parseFloat(Values[0]) !== `number`) return;
+
+				let XHR = Tools.pull([
+					`/json/web`, {
+						flag: `walletto`, mug: (Clients.mug) ? Clients.mug: false, float: parseFloat(Values[0]), pull: `wallets`, wallet: [Values[1], 
+						Tools.typen(this.getSource(S).getAttribute(`for`))]}]);
+
+				Values = [];
+
+				XHR.onload = () => {
+
+					let Obj = Tools.typen(XHR.response);
+
+					//if (Obj && Obj.mug) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+				}
 			}
 		}]);
 
