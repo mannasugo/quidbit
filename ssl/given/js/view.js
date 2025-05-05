@@ -395,7 +395,7 @@ let Models = {
 										[`div`, {style: {width: `${30}%`}}],
 										[`div`, {style: {width: `${70}%`}}, 
 											[[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-												[[`a`, {id: `walletout`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Withdraw`]]]]]]]]]]]]];													
+												[[`a`, {id: `walletout`, for: `${Tools.coats([`BTC`, `BTC`])}`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Withdraw`]]]]]]]]]]]]];													
 	},
 
 	plot: function (Arg) { //`v202204282015`

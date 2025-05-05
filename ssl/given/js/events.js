@@ -667,6 +667,8 @@ class Event {
 
 				document.querySelector(`#initWallet a`).setAttribute(`for`, `${Tools.coats([Child.querySelectorAll(`span`)[0].innerText, Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1]])}`)
 			
+				document.querySelector(`#walletout`).setAttribute(`for`, `${Tools.coats([Child.querySelectorAll(`span`)[0].innerText, Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1]])}`)
+			
 				document.querySelector(`#initWallet`).style.display = (!Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? `flex`: `none`;
 			
 				document.querySelector(`#toAddress`).style.display = (!Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? `none`: `flex`;
@@ -674,6 +676,18 @@ class Event {
 				document.querySelectorAll(`#toAddress span`)[1].innerText = (Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText])? Tools.typen(Clients.wallets)[Child.querySelectorAll(`span`)[0].innerText][0][0]: ``;
 			}]);
 		});
+
+		this.listen([document.querySelector(`#toAddress a`), `click`, S => {
+
+  			navigator.clipboard.writeText(document.querySelectorAll(`#toAddress span`)[1].innerText);
+
+  			document.querySelector(`#toAddress path`).style.strokeOpacity = .5;
+
+  			setTimeout(() => {
+
+  				document.querySelector(`#toAddress path`).style.strokeOpacity = 1;
+			}, 3000);
+		}]);
 
 		this.listen([document.querySelector(`#initWallet a`), `click`, S => {
 
@@ -694,16 +708,19 @@ class Event {
 			}
 		}]);
 
-		this.listen([document.querySelector(`#toAddress a`), `click`, S => {
+		this.listen([document.querySelector(`#walletout`), `click`, S => {
 
-  			navigator.clipboard.writeText(document.querySelectorAll(`#toAddress span`)[1].innerText);
+			let XHR = Tools.pull([
+				`/json/web`, {
+					flag: `walletto`,
+					mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`, wallet: [Tools.typen(this.getSource(S).getAttribute(`for`))]}]);
 
-  			document.querySelector(`#toAddress path`).style.strokeOpacity = .5;
+			XHR.onload = () => {
 
-  			setTimeout(() => {
+				let Obj = Tools.typen(XHR.response);
 
-  				document.querySelector(`#toAddress path`).style.strokeOpacity = 1;
-			}, 3000);
+				if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+			}
 		}]);
 
 		this.listen([document.querySelector(`#total`), `keyup`, S => {
