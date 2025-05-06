@@ -272,6 +272,27 @@ class Event {
 				
 					Candle[0].setAttribute(`stroke`, (K[0] > K[1])? `#e3415d`: `#6bc679`);
 				}
+
+				document.querySelectorAll(`.info`).forEach(SVG => {
+
+					if (Tools.typen(SVG.id)[2][0] === HL[0]) {
+
+						document.querySelector(`#yz`).innerHTML = parseFloat(HL[0]);
+
+						document.querySelector(`#yz`).setAttribute(`x`, SVG.getAttribute(`x`));
+
+						document.querySelector(`#yz`).setAttribute(`y`, (.15*Y + ((HL[0] - HL[0])*.35*Y)/(HL[0] - HL[HL.length - 1])) - 10);
+					}
+
+					if (Tools.typen(SVG.id)[2][1] === HL[HL.length - 1]) {
+
+						document.querySelector(`#ya`).innerHTML = parseFloat(HL[HL.length - 1]);
+
+						document.querySelector(`#ya`).setAttribute(`x`, SVG.getAttribute(`x`));
+
+						document.querySelector(`#ya`).setAttribute(`y`, (.15*Y + ((HL[0] - HL[HL.length - 1])*.35*Y)/(HL[0] - HL[HL.length - 1])) + 20);
+					}
+				});
 			}
 		});
 

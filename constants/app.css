@@ -59,6 +59,13 @@
   font-weight: 100;
 }
 
+@font-face {
+  font-family: itc;
+  src: url(/ssl/given/glyphs/ITCAvantGardeStdBk.otf) format('opentype');
+  font-style: normal;
+  font-weight: 100;
+}
+
 a, article, body, div, footer, form, h1, h2, h3, h4, header, html, img, label, li, nav, p, section, span, time, ul {
   margin: 0;
   padding: 0;
