@@ -86,7 +86,7 @@ class Tools {
 
 		let String = new Date(Arg[0]).toTimeString();
 
-		if (Arg[1] === 60000*60) String = new Date(Arg[0]).toDateString();
+		if (Arg[1] === 60000*60 || Arg[1] === 60000*60*24) {String = new Date(Arg[0]).toDateString()}
 
 		return `${String.substr(Arg[2][0], Arg[2][1])}`;
 	}
@@ -123,7 +123,12 @@ const Constants = {
 				abs: 60000*60,
 				C: 24, 
 				sub: [8, 2],
-				tox: -6}
+				tox: -6},
+		[`1D`]: {
+				abs: 60000*60*24,
+				C: 31, 
+				sub: [4, 3],
+				tox: -12}
 	},
 
 	SVG: {
