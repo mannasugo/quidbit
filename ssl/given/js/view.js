@@ -581,15 +581,16 @@ let Models = {
 										[`g`, {id: `XYKline`, class: `g`}, SVG[3]],
 										[`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]], 
 										[`g`, {id: `g`}, G[0]],
-										[`text`, {id: `ya`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``],
-										[`text`, {id: `yz`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``]]]]], 
+										[`text`, {id: `ya`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``],
+										[`text`, {id: `yz`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``]]]]], 
 							[`div`, {style: {width: `${20}%`}}, 
 								[
 									[`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
 										[
 											[`g`, {class: `ival-alt`, id: `spotY`}, 
 												[
-													[`rect`, {id: `a`, x: 0, height: 20, width: 80}], 
+													[`rect`, {id: `a`, x: 0, height: 20, width: ``}],
+													[`rect`, {id: `b`, x: 15, height: 20}], 
 													[`path`, {id: `c`, stroke: `#fff`, d: ``}],
 													[`g`, {class: `g`}, SVG[4]],
 													[`g`, {class: `g`}, [SVG[5]]],

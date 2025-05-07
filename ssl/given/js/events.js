@@ -230,13 +230,29 @@ class Event {
 
 				document.querySelector(`#spotline`).setAttribute(`d`, `M${parseFloat(X)} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
 
-            	document.querySelector(`#spotY #a`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) - 10);
+            	let YZOC = [Tools.typen(RECT[RECT.length - 1].id)[1][0], parseFloat(ZY)];
 
-           		//document.querySelector(`#spotY #a`).setAttribute(`fill`, (Open[1] > YZ)? `#ff000078`: `#05b5058c`);
+            	YZOC[0] = parseFloat(YZOC[0]);
+
+            	document.querySelector(`#spotline`).setAttribute(`stroke`, (YZOC[0] > YZOC[1])? `#e3415d`: `#6bc679`);
+
+            	document.querySelector(`#spotY #a`).setAttribute(`width`, parseFloat(ZY).toFixed(Arg.plot[1]).toString().length*8.5);
+
+				document.querySelector(`#spotY #a`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) - 10);
+
+           		document.querySelector(`#spotY #a`).setAttribute(`fill`, (YZOC[0] > YZOC[1])? `#e3415d5e`: `#6bc6795e`);
+
+            	document.querySelector(`#spotY #b`).setAttribute(`width`, parseFloat(ZY).toFixed(Arg.plot[1]).toString().length*8.5 - 15);
+
+				document.querySelector(`#spotY #b`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) - 10);
+
+           		document.querySelector(`#spotY #b`).setAttribute(`fill`, (YZOC[0] > YZOC[1])? `#e3415d5e`: `#6bc6795e`);
 
             	document.querySelector(`#spotY #c`).setAttribute(`d`, `M${0} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${8} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
 			
-				let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:00`).valueOf();
+				document.querySelector(`#spotY #c`).setAttribute(`stroke`, (YZOC[0] > YZOC[1])? `#e3415d`: `#6bc679`);
+
+            	let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:00`).valueOf();
 
 				if (Clients.plotXSplit === `1M`) {
 
@@ -271,6 +287,8 @@ class Event {
                 	Candle[0].setAttribute(`fill`, (K[0] > K[1])? `#e3415d`: `#000`);
 				
 					Candle[0].setAttribute(`stroke`, (K[0] > K[1])? `#e3415d`: `#6bc679`);
+
+					//document.querySelector(`#spotline`).setAttribute(`stroke`, (K[0] > K[1])? `#e3415d`: `#6bc679`);       	
 				}
 
 				document.querySelectorAll(`.info`).forEach(SVG => {
@@ -622,6 +640,11 @@ class Event {
 							}
 						});
 
+						/**/
+
+						SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];
+
+						/**/
 						G.forEach((Vect, i) => {
 
 							View.pop();
