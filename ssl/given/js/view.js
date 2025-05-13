@@ -534,9 +534,9 @@ let Models = {
 									[[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
 								[`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
 									(!Clients.mug)? [[`a`, {id: `modalMug`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, color: `#000`, display: `inline-grid`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, padding: `${2}px ${16}px`, [`text-align`]: `center`}}, `Sign in`]]: []]]]]],
-					[`div`, {id: `collapsible`, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
+					[`div`, {id: `collapsible`, style: {[`boder-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
 						[[`div`, {id: `faves`, class: `_gxM _geQ`, style: {cursor: `grab`, [`font-size`]: `${11}px`}}, this.faveplots()]]],
-					[`div`, {id: ``, style: {[`border-bottom`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
+					[`div`, {id: ``, style: {[`border-bottom`]: `${1}px solid #353535`, [`border-top`]: `${1}px solid #353535`, pdding: `${0}px ${12}px`, width: `${100}%`}}, 
 						[[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
 							[
 								[`div`, {},
