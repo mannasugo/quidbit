@@ -481,6 +481,10 @@ let Models = {
 
 			if (K[2].length > 0) {
 
+				K[1][0] = parseFloat(K[1][0]);
+
+				K[1][1] = parseFloat(K[1][1]);
+
 				SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
 				
                 let OC = Tools.typen(Tools.coats(K[1]));

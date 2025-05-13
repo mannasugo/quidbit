@@ -281,7 +281,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 21; A++) {
+			for (let A = 0; A < 14; A++) { //48
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -616,7 +616,7 @@ class Tools {
 			File[Obj[1]].push(Obj);
 		});
 
-		writeFileSync(`json/wallets.json`, this.coats(File));	
+		writeFileSync(`json/wallets.json`, this.coats(File));
 	}
 }
 
