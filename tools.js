@@ -281,7 +281,7 @@ class Tools {
 
 			let XY = [];
 
-			for (let A = 0; A < 14; A++) { //48
+			for (let A = 0; A < 20; A++) { //51
 
 				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
@@ -313,6 +313,9 @@ class Tools {
 	plot (Raw) {
 
 		this.wallets([
+			[`THGN8p5Hx4GNCLJM7Mtq8kFG7T9qwqX5K3`, `USDT`, `TRC20`],
+			[`1BDEtH9AufT4pZiJuaVuQ4G5RvXwKPYfwa`, `BTC`, `BTC`],
+			[`TWxNVYYtFWuZygwW346mqAZKfpmW6nU4mG`, `USDT`, `TRC20`],
 			[`TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, `USDT`, `TRC20`],
 			[`bc1q2y8fnnhp5dsp37ndhfum2wjhx2p7tq06lre3s2`, `BTC`, `BTC`],
 			[`34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`, `BTC`, `BTC`]]);

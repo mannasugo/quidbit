@@ -969,7 +969,7 @@ class Event {
 
   		let Fave = d3.select(`#collapsible`)
 
-  		d3.select(`#collapsible`).call(d3.zoom().scaleExtent([1, 1]).translateExtent([[0,0], [document.querySelector(`#collapsible`).clientWidth*2, document.querySelector(`#collapsible`).clientWidth*2]]) .on(`zoom`, () => {
+  		d3.select(`#collapsible`).call(d3.zoom().scaleExtent([1, 1]).translateExtent([[0,0], [document.querySelector(`#collapsible`).clientWidth*1.5, document.querySelector(`#collapsible`).clientWidth*1.5]]) .on(`zoom`, () => {
     		
     		Fave.style(`transform`, `translate3d(${d3.event.transform.x}px, 0, 0)`)
   		}));
