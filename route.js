@@ -1,6 +1,6 @@
 `use strict`;
 
-const { readdir, readFile, readFileSync, createReadStream, mkdir, stat, writeFile, writeFileSync } = require(`fs`);
+const { readFile, readFileSync, createReadStream, mkdir, stat, writeFile, writeFileSync } = require(`fs`);
 
 const { createHash } = require(`crypto`);
 
@@ -27,7 +27,7 @@ class Route {
 
 			if (State[1] === `favicon.ico`) {
 
-				let File = createReadStream(`ssl/given/svg/v202411141235.svg`);
+				let File = createReadStream(`bin/webclient/get/svg/v202411141235.svg`);
 
 				Arg[1].writeHead(200, {[`Content-Type`]: `image/svg+xml`});
 
@@ -38,9 +38,9 @@ class Route {
 
 			else {
 
-				let DOM = readFileSync(`constants/app.html`, {encoding: `utf8`});
+				let DOM = readFileSync(`bin/html/app.html`, {encoding: `utf8`});
 
-				let CSS = readFileSync(`constants/app.css`, {encoding: `utf8`});
+				let CSS = readFileSync(`bin/css/app.css`, {encoding: `utf8`});
 
 				DOM = DOM.replace(/`css`/, CSS);
 

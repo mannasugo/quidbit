@@ -916,7 +916,6 @@ class Event {
 					this.emailSalt();
 
 					document.querySelector(`#modal`).style.display = `flex`;
-
 				}
 
 				if (Clients.mug) {
