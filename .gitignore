@@ -1,6 +1,4 @@
-json/daily/
-json/plot/
+bin/data/spot/klines/json/60000/*
 node_modules/
-ssl/gets/
 
 package-lock.json

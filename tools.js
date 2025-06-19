@@ -267,6 +267,7 @@ class Tools {
 					if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
 						let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+						
 
 						X0.forEach(X0a => {
 
