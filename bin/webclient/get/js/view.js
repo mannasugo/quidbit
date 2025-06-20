@@ -442,13 +442,13 @@ let Models = {
 
 				Vols.push(K[3]);
 
-				RH += K[2][0] - K[2][1];
+				//RH += K[2][0] - K[2][1];
 
-				CAV++
+				//CAV++
 			}
 		});
 
-		HL.sort((A, B) => {return B - A});
+		HL = HL.sort((A, B) => {return parseFloat(B) - parseFloat(A)});
 
 		let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []], G = [[]]; 
 
