@@ -289,6 +289,76 @@ class Tools {
 			}
 		}
 
+		if (Arg[1] === `30M`) {
+
+			let XY = [[], {}];
+
+			for (let a = 0; a < (Arg[2]*3600000)/1800000; a++) {
+
+				if (existsSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+
+					XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+				}
+
+				else {
+
+					if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+
+						let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+						
+						X0.forEach(X0a => {
+
+							let XH = {};
+
+							if (X0a[0]%1800000 === 0) {
+
+								XH[X0a[0]] = [];
+
+								X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+1800000) XH[X0a[0]].push(X0B)});
+
+								let X60 = [];
+
+								for (let x in XH) {
+
+									let HL = [[], []], V = 0;
+
+									XH[x].forEach(X => {
+
+										HL[0].push(X[2][0]);
+
+										HL[1].push(X[2][1]);
+
+										V += X[3];
+									});
+
+									X60.push([
+										parseFloat(x), 
+										[XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+										[HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+										V]);
+								}
+
+								XY[0] = XY[0].concat(X60);
+							}
+						});
+					}
+				}
+			}
+
+			let Z = Math.floor(new Date(Arg[3]).getMinutes()/30)*30*60000;
+
+			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
+
+			XY[0].forEach(X => {XY[1][X[0]] = X});
+
+			for (let A = 0; A < Arg[2]; A++) {
+
+				if (XY[1][X_Z - 1800000*A]) {PlotXY.push(XY[1][X_Z - 1800000*A])}
+
+				else {PlotXY.push([X_Z - 1800000*A, [], [], 0])}
+			}
+		}
+
 		if (Arg[1] === `1H`) {
 
 			let XY = [[], {}];
