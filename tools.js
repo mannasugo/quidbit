@@ -13,40 +13,40 @@ const hold = new Date(`1996-01-20`).valueOf();
 const DAY = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf();
 
 class Sql {
-	
-	constructor (Arg) {
+  
+  constructor (Arg) {
 
-		this.credentials = Arg[0];
-	}
+    this.credentials = Arg[0];
+  }
 
-	Sql (Arg) {
+  Sql (Arg) {
 
-		return createConnection(this.credentials).query(Arg[0], (A, B, C) => Arg[1]([A, B, C]));
-	}
+    return createConnection(this.credentials).query(Arg[0], (A, B, C) => Arg[1]([A, B, C]));
+  }
 
-	pulls (Arg) {
+  pulls (Arg) {
 
-		this.credentials.database = `qb`;
+    this.credentials.database = `qb`;
 
-		this.Sql([readFileSync(`bin/sql/tables.sql`, {encoding: `utf8`}), (Raw) => {
+    this.Sql([readFileSync(`bin/sql/tables.sql`, {encoding: `utf8`}), (Raw) => {
 
-			let Fields = {};
+      let Fields = {};
 
-			Raw[2].forEach((Field, field) => {
+      Raw[2].forEach((Field, field) => {
 
-				Fields[Field[0].table] = [[], {}];
+        Fields[Field[0].table] = [[], {}];
 
-				Raw[1][field].forEach(Obj => {
+        Raw[1][field].forEach(Obj => {
 
-					Fields[Field[0].table][0].push(JSON.parse(Obj.json));
+          Fields[Field[0].table][0].push(JSON.parse(Obj.json));
 
-					Fields[Field[0].table][1][JSON.parse(Obj.json).md] = JSON.parse(Obj.json);
-				});
-			});
+          Fields[Field[0].table][1][JSON.parse(Obj.json).md] = JSON.parse(Obj.json);
+        });
+      });
 
-			Arg(Fields);
-		}]);
-	}
+      Arg(Fields);
+    }]);
+  }
 
     places (Arg) {
 
@@ -57,912 +57,977 @@ class Sql {
             values: [JSON.stringify(Arg[1]), JSON.stringify(Arg[2])]}, (Raw) => Arg[3](Raw)]);
     }
 
-	putlist (Arg) {
+  putlist (Arg) {
 
-		this.credentials.database = `qb`;
+    this.credentials.database = `qb`;
 
-		let Put = [];
+    let Put = [];
 
-		Arg[1].forEach(MD => {
+    Arg[1].forEach(MD => {
 
-			Put.push([new Tools().coats(MD)]);
-		});
+      Put.push([new Tools().coats(MD)]);
+    });
 
-		this.Sql([{
-			sql: `insert into ?? (json) values?`,
-			values: [Arg[0], Put]}, (Raw) => Arg[2](Raw)]);			
-	}
+    this.Sql([{
+      sql: `insert into ?? (json) values?`,
+      values: [Arg[0], Put]}, (Raw) => Arg[2](Raw)]);     
+  }
 
-	puts (Arg) {
+  puts (Arg) {
 
-		this.credentials.database = `qb`;
+    this.credentials.database = `qb`;
 
-		this.Sql([{
-			sql: `insert into ?? set ?`,
-			values: [Arg[0], {json: JSON.stringify(Arg[1])}]}, (Raw) => Arg[2](Raw)]);			
-	}
+    this.Sql([{
+      sql: `insert into ?? set ?`,
+      values: [Arg[0], {json: JSON.stringify(Arg[1])}]}, (Raw) => Arg[2](Raw)]);      
+  }
 }
 
 class Tools {
 
-	constructor () {}
+  constructor () {
 
-	coats (types) { return JSON.stringify(types); }
+    this.Y = {}
 
-	holding (Arg) {
+    this.XY = {};
+  }
 
-		let Hold = [Constants.fiat.concat(Constants.tokens), {}];
+  coats (types) { return JSON.stringify(types); }
 
-		Hold[0].forEach(Obj => {
+  holding (Arg) {
 
-			let cumulate = 0;
+    let Hold = [Constants.fiat.concat(Constants.tokens), {}];
 
-			Arg[0].ledge[0].sort((A, B) => {return A.ts - B.ts}).forEach(Objtx => {
+    Hold[0].forEach(Obj => {
 
-				if (Objtx.info.token === Obj[0] && Objtx.ledge[Arg[1]]) {
+      let cumulate = 0;
 
-					cumulate += Objtx.ledge[Arg[1]][1]
-				}
-			});
+      Arg[0].ledge[0].sort((A, B) => {return A.ts - B.ts}).forEach(Objtx => {
 
-			if (cumulate === 0) { cumulate = cumulate.toFixed(2) }
+        if (Objtx.info.token === Obj[0] && Objtx.ledge[Arg[1]]) {
 
-			Hold[1][Obj[0]] = cumulate;
-		});
+          cumulate += Objtx.ledge[Arg[1]][1]
+        }
+      });
 
-		return Hold[1];
-	}
+      if (cumulate === 0) { cumulate = cumulate.toFixed(2) }
 
-	plotXY (Arg) {
+      Hold[1][Obj[0]] = cumulate;
+    });
 
-		let PlotXY = [];
+    return Hold[1];
+  }
 
-		let X_D = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} 00:00`).valueOf();			
+  plotXY (Arg) {
 
-		if (Arg[1] === `1M`) {
+    let PlotXY = [];
 
-			let XY = [[], {}];
+    let X_D = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} 00:00`).valueOf();     
 
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:${new Date(Arg[3]).getMinutes()}`).valueOf();
+    if (Arg[1] === `1M`) {
 
-			let loop = (Arg[2]*60000)/86400000;
+      let XY = [[], {}];
 
-			if (loop < 1) {loop = 1}
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:${new Date(Arg[3]).getMinutes()}`).valueOf();
 
-			for (let a = 0; a < loop; a++) {
+      let loop = (Arg[2]*60000)/86400000;
 
-				if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+      if (loop < 1) {loop = 1}
 
-					XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
-				}
-			}
+      for (let a = 0; a < loop; a++) {
 
-			XY[0].forEach(X => {XY[1][X[0]] = X});
+        if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-			for (let A = 0; A < Arg[2]; A++) {
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
+      }
 
-				if (XY[1][X_Z - 60000*A]) {PlotXY.push(XY[1][X_Z - 60000*A])}
+      XY[0].forEach(X => {XY[1][X[0]] = X});
 
-				else {PlotXY.push([X_Z - 60000*A, [], [], 0])}
-			}
-		}
+      for (let A = 0; A < Arg[2]; A++) {
 
-		/**
+        if (XY[1][X_Z - 60000*A]) {PlotXY.push(XY[1][X_Z - 60000*A])}
 
-		if (Arg[1] === `3M`) {
+        else {PlotXY.push([X_Z - 60000*A, [], [], 0])}
+      }
+    }
 
-			let XY = [];
+    /**
 
-			for (let A = 0; A < 8; A++) {
+    if (Arg[1] === `3M`) {
 
-				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+      let XY = [];
 
-				XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
-			}
+      for (let A = 0; A < 8; A++) {
 
-			let Z = new Date(Arg[3]).getMinutes();
+        XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
-			if (new Date(Arg[3]).getMinutes()%3 === 1) Z = new Date().getMinutes() - 1;
+        XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+      }
 
-			if (new Date(Arg[3]).getMinutes()%3 === 2) Z = new Date().getMinutes() - 2;
+      let Z = new Date(Arg[3]).getMinutes();
 
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:${Z}`).valueOf();
+      if (new Date(Arg[3]).getMinutes()%3 === 1) Z = new Date().getMinutes() - 1;
 
-			for (let A = 0; A < Arg[2]; A++) {
+      if (new Date(Arg[3]).getMinutes()%3 === 2) Z = new Date().getMinutes() - 2;
 
-				let Plot = [];
-										
-				XY.forEach(X_Y => {
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:${Z}`).valueOf();
 
-					if (X_Y.ts_z > X_Z - 180000*A && X_Y.ts_z < (X_Z - 180000*A) + 180000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
-				});
+      for (let A = 0; A < Arg[2]; A++) {
 
-				let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
+        let Plot = [];
+                    
+        XY.forEach(X_Y => {
 
-				let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
-										
-				PlotXY.push([X_Z - 180000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
-			}
-		}
+          if (X_Y.ts_z > X_Z - 180000*A && X_Y.ts_z < (X_Z - 180000*A) + 180000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
+        });
 
-		if (Arg[1] === `5M`) {
+        let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
 
-			let XY = [];
+        let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
+                    
+        PlotXY.push([X_Z - 180000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
+      }
+    }
 
-			for (let A = 0; A < 8; A++) {
+    if (Arg[1] === `5M`) {
 
-				XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+      let XY = [];
 
-				XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
-			}
+      for (let A = 0; A < 8; A++) {
 
-			let Z = Math.floor(new Date(Arg[3]).getMinutes()/5)*5*60000;
+        XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
 
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
+        XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+      }
 
-			for (let A = 0; A < Arg[2]; A++) {
+      let Z = Math.floor(new Date(Arg[3]).getMinutes()/5)*5*60000;
 
-				let Plot = [];
-										
-				XY.forEach(X_Y => {
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
-					if (X_Y.ts_z > X_Z - 300000*A && X_Y.ts_z < (X_Z - 300000*A) + 300000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
-				});
+      for (let A = 0; A < Arg[2]; A++) {
 
-				let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
+        let Plot = [];
+                    
+        XY.forEach(X_Y => {
 
-				let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
-										
-				PlotXY.push([X_Z - 300000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
-			}
-		}
+          if (X_Y.ts_z > X_Z - 300000*A && X_Y.ts_z < (X_Z - 300000*A) + 300000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
+        });
 
-		**/
+        let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
 
-		if (Arg[1] === `15M`) {
+        let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
+                    
+        PlotXY.push([X_Z - 300000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
+      }
+    }
 
-			let XY = [[], {}];
+    **/
 
-			for (let a = 0; a < (Arg[2]*3600000)/900000; a++) {
+    if (Arg[1] === `15M`) {
 
-				if (existsSync(`bin/data/spot/klines/json/900000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+      let XY = [[], {}];
 
-					XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/900000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
-				}
+      for (let a = 0; a < (Arg[2]*3600000)/900000; a++) {
 
-				else {
+        if (existsSync(`bin/data/spot/klines/json/900000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-					if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/900000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
 
-						let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-						
-						X0.forEach(X0a => {
+        else {
 
-							let XH = {};
+          if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-							if (X0a[0]%900000 === 0) {
+            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+            
+            X0.forEach(X0a => {
 
-								XH[X0a[0]] = [];
+              let XH = {};
 
-								X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+900000) XH[X0a[0]].push(X0B)});
+              if (X0a[0]%900000 === 0) {
 
-								let X60 = [];
+                XH[X0a[0]] = [];
 
-								for (let x in XH) {
+                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+900000) XH[X0a[0]].push(X0B)});
 
-									let HL = [[], []], V = 0;
+                let X60 = [];
 
-									XH[x].forEach(X => {
+                for (let x in XH) {
 
-										HL[0].push(X[2][0]);
+                  let HL = [[], []], V = 0;
 
-										HL[1].push(X[2][1]);
+                  XH[x].forEach(X => {
 
-										V += X[3];
-									});
+                    HL[0].push(X[2][0]);
 
-									X60.push([
-										parseFloat(x), 
-										[XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-										[HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-										V]);
-								}
+                    HL[1].push(X[2][1]);
 
-								XY[0] = XY[0].concat(X60);
-							}
-						});
-					}
-				}
-			}
+                    V += X[3];
+                  });
 
-			let Z = Math.floor(new Date(Arg[3]).getMinutes()/15)*15*60000;
+                  X60.push([
+                    parseFloat(x), 
+                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+                    V]);
+                }
 
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
+                XY[0] = XY[0].concat(X60);
+              }
+            });
+          }
+        }
+      }
 
-			XY[0].forEach(X => {XY[1][X[0]] = X});
+      let Z = Math.floor(new Date(Arg[3]).getMinutes()/15)*15*60000;
 
-			for (let A = 0; A < Arg[2]; A++) {
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
-				if (XY[1][X_Z - 900000*A]) {PlotXY.push(XY[1][X_Z - 900000*A])}
+      XY[0].forEach(X => {XY[1][X[0]] = X});
 
-				else {PlotXY.push([X_Z - 900000*A, [], [], 0])}
-			}
-		}
+      for (let A = 0; A < Arg[2]; A++) {
 
-		if (Arg[1] === `30M`) {
+        if (XY[1][X_Z - 900000*A]) {PlotXY.push(XY[1][X_Z - 900000*A])}
 
-			let XY = [[], {}];
+        else {PlotXY.push([X_Z - 900000*A, [], [], 0])}
+      }
+    }
 
-			for (let a = 0; a < (Arg[2]*3600000)/1800000; a++) {
+    if (Arg[1] === `30M`) {
 
-				if (existsSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+      let XY = [[], {}];
 
-					XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
-				}
+      for (let a = 0; a < (Arg[2]*3600000)/1800000; a++) {
 
-				else {
+        if (existsSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-					if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
 
-						let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-						
-						X0.forEach(X0a => {
+        else {
 
-							let XH = {};
+          if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-							if (X0a[0]%1800000 === 0) {
+            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+            
+            X0.forEach(X0a => {
 
-								XH[X0a[0]] = [];
+              let XH = {};
 
-								X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+1800000) XH[X0a[0]].push(X0B)});
+              if (X0a[0]%1800000 === 0) {
 
-								let X60 = [];
+                XH[X0a[0]] = [];
 
-								for (let x in XH) {
+                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+1800000) XH[X0a[0]].push(X0B)});
 
-									let HL = [[], []], V = 0;
+                let X60 = [];
 
-									XH[x].forEach(X => {
+                for (let x in XH) {
 
-										HL[0].push(X[2][0]);
+                  let HL = [[], []], V = 0;
 
-										HL[1].push(X[2][1]);
+                  XH[x].forEach(X => {
 
-										V += X[3];
-									});
+                    HL[0].push(X[2][0]);
 
-									X60.push([
-										parseFloat(x), 
-										[XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-										[HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-										V]);
-								}
+                    HL[1].push(X[2][1]);
 
-								XY[0] = XY[0].concat(X60);
-							}
-						});
-					}
-				}
-			}
+                    V += X[3];
+                  });
 
-			let Z = Math.floor(new Date(Arg[3]).getMinutes()/30)*30*60000;
+                  X60.push([
+                    parseFloat(x), 
+                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+                    V]);
+                }
 
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
+                XY[0] = XY[0].concat(X60);
+              }
+            });
+          }
+        }
+      }
 
-			XY[0].forEach(X => {XY[1][X[0]] = X});
+      let Z = Math.floor(new Date(Arg[3]).getMinutes()/30)*30*60000;
 
-			for (let A = 0; A < Arg[2]; A++) {
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
-				if (XY[1][X_Z - 1800000*A]) {PlotXY.push(XY[1][X_Z - 1800000*A])}
+      XY[0].forEach(X => {XY[1][X[0]] = X});
 
-				else {PlotXY.push([X_Z - 1800000*A, [], [], 0])}
-			}
-		}
+      for (let A = 0; A < Arg[2]; A++) {
 
-		if (Arg[1] === `1H`) {
+        if (XY[1][X_Z - 1800000*A]) {PlotXY.push(XY[1][X_Z - 1800000*A])}
 
-			let XY = [[], {}];
+        else {PlotXY.push([X_Z - 1800000*A, [], [], 0])}
+      }
+    }
 
-			for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
+    if (Arg[1] === `1H`) {
 
-				if (existsSync(`bin/data/spot/klines/json/3600000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+      let XY = [[], {}];
 
-					XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/3600000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
-				}
+      for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
 
-				else {
+        if (existsSync(`bin/data/spot/klines/json/3600000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-					if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/3600000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
 
-						let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-						
+        else {
 
-						X0.forEach(X0a => {
+          if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-							let XH = {};
+            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+            
 
-							if (X0a[0]%3600000 === 0) {
+            X0.forEach(X0a => {
 
-								XH[X0a[0]] = [];
+              let XH = {};
 
-								X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+3600000) XH[X0a[0]].push(X0B)});
+              if (X0a[0]%3600000 === 0) {
 
-								let X60 = [];
+                XH[X0a[0]] = [];
 
-								for (let x in XH) {
+                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+3600000) XH[X0a[0]].push(X0B)});
 
-									let HL = [[], []], V = 0;
+                let X60 = [];
 
-									XH[x].forEach(X => {
+                for (let x in XH) {
 
-										HL[0].push(X[2][0]);
+                  let HL = [[], []], V = 0;
 
-										HL[1].push(X[2][1]);
+                  XH[x].forEach(X => {
 
-										V += X[3];
-									});
+                    HL[0].push(X[2][0]);
 
-									X60.push([
-										parseFloat(x), 
-										[XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-										[HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-										V]);
-								}
+                    HL[1].push(X[2][1]);
 
-								XY[0] = XY[0].concat(X60);
-							}
-						});
-					}
-				}
-			}
+                    V += X[3];
+                  });
 
-			let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:00`).valueOf();
+                  X60.push([
+                    parseFloat(x), 
+                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+                    V]);
+                }
 
-			XY[0].forEach(X => {XY[1][X[0]] = X});
+                XY[0] = XY[0].concat(X60);
+              }
+            });
+          }
+        }
+      }
 
-			for (let A = 0; A < Arg[2]; A++) {
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:00`).valueOf();
 
-				if (XY[1][X_Z - 3600000*A]) {PlotXY.push(XY[1][X_Z - 3600000*A])}
+      XY[0].forEach(X => {XY[1][X[0]] = X});
 
-				else {PlotXY.push([X_Z - 3600000*A, [], [], 0])}
-			}
-		}
+      for (let A = 0; A < Arg[2]; A++) {
 
-		if (Arg[1] === `1D`) {
+        if (XY[1][X_Z - 3600000*A]) {PlotXY.push(XY[1][X_Z - 3600000*A])}
 
-			let XY = [[], {}];
+        else {PlotXY.push([X_Z - 3600000*A, [], [], 0])}
+      }
+    }
 
-			for (let a = 0; a < Arg[2]; a++) {
+    if (Arg[1] === `1D`) {
 
-				if (existsSync(`bin/data/spot/klines/json/86400000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+      let XY = [[], {}];
 
-					XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/86400000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
-				}
+      for (let a = 0; a < Arg[2]; a++) {
 
-				else {
+        if (existsSync(`bin/data/spot/klines/json/86400000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-					if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/86400000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
 
-						let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-						
-						X0.forEach(X0a => {
+        else {
 
-							let XH = {};
+          if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-							if (/*X0a[0] === X_D - 86400000*a/* || */X0a[0]%86400000 === 0) {
+            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+            
+            X0.forEach(X0a => {
 
-								//if (X0a[0]%86400000 === 0) {X0a[0] = X0a[0] - 60000*60*3}
+              let XH = {};
 
-								XH[X0a[0]] = [];
+              if (/*X0a[0] === X_D - 86400000*a/* || */X0a[0]%86400000 === 0) {
 
-								X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+86400000) XH[X0a[0]].push(X0B)});
+                //if (X0a[0]%86400000 === 0) {X0a[0] = X0a[0] - 60000*60*3}
 
-								let X60 = [];
+                XH[X0a[0]] = [];
 
-								for (let x in XH) {
+                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+86400000) XH[X0a[0]].push(X0B)});
 
-									let HL = [[], []], V = 0;
+                let X60 = [];
 
-									XH[x].forEach(X => {
+                for (let x in XH) {
 
-										HL[0].push(X[2][0]);
+                  let HL = [[], []], V = 0;
 
-										HL[1].push(X[2][1]);
+                  XH[x].forEach(X => {
 
-										V += X[3];
-									});
+                    HL[0].push(X[2][0]);
 
-									X60.push([
-										parseFloat(x), 
-										[XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-										[HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-										V]);
-								}
+                    HL[1].push(X[2][1]);
 
-								XY[0] = XY[0].concat(X60);
-							}
-						});
-					}
-				}
-			}
+                    V += X[3];
+                  });
 
-			XY[0].forEach(X => {XY[1][X[0]] = X}); X_D += 3600000*3; 
+                  X60.push([
+                    parseFloat(x), 
+                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+                    V]);
+                }
 
-			for (let A = 0; A < Arg[2]; A++) {
+                XY[0] = XY[0].concat(X60);
+              }
+            });
+          }
+        }
+      }
 
-				if (XY[1][X_D - 86400000*A]) {PlotXY.push(XY[1][X_D - 86400000*A])}
+      XY[0].forEach(X => {XY[1][X[0]] = X}); X_D += 3600000*3; 
 
-				else {PlotXY.push([X_D - 86400000*A, [], [], 0])}
-			}
-		}
+      for (let A = 0; A < Arg[2]; A++) {
 
-		return PlotXY;
-	}
+        if (XY[1][X_D - 86400000*A]) {PlotXY.push(XY[1][X_D - 86400000*A])}
 
-	plot (Raw) {
+        else {PlotXY.push([X_D - 86400000*A, [], [], 0])}
+      }
+    }
 
-		this.wallets([
-			[`THGN8p5Hx4GNCLJM7Mtq8kFG7T9qwqX5K3`, `USDT`, `TRC20`],
-			[`1BDEtH9AufT4pZiJuaVuQ4G5RvXwKPYfwa`, `BTC`, `BTC`],
-			[`TWxNVYYtFWuZygwW346mqAZKfpmW6nU4mG`, `USDT`, `TRC20`],
-			[`TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, `USDT`, `TRC20`],
-			[`bc1q2y8fnnhp5dsp37ndhfum2wjhx2p7tq06lre3s2`, `BTC`, `BTC`],
-			[`34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`, `BTC`, `BTC`]]);
+    return PlotXY;
+  }
 
-		this.txscan([
-			{
-				in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, 
-				nettype: `trc20`, 
-				out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, 
-				token: `USDT`, 
-				ts: 1656534249000, 
-				txmd: `3354a2d6c3719364a5fdc178bd5b58b4bbcc33ef2d708fc10b2e03cba87358e6`, 
-				value: 21.18}, 
-			{
-				in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, 
-				nettype: `trc20`, 
-				out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, 
-				token: `USDT`, 
-				ts: 1655888859000, 
-				txmd: `a448461d459fdffab3629af091d9b699083e7d08b49d11f9cf7366d3d823530d`, 
-				value: 156.79}]);
+  plot (Raw) {
 
-		/**
+    this.wallets([
+      [`THGN8p5Hx4GNCLJM7Mtq8kFG7T9qwqX5K3`, `USDT`, `TRC20`],
+      [`1BDEtH9AufT4pZiJuaVuQ4G5RvXwKPYfwa`, `BTC`, `BTC`],
+      [`TWxNVYYtFWuZygwW346mqAZKfpmW6nU4mG`, `USDT`, `TRC20`],
+      [`TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, `USDT`, `TRC20`],
+      [`bc1q2y8fnnhp5dsp37ndhfum2wjhx2p7tq06lre3s2`, `BTC`, `BTC`],
+      [`34miqr44ju9RVdAFa2pHjkQEtP9V8MQZ4M`, `BTC`, `BTC`]]);
 
-		Constants.plot.forEach(Plot => {
+    this.txscan([
+      {
+        in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, 
+        nettype: `trc20`, 
+        out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, 
+        token: `USDT`, 
+        ts: 1656534249000, 
+        txmd: `3354a2d6c3719364a5fdc178bd5b58b4bbcc33ef2d708fc10b2e03cba87358e6`, 
+        value: 21.18}, 
+      {
+        in: `TH9BuLCBLmCTfvtgBWB14Y4TxCjPdYx4WK`, 
+        nettype: `trc20`, 
+        out: `TDEaMfek3Ud5iULNA3Lu8u5HGGnmdJ6JEd`, 
+        token: `USDT`, 
+        ts: 1655888859000, 
+        txmd: `a448461d459fdffab3629af091d9b699083e7d08b49d11f9cf7366d3d823530d`, 
+        value: 156.79}]);
 
-			writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY}.json`, this.coats([]));
+    setInterval(() => {
 
-			stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, (bug, Stat) => {
+      let X_Z = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
 
-				if (bug) {
+      Constants.plot.forEach(Y => {
 
-					writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+        let key = `${Y[0][0]}-${Y[0][1]}`;
 
-					writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
-				}
-			});
+        RQ(`https://api.coinbase.com/v2/prices/${key}/spot`, (flaw, State, value) => {
 
-			let PREDAY = new Date(DAY - 3600000*24);
+          if (!flaw && State.statusCode == 200 && this.typen(value) && this.typen(value).data && parseFloat(this.typen(value).data.amount) > 0) {
 
-			let file = (`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${((PREDAY.getMonth() + 1) > 9)? ``: `0`}${PREDAY.getMonth() + 1}${(PREDAY.getDate() > 9)? ``: `0`}${PREDAY.getDate()}.csv`)
+            if (!this.XY[key]) {this.XY[key] = {}}
 
-			stat(file, (flaw, Stat) => {
+            if (!this.XY[key][X_Z]) {this.XY[key][X_Z] = []}
 
-				if (!flaw) {
+            if (new Date().valueOf() < X_Z + 60000) {
 
-					let Obj = [], 
+              this.XY[key][X_Z].push([new Date().valueOf(), parseFloat(parseFloat(this.typen(value).data.amount).toFixed(Y[1]))]);
+            }
 
-						CSV = readFileSync(file, {encoding: `utf8`});
+            this.Y[key] = parseFloat(parseFloat(this.typen(value).data.amount).toFixed(Y[1]));
+          }
+        })})}, 3000);
 
-					CSV = CSV.split(`\n`); 
+    let X_A = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
 
-					//if (parseInt(CSV[0][0][0]) > 0) CSV = CSV.slice(2);
+    setInterval(() => {
 
-					CSV.forEach(Value => {
+      if (new Date().valueOf() > X_A + 60000)  {
 
-						if (Value.indexOf(`,`) === -1) {
+        for (let plot in this.XY) {
 
-							Value = Value.split(`\t`);
-						}
+          let XYV= [];
 
-						else { Value = Value.split(`,`) } //OHLC
+          for (let y in this.XY[plot]) {
 
-						(Value[0].indexOf(`/`) > -1 || Value[0].indexOf(`-`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
+            let Obj = this.XY[plot][y];
 
-						if (Value[0].toString().length > 13) {Value[0] = parseFloat(Value[0].toString().substr(0, 13));}
+            XYV.push([
+              parseFloat(y), 
+              [Obj.sort((A, B) => {return A[0] - B[0]})[0][1], Obj.sort((A, B) => {return B[0] - A[0]})[0][1]], 
+              [Obj.sort((A, B) => {return B[1] - A[1]})[0][1], Obj.sort((A, B) => {return A[1] - B[1]})[0][1]], 
+              0]);
+          };
 
-						Obj.push({
-							allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
-							ilk: `market`,
-							md: createHash(`md5`).update(`${Value[0]}`, `utf8`).digest(`hex`),
-							mug: hold,
-							pair: [[Plot[0][0], Plot[0][1]], [0, Value[1]]],
-							side: `buy`,
-							ts: Value[0],
-							ts_z: Value[0]});
+          if (existsSync(`bin/data/spot/klines/json/60000/${plot.replace(`-`, ``)}_-_${DAY}.json`) === true) {
 
-						Obj.push({
-							allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
-							ilk: `market`,
-							md: createHash(`md5`).update(`${Value[0] + 59975}`, `utf8`).digest(`hex`),
-							mug: hold,
-							pair: [[Plot[0][0], Plot[0][1]], [0, Value[4]]],
-							side: `buy`,
-							ts: Value[0] + 59975,
-							ts_z: Value[0] + 59975});
+            XYV = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${plot.replace(`-`, ``)}_-_${DAY}.json`, {encoding: `utf8`})).concat(XYV);
+          }
 
-						for (let A = 0; A < 2; A++) {
+          writeFileSync(`bin/data/spot/klines/json/60000/${plot.replace(`-`, ``)}_-_${DAY}.json`, this.coats(XYV));
 
-							Obj.push({
-								allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
-								ilk: `market`,
-								md: createHash(`md5`).update(`${Value[0] + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
-								mug: hold,
-								pair: [[Plot[0][0], Plot[0][1]], [0, Value[A+2]]],
-								side: `buy`,
-								ts: Value[0] + 60000*(A+1)/4,
-								ts_z: Value[0] + 60000*(A+1)/4});
-						}
-					});
+          this.XY[plot] = {};
+        }
 
-					writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats(Obj));
-				}
-			});
-		});
+        X_A = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
+      }
+    }, 1000);
 
-		setInterval(() => {
+    /**
 
-			let Spot = [];
+    Constants.plot.forEach(Plot => {
 
-			Constants.plot.forEach(Plot => {
+      writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY}.json`, this.coats([]));
 
-				stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, (bug, Stat) => {
+      stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, (bug, Stat) => {
 
-					if (bug) writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, this.coats([]));
+        if (bug) {
 
-					RQ(`https://api.coinbase.com/v2/prices/${Plot[0][0]}-${Plot[0][1]}/spot`, (flaw, State, coat) => {
+          writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
 
-						if (flaw || State.statusCode !== 200) {
+          writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats([]));
+        }
+      });
 
-							let XY = [];
+      let PREDAY = new Date(DAY - 3600000*24);
 
-							for (let A = 0; A < 3; A++) {
+      let file = (`json/daily/${Plot[0][0]}${Plot[0][1]}_${PREDAY.getFullYear()}${((PREDAY.getMonth() + 1) > 9)? ``: `0`}${PREDAY.getMonth() + 1}${(PREDAY.getDate() > 9)? ``: `0`}${PREDAY.getDate()}.csv`)
 
-								XY = XY.concat(this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
-							}
+      stat(file, (flaw, Stat) => {
 
-							XY = XY.sort((A, B) => {return B.ts_z - A.ts_z});
+        if (!flaw) {
 
-							if (XY[0]) {
+          let Obj = [], 
 
-								Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
+            CSV = readFileSync(file, {encoding: `utf8`});
 
-								writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
-							}
-						}
+          CSV = CSV.split(`\n`); 
 
-						if (!flaw && State.statusCode === 200 && this.typen(coat) && this.typen(coat).data 
-							&& parseFloat(this.typen(coat).data.amount) > 0) {
-		
-							let COST = parseFloat(this.typen(coat).data.amount).toFixed(Plot[1]), STAMP = new Date().valueOf();
+          //if (parseInt(CSV[0][0][0]) > 0) CSV = CSV.slice(2);
 
-							let Pair = {
-								allocate: 0,
-								ilk: `market`,
-								md: createHash(`md5`).update(`${STAMP}`, `utf8`).digest(`hex`),
-								mug: hold,
-								pair: [[Plot[0][0], Plot[0][1]], [0, COST]],
-								side: `buy`,
-								ts: STAMP,
-								ts_z: STAMP
-							};
+          CSV.forEach(Value => {
 
-							Spot.push([Plot[0].toString().replace(`,`, `-`), COST]);
+            if (Value.indexOf(`,`) === -1) {
 
-							let Execute = this.typen(readFileSync(`json/EXECUTE_BOOK.json`, {encoding: `utf8`}));
+              Value = Value.split(`\t`);
+            }
 
-							if (typeof Execute === `object`) Execute.push(Pair);
+            else { Value = Value.split(`,`) } //OHLC
 
-							writeFileSync(`json/EXECUTE_BOOK.json`, this.coats(Execute));
+            (Value[0].indexOf(`/`) > -1 || Value[0].indexOf(`-`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
 
-							writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));									
-						}
-					});
-				});	
-			});
-		}, 6000);
+            if (Value[0].toString().length > 13) {Value[0] = parseFloat(Value[0].toString().substr(0, 13));}
 
-		setInterval(() => {
+            Obj.push({
+              allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
+              ilk: `market`,
+              md: createHash(`md5`).update(`${Value[0]}`, `utf8`).digest(`hex`),
+              mug: hold,
+              pair: [[Plot[0][0], Plot[0][1]], [0, Value[1]]],
+              side: `buy`,
+              ts: Value[0],
+              ts_z: Value[0]});
 
-			let Plot = this.typen(readFileSync(`json/EXECUTE_BOOK.json`, {encoding: `utf8`}));
+            Obj.push({
+              allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
+              ilk: `market`,
+              md: createHash(`md5`).update(`${Value[0] + 59975}`, `utf8`).digest(`hex`),
+              mug: hold,
+              pair: [[Plot[0][0], Plot[0][1]], [0, Value[4]]],
+              side: `buy`,
+              ts: Value[0] + 59975,
+              ts_z: Value[0] + 59975});
 
-			writeFileSync(`json/EXECUTE_BOOK.json`, this.coats([]));
+            for (let A = 0; A < 2; A++) {
 
-			if (typeof Plot !== `object`) return;
+              Obj.push({
+                allocate: (parseInt(CSV[0][0][0]) > 0 || Value.indexOf(`,`) === -1)? parseFloat(Value[5]): 0,
+                ilk: `market`,
+                md: createHash(`md5`).update(`${Value[0] + 60000*(A+1)/4}`, `utf8`).digest(`hex`),
+                mug: hold,
+                pair: [[Plot[0][0], Plot[0][1]], [0, Value[A+2]]],
+                side: `buy`,
+                ts: Value[0] + 60000*(A+1)/4,
+                ts_z: Value[0] + 60000*(A+1)/4});
+            }
+          });
 
-			Plot.forEach(B => {
+          writeFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, this.coats(Obj));
+        }
+      });
+    });
 
-				let Dayplot = this.typen(readFileSync(`json/plot/${B.pair[0][0]}_${B.pair[0][1]}_${DAY}.json`, {encoding: `utf8`}));
+    setInterval(() => {
 
-				if (typeof Dayplot === `object`) {
+      let Spot = [];
 
-					Dayplot.push(B);
+      Constants.plot.forEach(Plot => {
 
-					writeFileSync(`json/plot/${B.pair[0][0]}_${B.pair[0][1]}_${DAY}.json`, this.coats(Dayplot));
-				}
-			});	
-		}, 50000)
+        stat(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, (bug, Stat) => {
 
-		**/
+          if (bug) writeFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY}.json`, this.coats([]));
 
-		setInterval(() => {
+          RQ(`https://api.coinbase.com/v2/prices/${Plot[0][0]}-${Plot[0][1]}/spot`, (flaw, State, coat) => {
 
-			readdir(`bin/data/spot/klines/temp`, (A, B) => {
+            if (flaw || State.statusCode !== 200) {
 
-				if (B.length > 0) {
+              let XY = [];
 
-					B.forEach(file => {
+              for (let A = 0; A < 3; A++) {
 
-						let CSV = readFileSync(`bin/data/spot/klines/temp/${file}`, {encoding: `utf8`}), Obj = [];
+                XY = XY.concat(this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+              }
 
-						CSV = CSV.split(`\n`); 
+              XY = XY.sort((A, B) => {return B.ts_z - A.ts_z});
 
-						CSV.forEach(Value => {
+              if (XY[0]) {
 
-							if (Value.indexOf(`,`) === -1) {Value = Value.split(`\t`)}
+                Spot.push([Plot[0].toString().replace(`,`, `-`), parseFloat(XY[0].pair[1][1])]);
 
-							else { Value = Value.split(`,`) }
+                writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));
+              }
+            }
 
-							(Value[0].indexOf(`/`) > -1 || Value[0].indexOf(`-`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
+            if (!flaw && State.statusCode === 200 && this.typen(coat) && this.typen(coat).data 
+              && parseFloat(this.typen(coat).data.amount) > 0) {
+    
+              let COST = parseFloat(this.typen(coat).data.amount).toFixed(Plot[1]), STAMP = new Date().valueOf();
 
-							if (Value[0].toString().length > 13) {Value[0] = parseFloat(Value[0].toString().substr(0, 13))}
+              let Pair = {
+                allocate: 0,
+                ilk: `market`,
+                md: createHash(`md5`).update(`${STAMP}`, `utf8`).digest(`hex`),
+                mug: hold,
+                pair: [[Plot[0][0], Plot[0][1]], [0, COST]],
+                side: `buy`,
+                ts: STAMP,
+                ts_z: STAMP
+              };
 
-							Obj.push([Value[0], [parseFloat(Value[1]), parseFloat(Value[4])], [parseFloat(Value[2]), parseFloat(Value[3])], parseFloat(Value[5])]);
-						});
+              Spot.push([Plot[0].toString().replace(`,`, `-`), COST]);
 
-						Obj = Obj.sort((A, B) => {return A[0] - B[0]});
+              let Execute = this.typen(readFileSync(`json/EXECUTE_BOOK.json`, {encoding: `utf8`}));
 
-						let AZ = [Obj[0][0], Obj[Obj.length - 1][0]];
+              if (typeof Execute === `object`) Execute.push(Pair);
 
-						let X_Z = new Date(`${new Date(AZ[0]).getFullYear()}-${new Date(AZ[0]).getMonth() + 1}-${new Date(AZ[0]).getDate()} 00:00`).valueOf();
+              writeFileSync(`json/EXECUTE_BOOK.json`, this.coats(Execute));
 
-						if (Obj[1][0] - Obj[0][0] === 60000) {
+              writeFileSync(`json/SPOT_BOOK.json`, this.coats(Spot));                 
+            }
+          });
+        }); 
+      });
+    }, 6000);
 
-							Obj.forEach(Val => {
+    setInterval(() => {
 
-								if (Val[0]%86400000 === 0) {
+      let Plot = this.typen(readFileSync(`json/EXECUTE_BOOK.json`, {encoding: `utf8`}));
 
-									let X_D = new Date(`${new Date(Val[0]).getFullYear()}-${new Date(Val[0]).getMonth() + 1}-${new Date(Val[0]).getDate()} 00:00`).valueOf();
-								
-									let KV = {};
+      writeFileSync(`json/EXECUTE_BOOK.json`, this.coats([]));
 
-									if (existsSync(`bin/data/spot/klines/json/60000/${file.split(`_`)[0]}_-_${X_D}.json`) === true) {
+      if (typeof Plot !== `object`) return;
 
-										this.typen(readFileSync(
-											`bin/data/spot/klines/json/60000/${file.split(`_`)[0]}_-_${X_D}.json`, {encoding: `utf8`})).forEach(K => {
+      Plot.forEach(B => {
 
-											KV[K[0]] = K;
-										});
-									}
+        let Dayplot = this.typen(readFileSync(`json/plot/${B.pair[0][0]}_${B.pair[0][1]}_${DAY}.json`, {encoding: `utf8`}));
 
-									Obj.forEach(K => {
+        if (typeof Dayplot === `object`) {
 
-										if (K[0] >= X_D && K[0] <= X_D + 86400000) {KV[K[0]] = K}
-									});
+          Dayplot.push(B);
 
-									let XY = [];
+          writeFileSync(`json/plot/${B.pair[0][0]}_${B.pair[0][1]}_${DAY}.json`, this.coats(Dayplot));
+        }
+      }); 
+    }, 50000)
 
-									for (let obj in KV) {XY.push(KV[obj])}
+    **/
 
-									writeFileSync(`bin/data/spot/klines/json/60000/${file.split(`_`)[0]}_-_${X_D}.json`, this.coats(XY));
-								}
-							});
-						}
+    setInterval(() => {
 
-						unlinkSync(`bin/data/spot/klines/temp/${file}`);
-					});
-				}
-			});
-		}, 5000);
-	}
+      readdir(`bin/data/spot/klines/temp`, (A, B) => {
 
-	plot24 () {
+        if (B.length > 0) {
 
-		let Plot24 = {};
+          B.forEach(file => {
 
-		Constants.plot.forEach(Plot => {
+            let CSV = readFileSync(`bin/data/spot/klines/temp/${file}`, {encoding: `utf8`}), Obj = [];
 
-			let XY24 = [];
+            CSV = CSV.split(`\n`); 
 
-			/**
+            CSV.forEach(Value => {
 
-			let XY = this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`}));
-			
-			XY.forEach(X_Y => {
+              if (Value.indexOf(`,`) === -1) {Value = Value.split(`\t`)}
 
-				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) XY24.push([X_Y.pair[1][1], X_Y.ts_z]);
-			});
+              else { Value = Value.split(`,`) }
 
-			this.typen(readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`})).forEach(X_Y => {
+              (Value[0].indexOf(`/`) > -1 || Value[0].indexOf(`-`) > -1)? Value[0] = new Date(Value[0]).valueOf(): Value[0] = parseFloat(Value[0]);
 
-				if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) {XY24.push([X_Y.pair[1][1], X_Y.ts_z]);}
-			});
+              if (Value[0].toString().length > 13) {Value[0] = parseFloat(Value[0].toString().substr(0, 13))}
 
-			*/
+              Obj.push([Value[0], [parseFloat(Value[1]), parseFloat(Value[4])], [parseFloat(Value[2]), parseFloat(Value[3])], parseFloat(Value[5])]);
+            });
 
-			Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;
-		});
+            Obj = Obj.sort((A, B) => {return A[0] - B[0]});
 
-		return Plot24;
-	}
+            let AZ = [Obj[0][0], Obj[Obj.length - 1][0]];
 
-	txscan (Arg) {
+            let X_Z = new Date(`${new Date(AZ[0]).getFullYear()}-${new Date(AZ[0]).getMonth() + 1}-${new Date(AZ[0]).getDate()} 00:00`).valueOf();
 
-		let File = this.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
+            if (Obj[1][0] - Obj[0][0] === 60000) {
 
-		let Roll = [[]];
+              Obj.forEach(Val => {
 
-		//if (File.length === 0) File.push(Arg[0]);
+                if (Val[0]%86400000 === 0) {
 
-		File.forEach(Tx => {Roll[0].push(`${Tx.ts}_${Tx.txmd}`);});
+                  let X_D = new Date(`${new Date(Val[0]).getFullYear()}-${new Date(Val[0]).getMonth() + 1}-${new Date(Val[0]).getDate()} 00:00`).valueOf();
+                
+                  let KV = {};
 
-		Arg.forEach(Obj => {
+                  if (existsSync(`bin/data/spot/klines/json/60000/${file.split(`_`)[0]}_-_${X_D}.json`) === true) {
 
-			if (Roll[0].indexOf(`${Obj.ts}_${Obj.txmd}`) === -1) {File.push(Obj)}
-		});
+                    this.typen(readFileSync(
+                      `bin/data/spot/klines/json/60000/${file.split(`_`)[0]}_-_${X_D}.json`, {encoding: `utf8`})).forEach(K => {
 
-		writeFileSync(`json/txscan.json`, this.coats(File));
-	}			
+                      KV[K[0]] = K;
+                    });
+                  }
 
-	typen (coat) { return JSON.parse(coat); }
+                  Obj.forEach(K => {
 
-	utils (Arg) {
+                    if (K[0] >= X_D && K[0] <= X_D + 86400000) {KV[K[0]] = K}
+                  });
 
-		let Util = [];
+                  let XY = [];
 
-		if (Arg[0] === `index` && Arg[1] === `fiat`) {
+                  for (let obj in KV) {XY.push(KV[obj])}
 
-			Constants.fiat.forEach(Fiat => {
+                  writeFileSync(`bin/data/spot/klines/json/60000/${file.split(`_`)[0]}_-_${X_D}.json`, this.coats(XY));
+                }
+              });
+            }
 
-				Util.push({fiat: Fiat[0], column: [(0).toFixed(Fiat[1]), (0).toFixed(2), 0, 0], feat: Fiat});
-			});
+            unlinkSync(`bin/data/spot/klines/temp/${file}`);
+          });
+        }
+      });
+    }, 5000);
+  }
 
-			return Util;
-		}
+  plot24 () {
 
-		if (Arg[0] === `index` && Arg[1] === `spot`) {
+    let Plot24 = {};
 
-			Constants.plot.forEach(Plot => {
+    Constants.plot.forEach(Plot => {
 
-				Util.push({pair: Plot[0], column: [(0).toFixed(Plot[1]), (0).toFixed(2), 0, 0]});
-			});
+      let XY24 = [];
 
-			return Util;
-		}
+      /**
 
-		if (Arg[0] === `index` && Arg[1] === `tokens`) {
+      let XY = this.typen(readFileSync(`json/plot/${Plot[0][0]}_${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`}));
+      
+      XY.forEach(X_Y => {
 
-			Constants.tokens.forEach(Coin => {
+        if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) XY24.push([X_Y.pair[1][1], X_Y.ts_z]);
+      });
 
-				Util.push({token: Coin[0], column: [Coin[4].toFixed(Coin[1]), (0).toFixed(2), 0, 0], feat: Coin});
-			});
+      this.typen(readFileSync(`json/daily/${Plot[0][0]}${Plot[0][1]}_${DAY - 3600000*24}.json`, {encoding: `utf8`})).forEach(X_Y => {
 
-			return Util;
-		}
-	}
+        if (X_Y.ts_z > (new Date().valueOf() - 3600000*24) && X_Y.ts_z < (new Date().valueOf() - 3600000*21)) {XY24.push([X_Y.pair[1][1], X_Y.ts_z]);}
+      });
 
-	wallets (Arg) {
+      */
 
-		let File = this.typen(readFileSync(`json/wallets.json`, {encoding: `utf8`}));
+      Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;
+    });
 
-		let Roll = [[], []];
+    return Plot24;
+  }
 
-		for (let obj in File) {
+  txscan (Arg) {
 
-			File[obj].forEach(Obj => {Roll[0].push(Obj[0])});
-		}
+    let File = this.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
 
-		Arg.forEach(Obj => {
+    let Roll = [[]];
 
-			if (Roll[0].indexOf(Obj[0]) === -1) {Roll[1].push(Obj)}
-		});
+    //if (File.length === 0) File.push(Arg[0]);
 
-		Roll[1].forEach(Obj => {
+    File.forEach(Tx => {Roll[0].push(`${Tx.ts}_${Tx.txmd}`);});
 
-			if (!File[Obj[1]]) {File[Obj[1]] = []}
+    Arg.forEach(Obj => {
 
-			File[Obj[1]].push(Obj);
-		});
+      if (Roll[0].indexOf(`${Obj.ts}_${Obj.txmd}`) === -1) {File.push(Obj)}
+    });
 
-		writeFileSync(`json/wallets.json`, this.coats(File));
-	}
+    writeFileSync(`json/txscan.json`, this.coats(File));
+  }     
+
+  typen (coat) { return JSON.parse(coat); }
+
+  utils (Arg) {
+
+    let Util = [];
+
+    if (Arg[0] === `index` && Arg[1] === `fiat`) {
+
+      Constants.fiat.forEach(Fiat => {
+
+        Util.push({fiat: Fiat[0], column: [(0).toFixed(Fiat[1]), (0).toFixed(2), 0, 0], feat: Fiat});
+      });
+
+      return Util;
+    }
+
+    if (Arg[0] === `index` && Arg[1] === `spot`) {
+
+      Constants.plot.forEach(Plot => {
+
+        Util.push({pair: Plot[0], column: [(0).toFixed(Plot[1]), (0).toFixed(2), 0, 0]});
+      });
+
+      return Util;
+    }
+
+    if (Arg[0] === `index` && Arg[1] === `tokens`) {
+
+      Constants.tokens.forEach(Coin => {
+
+        Util.push({token: Coin[0], column: [Coin[4].toFixed(Coin[1]), (0).toFixed(2), 0, 0], feat: Coin});
+      });
+
+      return Util;
+    }
+  }
+
+  wallets (Arg) {
+
+    let File = this.typen(readFileSync(`json/wallets.json`, {encoding: `utf8`}));
+
+    let Roll = [[], []];
+
+    for (let obj in File) {
+
+      File[obj].forEach(Obj => {Roll[0].push(Obj[0])});
+    }
+
+    Arg.forEach(Obj => {
+
+      if (Roll[0].indexOf(Obj[0]) === -1) {Roll[1].push(Obj)}
+    });
+
+    Roll[1].forEach(Obj => {
+
+      if (!File[Obj[1]]) {File[Obj[1]] = []}
+
+      File[Obj[1]].push(Obj);
+    });
+
+    writeFileSync(`json/wallets.json`, this.coats(File));
+  }
 }
 
 let Constants = {
 
-	fiat: [
-		[`AUD`, 5, hold, `australian dollar`, `AUD-USD`],
-		[`CAD`, 5, hold, `canadian dollar`, `USD-CAD`],
-		[`CHF`, 5, hold, `swiss franc`, `USD-CHF`],
-		[`EUR`, 5, hold, `euro`, `EUR-USD`],
-		[`GBP`, 5, hold, `sterling pound`, `GBP-USD`],
-		[`JPY`, 5, hold, `japanese yen`, `USD-JPY`],
-		[`KES`, 8, hold, `kenyan shilling`, `USD-KES`],
-		[`NOK`, 5, hold, `norwegian krone`, `USD-NOK`],
-		[`NZD`, 5, hold, `new zealand dollar`, `NZD-USD`],
-		[`SEK`, 5, hold, `swedish krone`, `USD-SEK`],
-		[`USD`, 5, hold, `american dollar`, `USD-USD`],
-		[`ZAR`, 5, hold, `south african rand`, `USD-ZAR`]
-	],
+  fiat: [
+    [`AUD`, 5, hold, `australian dollar`, `AUD-USD`],
+    [`CAD`, 5, hold, `canadian dollar`, `USD-CAD`],
+    [`CHF`, 5, hold, `swiss franc`, `USD-CHF`],
+    [`EUR`, 5, hold, `euro`, `EUR-USD`],
+    [`GBP`, 5, hold, `sterling pound`, `GBP-USD`],
+    [`JPY`, 5, hold, `japanese yen`, `USD-JPY`],
+    [`KES`, 8, hold, `kenyan shilling`, `USD-KES`],
+    [`NOK`, 5, hold, `norwegian krone`, `USD-NOK`],
+    [`NZD`, 5, hold, `new zealand dollar`, `NZD-USD`],
+    [`SEK`, 5, hold, `swedish krone`, `USD-SEK`],
+    [`USD`, 5, hold, `american dollar`, `USD-USD`],
+    [`ZAR`, 5, hold, `south african rand`, `USD-ZAR`]
+  ],
 
-	plot: [
-		[[`ADA`, `USD`], 4, hold],
-		[[`AUD`, `USD`], 5, hold],
-		[[`AVAX`, `USD`], 2, hold],
-		[[`BCH`, `USD`], 2, hold],
-		[[`BNB`, `USD`], 3, hold],
-		[[`BTC`, `AUD`], 2, hold],
-		[[`BTC`, `CAD`], 2, hold],
-		[[`BTC`, `EUR`], 2, hold],
-		[[`BTC`, `USD`], 2, hold],
-		[[`BTC`, `USDT`], 2, hold],
-		[[`DOGE`, `USD`], 5, hold],
-		[[`DOT`, `USD`], 3, hold],
-		[[`ETH`, `BTC`], 5, hold],
-		[[`ETH`, `USD`], 2, hold],
-		[[`EUR`, `CAD`], 5, hold],
-		[[`EUR`, `CHF`], 5, hold],
-		[[`EUR`, `USD`], 5, hold],
-		//[[`FDUSD`, `USD`], 5, hold],
-		[[`GBP`, `USD`], 5, hold],
-		[[`LTC`, `USD`], 2, hold],
-		[[`NZD`, `USD`], 5, hold],
-		[[`SHIB`, `USD`], 8, hold],
-		[[`SOL`, `USD`], 2, hold],
-		[[`USD`, `CAD`], 5, hold],
-		[[`USD`, `CHF`], 5, hold],
-		[[`USD`, `JPY`], 5, hold],
-		[[`USD`, `KES`], 5, hold],
-		[[`USD`, `NOK`], 5, hold],
-		[[`USD`, `SEK`], 5, hold],
-		[[`USD`, `ZAR`], 5, hold],
-		//[[`USDC`, `USD`], 5, hold],
-		[[`USDT`, `USD`], 5, hold],
-		[[`XRP`, `USD`], 5, hold],
-		[[`XTZ`, `USD`], 3, hold]
-	], 
+  plot: [
+    [[`ADA`, `USD`], 4, hold],
+    [[`AUD`, `USD`], 5, hold],
+    [[`AVAX`, `USD`], 2, hold],
+    [[`BCH`, `USD`], 2, hold],
+    [[`BNB`, `USD`], 3, hold],
+    [[`BTC`, `AUD`], 2, hold],
+    [[`BTC`, `CAD`], 2, hold],
+    [[`BTC`, `EUR`], 2, hold],
+    [[`BTC`, `USD`], 2, hold],
+    [[`BTC`, `USDT`], 2, hold],
+    [[`DOGE`, `USD`], 5, hold],
+    [[`DOT`, `USD`], 3, hold],
+    [[`ETH`, `BTC`], 5, hold],
+    [[`ETH`, `USD`], 2, hold],
+    [[`EUR`, `CAD`], 5, hold],
+    [[`EUR`, `CHF`], 5, hold],
+    [[`EUR`, `USD`], 5, hold],
+    //[[`FDUSD`, `USD`], 5, hold],
+    [[`GBP`, `USD`], 5, hold],
+    [[`LTC`, `USD`], 2, hold],
+    [[`NZD`, `USD`], 5, hold],
+    [[`SHIB`, `USD`], 8, hold],
+    [[`SOL`, `USD`], 2, hold],
+    [[`USD`, `CAD`], 5, hold],
+    [[`USD`, `CHF`], 5, hold],
+    [[`USD`, `JPY`], 5, hold],
+    [[`USD`, `KES`], 5, hold],
+    [[`USD`, `NOK`], 5, hold],
+    [[`USD`, `SEK`], 5, hold],
+    [[`USD`, `ZAR`], 5, hold],
+    //[[`USDC`, `USD`], 5, hold],
+    [[`USDT`, `USD`], 5, hold],
+    [[`XRP`, `USD`], 5, hold],
+    [[`XTZ`, `USD`], 3, hold]
+  ], 
 
-	tokens: [
-		[`ADA`, 4, hold, `cardano`, 0],
-		[`AVAX`, 2, hold, `avalanche`, 0],
-		[`BNB`, 3, hold, `binance coin`, 0],
-		[`BCH`, 2, hold, `bitcoin cash`, 0],
-		[`BTC`, 2, hold, `bitcoin`, 0],
-		[`DOGE`, 5, hold, `dogecoin`, 0],
-		[`DOT`, 3, hold, `polkadot`, 0],
-		[`ETH`, 2, hold, `ethereum`, 0],
-		//[`FDUSD`, 5, hold, `first digital USD`, 0],
-		[`LTC`, 2, hold, `litecoin`, 0],
-		[`SHIB`, 3, hold, `shiba inu`, 0],
-		[`SOL`, 2, hold, `solana`, 0],
-		[`XTZ`, 3, hold, `tezos`, 0],
-		//[`USDC`, 5, hold, `USD Coin`, 0],
-		[`USDT`, 5, hold, `tether`, 0],
-		[`XRP`, 5, hold, `ripple`, 0]
-	]
+  tokens: [
+    [`ADA`, 4, hold, `cardano`, 0],
+    [`AVAX`, 2, hold, `avalanche`, 0],
+    [`BNB`, 3, hold, `binance coin`, 0],
+    [`BCH`, 2, hold, `bitcoin cash`, 0],
+    [`BTC`, 2, hold, `bitcoin`, 0],
+    [`DOGE`, 5, hold, `dogecoin`, 0],
+    [`DOT`, 3, hold, `polkadot`, 0],
+    [`ETH`, 2, hold, `ethereum`, 0],
+    //[`FDUSD`, 5, hold, `first digital USD`, 0],
+    [`LTC`, 2, hold, `litecoin`, 0],
+    [`SHIB`, 3, hold, `shiba inu`, 0],
+    [`SOL`, 2, hold, `solana`, 0],
+    [`XTZ`, 3, hold, `tezos`, 0],
+    //[`USDC`, 5, hold, `USD Coin`, 0],
+    [`USDT`, 5, hold, `tether`, 0],
+    [`XRP`, 5, hold, `ripple`, 0]
+  ]
 }
 
 module.exports = {
 
-	Constants: Constants,
-	
-	Sql : new Sql([{
-		host: `127.0.0.1`,
-		user: `root`,
-		password: `Mann2asugo`,
-		multipleStatements: true
-	}]),
+  Constants: Constants,
+  
+  Sql : new Sql([{
+    host: `127.0.0.1`,
+    user: `root`,
+    password: `Mann2asugo`,
+    multipleStatements: true
+  }]),
 
-	Tools : new Tools()
+  Tools : new Tools()
 }

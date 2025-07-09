@@ -46,7 +46,7 @@
 
 @font-face {
   font-family: generica;
-  src: url(/ssl/given/glyphs/Generica_0.otf) format('opentype');
+  src: url(/webclient/get/font/Generica_0.otf) format('opentype');
   font-style: normal;
   font-weight: 100;
 }
@@ -316,7 +316,7 @@ body {
 
 .v202312231716 {background-image: url(/ssl/given/svg/io_202312231716.svg);}
 
-.v202312301635 {background-image: url(/ssl/given/svg/wallet_202312301635.svg);}
+.v202312301635 {background-image: url(/webclient/get/svg/wallet_202312301635.svg);}
 
 .v202312301653 {background-image: url(/ssl/given/svg/vault_202312301653.svg);}
 
@@ -338,7 +338,7 @@ body {
 
 .v202412192124 {background-image: url(/ssl/given/svg/202412192124.svg);}
 
-.v202501181301 {background-image: url(/ssl/given/svg/202501181301.svg);}
+.v202501181301 {background-image: url(/webclient/get/svg/202501181301.svg);}
 
 .ival:hover, #row > div > div:hover, #list > div:hover {background: #4848481c}
 

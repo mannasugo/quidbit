@@ -18,7 +18,7 @@ class Event {
 
 	app (Arg) {
 
-		io().on(`SPOT_BOOK`, Spot => {
+		io().on(`plotY`, Spot => {
 
 			let Plot = {};
 
@@ -180,7 +180,7 @@ class Event {
 
   		X = RECT[RECT.length - 1].getAttribute(`x`);
 
-		io().on(`SPOT_BOOK`, Spot => {
+		io().on(`plotY`, Spot => {
 
 			let Plot = {};
 
@@ -382,8 +382,8 @@ class Event {
 						[
 							[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${35}%`}}, 
 								[
-									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
-									[`img`, {src: `/ssl/given/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
+									[`img`, {src: `/webclient/get/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
+									[`img`, {src: `/webclient/get/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
 									[`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
 										[ 
 											[`span`, {style: {[`font-size`]: `${11}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
@@ -711,7 +711,7 @@ class Event {
 
 				Child.style.background = `#242471`;
 
-				document.querySelector(`#walletSelect img`).src = `/ssl/given/svg/${Constants.SVG[Child.querySelectorAll(`span`)[0].innerHTML]}.svg`;
+				document.querySelector(`#walletSelect img`).src = `/webclient/get/svg/${Constants.SVG[Child.querySelectorAll(`span`)[0].innerHTML]}.svg`;
 
 				document.querySelectorAll(`#walletSelect span`)[0].innerHTML = Child.querySelectorAll(`span`)[0].innerHTML;
 

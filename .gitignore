@@ -1,4 +1,4 @@
-bin/data/spot/klines/json/60000/*
+bin/data/spot/klines/json/60000/
 node_modules/
 
 package-lock.json
