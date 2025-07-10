@@ -28,32 +28,7 @@ class Route {
 
 		if (State.length === 4 && State[3] === ``) { 
 
-			/**
-
-			document.title = `Quidbit`;
-
-			let Puts = Tools.pull([
-				`/json/web`, {
-					mug: (Clients.mug) ? Clients.mug: false,
-					pull: `app`
-				}]);
-
-			Puts.onload = () => {
-
-				let Web = Tools.typen(Puts.response);
-
-				View.DOM([`div`, [Models.app(Web)]]);
-
-				document.querySelector(`body`).style.background = `#000`;
-
-				document.querySelector(`#app`).style.height = `unset`;
-
-				Event.app(Web);
-			}
-
-			**/
-
-			io().on(`SPOT_BOOK`, Spot => {
+			io().on(`plotY`, Spot => {
 
 				let Plot = {};
 
@@ -72,7 +47,9 @@ class Route {
 
     		if (State[4] && !State[5] && !Tools.slim[State[5]]) {
 
-				if (!Clients.plotXSplit) Clients.plotXSplit = `1D`;
+    			Clients.tSZ = new Date().valueOf();
+
+				if (!Clients.plotXSplit) {Clients.plotXSplit = `1D`}
 
 				let Puts = Tools.pull([
 					`/json/web/`, {
@@ -102,7 +79,6 @@ class Route {
     		}
 		}
 	}
-
 }
 
 Route = new Route();

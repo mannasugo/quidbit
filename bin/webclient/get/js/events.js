@@ -1358,7 +1358,7 @@ class Event {
 					M_Z = M_Z + 60000;
 
 					let tS = new Date().valueOf();
-
+					
 					io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), tSZ + 60000*2, tS]);
 
 					io().on(`az`, AZ => {

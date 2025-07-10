@@ -16,14 +16,11 @@ class Route {
 
   Call (Arg) {
 
-                let url = (`./${Arg[0].url}`).replace(`//`, `/`).replace(/%(...)/g, (match, hex) => {
+    let url = (`./${Arg[0].url}`).replace(`//`, `/`).replace(/%(...)/g, (match, hex) => { return String.fromCharCode(parseInt(hex, 16))});
 
-                        return String.fromCharCode(parseInt(hex, 16));
-                });
+    let State = url.split(`/`);
 
-                let State = url.split(`/`);
-
-                if (Arg[0].method === `GET`)  {
+    if (Arg[0].method === `GET`)  {
 
                         if (State[1] === `favicon.ico`) {
 
@@ -48,45 +45,44 @@ class Route {
 
                                 Arg[1].end(DOM);
                         }
-                }
+    }
 
-                else if (Arg[0].method == `POST`) {
+    else if (Arg[0].method == `POST`) {
 
-                        let blob = new Buffer.alloc(+Arg[0].headers[`content-length`]);
+      let blob = new Buffer.alloc(+Arg[0].headers[`content-length`]);
 
-                        let Pull = ``;
+      let Pull = ``;
 
-                        let allocate = 0;
+      let allocate = 0;
 
-                        Arg[0].on(`data`, (Data) => {
+      Arg[0].on(`data`, (Data) => {
 
-                                Data.copy(blob, allocate);
+        Data.copy(blob, allocate);
 
-                                allocate += Data.length;
+        allocate += Data.length;
 
-                                Pull += Data;
+        Pull += Data;
 
-                        }).on(`end`, () => {
+      }).on(`end`, () => {
 
-                                let Pulls;
+        let Pulls;
 
-                                if (Pull[0] === `{`) Pulls = JSON.parse(Pull);
+        if (Pull[0] === `{`) Pulls = JSON.parse(Pull);
 
-                                if (State[1] === `json`) {
+        if (State[1] === `json`) {
 
-                                        Arg[1].setHeader(`Content-Type`, `application/json`);
+          Arg[1].setHeader(`Content-Type`, `application/json`);
 
-                                        if (State[2] === `web`) {
+          if (State[2] === `web`) {
 
-                                                Sql.pulls(Raw => {
+            Sql.pulls(Raw => {
 
-                                                        if (Pulls.pull === `app`) { 
+              if (Pulls.pull === `app`) { 
 
-                                                                Arg[1].end(Tools.coats({
-                                                                        ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
-                                                        }
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
+              }
 
-                                                        if (Pulls.pull === `mug`) { 
+              if (Pulls.pull === `mug`) { 
 
                                                                 if (Pulls.flag === `emailAvail`) {
 
@@ -146,41 +142,38 @@ class Route {
                                                                                 }]);
                                                                         }
                                                                 }
-                                                        }
+              }
 
-                                                        if (Pulls.pull === `plot`) {
+              if (Pulls.pull === `plot`) {
 
-                                                                let S = {};
+                let S = {};
 
-                                                                Constants.plot.forEach(Plot => {
+                Constants.plot.forEach(Plot => {
 
-                                                                        if (Plot[0][0] === Pulls.plot[0] && Plot[0][1] === Pulls.plot[1]) S.plot = Plot;
-                                                                });
+                  if (Plot[0][0] === Pulls.plot[0] && Plot[0][1] === Pulls.plot[1]) S.plot = Plot;
+                });
 
-                                                                if (!S.plot) return;
+                if (!S.plot) return;
 
-                                                                let Client = {wallets: {}};
+                let Client = {wallets: {}};
 
-                                                                if (Raw.mugs[1][Pulls.mug]) {
+                if (Raw.mugs[1][Pulls.mug]) {
 
-                                                                        Raw.wallets[0].forEach(Obj => {
+                  Raw.wallets[0].forEach(Obj => {
 
-                                                                                if (Obj.mug === Pulls.mug) {
+                    if (Obj.mug === Pulls.mug) {
 
-                                                                                        if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = []}
+                      if (!Client.wallets[Obj.asset]) {Client.wallets[Obj.asset] = []}
 
-                                                                                        Client.wallets[Obj.asset].push([Obj.address, Obj.nettype]);
-                                                                                }
-                                                                        });
-                                                                }
+                      Client.wallets[Obj.asset].push([Obj.address, Obj.nettype]);
+                    }
+                  });
+                }
 
-                                                                Arg[1].end(Tools.coats({
-                                                                        ago: Tools.plot24(), 
-                                                                        plot: S.plot, wallets: Client.wallets, 
-                                                                        XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf()])}));
-                                                        }
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf()])}));
+              }
 
-                                                        if (Pulls.pull === `util`) {
+              if (Pulls.pull === `util`) {
 
                                                                 if (Pulls.flag[0] === `fiat` && Pulls.flag[1] === `index`) {
 
@@ -199,9 +192,9 @@ class Route {
                                                                         Arg[1].end(Tools.coats({
                                                                                 mug: Pulls.mug, utils: Tools.utils([`index`, `tokens`])}));
                                                                 }
-                                                        }
+              }
 
-                                                        if (Pulls.pull === `trade`) {
+              if (Pulls.pull === `trade`) {
 
                                                                 let Plot = [];
 
@@ -282,9 +275,9 @@ class Route {
                                                                                 }
                                                                         }
                                                                 }
-                                                        }
+              }
 
-                                                        if (Pulls.pull === `wallets`) {
+              if (Pulls.pull === `wallets`) {
 
                                                                 let Client = {wallets: {}};
 
@@ -404,9 +397,9 @@ class Route {
                                                                                 }
                                                                         }
                                                                 }
-                                                        }
-                                                });}}});
-                }
+              }
+            });}}});
+    }
   }
 
   io (App) {
