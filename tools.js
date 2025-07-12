@@ -559,7 +559,7 @@ class Tools {
 
     let X_A = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
 
-    setInterval(() => {//console.log(this.XY)
+    setInterval(() => {console.log(this.XY)
 
       if (new Date().valueOf() > X_A + 60000)  {
 
@@ -846,7 +846,7 @@ class Tools {
 
           if (XY[0] > (new Date().valueOf() - 3600000*24) && XY[0] < (new Date().valueOf() - 3600000*21)) {XY24.push([XY[1][1], XY[0]]);}
         });
-      }console.log(XY24)
+      }
 
       Plot24[`${Plot[0][0]}-${Plot[0][1]}`] = XY24;
     });
