@@ -454,7 +454,7 @@ class Tools {
 
               let XH = {};
 
-              if (/*X0a[0] === X_D - 86400000*a/* || */X0a[0]%86400000 === 0) {
+              if (/*X0a[0] === X_D - 86400000*a/* || */X0a[0]%86400000 === 0) {console.log(X0a[0])
 
                 //if (X0a[0]%86400000 === 0) {X0a[0] = X0a[0] - 60000*60*3}
 
@@ -559,7 +559,7 @@ class Tools {
 
     let X_A = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();
 
-    setInterval(() => {console.log(this.XY)
+    setInterval(() => {
 
       if (new Date().valueOf() > X_A + 60000)  {
 
