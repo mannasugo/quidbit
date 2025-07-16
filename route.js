@@ -170,7 +170,7 @@ class Route {
                   });
                 }
 
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, new Date().valueOf()])}));
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts])}));
               }
 
               if (Pulls.pull === `util`) {
