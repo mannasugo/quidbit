@@ -454,7 +454,7 @@ class Tools {
 
               let XH = {};
 
-              if (X0a[0] === X_D - 86400000*a /*|| X0a[0]%86400000 === 0*/) {//console.log(X0a[0])
+              if (X0a[0] === X_D - 86400000*a /*|| X0a[0]%86400000 === 0*/) {console.log(X0a[0])
 
                 //if (X0a[0]%86400000 === 0) {X0a[0] = X0a[0] - 60000*60*3}
 
@@ -493,7 +493,7 @@ class Tools {
 
       let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:00`).valueOf();
 
-      console.log(X_D, X_Z - new Date(Arg[3]).getHours()*3600000)
+      //console.log(X_D, X_Z - new Date(Arg[3]).getHours()*3600000)
 
       XY[0].forEach(X => {XY[1][X[0]] = X}); //X_D += 3600000*3; 
 
