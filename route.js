@@ -168,7 +168,7 @@ class Route {
                       Client.wallets[Obj.asset].push([Obj.address, Obj.nettype]);
                     }
                   });
-                }
+                }console.log(new Date().valueOf(), pulls.ts, new Date().getHours(), new Date(Pulls.ts).getHours())
 
                 Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts])}));
               }
