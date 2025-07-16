@@ -459,7 +459,7 @@ class Event {
 				let Puts = Tools.pull([
 					`/json/web/`, {
 						mug: (Clients.mug) ? Clients.mug: false,
-						pull: `plot`, plot: Arg.plot[0], splitX: Clients.plotXSplit, ts: new Date().valueOf(), 
+						pull: `plot`, plot: Arg.plot[0], splitX: Clients.plotXSplit, ts: new Date().valueOf(), tsDay: DAY, 
 						x: parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0))}]);	
 
 				Puts.onload = () => {
