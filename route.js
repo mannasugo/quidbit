@@ -168,9 +168,9 @@ class Route {
                       Client.wallets[Obj.asset].push([Obj.address, Obj.nettype]);
                     }
                   });
-                }console.log(new Date().valueOf(), Pulls.ts, new Date().getHours(), new Date(Pulls.ts).getHours())
+                }
 
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts])}));
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
               }
 
               if (Pulls.pull === `util`) {
@@ -416,7 +416,7 @@ class Route {
 
       }, 1000);
 
-      Polling.on(`az`, Arg => {App.emit(`az`, [Arg[4], Tools.plotXY([Arg[0], Arg[1], Arg[2], Arg[3]])])});
+      Polling.on(`az`, Arg => {App.emit(`az`, [Arg[4], Tools.plotXY([Arg[0], Arg[1], Arg[2], Arg[3], Arg[5]])])});
     });
   }
 }

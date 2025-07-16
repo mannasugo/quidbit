@@ -449,55 +449,51 @@ class Tools {
           if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
             let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
+
+            let XH = {}, tsDay = Arg[4] - 86400000*a;
+
+            XH[tsDay] = [];
             
             X0.forEach(X0a => {
 
-              let XH = {};
-
-              if (X0a[0] === X_D - 86400000*a /*|| X0a[0]%86400000 === 0*/) {//console.log(X0a[0])
-
-                //if (X0a[0]%86400000 === 0) {X0a[0] = X0a[0] - 60000*60*3}
-
-                XH[X0a[0]] = [];
-
-                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+86400000) XH[X0a[0]].push(X0B)});
-
-                let X60 = [];
-
-                for (let x in XH) {
-
-                  let HL = [[], []], V = 0;
-
-                  XH[x].forEach(X => {
-
-                    HL[0].push(X[2][0]);
-
-                    HL[1].push(X[2][1]);
-
-                    V += X[3];
-                  });
-
-                  X60.push([
-                    parseFloat(x), 
-                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-                    V]);
-                }
-
-                XY[0] = XY[0].concat(X60);
-              }
+              if (X0a[0] >= tsDay && X0a[0] < tsDay + 86400000) {XH[tsDay].push(X0a)}
             });
+
+            let X60 = [];
+
+            for (let x in XH) {
+
+              let HL = [[], []], V = 0;
+
+              XH[x].forEach(X => {
+
+              HL[0].push(X[2][0]);
+
+              HL[1].push(X[2][1]);
+
+              V += X[3];
+            });
+
+            X60.push([
+              parseFloat(x), 
+              [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+              [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+              V]);
+            }
+
+            XY[0] = XY[0].concat(X60);
           }
         }
-      }console.log(new Date().getHours() , new Date(Arg[3]).getHours())
+      }
 
-      XY[0].forEach(X => {XY[1][X[0]] = X}); //X_D += 3600000*3; 
+      XY[0].forEach(X => {XY[1][X[0]] = X});
 
-      for (let A = 0; A < Arg[2]; A++) {
+      for (let a = 0; a < Arg[2]; a++) {
 
-        if (XY[1][X_D - 86400000*A]) {PlotXY.push(XY[1][X_D - 86400000*A])}
+        if (XY[1][Arg[4] - 86400000*a]) {PlotXY.push(XY[1][Arg[4] - 86400000*a])}
 
-        else {PlotXY.push([X_D - 86400000*A, [], [], 0])}
+        else {PlotXY.push([Arg[4] - 86400000*a, [], [], 0])}
+
       }
     }
 

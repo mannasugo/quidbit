@@ -1,5 +1,7 @@
 `use strict`;
 
+const DAY = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf();
+
 let HL = [], Vols = [], X;
 
 class Event {
@@ -539,10 +541,6 @@ class Event {
 
 			if ((Pan[1] - Pan[0]) < 0) {
 
-				//OffX = OffX - (Pan[1] - Pan[0])
-
-				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`
-
 				move = parseFloat((-(Pan[1] - Pan[0])/5).toFixed(0));
 
 				ts_z = ts_z - Split.abs*move;
@@ -551,10 +549,6 @@ class Event {
 			}
 
 			if ((Pan[1] - Pan[0]) > 1) {
-
-				//OffX = OffX - (Pan[1] - Pan[0]);
-
-				//document.querySelector(`#kline`).style.transform = `translateX(${OffX}px)`;
 
 				move = parseFloat(((Pan[1] - Pan[0])/5).toFixed(0)); Clients.move = move
 
@@ -565,7 +559,9 @@ class Event {
 
 			if ((Pan[1] - Pan[0]) < 0 || (Pan[1] - Pan[0]) > 1) {
 
-				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), ts_z, ts]);
+				let tsDAY = new Date(`${new Date(ts_z).getFullYear()}-${new Date(ts_z).getMonth() + 1}-${new Date(ts_z).getDate()}`).valueOf();
+
+				io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), ts_z, ts, tsDAY]);
 
 				io().on(`az`, AZ => {
 

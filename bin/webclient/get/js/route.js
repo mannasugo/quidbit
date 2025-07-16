@@ -53,6 +53,7 @@ class Route {
 
 				let Puts = Tools.pull([
 					`/json/web/`, {
+						tsDay: DAY,
 						mug: (Clients.mug) ? Clients.mug: false,
 						pull: `plot`, 
 						plot: State[4].split(`_`), splitX: Clients.plotXSplit, x: parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0)), 
