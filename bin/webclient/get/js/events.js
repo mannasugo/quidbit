@@ -176,11 +176,11 @@ class Event {
 			}
 		});
     
-  		let Y = parseFloat(document.body.clientHeight - 70);
+  	let Y = parseFloat(document.body.clientHeight - 70);
 
-  		let RECT = document.querySelectorAll(`#kline rect`);
+  	let RECT = document.querySelectorAll(`#kline rect`);
 
-  		X = RECT[RECT.length - 1].getAttribute(`x`);
+  	X = RECT[RECT.length - 1].getAttribute(`x`);
 
 		io().on(`plotY`, Spot => {
 
@@ -232,29 +232,29 @@ class Event {
 
 				document.querySelector(`#spotline`).setAttribute(`d`, `M${parseFloat(X)} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
 
-            	let YZOC = [Tools.typen(RECT[RECT.length - 1].id)[1][0], parseFloat(ZY)];
+        let YZOC = [Tools.typen(RECT[RECT.length - 1].id)[1][0], parseFloat(ZY)];
 
-            	YZOC[0] = parseFloat(YZOC[0]);
+        YZOC[0] = parseFloat(YZOC[0]);
 
-            	document.querySelector(`#spotline`).setAttribute(`stroke`, (YZOC[0] > YZOC[1])? `#e3415d`: `#6bc679`);
+        document.querySelector(`#spotline`).setAttribute(`stroke`, (YZOC[0] > YZOC[1])? `#e3415d`: `#6bc679`);
 
-            	document.querySelector(`#spotY #a`).setAttribute(`width`, parseFloat(ZY).toFixed(Arg.plot[1]).toString().length*8.5);
+        document.querySelector(`#spotY #a`).setAttribute(`width`, parseFloat(ZY).toFixed(Arg.plot[1]).toString().length*8.5);
 
 				document.querySelector(`#spotY #a`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) - 10);
 
-           		document.querySelector(`#spotY #a`).setAttribute(`fill`, (YZOC[0] > YZOC[1])? `#e3415d5e`: `#6bc6795e`);
+        document.querySelector(`#spotY #a`).setAttribute(`fill`, (YZOC[0] > YZOC[1])? `#e3415d5e`: `#6bc6795e`);
 
-            	document.querySelector(`#spotY #b`).setAttribute(`width`, parseFloat(ZY).toFixed(Arg.plot[1]).toString().length*8.5 - 15);
+        document.querySelector(`#spotY #b`).setAttribute(`width`, parseFloat(ZY).toFixed(Arg.plot[1]).toString().length*8.5 - 15);
 
 				document.querySelector(`#spotY #b`).setAttribute(`y`, .15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) - 10);
 
-           		document.querySelector(`#spotY #b`).setAttribute(`fill`, (YZOC[0] > YZOC[1])? `#e3415d5e`: `#6bc6795e`);
+        document.querySelector(`#spotY #b`).setAttribute(`fill`, (YZOC[0] > YZOC[1])? `#e3415d5e`: `#6bc6795e`);
 
-            	document.querySelector(`#spotY #c`).setAttribute(`d`, `M${0} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${8} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
+        document.querySelector(`#spotY #c`).setAttribute(`d`, `M${0} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${8} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
 			
 				document.querySelector(`#spotY #c`).setAttribute(`stroke`, (YZOC[0] > YZOC[1])? `#e3415d`: `#6bc679`);
 
-            	let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:00`).valueOf();
+        let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:00`).valueOf();
 
 				if (Clients.plotXSplit === `1M`) {
 
@@ -513,8 +513,6 @@ class Event {
 
 			document.querySelector(`#floatY`).style.display = `none`;
 		}]);
-
-		//let OffX = -20
 
 		let Split = Constants.ival[Clients.plotXSplit];
 
@@ -1281,7 +1279,7 @@ class Event {
 
 			let tSZ = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} ${new Date().getHours() }:${new Date().getMinutes()}`).valueOf();				
 
-			SVG[3].push([`rect`, {id: `g${tSZ}`, info: Tools.coats([]), x: (Arg[0][1].length - 2)*7.125 - 2, width: 4.25}]);
+			SVG[3].push([`rect`, {id: `g${tSZ}`, info: Tools.coats([]), x: (Arg[0][1].length - 3)*7.125 - 2, width: 4.25}]);
 		}
 
 		SVG[5] = [[`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}]];

@@ -567,11 +567,14 @@ class Tools {
 
             let Obj = this.XY[plot][y];
 
-            XYV.push([
-              parseFloat(y), 
-              [Obj.sort((A, B) => {return A[0] - B[0]})[0][1], Obj.sort((A, B) => {return B[0] - A[0]})[0][1]], 
-              [Obj.sort((A, B) => {return B[1] - A[1]})[0][1], Obj.sort((A, B) => {return A[1] - B[1]})[0][1]], 
-              0]);
+            if (Obj && Obj.length > 0) {
+
+              XYV.push([
+                parseFloat(y), 
+                [Obj.sort((A, B) => {return A[0] - B[0]})[0][1], Obj.sort((A, B) => {return B[0] - A[0]})[0][1]], 
+                [Obj.sort((A, B) => {return B[1] - A[1]})[0][1], Obj.sort((A, B) => {return A[1] - B[1]})[0][1]], 
+                0]);
+            }
           };
 
           if (existsSync(`bin/data/spot/klines/json/60000/${plot.replace(`-`, ``)}_-_${DAY}.json`) === true) {
