@@ -280,13 +280,13 @@ class Event {
 
 					let OC = Tools.typen(Tools.coats(K));
 
-                	OC.sort((A, B) => {return B - A});
+          OC.sort((A, B) => {return B - A});
 
-                	Candle[0].setAttribute(`y`, .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]));
+          Candle[0].setAttribute(`y`, .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]));
 
-                	Candle[0].setAttribute(`height`, ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]));
+          Candle[0].setAttribute(`height`, ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]));
 
-                	Candle[0].setAttribute(`fill`, (K[0] > K[1])? `#e3415d`: `#000`);
+          Candle[0].setAttribute(`fill`, (K[0] > K[1])? `#e3415d`: `#000`);
 				
 					Candle[0].setAttribute(`stroke`, (K[0] > K[1])? `#e3415d`: `#6bc679`);
 
@@ -970,12 +970,12 @@ class Event {
 			}
 		}]);
 
-  		let Fave = d3.select(`#collapsible`)
+  	let Fave = d3.select(`#collapsible`)
 
-  		d3.select(`#collapsible`).call(d3.zoom().scaleExtent([1, 1]).translateExtent([[0,0], [document.querySelector(`#collapsible`).clientWidth*1.5, document.querySelector(`#collapsible`).clientWidth*1.5]]) .on(`zoom`, () => {
+  	d3.select(`#collapsible`).call(d3.zoom().scaleExtent([1, 1]).translateExtent([[0,0], [document.querySelector(`#collapsible`).clientWidth*1.5, document.querySelector(`#collapsible`).clientWidth*1.5]]) .on(`zoom`, () => {
     		
-    		Fave.style(`transform`, `translate3d(${d3.event.transform.x}px, 0, 0)`)
-  		}));
+    	Fave.style(`transform`, `translate3d(${d3.event.transform.x}px, 0, 0)`)
+  	}));
 
 		this.plotState(Arg);
 	}
