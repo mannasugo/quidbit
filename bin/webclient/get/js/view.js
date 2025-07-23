@@ -6,15 +6,15 @@ class View {
 
   ModelDOM(Model) {
 
-        if (typeof Model !== `object`) return;
+    if (typeof Model !== `object`) return;
 
-        Model.forEach(Obj => {
+    Model.forEach(Obj => {
 
-            let a = Obj[0], z, last;
+      let a = Obj[0], z, last;
 
-            z = a; 
+      z = a; 
 
-                if (a === `html`) a = `!doctype html><html`;
+      if (a === `html`) a = `!doctype html><html`;
 
                 this.appendString += `<` + a;
                 
@@ -61,27 +61,27 @@ let Models = {
 
   init: {
 
-    fill: () => {
+    fill: (Arg) => {
 
       return [`div`, {id: ``, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, margin: `${69}px ${0}px ${0}px ${12}px`, [`max-width`]: `${80}%`}}, 
         [[`div`, {style: {background: `#141414`, border: `${1}px solid #9a9af9`}}, 
           [[`div`, {class: `_gxM _geQ`, style: {background: `#272746`, padding: `${8}px ${12}px`}}, 
             [[`span`, {style: {color: `#9a9af9`, [`font-weight`]: 600}}, `Alerts`], 
             [`div`, {class: `_gZz`}, 
-              [[`svg`, {id: `multiClose`, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${10}px`, width: `${10}px`}}, 
+              [[`svg`, {id: `alertClose`, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${10}px`, width: `${10}px`}}, 
                 [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 0 24 24 M24 0 0 24`}]]]]]]],
           [`div`, {style: {padding: `${8}px ${12}px`}}, 
             [[`span`, {}, `Your order was filled:`], 
             [`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`}}, 
-              [[`span`, {style: {opacity: .6}}, new Date().toString().substr(4, 20)], 
-              [`span`, {style: {color: `#6bc679`, margin: `${0}px ${4}px`}}, `Buy`], 
-              [`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`}}, `756.9540 USD at 1.35`]]]]]]]]];
+              [[`span`, {style: {opacity: .6}}, new Date(Arg[0]).toString().substr(4, 20)], 
+              [`span`, {style: {color: (Arg[1] === `sell`)? `#e3415d`: `#6bc679`, margin: `${0}px ${4}px`}}, Arg[1]], 
+              [`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`}}, `${Arg[2]} ${Arg[3]} at ${Arg[4]}`]]]]]]]]];
     }
   },
 
   faveplots: () => {
 
-        if (!Clients.faveplots) {
+    if (!Clients.faveplots) {
 
             Clients.faveplots = Tools.coats({
                 AUD: [`USD`],
@@ -90,11 +90,11 @@ let Models = {
                 EUR: [/*`CAD`, `CHF`, */`USD`],
                 USD: [`CAD`, `CHF`, `JPY`]
             });
-        }
+  }
 
-        let DOM = [];
+  let DOM = [];
 
-        for (let fave in Tools.typen(Clients.faveplots)) {
+  for (let fave in Tools.typen(Clients.faveplots)) {
 
             let DOM2 = [];
 
@@ -120,9 +120,9 @@ let Models = {
 
   inputMug: function (Arg) {
 
-        let DOM = [];
+    let DOM = [];
 
-        DOM[0] = [`section`, {}, 
+    DOM[0] = [`section`, {}, 
             [
                 [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Quidbit`],
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
@@ -163,13 +163,23 @@ let Models = {
 
   inputSwap: function (Arg) {
 
-    let Old = [`orders`, `trades`]//, `positions`];
+    let DOM = [[], []];
 
-    let DOM = [[]];
+    let Old = [`orders`, `trades`, `positions`];
 
     Old.forEach(old => {
 
       DOM[0].push([`a`, {class: `_gxM _geQ`, href: `javascript:;`, style: {[`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old[old] !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
+    });
+
+    let OldSwap = [[`buy`, 756.9540, 1.35]];
+
+    OldSwap.forEach(Swap => {
+
+      DOM[1].push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`}}, 
+        [[`span`, {style: {color: (Swap[0] === `buy`)? `#6BC679`: `#E3415D`, [`font-family`]: ``, [`text-transform`]: `capitalize`, width: `${40}%`}}, Swap[0]],
+        [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Swap[1]}`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Swap[2]}`]]])
     });
 
     return [`aside`, {style: {height: `${100}%`}}, 
@@ -238,30 +248,31 @@ let Models = {
                                         [`div`, {style: {width: `${70}%`}}, 
                                             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
                                                 [[`a`, {id: `execute`, role: `buy`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Review & Buy`]]]]]]]]]]], 
-      [`section`, {style: {[`border-top`]: `${1}px solid #353535`}}, 
+      [`section`, {style: {[`border-top`]: `${1}px solid #353535`, [`font-family`]: `insvg`}}, 
         [[`div`, {class: `_gxM _geQ`, style: {}}, DOM[0]],
-        [`div`, {class: `_gxM _geQ`, style: {[`boder-bottom`]: `${1}px solid #353535`, [`font-size`]: `${9}px`, margin: `${1}px ${12}px`}}, 
+        [`div`, {class: `_gxM _geQ`, style: {[`border-bottom`]: `${1}px solid #353535`, [`font-size`]: ``, padding: `${1}px ${12}px`, opacity: .5}}, 
           [[`span`, {style: {width: `${40}%`}}, `Side`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Quantity`],
-          [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`]]]]]]];                                                   
+          [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`]]], 
+        [`div`, {style: {display: `none`, [`font-family`]: `insvg`, [`font-size`]: `${10.88}px`}}, DOM[1]]]]]];                                                   
   },
 
   inputWallet: function (Arg) {
 
-        Clients.wallets = Tools.coats(Arg.wallets);
+    Clients.wallets = Tools.coats(Arg.wallets);
 
-        let DOM = [[]];
+    let DOM = [[]];
 
-        for (let hold in Constants.wallet) {
+    for (let hold in Constants.wallet) {
 
             DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #393939ad`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                 [
                     [`img`, {src: `/webclient/get/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
                     [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
                         [[`span`, {}, hold], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, Constants.wallet[hold][0]]]]]]);
-        }
+    }
 
-        return [`section`, {style: {height: `${100}%`}}, 
+    return [`section`, {style: {height: `${100}%`}}, 
             [
                 [`div`, {style: {height: `inherit`}}, 
                     [
@@ -379,14 +390,14 @@ let Models = {
 
     for (let span in Constants.ival) {
 
-            DOM.split.push([`a`, {href: `javascript:;`, class: `ival`, style: {background: (Clients.plotXSplit === span)? `#8888881C`: `#000`, [`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
-        }
+      DOM.split.push([`a`, {href: `javascript:;`, class: `ival`, style: {background: (Clients.plotXSplit === span)? `#8888881C`: `#000`, [`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
+    }
 
-        let HL = [], Vols = [];
+    let HL = [], Vols = [];
 
-        let CAV = 0, RH = 0; //Row Height, Candle Average
+    let CAV = 0, RH = 0; //Row Height, Candle Average
 
-        Arg.XY.forEach(K => {
+    Arg.XY.forEach(K => {
 
             if (K[2].length > 0) {
 
@@ -609,7 +620,7 @@ let Models = {
                     [`div`, {style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: 0, height: `${30}px`, padding: `${0}px ${12}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 11}}, 
                         [[`div`, {class: `_gxM _geQ`}, []]]], 
                     [`div`, {id: `modal`, style: {background: `#000000ab`, display: `none`, height: `${100}%`, position: `absolute`, width: `${100}%`, [`z-index`]: 56}}, ],
-                    [`div`, {id: `top`, style: {background: ``, bottom: 0, display: `none`, position: `fixed`, top: 0, width: `${100}%`, [`z-index`]: 18}}, [this.init.fill()]]]];  
+                    [`div`, {id: `top`, style: {background: ``, bottom: 0, display: `none`, position: `fixed`, top: 0, width: `${100}%`, [`z-index`]: 18}}]]];  
     }, 
 
     utilApp: (Arg) => {
