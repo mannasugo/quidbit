@@ -460,7 +460,7 @@ class Event {
           `/json/web/`, {
             mug: (Clients.mug) ? Clients.mug: false,
             pull: `plot`, plot: Arg.plot[0], splitX: Clients.plotXSplit, ts: new Date().valueOf(), tsDay: DAY, 
-            x: parseInt(((document.body.clientWidth*.8)/7.5).toFixed(0))}]);  
+            x: parseInt((((document.body.clientWidth - 360)*.8)/7.5).toFixed(0))}]);  
 
         Puts.onload = () => {
 
@@ -559,7 +559,7 @@ class Event {
 
         let tsDAY = new Date(`${new Date(ts_z).getFullYear()}-${new Date(ts_z).getMonth() + 1}-${new Date(ts_z).getDate()}`).valueOf();
 
-        io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), ts_z, ts, tsDAY]);
+        io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt((((document.body.clientWidth - 360)*.8)/6.95).toFixed(0)), ts_z, ts, tsDAY]);
 
         io().on(`az`, AZ => {
 
@@ -837,11 +837,11 @@ class Event {
 
           this.getSource(S).style.background = `#242471`;
 
-          document.querySelectorAll(`#action`)[1].style.background = `#0b0b48`;
+          this.getSource(S).parentNode.querySelectorAll(`#action`)[1].style.background = `#0b0b48`;
 
           document.querySelector(`#hold`).innerText = (Clients.hold)? `${Tools.typen(Clients.hold)[Arg.plot[0][1]]}`: `0.00`;
 
-          document.querySelector(`#balance`).innerText = Arg.plot[0][1];
+          this.getSource(S).parentNode.parentNode.parentNode.parentNode.querySelector(`#balance`).innerText = Arg.plot[0][1];
 
           document.querySelector(`#execute`).style.border = `${1}px solid lime`;
 
@@ -873,11 +873,11 @@ class Event {
 
           this.getSource(S).style.background = `#242471`;
 
-          document.querySelectorAll(`#action`)[0].style.background = `#0b0b48`;
+          this.getSource(S).parentNode.querySelectorAll(`#action`)[0].style.background = `#0b0b48`;
 
           document.querySelector(`#hold`).innerText = (Clients.hold)? `${Tools.typen(Clients.hold)[Arg.plot[0][0]]}`: `0.00`;
 
-          document.querySelector(`#balance`).innerHTML = Arg.plot[0][0];
+          this.getSource(S).parentNode.parentNode.parentNode.parentNode.querySelector(`#balance`).innerHTML = Arg.plot[0][0];
 
           document.querySelector(`#execute`).style.border = `${1}px solid red`;
 
@@ -1372,7 +1372,7 @@ class Event {
 
           let tS = new Date().valueOf();
           
-          io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), tSZ + 60000*2, tS]);
+          io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt((((document.body.clientWidth - 360)*.8)/6.95).toFixed(0)), tSZ + 60000*2, tS]);
 
           io().on(`az`, AZ => {
 
@@ -1396,7 +1396,7 @@ class Event {
 
           let tS = new Date().valueOf();
 
-          io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt(((document.body.clientWidth*.8)/6.95).toFixed(0)), H_Z, tS]);
+          io().emit(`az`, [Arg.plot[0], Clients.plotXSplit, parseInt((((document.body.clientWidth - 360)*.8)/6.95).toFixed(0)), H_Z, tS]);
 
           io().on(`az`, AZ => {
 

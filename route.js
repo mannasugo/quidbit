@@ -203,15 +203,15 @@ class Route {
                   if (Obj[0][0] === Pulls.plot[0] && Obj[0][1] === Pulls.plot[1]) Plot.push(Obj[0])
                 });
 
-                 if (Raw.mugs[1][Pulls.mug] && Plot[0]) {
+                if (Raw.mugs[1][Pulls.mug] && Plot[0]) {
 
-                    let OB = Tools.Y;
+                  let OB = Tools.Y;
 
-                    if (Pulls.flag === `buy`) {
+                  let ts = new Date().valueOf();
 
-                      if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.plot[1]] > Pulls.float && OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`]) {
+                  if (Pulls.flag === `buy`) {
 
-                        let ts = new Date().valueOf();
+                    if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.plot[1]] > Pulls.float && OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`]) {
 
                         let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`), value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
 
@@ -227,45 +227,32 @@ class Route {
                           md: md, 
                           ts: ts}];
 
-                        Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({float: Pulls.float, mug: Pulls.mug, ts: ts, value: value}))}]);
-                      }
+                      Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({float: Pulls.float, mug: Pulls.mug, ts: ts, value: value}))}]);
                     }
+                  }
 
-                                                                        if (Pulls.flag === `sell`) {
+                  if (Pulls.flag === `sell`) {
 
-                                                                                let OB = [Tools.typen(readFileSync(`json/SPOT_BOOK.json`, {encoding: `utf8`})), {}];
+                    if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.plot[0]] > Pulls.float && OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`]) {
 
-                                                                                OB[0].forEach(Obj => {OB[1][Obj[0]] = Obj[1]});
+                      let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`),  value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
 
-                                                                                if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.plot[0]] > Pulls.float 
-                                                                                        && OB[1][`${Pulls.plot[0]}-${Pulls.plot[1]}`]) {
+                      let Row = [{
+                        ilk: `trade`,
+                        info: {token: Pulls.plot[1]}, 
+                        ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float*value]},
+                        md: md, 
+                        ts: ts}, {
+                        ilk: `trade`,
+                        info: {token: Pulls.plot[0]},
+                        ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]},
+                        md: md, 
+                        ts: ts}];
 
-                                                                                        let ts = new Date().valueOf();
-
-                                                                                        let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`), 
-
-                                                                                                value = OB[1][`${Pulls.plot[0]}-${Pulls.plot[1]}`];
-
-                                                                                        let Row = [{
-                                                                                                ilk: `trade`,
-                                                                                                info: {token: Pulls.plot[1]}, 
-                                                                                                ledge: {
-                                                                                                        [hold]: 0,  
-                                                                                                        [Pulls.mug]: [0, Pulls.float*value]},
-                                                                                                md: md, 
-                                                                                                ts: ts}, {
-                                                                                                ilk: `trade`,
-                                                                                                info: {token: Pulls.plot[0]},
-                                                                                                ledge: {
-                                                                                                        [hold]: 0,
-                                                                                                        [Pulls.mug]: [0, -(Pulls.float)]},
-                                                                                                md: md, 
-                                                                                                ts: ts}];
-
-                                                                                        Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({mug: Pulls.mug}))}]);
-                                                                                }
-                                                                        }
-                                                                }
+                      Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({mug: Pulls.mug}))}]);
+                    }
+                  }
+                }
               }
 
               if (Pulls.pull === `wallets`) {
