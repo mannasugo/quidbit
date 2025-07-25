@@ -853,6 +853,25 @@ class Tools {
     return Plot24;
   }
 
+  oldSwap (Arg) {
+
+    let Swap = {};
+
+    Constants.plot.forEach(Obj => {
+
+      let plot = Obj[0].toString().replace(`,`, `-`);
+
+      Swap[plot] = [];
+
+      Arg[0].trades[0].sort((A, B) => {return B.ts - A.ts}).forEach(Obj => {
+
+        if (Obj.mug === Arg[1] && Obj.info[0] === plot) { Swap[plot].push([Obj.side, Obj.info[2], Obj.info[1]]) }
+      });
+    });
+
+    return Swap;
+  }
+
   txscan (Arg) {
 
     let File = this.typen(readFileSync(`json/txscan.json`, {encoding: `utf8`}));
@@ -871,7 +890,7 @@ class Tools {
     writeFileSync(`json/txscan.json`, this.coats(File));
   }     
 
-  typen (coat) { return JSON.parse(coat); }
+  typen (coat) { return JSON.parse(coat) }
 
   utils (Arg) {
 

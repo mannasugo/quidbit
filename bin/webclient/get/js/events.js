@@ -49,117 +49,6 @@ class Event {
         }
       });
     });
-
-    document.querySelectorAll(`.A0`).forEach(A0 => {
-
-      this.listen([A0, `click`, S => {
-
-        document.querySelectorAll(`.A0`).forEach(A0 => {
-
-          A0.style.fontWeight = 300;
-
-          A0.style.opacity = .5
-        });
-
-        this.getSource(S).style.fontWeight = 300;
-
-        this.getSource(S).style.opacity = 1;
-
-        document.querySelectorAll(`#column div`)[1].querySelector(`span`).innerHTML = `symbol`;
-
-        document.querySelectorAll(`#column div`)[2].querySelector(`span`).innerHTML = `price(usd)`;
-
-        if (this.getSource(S).getAttribute(`for`) === `fiat`) {
-
-          document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `currency`;
-
-          document.querySelector(`#row div`).innerHTML = ``;
-
-          let Puts = Tools.pull([
-            `/json/web`, {
-              flag: [`fiat`, `index`],
-              mug: (Clients.mug) ? Clients.mug: false,
-              pull: `util`
-          }]);
-
-          Puts.onload = () => {
-
-            let Web = Tools.typen(Puts.response);
-
-            View.pop();
-
-            View.DOM([`#row div`, Models.utilApp([[`fiat`, `index`], Web])]);
-          }
-        }
-
-        if (this.getSource(S).getAttribute(`for`) === `spot`) {
-
-          document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `pair`;
-
-          document.querySelectorAll(`#column div`)[1].querySelector(`span`).innerHTML = ``;
-
-          document.querySelectorAll(`#column div`)[2].querySelector(`span`).innerHTML = `last trade`;
-
-          document.querySelector(`#row div`).innerHTML = ``;
-
-          let Puts = Tools.pull([
-            `/json/web`, {
-              flag: [`spot`, `index`],
-              mug: (Clients.mug) ? Clients.mug: false,
-              pull: `util`
-          }]);
-
-          Puts.onload = () => {
-
-            let Web = Tools.typen(Puts.response);
-
-            View.pop();
-
-            View.DOM([`#row div`, Models.utilApp([[`spot`, `index`], Web])]);
-
-            mouseup();
-          }
-        }
-
-        if (this.getSource(S).getAttribute(`for`) === `tokens`) {
-
-          document.querySelectorAll(`#column div`)[0].querySelector(`span`).innerHTML = `token`;
-
-          document.querySelector(`#row div`).innerHTML = ``;
-
-          let Puts = Tools.pull([
-            `/json/web`, {
-              flag: [`tokens`, `index`],
-              mug: (Clients.mug) ? Clients.mug: false,
-              pull: `util`
-          }]);
-
-          Puts.onload = () => {
-
-            let Web = Tools.typen(Puts.response);
-
-            View.pop();
-
-            View.DOM([`#row div`, Models.utilApp([[`tokens`, `index`], Web])]);
-          }
-        }
-    }]);});
-
-    let mouseup = () => {
-
-       document.querySelectorAll(`#row > div > div`).forEach(ROWDIV => {
-
-        this.listen([ROWDIV, `mouseover`, S => {
-
-          document.querySelectorAll(`#row > div > div  a`).forEach(A => {
-
-            A.style.textDecoration = `unset`;
-          });
-
-          if (!this.getSource(S).querySelector(`a`)) return;
-
-          this.getSource(S).querySelector(`a`).style.textDecoration = `underline`;}])});
-    }
   }
 
   plot (Arg) {
@@ -714,9 +603,9 @@ class Event {
 
         document.querySelector(`#walletOptions`).style.display = `none`;
 
-        document.querySelectorAll(`#balance`)[1].innerHTML = Child.querySelectorAll(`span`)[0].innerText;
+        document.querySelector(`#holds #balance`).innerHTML = Child.querySelectorAll(`span`)[0].innerText;
 
-        document.querySelectorAll(`#balance`)[1].previousElementSibling.innerText = Tools.typen(Clients.hold)[document.querySelectorAll(`#balance`)[1].innerText];
+        document.querySelector(`#holds #balance`).previousElementSibling.innerText = Tools.typen(Clients.hold)[document.querySelector(`#holds #balance`).innerText];
 
         document.querySelector(`#viaSelect`).innerHTML = Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1];
 

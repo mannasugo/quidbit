@@ -83,18 +83,18 @@ let Models = {
 
     if (!Clients.faveplots) {
 
-            Clients.faveplots = Tools.coats({
-                AUD: [`USD`],
-                BTC: [/*`CAD`, `EUR`,*/ `USD`, `USDT`],
-                ETH: [`BTC`, `USD`],
-                EUR: [/*`CAD`, `CHF`, */`USD`],
-                USD: [`CAD`, `CHF`, `JPY`]
-            });
-  }
+      Clients.faveplots = Tools.coats({
+        AUD: [`USD`],
+        BTC: [/*`CAD`, `EUR`,*/ `USD`, `USDT`],
+        ETH: [`BTC`, `USD`],
+        EUR: [/*`CAD`, `CHF`, */`USD`],
+        USD: [`CAD`, `CHF`, `JPY`]
+      });
+    }
 
-  let DOM = [];
+    let DOM = [];
 
-  for (let fave in Tools.typen(Clients.faveplots)) {
+    for (let fave in Tools.typen(Clients.faveplots)) {
 
             let DOM2 = [];
 
@@ -115,7 +115,7 @@ let Models = {
                         [`div`, {class: `_gxM`}, DOM2]]]]]);
         }
 
-        return DOM;
+    return DOM;
   }, 
 
   inputMug: function (Arg) {
@@ -172,13 +172,11 @@ let Models = {
       DOM[0].push([`a`, {class: `_gxM _geQ`, href: `javascript:;`, style: {[`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old[old] !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
     });
 
-    let OldSwap = [[`buy`, 756.9540, 1.35]];
-
-    OldSwap.forEach(Swap => {
+    Tools.typen(Clients.old)[1].forEach(Swap => {
 
       DOM[1].push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`}}, 
         [[`span`, {style: {color: (Swap[0] === `buy`)? `#6BC679`: `#E3415D`, [`font-family`]: ``, [`text-transform`]: `capitalize`, width: `${40}%`}}, Swap[0]],
-        [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Swap[1]}`],
+        [`span`, {style: {overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `${30}%`}}, `${Swap[1]}`],
         [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Swap[2]}`]]])
     });
 
@@ -254,7 +252,7 @@ let Models = {
           [[`span`, {style: {width: `${40}%`}}, `Side`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Quantity`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`]]], 
-        [`div`, {style: {display: `none`, [`font-family`]: `insvg`, [`font-size`]: `${10.88}px`}}, DOM[1]]]]]];                                                   
+        [`div`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`}}, DOM[1]]]]]];                                                   
   },
 
   inputWallet: function (Arg) {
@@ -265,23 +263,19 @@ let Models = {
 
     for (let hold in Constants.wallet) {
 
-            DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #393939ad`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-                [
-                    [`img`, {src: `/webclient/get/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
-                    [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
-                        [[`span`, {}, hold], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, Constants.wallet[hold][0]]]]]]);
+      DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #393939ad`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+        [[`img`, {src: `/webclient/get/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+        [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
+          [[`span`, {}, hold], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, Constants.wallet[hold][0]]]]]]);
     }
 
-    return [`section`, {style: {height: `${100}%`}}, 
-            [
-                [`div`, {style: {height: `inherit`}}, 
-                    [
-                        [`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
-                            [[`div`, {class: `_gxM _geQ`, style: {}}, 
-                                [[`span`, {style: {padding: `${6}px ${12}px ${6}px 0`}}, `Funding`]]]]], 
-                        [`div`, {style: {padding: `${24}px ${12}px`}}, 
-                            [
-                                [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+    return [`section`, {id: `holds`, style: {height: `${100}%`}}, 
+      [[`div`, {style: {height: `inherit`}}, 
+        [[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
+          [[`div`, {class: `_gxM _geQ`, style: {}}, 
+            [[`span`, {style: {padding: `${6}px ${12}px ${6}px 0`}}, `Funding`]]]]], 
+        [`div`, {style: {padding: `${24}px ${12}px`}}, 
+          [[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Action`],
                                         [`div`, {style: {width: `${70}%`}}, 

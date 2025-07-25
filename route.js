@@ -157,6 +157,8 @@ class Route {
 
                 let Client = {wallets: {}};
 
+                let Old = [[], [], []]
+
                 if (Raw.mugs[1][Pulls.mug]) {
 
                   Raw.wallets[0].forEach(Obj => {
@@ -168,30 +170,11 @@ class Route {
                       Client.wallets[Obj.asset].push([Obj.address, Obj.nettype]);
                     }
                   });
+
+                  Old[1] = Tools.oldSwap([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
                 }
 
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
-              }
-
-              if (Pulls.pull === `util`) {
-
-                                                                if (Pulls.flag[0] === `fiat` && Pulls.flag[1] === `index`) {
-
-                                                                        Arg[1].end(Tools.coats({
-                                                                                mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
-                                                                }
-
-                                                                if (Pulls.flag[0] === `spot` && Pulls.flag[1] === `index`) {
-
-                                                                        Arg[1].end(Tools.coats({
-                                                                                mug: Pulls.mug, utils: Tools.utils([`index`, `spot`])}));
-                                                                }
-
-                                                                if (Pulls.flag[0] === `tokens` && Pulls.flag[1] === `index`) {
-
-                                                                        Arg[1].end(Tools.coats({
-                                                                                mug: Pulls.mug, utils: Tools.utils([`index`, `tokens`])}));
-                                                                }
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), old: Old, plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
               }
 
               if (Pulls.pull === `trade`) {
@@ -227,7 +210,13 @@ class Route {
                           md: md, 
                           ts: ts}];
 
-                      Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({float: Pulls.float, mug: Pulls.mug, ts: ts, value: value}))}]);
+                      Sql.putlist([`ledge`, Row, (Q) => {
+
+                        Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float/value], md: md, mug: Pulls.mug, side: `buy`, ts: ts}, (Q) => {
+
+                          Arg[1].end(Tools.coats({float: Pulls.float/value, mug: Pulls.mug, ts: ts, value: value}))
+                        }])
+                      }]);
                     }
                   }
 
@@ -249,7 +238,12 @@ class Route {
                         md: md, 
                         ts: ts}];
 
-                      Sql.putlist([`ledge`, Row, (Q) => {Arg[1].end(Tools.coats({mug: Pulls.mug}))}]);
+                      Sql.putlist([`ledge`, Row, (Q) => {
+
+                        Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float], md: md, mug: Pulls.mug, side: `sell`, ts: ts}, (Q) => {
+
+                          Arg[1].end(Tools.coats({mug: Pulls.mug}))}])
+                      }]);
                     }
                   }
                 }
