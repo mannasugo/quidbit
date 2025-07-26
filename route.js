@@ -22,29 +22,29 @@ class Route {
 
     if (Arg[0].method === `GET`)  {
 
-                        if (State[1] === `favicon.ico`) {
+      if (State[1] === `favicon.ico`) {
 
-                                let File = createReadStream(`bin/webclient/get/svg/v202411141235.svg`);
+        let File = createReadStream(`bin/webclient/get/svg/v202411141235.svg`);
 
-                                Arg[1].writeHead(200, {[`Content-Type`]: `image/svg+xml`});
+        Arg[1].writeHead(200, {[`Content-Type`]: `image/svg+xml`});
 
-                                File.on(`data`, Arg[1].write.bind(Arg[1]));
+        File.on(`data`, Arg[1].write.bind(Arg[1]));
 
-                                File.on(`close`, () => Arg[1].end());
-                        }
+        File.on(`close`, () => Arg[1].end());
+      }
 
-                        else {
+      else {
 
-                                let DOM = readFileSync(`bin/html/app.html`, {encoding: `utf8`});
+        let DOM = readFileSync(`bin/html/app.html`, {encoding: `utf8`});
 
-                                let CSS = readFileSync(`bin/css/app.css`, {encoding: `utf8`});
+        let CSS = readFileSync(`bin/css/app.css`, {encoding: `utf8`});
 
-                                DOM = DOM.replace(/`css`/, CSS);
+        DOM = DOM.replace(/`css`/, CSS);
 
-                                Arg[1].writeHead(200, {[`Content-Type`]: `text/html`});
+        Arg[1].writeHead(200, {[`Content-Type`]: `text/html`});
 
-                                Arg[1].end(DOM);
-                        }
+        Arg[1].end(DOM);
+      }
     }
 
     else if (Arg[0].method == `POST`) {
@@ -77,10 +77,7 @@ class Route {
 
             Sql.pulls(Raw => {
 
-              if (Pulls.pull === `app`) { 
-
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])}));
-              }
+              if (Pulls.pull === `app`) { Arg[1].end(Tools.coats({ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])})) }
 
               if (Pulls.pull === `mug`) { 
 
@@ -192,27 +189,31 @@ class Route {
 
                   let ts = new Date().valueOf();
 
+                  let X_Z = new Date(`${new Date(ts).getFullYear()}-${new Date(ts).getMonth() + 1}-${new Date(ts).getDate()} ${new Date(ts).getHours() }:${new Date(ts).getMinutes()}`).valueOf();
+
                   if (Pulls.flag === `buy`) {
 
                     if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.plot[1]] > Pulls.float && OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`]) {
 
-                        let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`), value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
+                      let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`), value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
 
-                        let Row = [{
-                          ilk: `trade`,
-                          info: {token: Pulls.plot[0]}, 
-                          ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float/value]},
-                          md: md, 
-                          ts: ts}, {
-                          ilk: `trade`,
-                          info: {token: Pulls.plot[1]},
-                          ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]}, 
-                          md: md, 
-                          ts: ts}];
+                      let Row = [{
+                        ilk: `trade`,
+                        info: {token: Pulls.plot[0]}, 
+                        ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float/value]},
+                        md: md, 
+                        ts: ts}, {
+                        ilk: `trade`,
+                        info: {token: Pulls.plot[1]},
+                        ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]}, 
+                        md: md, 
+                        ts: ts}];
 
                       Sql.putlist([`ledge`, Row, (Q) => {
 
                         Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float/value], md: md, mug: Pulls.mug, side: `buy`, ts: ts}, (Q) => {
+
+                          Tools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float/value]);
 
                           Arg[1].end(Tools.coats({float: Pulls.float/value, mug: Pulls.mug, ts: ts, value: value}))
                         }])
@@ -241,6 +242,8 @@ class Route {
                       Sql.putlist([`ledge`, Row, (Q) => {
 
                         Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float], md: md, mug: Pulls.mug, side: `sell`, ts: ts}, (Q) => {
+
+                          Tools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float]);
 
                           Arg[1].end(Tools.coats({mug: Pulls.mug}))}])
                       }]);
@@ -370,7 +373,8 @@ class Route {
                                                                         }
                                                                 }
               }
-            });}}});
+            });
+}}});
     }
   }
 

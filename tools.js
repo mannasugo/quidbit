@@ -87,7 +87,7 @@ class Tools {
 
   constructor () {
 
-    this.Y = {}
+    this.Y = {};
 
     this.XY = {};
   }
@@ -467,12 +467,12 @@ class Tools {
 
               XH[x].forEach(X => {
 
-              HL[0].push(X[2][0]);
+                HL[0].push(X[2][0]);
 
-              HL[1].push(X[2][1]);
+                HL[1].push(X[2][1]);
 
-              V += X[3];
-            });
+                V += X[3];
+              });
 
             X60.push([
               parseFloat(x), 
@@ -546,7 +546,7 @@ class Tools {
 
             if (new Date().valueOf() < X_Z + 60000) {
 
-              this.XY[key][X_Z].push([new Date().valueOf(), parseFloat(parseFloat(this.typen(value).data.amount).toFixed(Y[1]))]);
+              this.XY[key][X_Z].push([new Date().valueOf(), parseFloat(parseFloat(this.typen(value).data.amount).toFixed(Y[1])), 0]);
             }
 
             this.Y[key] = parseFloat(parseFloat(this.typen(value).data.amount).toFixed(Y[1]));
@@ -565,15 +565,17 @@ class Tools {
 
           for (let y in this.XY[plot]) {
 
-            let Obj = this.XY[plot][y];
+            let Obj = this.XY[plot][y], V = 0;
 
             if (Obj && Obj.length > 0) {
+
+              Obj.forEach(XY => { V += XY[2] });
 
               XYV.push([
                 parseFloat(y), 
                 [Obj.sort((A, B) => {return A[0] - B[0]})[0][1], Obj.sort((A, B) => {return B[0] - A[0]})[0][1]], 
                 [Obj.sort((A, B) => {return B[1] - A[1]})[0][1], Obj.sort((A, B) => {return A[1] - B[1]})[0][1]], 
-                0]);
+                V]);
             }
           };
 

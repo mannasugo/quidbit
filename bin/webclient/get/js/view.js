@@ -16,45 +16,45 @@ class View {
 
       if (a === `html`) a = `!doctype html><html`;
 
-                this.appendString += `<` + a;
+      this.appendString += `<` + a;
                 
-                for (let meta in Obj[1]) {
+      for (let meta in Obj[1]) {
 
-                    let value = ``;
+        let value = ``;
 
-                    if (meta === `style`) {
+        if (meta === `style`) {
 
-                        for (let style in Obj[1][meta]) {
+          for (let style in Obj[1][meta]) {
 
-                            value += `${style}:${Obj[1][meta][style]};`
-                        }
-                    }
+            value += `${style}:${Obj[1][meta][style]};`
+          }
+        }
 
-                    else value = Obj[1][meta];
+        else value = Obj[1][meta];
 
-                    this.appendString += ` ${meta}='${value}'`;
-                }
+        this.appendString += ` ${meta}='${value}'`;
+      }
 
-                this.appendString += `>`;
+      this.appendString += `>`;
                 
-                if (Obj[2]) {
+      if (Obj[2]) {
 
-                    if (typeof Obj[2] === `object`) this.ModelDOM(Obj[2]);
+        if (typeof Obj[2] === `object`) this.ModelDOM(Obj[2]);
 
-                    else if (typeof Obj[2] === `string`) this.appendString += Obj[2];
-                }
+        else if (typeof Obj[2] === `string`) this.appendString += Obj[2];
+      }
 
-                let Queer = [`img`, `input`, `meta`];
+      let Queer = [`img`, `input`, `meta`];
 
-                if (!Queer.indexOf(z) > -1) this.appendString += `</` + z + `>`;
-        });
+      if (!Queer.indexOf(z) > -1) this.appendString += `</` + z + `>`;
+    });
 
-        return Tools.plains(this.appendString);
-    }
+    return Tools.plains(this.appendString);
+  }
 
-    DOM(Arg) { document.querySelector(Arg[0]).innerHTML = this.ModelDOM(Arg[1]);}
+  DOM(Arg) { document.querySelector(Arg[0]).innerHTML = this.ModelDOM(Arg[1]);}
 
-    pop () {this.appendString = ``};
+  pop () {this.appendString = ``};
 }
 
 let Models = {
