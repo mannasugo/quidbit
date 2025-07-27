@@ -418,7 +418,7 @@ class Event {
 
     this.listen([document.querySelector(`#kline`), `mouseup`, S => {
 
-      this.getSource(S).style.cursor = `none`;
+      //this.getSource(S).style.cursor = `none`;
 
       Pan = [S.layerX, Pan[1]];
 
@@ -474,7 +474,7 @@ class Event {
 
             RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
-            let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
+            let G = document.querySelectorAll(`svg .g`), OM = [[]], SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
 
             for (let A = 0; A < 25; A++) {
 
@@ -499,15 +499,59 @@ class Event {
 
             for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
 
+            let Old = [];
+
+            Tools.typen(Clients.old)[1].forEach(Obj => {
+
+              if (Clients.plotXSplit === `1D`) {
+
+                Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} 00:00`).valueOf();
+
+                Old.push(Obj);
+              }
+
+              if (Clients.plotXSplit === `1H`) {
+
+                Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf();
+
+                Old.push(Obj);
+              }
+
+      if (Clients.plotXSplit === `30M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/30)*30*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `15M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/15)*15*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1M`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:${new Date(Obj[3]).getMinutes()}`).valueOf();
+
+        Old.push(Obj);
+      }       
+            });
+
             AZ[1].sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
               if (K[2].length > 0) {
 
                 SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
         
-                        let OC = Tools.typen(Tools.coats(K[1]));
+                let OC = Tools.typen(Tools.coats(K[1]));
 
-                        OC.sort((A, B) => {return B - A});
+                OC.sort((A, B) => {return B - A});
         
                 SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
         
@@ -515,6 +559,16 @@ class Event {
         
                 SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);            
               }
+
+              Old.forEach(Obj => {
+
+                if (Obj.indexOf(K[0]) > -1) {
+
+                  OM[0].push([`g`, {style: {cursor: `pointer`}}, 
+                    [[`circle`, {r: 8, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+                    [`circle`, {r: 4, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}]]]);
+                }
+              });
 
               if (Xlet.indexOf(K[0]) > -1 && Clients.plotXSplit !== `30M` && Clients.plotXSplit !== `1D`) {
 
@@ -553,6 +607,8 @@ class Event {
             });
 
             document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13]);
+
+            document.querySelector(`#gSwap`).innerHTML = View.ModelDOM(OM[0]);
 
             document.querySelectorAll(`.info`).forEach(SVG => {
 
@@ -987,9 +1043,9 @@ class Event {
 
     let Split = Constants.ival[Clients.plotXSplit];
     
-      let X = parseFloat(document.body.clientWidth);
+    let X = parseFloat(document.body.clientWidth);
     
-      let Y = parseFloat(document.body.clientHeight - 70);
+    let Y = parseFloat(document.body.clientHeight - 70);
 
     let HL = [], Vols = [];
 
@@ -1011,7 +1067,7 @@ class Event {
 
     RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
-    let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
+    let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []], OM = [[]];
 
     for (let A = 0; A < 25; A++) {
 
@@ -1036,15 +1092,59 @@ class Event {
 
     for (let i = 0; i < X/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
 
+    let Old = [];
+
+    Tools.typen(Clients.old)[1].forEach(Obj => {
+
+      if (Clients.plotXSplit === `1D`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} 00:00`).valueOf();
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1H`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf();
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `30M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/30)*30*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `15M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/15)*15*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1M`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:${new Date(Obj[3]).getMinutes()}`).valueOf();
+
+        Old.push(Obj);
+      }       
+    });
+
     Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
       if (K[2].length > 0) {
 
         SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
         
-                let OC = Tools.typen(Tools.coats(K[1]));
+        let OC = Tools.typen(Tools.coats(K[1]));
 
-                OC.sort((A, B) => {return B - A});
+        OC.sort((A, B) => {return B - A});
         
         SVG[3].push([`rect`, {id: `g${K[0]}`, x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
         
@@ -1052,6 +1152,16 @@ class Event {
         
         SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);            
       }
+
+      Old.forEach(Obj => {
+
+        if (Obj.indexOf(K[0]) > -1) {
+
+          OM[0].push([`g`, {style: {cursor: `pointer`}}, 
+            [[`circle`, {r: 8, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+            [`circle`, {r: 4, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}]]]);
+        }
+      });
 
       if (Xlet.indexOf(K[0]) > -1 && Clients.plotXSplit !== `30M` && Clients.plotXSplit !== `1D`) {
 
@@ -1094,7 +1204,9 @@ class Event {
       Vect.innerHTML = View.ModelDOM(SVG[i]);
     });
 
-    document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13])
+    document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13]);
+
+    document.querySelector(`#gSwap`).innerHTML = View.ModelDOM(OM[0]);
 
     document.querySelectorAll(`.ival-alt`).forEach(A => {A.style.display = `flex`;});
 
@@ -1121,9 +1233,9 @@ class Event {
 
     RH = HL[0] - HL[HL.length - 1]; CAV = 2;
     
-      let Y = parseFloat(document.body.clientHeight - 70);
+    let Y = parseFloat(document.body.clientHeight - 70);
 
-    let G = document.querySelectorAll(`svg .g`), SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
+    let G = document.querySelectorAll(`svg .g`), OM = [[]], SVG = [[], [], [], [], [], [], [], [], [], [], [], [], [], []];
 
     for (let A = 0; A < 25; A++) {
 
@@ -1150,15 +1262,59 @@ class Event {
 
     for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) {Xlet.push(tSZ - i*Split.abs*Split.C);}
 
+    let Old = [];
+
+    Tools.typen(Clients.old)[1].forEach(Obj => {
+
+      if (Clients.plotXSplit === `1D`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} 00:00`).valueOf();
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1H`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf();
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `30M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/30)*30*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `15M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/15)*15*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1M`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:${new Date(Obj[3]).getMinutes()}`).valueOf();
+
+        Old.push(Obj);
+      }       
+    });
+
     Arg[0][1].sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
 
       if (K[2].length > 0) {
 
         SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
         
-                let OC = Tools.typen(Tools.coats(K[1]));
+        let OC = Tools.typen(Tools.coats(K[1]));
 
-                OC.sort((A, B) => {return B - A});
+        OC.sort((A, B) => {return B - A});
         
         SVG[3].push([`rect`, {id: `g${K[0]}`, info: Tools.coats(K[1]), x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
         
@@ -1166,6 +1322,16 @@ class Event {
         
         SVG[13].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);            
       }
+
+      Old.forEach(Obj => {
+
+        if (Obj.indexOf(K[0]) > -1) {
+
+          OM[0].push([`g`, {style: {cursor: `pointer`}}, 
+            [[`circle`, {r: 8, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+            [`circle`, {r: 4, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}]]]);
+        }
+      });
 
       if (Xlet.indexOf(K[0]) > -1 && Clients.plotXSplit !== `1D`) {
 
@@ -1199,6 +1365,8 @@ class Event {
     });
 
     document.querySelector(`#g`).innerHTML = View.ModelDOM(SVG[13]);
+
+    document.querySelector(`#gSwap`).innerHTML = View.ModelDOM(OM[0]);
 
     document.querySelectorAll(`.info`).forEach(SVG => {
 

@@ -48,14 +48,14 @@ class Sql {
     }]);
   }
 
-    places (Arg) {
+  places (Arg) {
 
-        this.credentials.database = `qb`;
+    this.credentials.database = `qb`;
 
-        this.Sql([{
-            sql: `update ${Arg[0]} set json = ? where json = ?`,
-            values: [JSON.stringify(Arg[1]), JSON.stringify(Arg[2])]}, (Raw) => Arg[3](Raw)]);
-    }
+    this.Sql([{
+      sql: `update ${Arg[0]} set json = ? where json = ?`,
+      values: [JSON.stringify(Arg[1]), JSON.stringify(Arg[2])]}, (Raw) => Arg[3](Raw)]);
+  }
 
   putlist (Arg) {
 
@@ -867,7 +867,7 @@ class Tools {
 
       Arg[0].trades[0].sort((A, B) => {return B.ts - A.ts}).forEach(Obj => {
 
-        if (Obj.mug === Arg[1] && Obj.info[0] === plot) { Swap[plot].push([Obj.side, Obj.info[2], Obj.info[1]]) }
+        if (Obj.mug === Arg[1] && Obj.info[0] === plot) { Swap[plot].push([Obj.side, Obj.info[2], Obj.info[1], Obj.ts]) }
       });
     });
 

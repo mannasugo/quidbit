@@ -157,7 +157,7 @@ let Models = {
         return [`main`, {style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
             [[`section`, {style: {[`font-family`]: `qb`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
                 [
-                    [`h1`, {style: {color: `#6bc679`, [`font-family`]: `litera`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
+                    [`h1`, {style: {color: `#6bc679`, [`font-family`]: `qb`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
                     DOM[Arg[0]]]]]]
   },
 
@@ -393,52 +393,96 @@ let Models = {
 
     Arg.XY.forEach(K => {
 
-            if (K[2].length > 0) {
+      if (K[2].length > 0) {
 
-                HL.push(K[2][0]); 
+        HL.push(K[2][0]); 
 
-                HL.push(K[2][1]);
+        HL.push(K[2][1]);
 
-                Vols.push(K[3]);
+        Vols.push(K[3]);
 
-                //RH += K[2][0] - K[2][1];
+        //RH += K[2][0] - K[2][1];
 
-                //CAV++
-            }
+        //CAV++
+      }
     });
 
-        HL = HL.sort((A, B) => {return parseFloat(B) - parseFloat(A)});
+    HL = HL.sort((A, B) => {return parseFloat(B) - parseFloat(A)});
 
-        let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []], G = [[]]; 
+    let SVG = [[], [], [], [], [], [], [], [], [], [], [], [], []], G = [[], []]; 
 
-        RH = HL[0] - HL[HL.length - 1]; CAV = 2;
+    RH = HL[0] - HL[HL.length - 1]; CAV = 2;
 
-        for (let A = 0; A < 25; A++) {
+    for (let A = 0; A < 25; A++) {
 
-            let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*16 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
+      let AY = (Tools.yScale([RH/CAV, HL[0]])[0]*16 + Tools.yScale([RH/CAV, HL[0]])[1]) - Tools.yScale([RH/CAV, HL[0]])[0]*A;
 
-            SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
+      SVG[4].push([`text`, {x: 20, y: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + 4, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}, `${AY}`]);
                 
-            SVG[1].push([`line`, {style: {visibility: (.15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) > .70*Y)? `collapse`: `visible`}, x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);      
+      SVG[1].push([`line`, {style: {visibility: (.15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) > .70*Y)? `collapse`: `visible`}, x1: 0, x2: 4000, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);      
         
-            SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);      
-        }
+      SVG[6].push([`line`, {x1: 0, x2: 8, y1: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, y2: .15*Y + ((HL[0] - (AY))*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);      
+    }
 
-        Vols = Vols.sort((A, B) => {return B - A});
+    Vols = Vols.sort((A, B) => {return B - A});
 
-        let tsz = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
+    let tsz = Arg.XY.sort((A, B) => {return B[0] - A[0]})[0][0];
 
-        tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C*4;
+    tsz = new Date(`${new Date(tsz).toLocaleDateString()} ${new Date(tsz).getHours()}:00`).valueOf() + Split.abs*Split.C*4;
 
-        if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
+    if (Split.abs === 60000*60) tsz = new Date(new Date(tsz).toLocaleDateString()).valueOf() + Split.abs*Split.C;
 
-        let Xlet = [];
+    let Xlet = [];
 
-        for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) {Xlet.push(tsz - i*Split.abs*Split.C);}
+    for (let i = 0; i < document.body.clientWidth/(Split.C*4.75) + 2; i++) { Xlet.push(tsz - i*Split.abs*Split.C) }
 
-        Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
+    let Old = [];
 
-            if (K[2].length > 0) {
+    Tools.typen(Clients.old)[1].forEach(Obj => {
+
+      if (Clients.plotXSplit === `1D`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} 00:00`).valueOf();
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1H`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf();
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `30M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/30)*30*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `15M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/15)*15*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      }
+
+      if (Clients.plotXSplit === `1M`) {
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:${new Date(Obj[3]).getMinutes()}`).valueOf();
+
+        Old.push(Obj);
+      }    
+    });
+
+    Arg.XY.sort((A, B) => {return A[0] - B[0]}).forEach((K, i) => {
+
+      if (K[2].length > 0) {
 
                 K[1][0] = parseFloat(K[1][0]);
 
@@ -454,8 +498,18 @@ let Models = {
                 
                 SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
                 
-                G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);                       
-            }
+                G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);   
+      }
+
+      Old.forEach(Obj => {
+
+        if (Obj.indexOf(K[0]) > -1) {
+
+          G[1].push([`g`, {style: {cursor: `pointer`}}, 
+            [[`circle`, {r: 8, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+            [`circle`, {r: 4, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}]]]);
+        }
+      });
 
             if (Xlet.indexOf(K[0]) > -1 && Clients.plotXSplit !== `30M` && Clients.plotXSplit !== `1D`) {
 
@@ -479,7 +533,7 @@ let Models = {
 
                 SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
             }
-        });
+    });
 
     SVG[5] = [`text`, {id: `ZY`, x: 20, y: 0, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}}];
 
@@ -554,7 +608,7 @@ let Models = {
                                         [`g`, {class: `g`}, SVG[2]], 
                                         [`g`, {id: `XYKline`, class: `g`}, SVG[3]],
                                         [`g`, {}, [[`path`, {id: `spotline`, stroke: `#FFF`, [`stroke-dasharray`]: 2, d: ``}]]], 
-                                        [`g`, {id: `g`}, G[0]],
+                                        [`g`, {id: `g`}, G[0]], [`g`, {id: `gSwap`}, G[1]],
                                         [`text`, {id: `ya`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``],
                                         [`text`, {id: `yz`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``]]]]], 
                             [`div`, {style: {width: `${20}%`}}, 
