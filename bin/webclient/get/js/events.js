@@ -533,6 +533,24 @@ class Event {
         Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
 
         Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `5M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/5)*5*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `3M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/3)*3*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
       }
 
       if (Clients.plotXSplit === `1M`) {
@@ -1126,6 +1144,24 @@ class Event {
         Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
 
         Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `5M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/5)*5*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `3M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/3)*3*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
       }
 
       if (Clients.plotXSplit === `1M`) {
@@ -1292,6 +1328,24 @@ class Event {
       if (Clients.plotXSplit === `15M`) {
 
         let Z = Math.floor(new Date(Obj[3]).getMinutes()/15)*15*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `5M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/5)*5*60000; 
+
+        Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
+
+        Old.push(Obj);
+      } 
+
+      if (Clients.plotXSplit === `3M`) {
+
+        let Z = Math.floor(new Date(Obj[3]).getMinutes()/3)*3*60000; 
 
         Obj[3] = new Date(`${new Date(Obj[3]).getFullYear()}-${new Date(Obj[3]).getMonth() + 1}-${new Date(Obj[3]).getDate()} ${new Date(Obj[3]).getHours()}:00`).valueOf() + Z;
 

@@ -152,81 +152,117 @@ class Tools {
       }
     }
 
-    /**
-
     if (Arg[1] === `3M`) {
 
-      let XY = [];
+      let XY = [[]];
 
-      for (let A = 0; A < 8; A++) {
+      let Z = Math.floor(new Date(Arg[3]).getMinutes()/3)*3*60000;
 
-        XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
-        XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
+      for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
+
+        if (existsSync(`bin/data/spot/klines/json/180000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/180000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
+
+        else {
+
+          if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+
+            XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+          }
+        }
       }
-
-      let Z = new Date(Arg[3]).getMinutes();
-
-      if (new Date(Arg[3]).getMinutes()%3 === 1) Z = new Date().getMinutes() - 1;
-
-      if (new Date(Arg[3]).getMinutes()%3 === 2) Z = new Date().getMinutes() - 2;
-
-      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:${Z}`).valueOf();
 
       for (let A = 0; A < Arg[2]; A++) {
 
-        let Plot = [];
-                    
-        XY.forEach(X_Y => {
+        let D5 = X_Z - 180000*A, XYV = [];
 
-          if (X_Y.ts_z > X_Z - 180000*A && X_Y.ts_z < (X_Z - 180000*A) + 180000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
+        XY[0].forEach(Obj => { if (Obj[0] >= D5 && Obj[0] < D5 + 180000) { XYV.push(Obj) } });
+
+        let HL = [[], []], V = 0;
+
+        XYV.forEach(X => {
+
+          HL[0].push(X[2][0]);
+
+          HL[1].push(X[2][1]);
+
+          V += X[3];
         });
 
-        let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
+        if (XYV.length > 0) {
 
-        let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
-                    
-        PlotXY.push([X_Z - 180000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
+          PlotXY.push([
+            D5, 
+            [XYV.sort((A, B) => {return A[0] - B[0]})[0][1][0], XYV.sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+            [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+            V]);
+        }
+
+        else {PlotXY.push([X_Z - 180000*A, [], [], 0])}
       }
     }
 
     if (Arg[1] === `5M`) {
 
-      let XY = [];
-
-      for (let A = 0; A < 8; A++) {
-
-        XY = XY.concat(this.typen(readFileSync(`json/plot/${Arg[0][0]}_${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
-
-        XY = XY.concat(this.typen(readFileSync(`json/daily/${Arg[0][0]}${Arg[0][1]}_${DAY - 3600000*24*A}.json`, {encoding: `utf8`})));
-      }
+      let XY = [[]];
 
       let Z = Math.floor(new Date(Arg[3]).getMinutes()/5)*5*60000;
 
       let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
+      for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
+
+        if (existsSync(`bin/data/spot/klines/json/300000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+
+          XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/300000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+        }
+
+        else {
+
+          if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
+
+            XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
+          }
+        }
+      }
+
       for (let A = 0; A < Arg[2]; A++) {
 
-        let Plot = [];
-                    
-        XY.forEach(X_Y => {
+        let D5 = X_Z - 300000*A, XYV = [];
 
-          if (X_Y.ts_z > X_Z - 300000*A && X_Y.ts_z < (X_Z - 300000*A) + 300000) Plot.push([X_Y.pair[1][1], X_Y.ts_z, X_Y.allocate]);
+        XY[0].forEach(Obj => { if (Obj[0] >= D5 && Obj[0] < D5 + 300000) { XYV.push(Obj) } });
+
+        let HL = [[], []], V = 0;
+
+        XYV.forEach(X => {
+
+          HL[0].push(X[2][0]);
+
+          HL[1].push(X[2][1]);
+
+          V += X[3];
         });
 
-        let OC = this.typen(this.coats(Plot)).sort((A, B) => {return A[1] - B[1]});
+        if (XYV.length > 0) {
 
-        let HL = this.typen(this.coats(Plot)).sort((A, B) => {return B[0] - A[0]});
-                    
-        PlotXY.push([X_Z - 300000*A, (OC.length > 0)? [OC[0][0], OC[OC.length -1][0]]: [], (HL.length > 0)? [HL[0][0], HL[HL.length -1][0]]: [], (OC.length > 0)? OC[OC.length -1][2]: 0]) //OCHL
+          PlotXY.push([
+            D5, 
+            [XYV.sort((A, B) => {return A[0] - B[0]})[0][1][0], XYV.sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+            [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+            V]);
+        }
+
+        else {PlotXY.push([X_Z - 300000*A, [], [], 0])}
       }
     }
 
-    **/
-
     if (Arg[1] === `15M`) {
 
-      let XY = [[], {}];
+      let XY = [[]];
 
       for (let a = 0; a < (Arg[2]*3600000)/900000; a++) {
 
@@ -239,43 +275,7 @@ class Tools {
 
           if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-            
-            X0.forEach(X0a => {
-
-              let XH = {};
-
-              if (X0a[0]%900000 === 0) {
-
-                XH[X0a[0]] = [];
-
-                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+900000) XH[X0a[0]].push(X0B)});
-
-                let X60 = [];
-
-                for (let x in XH) {
-
-                  let HL = [[], []], V = 0;
-
-                  XH[x].forEach(X => {
-
-                    HL[0].push(X[2][0]);
-
-                    HL[1].push(X[2][1]);
-
-                    V += X[3];
-                  });
-
-                  X60.push([
-                    parseFloat(x), 
-                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-                    V]);
-                }
-
-                XY[0] = XY[0].concat(X60);
-              }
-            });
+            XY [0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
           }
         }
       }
@@ -284,11 +284,31 @@ class Tools {
 
       let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
 
-      XY[0].forEach(X => {XY[1][X[0]] = X});
-
       for (let A = 0; A < Arg[2]; A++) {
 
-        if (XY[1][X_Z - 900000*A]) {PlotXY.push(XY[1][X_Z - 900000*A])}
+        let D15 = X_Z - 900000*A, XYV = [];
+
+        XY[0].forEach(Obj => { if (Obj[0] >= D15 && Obj[0] < D15 + 900000) { XYV.push(Obj) } });
+
+        let HL = [[], []], V = 0;
+
+        XYV.forEach(X => {
+
+          HL[0].push(X[2][0]);
+
+          HL[1].push(X[2][1]);
+
+          V += X[3];
+        });
+
+        if (XYV.length > 0) {
+
+          PlotXY.push([
+            D15, 
+            [XYV.sort((A, B) => {return A[0] - B[0]})[0][1][0], XYV.sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+            [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+            V]);
+        }
 
         else {PlotXY.push([X_Z - 900000*A, [], [], 0])}
       }
@@ -296,9 +316,13 @@ class Tools {
 
     if (Arg[1] === `30M`) {
 
-      let XY = [[], {}];
+      let XY = [[]];
 
-      for (let a = 0; a < (Arg[2]*3600000)/1800000; a++) {
+      let Z = Math.floor(new Date(Arg[3]).getMinutes()/30)*30*60000;
+
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
+
+      for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
 
         if (existsSync(`bin/data/spot/klines/json/1800000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
@@ -309,56 +333,36 @@ class Tools {
 
           if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-            
-            X0.forEach(X0a => {
-
-              let XH = {};
-
-              if (X0a[0]%1800000 === 0) {
-
-                XH[X0a[0]] = [];
-
-                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+1800000) XH[X0a[0]].push(X0B)});
-
-                let X60 = [];
-
-                for (let x in XH) {
-
-                  let HL = [[], []], V = 0;
-
-                  XH[x].forEach(X => {
-
-                    HL[0].push(X[2][0]);
-
-                    HL[1].push(X[2][1]);
-
-                    V += X[3];
-                  });
-
-                  X60.push([
-                    parseFloat(x), 
-                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-                    V]);
-                }
-
-                XY[0] = XY[0].concat(X60);
-              }
-            });
+            XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
           }
         }
       }
 
-      let Z = Math.floor(new Date(Arg[3]).getMinutes()/30)*30*60000;
-
-      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours()}:00`).valueOf() + Z;
-
-      XY[0].forEach(X => {XY[1][X[0]] = X});
-
       for (let A = 0; A < Arg[2]; A++) {
 
-        if (XY[1][X_Z - 1800000*A]) {PlotXY.push(XY[1][X_Z - 1800000*A])}
+        let D30 = X_Z - 1800000*A, XYV = [];
+
+        XY[0].forEach(Obj => { if (Obj[0] >= D30 && Obj[0] < D30 + 1800000) { XYV.push(Obj) } });
+
+        let HL = [[], []], V = 0;
+
+        XYV.forEach(X => {
+
+          HL[0].push(X[2][0]);
+
+          HL[1].push(X[2][1]);
+
+          V += X[3];
+        });
+
+        if (XYV.length > 0) {
+
+          PlotXY.push([
+            D30, 
+            [XYV.sort((A, B) => {return A[0] - B[0]})[0][1][0], XYV.sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+            [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+            V]);
+        }
 
         else {PlotXY.push([X_Z - 1800000*A, [], [], 0])}
       }
@@ -366,7 +370,7 @@ class Tools {
 
     if (Arg[1] === `1H`) {
 
-      let XY = [[], {}];
+      let XY = [[]];
 
       for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
 
@@ -379,55 +383,38 @@ class Tools {
 
           if (existsSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
-            let X0 = this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`}));
-            
-
-            X0.forEach(X0a => {
-
-              let XH = {};
-
-              if (X0a[0]%3600000 === 0) {
-
-                XH[X0a[0]] = [];
-
-                X0.forEach(X0B => {if (X0B[0] >= X0a[0] && X0B[0] < X0a[0]+3600000) XH[X0a[0]].push(X0B)});
-
-                let X60 = [];
-
-                for (let x in XH) {
-
-                  let HL = [[], []], V = 0;
-
-                  XH[x].forEach(X => {
-
-                    HL[0].push(X[2][0]);
-
-                    HL[1].push(X[2][1]);
-
-                    V += X[3];
-                  });
-
-                  X60.push([
-                    parseFloat(x), 
-                    [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-                    [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-                    V]);
-                }
-
-                XY[0] = XY[0].concat(X60);
-              }
-            });
+            XY[0] = XY[0].concat(this.typen(readFileSync(`bin/data/spot/klines/json/60000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`, {encoding: `utf8`})));
           }
         }
       }
 
       let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:00`).valueOf();
 
-      XY[0].forEach(X => {XY[1][X[0]] = X});
-
       for (let A = 0; A < Arg[2]; A++) {
 
-        if (XY[1][X_Z - 3600000*A]) {PlotXY.push(XY[1][X_Z - 3600000*A])}
+        let D60 = X_Z - 3600000*A, XYV = [];
+
+        XY[0].forEach(Obj => { if (Obj[0] >= D60 && Obj[0] < D60 + 3600000) { XYV.push(Obj) } });
+
+        let HL = [[], []], V = 0;
+
+        XYV.forEach(X => {
+
+          HL[0].push(X[2][0]);
+
+          HL[1].push(X[2][1]);
+
+          V += X[3];
+        });
+
+        if (XYV.length > 0) {
+
+          PlotXY.push([
+            D60, 
+            [XYV.sort((A, B) => {return A[0] - B[0]})[0][1][0], XYV.sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+            [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+            V]);
+        }
 
         else {PlotXY.push([X_Z - 3600000*A, [], [], 0])}
       }
@@ -474,11 +461,14 @@ class Tools {
                 V += X[3];
               });
 
-            X60.push([
-              parseFloat(x), 
-              [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
-              [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
-              V]);
+              //if (XH[x].length > 0) {
+
+                X60.push([
+                  parseFloat(x), 
+                  [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
+                  [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
+                  V]);
+              //}
             }
 
             XY[0] = XY[0].concat(X60);
