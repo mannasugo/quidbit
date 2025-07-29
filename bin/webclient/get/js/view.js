@@ -165,11 +165,11 @@ let Models = {
 
     let DOM = [[], []];
 
-    let Old = [`orders`, `trades`, `positions`];
+    let Old = [/*`orders`, */`trades`, `blank`]//, `positions`];
 
-    Old.forEach(old => {
+    Old.forEach(old => {console.log
 
-      DOM[0].push([`a`, {class: `_gxM _geQ`, href: `javascript:;`, style: {[`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old[old] !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
+      DOM[0].push([`a`, {class: `_gxM _geQ`, href: `javascript:;`, style: {[`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old.indexOf(old) !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
     });
 
     Tools.typen(Clients.old)[1].forEach(Swap => {
@@ -502,21 +502,21 @@ let Models = {
 
       if (K[2].length > 0) {
 
-                K[1][0] = parseFloat(K[1][0]);
+        K[1][0] = parseFloat(K[1][0]);
 
-                K[1][1] = parseFloat(K[1][1]);
+        K[1][1] = parseFloat(K[1][1]);
 
-                SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
+        SVG[2].push([`line`, {id: `g${K[0]}`, x1: i*7.125 + .05, y1: .15*Y + ((HL[0] - K[2][0])*.35*Y)/(HL[0] - HL[HL.length - 1]), x2: i*7.125 + .05, y2: .15*Y + ((HL[0] - K[2][1])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: .95}]);
                 
-                let OC = Tools.typen(Tools.coats(K[1]));
+        let OC = Tools.typen(Tools.coats(K[1]));
 
-                OC.sort((A, B) => {return B - A});
+        OC.sort((A, B) => {return B - A});
                 
-                SVG[3].push([`rect`, {id: `g${K[0]}`, info: Tools.coats(K[1]), x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+        SVG[3].push([`rect`, {id: `g${K[0]}`, info: Tools.coats(K[1]), x: (i*7.125) - 2, y: .15*Y + ((HL[0] - OC[0])*.35*Y)/(HL[0] - HL[HL.length - 1]), width: 4.25, height: ((OC[0] - OC[1])*.35*Y)/(HL[0] - HL[HL.length - 1]), fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
                 
-                SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
+        SVG[10].push([`rect`, {x: (i*7.125) - 2, y: `${102 - (K[3]*100)/Vols[0]}%`, width: 4.25, height: `${(K[3]*100)/Vols[0] - 3}%`, fill: (K[1][0] > K[1][1])? `#e3415d`: `#000`, stroke: (K[1][0] > K[1][1])? `#e3415d`: `#6bc679`, [`stroke-width`]: 1}]);
                 
-                G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);   
+        G[0].push([`rect`, {id: Tools.coats(K), class: `info`, x: (i*7.125) - 2, y: 0, width: 4.25, height: `${100}%`, fill: `transparent`, stroke: `transparent`}]);   
       }
 
       Old.forEach(Obj => {
@@ -601,11 +601,11 @@ let Models = {
                                             [
                                                 [`a`, {id: `modalWallet`, href: `javascript:;`, class: `v202312301635`, style: {[`align-self`]: `center`, height: `${24}px`, margin: `0 ${12}px`, width: `${24}px`}}], 
                                                 [`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: `none`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputWallet(Arg)]]]]]]]]]],
-                    [`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${108}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
+                    [`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${38}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
                         [
                             [`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 
                                 [
-                                    [`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1c`, [`mrgin-bottom`]: `${12}px`, padding: `${3}px ${6}px`}}, 
+                                    [`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1c`, display: `none`, padding: `${3}px ${6}px`}}, 
                                         [
                                             [`span`, {class: `v202412192124`, style: {height: `${16}px`, width: `${16}px`}}],
                                             [`input`, {id: `quiz`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${4}px ${12}px`, [`text-transform`]: `uppercase`, width: `${100}%`}}]]], 

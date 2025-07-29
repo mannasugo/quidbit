@@ -105,7 +105,7 @@ a, a:visited {
 
 #app, body, html {
   height: 100%;  
-  line-height: 1.15;
+  line-height: 24px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -415,7 +415,7 @@ body {
 
 #pitvalue input:focus {outline: none}
 
-._tY0 {letter-spacing: 1.2px;line-height: 1.5rem;}
+._tY0 {letter-spacing: 1.2px;line-height: 24px;}
 
 ._gM_a { border: 1px solid #1185fe;border-radius: 6px;}
 
