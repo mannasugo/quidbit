@@ -47,7 +47,7 @@ class Route {
       }
     }
 
-    else if (Arg[0].method == `POST`) {
+    else if (Arg[0].method === `POST`) {
 
       let blob = new Buffer.alloc(+Arg[0].headers[`content-length`]);
 

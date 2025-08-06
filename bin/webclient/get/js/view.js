@@ -167,14 +167,14 @@ let Models = {
 
     let Old = [/*`orders`, */`trades`, `blank`]//, `positions`];
 
-    Old.forEach(old => {console.log
+    Old.forEach(old => {
 
       DOM[0].push([`a`, {class: `_gxM _geQ`, href: `javascript:;`, style: {[`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old.indexOf(old) !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
     });
 
     Tools.typen(Clients.old)[1].forEach(Swap => {
 
-      DOM[1].push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`}}, 
+      DOM[1].push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`,  [`max-height`]: `${24}px`}}, 
         [[`span`, {style: {color: (Swap[0] === `buy`)? `#6BC679`: `#E3415D`, [`font-family`]: ``, [`text-transform`]: `capitalize`, width: `${40}%`}}, Swap[0]],
         [`span`, {style: {overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `${30}%`}}, `${Swap[1]}`],
         [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Swap[2]}`]]])
@@ -189,10 +189,9 @@ let Models = {
           [[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
             [[`span`, {style: {width: `${30}%`}}, `Action`],
             [`div`, {style: {width: `${70}%`}}, 
-              [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-                                                [
-                                                    [`a`, {id: `action`, for: `buy`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`margin-right`]: `${1.5}px`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${50}%`}}, `Buy`],
-                                                    [`a`, {id: `action`, for: `sell`, href: `javascript:;`, style: {background: `#0b0b48`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`margin-left`]: `${1.5}px`, width: `${50}%`}}, `Sell`]]]]]]],
+              [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}},
+                  [[`a`, {id: `action`, for: `buy`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`margin-right`]: `${1.5}px`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${50}%`}}, `Buy`],
+                      [`a`, {id: `action`, for: `sell`, href: `javascript:;`, style: {background: `#0b0b48`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`margin-left`]: `${1.5}px`, width: `${50}%`}}, `Sell`]]]]]]],
                                 [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Type`],
@@ -252,7 +251,7 @@ let Models = {
           [[`span`, {style: {width: `${40}%`}}, `Side`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Quantity`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`]]], 
-        [`div`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`}}, DOM[1]]]]]];                                                   
+        [`div`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}, DOM[1]]]]]];                                                   
   },
 
   inputWallet: function (Arg) {
@@ -684,83 +683,7 @@ let Models = {
                         [[`div`, {class: `_gxM _geQ`}, []]]], 
                     [`div`, {id: `modal`, style: {background: `#000000ab`, display: `none`, height: `${100}%`, position: `absolute`, width: `${100}%`, [`z-index`]: 56}}, ],
                     [`div`, {id: `top`, style: {background: ``, bottom: 0, display: `none`, position: `fixed`, top: 0, width: `${100}%`, [`z-index`]: 18}}]]];  
-    }, 
-
-    utilApp: (Arg) => {
-
-        let DOM = [];
-
-        if (Arg[0][0] === `fiat` && Arg[0][1] === `index`) {
-
-            Arg[1].utils.forEach(Fiat => {
-
-                DOM.push([`div`, {id: (Fiat.feat[4] === `${Fiat.fiat}-USD`)? Fiat.feat[4]: `${Fiat.feat[4]}_CONVERT`, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
-                    [
-                        [`div`, {class: `_geQ _gxM`, style: {overflow: `hidden`, [`width`]: `${20}%`}}, 
-                            [
-                                [`img`, {src: `/ssl/given/svg/${Constants.SVG[Fiat.fiat]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
-                                [`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Fiat.feat[3]}`]]]]], 
-                        [`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-family`]: ``, [`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Fiat.fiat}`]]], 
-                        [`div`, {style: {width: `${22.5}%`}}, 
-                            [[`span`, {id: `COST`, decimal: Fiat.feat[1], style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {width: `${15}%`}}, 
-                            [[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {width: `${15}%`}}, 
-                            [[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
-                            [[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, ``]]]]])
-            });
-        }
-
-        if (Arg[0][0] === `spot` && Arg[0][1] === `index`) {
-
-            Arg[1].utils.forEach(Spot => {
-
-                DOM.push([`div`, {id: `${Spot.pair.toString().replace(`,`, `-`)}`, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
-                    [
-                        [`div`, {class: `_geQ _gxM`, style: {[`width`]: `${30}%`}}, 
-                            [
-                                [`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[0]]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}],
-                                [`img`, {src: `/ssl/given/svg/${Constants.SVG[Spot.pair[1]]}.svg`, style: {height: `${20}px`,[`max-width`]: `${20}px`, transform: `translateX(${-6.6667}px)`}}], 
-                                [`a`, {href: `/trade/${Spot.pair[0]}_${Spot.pair[1]}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `qb`, }}, 
-                                    [ 
-                                        [`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Spot.pair[0]}`], 
-                                        [`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Spot.pair[1]}`]]]]], 
-                        [`div`, {style: {width: `${22.5}%`}}, 
-                            [[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {width: `${15}%`}}, 
-                            [[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {width: `${15}%`}}, 
-                            [[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
-                            [[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, ``]]]]])
-            });
-        }
-
-        if (Arg[0][0] === `tokens` && Arg[0][1] === `index`) {
-
-            Arg[1].utils.forEach(Coin => {
-
-                DOM.push([`div`, {id: `${Coin.token}-USD`, class: `_geQ _gxM`, style: {padding: `${12}px ${0}px`}}, 
-                    [
-                        [`div`, {class: `_geQ _gxM`, style: {overflow: `hidden`, [`width`]: `${20}%`}}, 
-                            [
-                                [`img`, {src: `/ssl/given/svg/${Constants.SVG[Coin.token]}.svg`, style: {height: `${20}px`, [`max-width`]: `${20}px`, transform: `translateX(${0}px)`}}], 
-                                [`div`, {class: `_gxM`, style: {[`white-space`]: `nowrap`, width: `${75}%`}}, [[`span`, {style: {[`font-size`]: `${12}px`, [`font-weight`]: 300, [`margin-left`]: `${8}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `capitalize`}}, `${Coin.feat[3]}`]]]]], 
-                        [`div`, {style: {[`align-items`]: `end`, width: `${10}%`}}, [[`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Coin.token}`]]], 
-                        [`div`, {style: {width: `${22.5}%`}}, 
-                            [[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`,[`font-weight`]: 300, [`letter-spacing`]: `${0}px`, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {width: `${15}%`}}, 
-                            [[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${13}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {width: `${15}%`}}, 
-                            [[`span`, {style: {[`font-family`]: `geometria`, [`font-size`]: `${11}px`,[`font-weight`]: 600, [`letter-spacing`]: `${.75}px`, [`text-align`]: `right`}}, ``]]], 
-                        [`div`, {style: {[`align-items`]: `end`, width: `${17.5}%`}}, 
-                            [[`span`, {id: `MOD`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.7064}px`, [`font-weight`]: 300, [`letter-spacing`]: 0, [`text-align`]: `right`}}, ``]]]]])
-            });
-        }
-
-        return DOM;
-    }
+  }
 };
 
 View = new View;

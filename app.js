@@ -13,7 +13,7 @@ const { Call, io, pollPay} = require(`./route`);
 Sql.Sql([readFileSync(`bin/sql/sql.sql`, {encoding: `utf8`}), () => {}]);
 
 let App = createSecureServer({
-  	key: readFileSync(`bin/http2/ssl/privkey.pem`),
+    key: readFileSync(`bin/http2/ssl/privkey.pem`),
   	cert: readFileSync(`bin/http2/ssl/fullchain.pem`),
   	allowHTTP1: true}, (call, put) => {Call([call, put]);});
 

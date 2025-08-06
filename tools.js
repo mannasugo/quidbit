@@ -461,14 +461,14 @@ class Tools {
                 V += X[3];
               });
 
-              //if (XH[x].length > 0) {
+              if (XH[x].length > 0) {
 
                 X60.push([
                   parseFloat(x), 
                   [XH[x].sort((A, B) => {return A[0] - B[0]})[0][1][0], XH[x].sort((A, B) => {return B[0] - A[0]})[0][1][1]], 
                   [HL[0].sort((A, B) => {return B - A})[0], HL[1].sort((A, B) => {return A - B})[0]], 
                   V]);
-              //}
+              }
             }
 
             XY[0] = XY[0].concat(X60);
