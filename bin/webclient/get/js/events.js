@@ -764,6 +764,39 @@ class Event {
       }
     }]);
 
+    this.listen([document.querySelector(`#limit`), `keyup`, S => {
+
+      let Slot = this.getSource(S);
+
+      let a = Slot.value[Slot.value.length - 1];
+
+      if (a === `.` && Slot.value.indexOf(`.`) !== Slot.value.length - 1) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
+
+      else if (!parseInt(a) && parseInt(a) !== 0 && a !== `.`) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
+
+      document.querySelector(`#quantity`).value = (parseFloat(document.querySelector(`#total`).value)/Slot.value);
+
+      document.querySelector(`#total`).value = (Slot.value*parseFloat(document.querySelector(`#quantity`).value));
+
+      document.querySelectorAll(`#limitSet circle`)[0].setAttribute(`cy`, .15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5);
+
+      document.querySelectorAll(`#limitSet circle`)[1].setAttribute(`cy`, .15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5);
+
+      document.querySelectorAll(`#limitSet circle`)[1].setAttribute(`fill`, (document.querySelector(`#execute`).getAttribute(`role`) === `sell`)? `#e3415d`: `#6bc679`);
+
+      document.querySelector(`#limitSetline path`).setAttribute(`stroke`, (document.querySelector(`#execute`).getAttribute(`role`) === `sell`)? `#e3415d`: `#6bc679`);
+
+      document.querySelector(`#limitSetline path`).setAttribute(`d`, `M${0} ${.15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`)
+
+      document.querySelector(`#limitSet text`).setAttribute(`y`, .15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5 + 3.5);
+
+      document.querySelector(`#limitSet text`).innerHTML = Slot.value;
+
+      document.querySelector(`#limitSetline`).style.display = `flex`;
+
+      document.querySelector(`#limitSet`).style.display = `flex`;
+    }]);
+
     this.listen([document.querySelector(`#total`), `keyup`, S => {
 
       let Slot = this.getSource(S);
@@ -774,7 +807,12 @@ class Event {
 
       else if (!parseInt(a) && parseInt(a) !== 0 && a !== `.`) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
 
-      document.querySelector(`#quantity`).value = (Slot.value/Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
+      if (Clients.typeSwap && Clients.typeSwap === `limit`) {
+
+        document.querySelector(`#quantity`).value = (Slot.value/parseFloat(document.querySelector(`#limit`).value));
+      }
+
+      else document.querySelector(`#quantity`).value = (Slot.value/Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
     }]);
 
     this.listen([document.querySelector(`#quantity`), `keyup`, S => {
@@ -787,7 +825,12 @@ class Event {
 
       else if (!parseInt(a) && parseInt(a) !== 0 && a !== `.`) Slot.value = Slot.value.substr(0, Slot.value.length - 1);
 
-      document.querySelector(`#total`).value = (Slot.value*Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
+      if (Clients.typeSwap && Clients.typeSwap === `limit`) {
+
+        document.querySelector(`#total`).value = (Slot.value*parseFloat(document.querySelector(`#limit`).value));
+      }
+
+      else document.querySelector(`#total`).value = (Slot.value*Tools.typen(Clients.plot)[Slot.getAttribute(`info`)])
     }]);
 
     document.querySelectorAll(`#action`).forEach(SPAN => {
@@ -957,6 +1000,49 @@ class Event {
         
       Fave.style(`transform`, `translate3d(${d3.event.transform.x}px, 0, 0)`)
     }));
+
+    this.listen([document.querySelector(`#typeSelect`), `click`, S => {
+
+      document.querySelector(`#typelist`).style.display = (document.querySelector(`#typelist`).style.display === `flex`)? `none`: `flex`;
+    }]);
+
+    document.querySelectorAll(`#typelist a`).forEach(Child => {
+
+      this.listen([Child, `click`, S => {
+
+        document.querySelectorAll(`#typelist a`).forEach(A => {A.style.background = `none`;});
+
+        Child.style.background = `#242471`;
+
+        document.querySelector(`#typeSelect span`).innerText = Child.querySelector(`span`).innerText;
+
+        document.querySelector(`#total`).value = 0;
+
+        document.querySelector(`#quantity`).value = 0;
+
+        document.querySelector(`#typelist`).style.display = `none`;
+
+        Clients.typeSwap = Child.querySelector(`span`).innerText.toLowerCase();
+
+        if (Clients.typeSwap === `limit`) { 
+
+          document.querySelector(`#letSwaplimit`).style.display = `flex`;
+
+          document.querySelector(`#letSwapSpot`).style.display = `none`;
+        }
+
+        if (Clients.typeSwap === `market`) { 
+
+          document.querySelector(`#letSwaplimit`).style.display = `none`;
+
+          document.querySelector(`#letSwapSpot`).style.display = `flex`;
+
+          document.querySelector(`#limitSetline`).style.display = `none`;
+
+          document.querySelector(`#limitSet`).style.display = `none`;
+        }
+      }]);
+    });
 
     this.plotState(Arg);
   }
