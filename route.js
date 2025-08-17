@@ -168,6 +168,8 @@ class Route {
                     }
                   });
 
+                  Old[0] = Tools.oldOpen([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
+
                   Old[1] = Tools.oldSwap([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
                 }
 
@@ -197,27 +199,43 @@ class Route {
 
                       let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`), value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
 
-                      let Row = [{
-                        ilk: `trade`,
-                        info: {token: Pulls.plot[0]}, 
-                        ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float/value]},
-                        md: md, 
-                        ts: ts}, {
-                        ilk: `trade`,
-                        info: {token: Pulls.plot[1]},
-                        ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]}, 
-                        md: md, 
-                        ts: ts}];
+                      if (Pulls.type === `limit` && Pulls.value < value) {
 
-                      Sql.putlist([`ledge`, Row, (Q) => {
+                        Sql.puts([`book`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, Pulls.value, Pulls.float/Pulls.value], md: md, mug: Pulls.mug, side: `buy`, status: `open`, ts: ts, type: `limit`}, (Q) => {
 
-                        Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float/value], md: md, mug: Pulls.mug, side: `buy`, ts: ts}, (Q) => {
+                          Tools.OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`].push({info: [Pulls.value, Pulls.float/Pulls.value], md: md, mug: Pulls.mug, side: `buy`, status: `open`, ts: ts});
 
-                          Tools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float/value]);
+                          Sql.puts([`ledge`, {ilk: `cold`, info: {token: Pulls.plot[1]}, ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]}, md: md, ts: ts}, (Q) => {
 
-                          Arg[1].end(Tools.coats({float: Pulls.float/value, mug: Pulls.mug, ts: ts, value: value}))
-                        }])
-                      }]);
+                            Arg[1].end(Tools.coats({float: Pulls.float/Pulls.value, mug: Pulls.mug, ts: ts, value: value}));
+                          }]);
+                        }]);
+                      }
+
+                      if (Pulls.type === `market` || (Pulls.type = `limit` && Pulls.value > value)) {
+
+                        let Row = [{
+                          ilk: `trade`,
+                          info: {token: Pulls.plot[0]}, 
+                          ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float/value]},
+                          md: md, 
+                          ts: ts}, {
+                          ilk: `trade`,
+                          info: {token: Pulls.plot[1]},
+                          ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]}, 
+                          md: md, 
+                          ts: ts}];
+
+                        Sql.putlist([`ledge`, Row, (Q) => {
+
+                          Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float/value], md: md, mug: Pulls.mug, side: `buy`, ts: ts}, (Q) => {
+
+                            Tools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float/value]);
+
+                            Arg[1].end(Tools.coats({float: Pulls.float/value, mug: Pulls.mug, ts: ts, value: value}))
+                          }]);
+                        }]);
+                      }
                     }
                   }
 
@@ -376,6 +394,14 @@ class Route {
             });
 }}});
     }
+  }
+
+  fillSwap (Arg) {
+
+    Constants.plot.forEach(Y => {
+
+      Tools.OB[`${Y[0][0]}-${Y[0][1]}`] = [];
+    });
   }
 
   io (App) {

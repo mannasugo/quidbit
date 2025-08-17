@@ -1,3 +1,5 @@
+select * from `book`;
+
 select * from `ledge`;
 
 select * from `mugs`;

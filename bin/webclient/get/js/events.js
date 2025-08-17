@@ -365,11 +365,13 @@ class Event {
 
       document.querySelector(`#pin path`).setAttribute(`d`, `M${0} ${S.clientY - 107 + .5} ${4000} ${S.clientY - 107 + .5} M${S.clientX + .5} ${0} ${S.clientX + .5} ${1000}`);
 
-            document.querySelector(`#floatY #c`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
+      document.querySelector(`#floatY #c`).setAttribute(`d`, `M${0} ${S.layerY + .5} ${8} ${S.layerY + .5}`);
 
-            document.querySelector(`#floatY #a`).setAttribute(`y`, S.layerY - 10);
+      document.querySelector(`#floatY #a`).setAttribute(`y`, S.layerY - 10);
 
       document.querySelector(`#floatY text`).setAttribute(`y`, S.layerY + 4);
+
+      HL = HL.sort((A, B) => {return B - A}); 
 
       HL[0] = parseFloat(HL[0]);
 
@@ -778,11 +780,13 @@ class Event {
 
       document.querySelector(`#total`).value = (Slot.value*parseFloat(document.querySelector(`#quantity`).value));
 
+      HL = HL.sort((A, B) => {B - A});
+
       document.querySelectorAll(`#limitSet circle`)[0].setAttribute(`cy`, .15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5);
 
       document.querySelectorAll(`#limitSet circle`)[1].setAttribute(`cy`, .15*Y + ((HL[0] - Slot.value)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5);
 
-      document.querySelectorAll(`#limitSet circle`)[1].setAttribute(`fill`, (document.querySelector(`#execute`).getAttribute(`role`) === `sell`)? `#e3415d`: `#6bc679`);
+      document.querySelectorAll(`#limitSet circle`)[1].setAttribute(`stroke`, (document.querySelector(`#execute`).getAttribute(`role`) === `sell`)? `#e3415d`: `#6bc679`);
 
       document.querySelector(`#limitSetline path`).setAttribute(`stroke`, (document.querySelector(`#execute`).getAttribute(`role`) === `sell`)? `#e3415d`: `#6bc679`);
 
@@ -941,7 +945,7 @@ class Event {
               mug: Clients.mug, flag: `buy`, 
               float: parseFloat(Values[0]), 
               plot: Arg.plot[0], 
-              pull: `trade`}]);
+              pull: `trade`, type: Clients.typeSwap, value: (Clients.typeSwap === `limit`)? parseFloat(document.querySelector(`#limit`).value): 0}]);
 
           Values = [];
 
@@ -1010,7 +1014,7 @@ class Event {
 
       this.listen([Child, `click`, S => {
 
-        document.querySelectorAll(`#typelist a`).forEach(A => {A.style.background = `none`;});
+        document.querySelectorAll(`#typelist a`).forEach(A => {A.style.background = `none`});
 
         Child.style.background = `#242471`;
 
@@ -1040,6 +1044,38 @@ class Event {
           document.querySelector(`#limitSetline`).style.display = `none`;
 
           document.querySelector(`#limitSet`).style.display = `none`;
+        }
+      }]);
+    });
+
+    document.querySelectorAll(`.tab`).forEach(DOM => {
+
+      this.listen([DOM, `click`, S => {
+
+        document.querySelectorAll(`.tab`).forEach(Obj => {
+
+          Obj.style.background = `#2424718a`;
+
+          Obj.style.borderBottom = `${1}px solid #353535`;
+
+          Obj.style.opacity = .5;
+        });
+
+        DOM.style.background = `#000`;
+
+        DOM.style.opacity = 1; 
+
+        DOM.style.borderBottom = `none`;
+
+        if (DOM.innerHTML === `open`) {
+
+          View.pop();
+
+          View.DOM([`#oldCol`, Models.init.oldOpen()[0]]);
+
+          View.pop();
+
+          View.DOM([`#oldObj`, Models.init.oldOpen()[1]]); 
         }
       }]);
     });

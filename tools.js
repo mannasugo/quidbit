@@ -87,12 +87,14 @@ class Tools {
 
   constructor () {
 
+    this.OB = {};
+
     this.Y = {};
 
     this.XY = {};
   }
 
-  coats (types) { return JSON.stringify(types); }
+  coats (types) { return JSON.stringify(types) }
 
   holding (Arg) {
 
@@ -540,6 +542,18 @@ class Tools {
             }
 
             this.Y[key] = parseFloat(parseFloat(this.typen(value).data.amount).toFixed(Y[1]));
+
+            this.OB[key].forEach(Obj => {
+
+              if (Obj.status === `open` && Obj.side === `buy` && Obj.info[0] >= this.Y[key]) { 
+
+                Obj.status = `close`;
+
+                Obj[`execute`] = new Date().valueOf();
+
+                this.XY[key][X_Z].push([new Date().valueOf(), this.Y[key], Obj.info[1]]);
+              }
+            });
           }
         })})}, 3000);
 
@@ -843,6 +857,25 @@ class Tools {
     });
 
     return Plot24;
+  }
+
+  oldOpen (Arg) {
+
+    let Open = {};
+
+    Constants.plot.forEach(Obj => {
+
+      let plot = Obj[0].toString().replace(`,`, `-`);
+
+      Open[plot] = [];
+
+      Arg[0].book[0].sort((A, B) => {return B.ts - A.ts}).forEach(Obj => {
+
+        if (Obj.mug === Arg[1] && Obj.info[0] === plot && Obj.status === `open`) { Open[plot].push([Obj.side, Obj.info[2], Obj.info[1], Obj.ts]) }
+      });
+    });
+
+    return Open;
   }
 
   oldSwap (Arg) {

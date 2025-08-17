@@ -76,6 +76,29 @@ let Models = {
               [[`span`, {style: {opacity: .6}}, new Date(Arg[0]).toString().substr(4, 20)], 
               [`span`, {style: {color: (Arg[1] === `sell`)? `#e3415d`: `#6bc679`, margin: `${0}px ${4}px`}}, Arg[1]], 
               [`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`}}, `${Arg[2]} ${Arg[3]} at ${Arg[4]}`]]]]]]]]];
+    },
+
+    oldOpen: () => {
+
+      let DOM = [];
+
+      DOM[0] = [[`span`, {style: {width: `${30}%`}}, `Side`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Quantity`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`],
+        [`span`, {style: {width: `${10}%`}}, ``]];
+
+      DOM[1] = [];
+
+      Tools.typen(Clients.old)[0].forEach(Obj => {
+
+        DOM[1].push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`,  [`max-height`]: `${24}px`}}, 
+          [[`span`, {style: {color: (Obj[0] === `buy`)? `#6BC679`: `#E3415D`, [`font-family`]: ``, [`text-transform`]: `capitalize`, width: `${30}%`}}, Obj[0]],
+          [`span`, {style: {overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `${30}%`}}, `${Obj[1]}`],
+          [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Obj[2]}`],
+          [`span`, {style: {width: `${10}%`}}, ``]]])
+      });
+
+      return DOM;
     }
   },
 
@@ -165,11 +188,11 @@ let Models = {
 
     let DOM = [[], []];
 
-    let Old = [`orders`, `trades`]//, `positions`];
+    let Old = [`open`, `trades`, `positions`];
 
     Old.forEach(old => {
 
-      DOM[0].push([`a`, {class: `_gxM _geQ`, href: `javascript:;`, style: {[`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old.indexOf(old) !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
+      DOM[0].push([`a`, {class: `_gxM _geQ tab`, href: `javascript:;`, style: {background: (old !== `trades`)? `#2424718a`: `none`, [`border-bottom`]: (old !== `trades`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old.indexOf(old) !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `trades`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
     });
 
     Tools.typen(Clients.old)[1].forEach(Swap => {
@@ -264,11 +287,11 @@ let Models = {
                                                 [[`a`, {id: `execute`, role: `buy`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Review & Buy`]]]]]]]]]]], 
       [`section`, {style: {[`border-top`]: `${1}px solid #353535`, [`font-family`]: `insvg`}}, 
         [[`div`, {class: `_gxM _geQ`, style: {}}, DOM[0]],
-        [`div`, {class: `_gxM _geQ`, style: {[`border-bottom`]: `${1}px solid #353535`, [`font-size`]: ``, padding: `${1}px ${12}px`, opacity: .5}}, 
+        [`div`, {id: `oldCol`, class: `_gxM _geQ`, style: {[`border-bottom`]: `${1}px solid #353535`, [`font-size`]: ``, padding: `${1}px ${12}px`, opacity: .5}}, 
           [[`span`, {style: {width: `${40}%`}}, `Side`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Quantity`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`]]], 
-        [`div`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}, DOM[1]]]]]];                                                   
+        [`div`, {id: `oldObj`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}, DOM[1]]]]]];                                                   
   },
 
   inputWallet: function (Arg) {
@@ -661,9 +684,9 @@ let Models = {
                                                     [`path`, {id: `c`, stroke: `#fff`, d: ``}],
                                                     [`text`, {fill: `#000`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]], 
                                         [`g`, {id: `limitSet`, style: {display: `none`}}, 
-                                          [[`circle`, {cx: 8, r: 8, fill: `none`, stroke: `#fff`, [`stroke-dasharray`]: 3}], 
-                                          [`circle`, {cx: 8, r: 3}],
-                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
+                                          [[`circle`, {cx: 8, r: 8, fill: `none`, stroke: `#fff`, [`stroke-dasharray`]: 3.5}], 
+                                          [`circle`, {cx: 8, r: 4}],
+                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
                     [`div`, {id: ``, style: {background: `#000000c9`, top: `${37}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
                         [[`span`, {id: `info`, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
                     [`div`, {id: ``, class: `_gxM ival-alt`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${80}px`, position: `absolute`, width: `${100}%`}}, 
