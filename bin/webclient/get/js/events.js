@@ -1077,6 +1077,28 @@ class Event {
 
           View.DOM([`#oldObj`, Models.init.oldOpen()[1]]); 
         }
+
+        if (DOM.innerHTML === `positions`) {
+
+          View.pop();
+
+          View.DOM([`#oldCol`, Models.init.oldPosition()[0]]); 
+
+          View.pop();
+
+          View.DOM([`#oldObj`, []]);
+        }
+
+        if (DOM.innerHTML === `trades`) {
+
+          View.pop();
+
+          View.DOM([`#oldCol`, Models.init.oldSwap()[0]]);
+
+          View.pop();
+
+          View.DOM([`#oldObj`, Models.init.oldSwap()[1]]); 
+        }
       }]);
     });
 

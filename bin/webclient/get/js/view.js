@@ -95,10 +95,44 @@ let Models = {
           [[`span`, {style: {color: (Obj[0] === `buy`)? `#6BC679`: `#E3415D`, [`font-family`]: ``, [`text-transform`]: `capitalize`, width: `${30}%`}}, Obj[0]],
           [`span`, {style: {overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `${30}%`}}, `${Obj[1]}`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `${Obj[2]}`],
-          [`span`, {style: {width: `${10}%`}}, ``]]])
+          [`span`, {style: {[`text-align`]: `right`, width: `${10}%`}}, [[`svg`, {id: ``, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${6}px`, width: `${6}px`}}, 
+            [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 0 24 24 M24 0 0 24 `}]]]]]]])
       });
 
       return DOM;
+    },
+
+    oldPosition: () => {
+
+      let DOM = [];
+
+      DOM[0] = [[`span`, {style: {width: `${15}%`}}, `Side`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${35}%`}}, `Quantity`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${20}%`}}, `P/L`]]; 
+
+      return DOM  
+    },
+
+    oldSwap: () => {
+
+      let DOM = [];
+
+      DOM[0] = [[`span`, {style: {width: `${20}%`}}, `Side`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${40}%`}}, `Quantity`],
+        [`span`, {style: {[`text-align`]: `right`, width: `${40}%`}}, `Price`]];
+
+      DOM[1] = [];
+
+      Tools.typen(Clients.old)[1].forEach(Swap => {
+
+        DOM[1].push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`,  [`max-height`]: `${24}px`}}, 
+          [[`span`, {style: {color: (Swap[0] === `buy`)? `#6BC679`: `#E3415D`, [`font-family`]: ``, [`text-transform`]: `capitalize`, width: `${20}%`}}, Swap[0]],
+          [`span`, {style: {overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `${40}%`}}, `${Swap[1]}`],
+          [`span`, {style: {[`text-align`]: `right`, width: `${40}%`}}, `${Swap[2]}`]]])
+      });
+
+      return DOM
     }
   },
 
