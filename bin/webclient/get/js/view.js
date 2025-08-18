@@ -132,7 +132,22 @@ let Models = {
           [`span`, {style: {[`text-align`]: `right`, width: `${40}%`}}, `${Swap[2]}`]]])
       });
 
-      return DOM
+      return DOM;
+    },
+
+    toSwap: (Arg) => {
+
+      let DOM = [];
+
+      Tools.typen(Clients.old)[0].forEach(Obj => {
+
+        DOM.push([`g`, {style: {cursor: `pointer`}}, 
+          [[`circle`, {r: 8, cx: 8, cy: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+          [`circle`, {r: 4, cx: 8, cy: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}],
+          [`text`, {fill: `#fff`, x: 20, y: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]) + 3.5, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, `${Obj[2]}`]]]);     
+      });
+
+      return DOM;
     }
   },
 
@@ -602,14 +617,14 @@ let Models = {
         }
       });
 
-            if (Xlet.indexOf(K[0]) > -1 && Clients.plotXSplit !== `30M` && Clients.plotXSplit !== `1D`) {
+      if (Xlet.indexOf(K[0]) > -1 && Clients.plotXSplit !== `30M` && Clients.plotXSplit !== `1D`) {
 
-                SVG[7].push([`text`, {x: (i*7.12) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.formatplanex([K[0], Split.abs, Split.sub])]);
+        SVG[7].push([`text`, {x: (i*7.12) + Split.tox, y: 17, fill: `#fff`, style: {[`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`letter-spacing`]: `${.25}px`}}, Tools.formatplanex([K[0], Split.abs, Split.sub])]);
 
-                SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
-            }
+        SVG[0].push([`line`, {x1: i*7.12, y1: 0, x2: i*7.12, y2: 1000, stroke: `#1e1e1e`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}]);
+      }
 
-            let X_D = new Date(`${new Date(K[0]).getFullYear()}-${new Date(K[0]).getMonth() + 1}-${new Date(K[0]).getDate()} 00:00`).valueOf();
+      let X_D = new Date(`${new Date(K[0]).getFullYear()}-${new Date(K[0]).getMonth() + 1}-${new Date(K[0]).getDate()} 00:00`).valueOf();
 
             if (Clients.plotXSplit === `30M` && K[0] === X_D) {
 
@@ -717,6 +732,7 @@ let Models = {
                                                     [`rect`, {id: `a`, x: 0, height: 20, width: 80, fill: `#FFFFFFA3`}],
                                                     [`path`, {id: `c`, stroke: `#fff`, d: ``}],
                                                     [`text`, {fill: `#000`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]], 
+                                        [`g`, {id: `gSwapY`}], 
                                         [`g`, {id: `limitSet`, style: {display: `none`}}, 
                                           [[`circle`, {cx: 8, r: 8, fill: `none`, stroke: `#fff`, [`stroke-dasharray`]: 3.5}], 
                                           [`circle`, {cx: 8, r: 4}],

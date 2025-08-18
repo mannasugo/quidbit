@@ -644,6 +644,10 @@ class Event {
 
                 document.querySelector(`#volbase`).innerHTML = Stat[3];
               }])});
+
+            View.pop();
+
+            View.DOM([`#gSwapY`, Models.init.toSwap({HL: HL, Y: Y})]);
           }
         });   
       }
@@ -1102,6 +1106,12 @@ class Event {
       }]);
     });
 
+    HL.sort((A, B) => {return B - A});
+
+    View.pop();
+
+    View.DOM([`#gSwapY`, Models.init.toSwap({HL: HL, Y: Y})]);
+
     this.plotState(Arg);
   }
 
@@ -1390,6 +1400,10 @@ class Event {
 
     document.querySelectorAll(`.ival-alt`).forEach(A => {A.style.display = `flex`;});
 
+    View.pop();
+
+    View.DOM([`#gSwapY`, Models.init.toSwap({HL: HL, Y: Y})]);
+
     this.plotState(Arg);
   }
 
@@ -1580,6 +1594,10 @@ class Event {
 
         document.querySelector(`#volbase`).innerHTML = Stat[3];
       }])});
+
+    View.pop();
+
+    View.DOM([`#gSwapY`, Models.init.toSwap({HL: HL, Y: Y})]);
   }
 
   plotState (Arg) {
