@@ -545,13 +545,13 @@ class Tools {
 
             this.OB[key].forEach(Obj => {
 
-              if (Obj.status === `open` && Obj.side === `buy` && Obj.info[0] >= this.Y[key]) { 
+              if (Obj.status === `open` && Obj.side === `buy` && Obj.info[1] >= this.Y[key]) { 
 
                 Obj.status = `close`;
 
                 Obj[`execute`] = new Date().valueOf();
 
-                this.XY[key][X_Z].push([new Date().valueOf(), this.Y[key], Obj.info[1]]);
+                this.XY[key][X_Z].push([new Date().valueOf(), this.Y[key], Obj.info[2]]);
               }
             });
           }
@@ -871,7 +871,17 @@ class Tools {
 
       Arg[0].book[0].sort((A, B) => {return B.ts - A.ts}).forEach(Obj => {
 
-        if (Obj.mug === Arg[1] && Obj.info[0] === plot && Obj.status === `open`) { Open[plot].push([Obj.side, Obj.info[2], Obj.info[1], Obj.ts]) }
+        if (Obj.mug === Arg[1] && Obj.info[0] === plot && Obj.status === `open`) { 
+
+          Open[plot].push([Obj.side, Obj.info[2], Obj.info[1], Obj.ts]);
+
+          this.OB[plot].forEach(O => {
+
+            if (O.md !== Obj.md) { this.OB[plot].push({info: Obj.info, md: Obj.md, mug: Obj.mug, side: Obj.side, status: Obj.status, ts: Obj.ts}) }
+          });
+
+          if (this.OB[plot].length === 0) { this.OB[plot].push({info: Obj.info, md: Obj.md, mug: Obj.mug, side: Obj.side, status: Obj.status, ts: Obj.ts}) };
+        }
       });
     });
 

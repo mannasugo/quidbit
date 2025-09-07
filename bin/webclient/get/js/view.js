@@ -148,6 +148,53 @@ let Models = {
       });
 
       return DOM;
+    }, 
+
+    fiatSlot: () => {
+
+      let DOM = [[]];
+
+      return [`div`, {id: `fiatSlot`}, 
+        [[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+          [[`span`, {style: {width: `${30}%`}}, `Currency`],
+          [`div`, {style: {width: `${70}%`}}, 
+            [[`a`, {id: `fiatSet`, href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+              [[`img`, {src: `/webclient/get/svg/${Constants.SVG[`KES`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+              [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
+                [[`span`, {}, `KES`], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, `Kenya Shilling`]]], 
+              [`div`, {class: `_gZz`}, 
+                [[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, width: `${8}px`}}, 
+                  [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]], 
+            [`div`, {id: `fiatMultiple`, style: {background: `#0b0b48`, display: `none`, position: `absolute`, top: `${28}px`, width: `${100}%`, [`z-index`]: 64}}, DOM[0]]]]]],
+        [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
+          [[`span`, {style: {width: `${30}%`}}, `Balance`],
+          [`div`, {style: {width: `${70}%`}}, 
+            [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+              [[`div`, {class: `_gxM _geQ`, style: {background: `#ffffff1f`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+                [[`div`, {class: `_eYG`}],
+                [`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
+                  [[`span`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
+                  [`span`, {id: ``, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `KES`]]]]]]]]]]],
+        [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+          [[`span`, {style: {width: `${30}%`}}, `MPESA Mobile`],
+          [`div`, {style: {width: `${70}%`}}, 
+            [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+              [[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+                [[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
+                  [[`input`, {id: ``, placeholder: `070123...`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `100%`}}]]]]]]]]]]],
+        [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+          [[`span`, {style: {width: `${30}%`}}, `Amount`],
+          [`div`, {style: {width: `${70}%`}}, 
+            [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+              [[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+                [[`div`, {class: `_eYG`}],
+                [`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
+                  [[`input`, {id: ``, placeholder: `0.00`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`text-align`]: `right`}}]]]]]]]]]]],
+        [`div`, {id: ``, class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+          [[`div`, {style: {width: `${30}%`}}],
+          [`div`, {style: {width: `${70}%`}}, 
+            [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+              [[`a`, {href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Deposit with MPESA`]]]]]]]]];
     }
   },
 
@@ -357,6 +404,18 @@ let Models = {
           [[`span`, {}, hold], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, Constants.wallet[hold][0]]]]]]);
     }
 
+    Clients.typeWallet = `crypto`;
+
+    let Settype = [`fiat`, `crypto`];
+
+    DOM[1] = [`div`, {id: `viamultiple`, style: {background: `#0b0b48`, display: `none`, position: `absolute`, top: `${28}px`, width: `${100}%`, [`z-index`]: 64}}, []];
+
+    Settype.forEach(type => {
+
+      DOM[1][2].push([`a`, {href: `javascript:;`, style: {[`border-top`]: `1px solid #393939ad`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+        [[`span`, {style: {opacity: .5, [`text-transform`]: `capitalize`}}, type]]]);
+    });
+
     return [`section`, {id: `holds`, style: {height: `${100}%`}}, 
       [[`div`, {style: {height: `inherit`}}, 
         [[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
@@ -364,16 +423,24 @@ let Models = {
             [[`span`, {style: {padding: `${6}px ${12}px ${6}px 0`}}, `Funding`]]]]], 
         [`div`, {style: {padding: `${24}px ${12}px`}}, 
           [[`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+            [[`span`, {style: {width: `${30}%`}}, `Type`],
+            [`div`, {style: {width: `${70}%`}}, 
+              [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+                [[`a`, {id: `setVia`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
+                  [[`span`, {}, `Crypto`], 
+                  [`div`, {class: `_gZz`}, 
+                    [[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, width: `${8}px`}}, 
+                      [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]], DOM[1]]]]]]], 
+          [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+            [[`span`, {style: {width: `${30}%`}}, `Action`],
+            [`div`, {style: {[`font-weight`]: 600, width: `${70}%`}}, 
+              [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
+                [[`a`, {id: `action`, for: `deposit`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`margin-right`]: `${1.5}px`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${50}%`}}, `Deposit`],
+                [`a`, {id: `action`, for: `withdraw`, href: `javascript:;`, style: {background: `#0b0b48`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`margin-left`]: `${1.5}px`, width: `${50}%`}}, `Withdraw`]]]]]]],
+          [`section`, {id: `plus`}], 
+          [`div`, {class: `hold-fiat _gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
                                     [
-                                        [`span`, {style: {width: `${30}%`}}, `Action`],
-                                        [`div`, {style: {width: `${70}%`}}, 
-                                            [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-                                                [
-                                                    [`a`, {id: `action`, for: `deposit`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`margin-right`]: `${1.5}px`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${50}%`}}, `Deposit`],
-                                                    [`a`, {id: `action`, for: `withdraw`, href: `javascript:;`, style: {background: `#0b0b48`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`margin-left`]: `${1.5}px`, width: `${50}%`}}, `Withdraw`]]]]]]],
-                                [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
-                                    [
-                                        [`span`, {style: {width: `${30}%`}}, `Wallet`],
+                                        [`span`, {style: {width: `${30}%`}}, `Token`],
                                         [`div`, {style: {width: `${70}%`}}, 
                                             [[`a`, {id: `walletSelect`, href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                                               [
@@ -384,7 +451,7 @@ let Models = {
                                                         [[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, width: `${8}px`}}, 
                                                             [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]], 
                                                 [`div`, {id: `walletOptions`, style: {background: `#0b0b48`, display: `none`, position: `absolute`, top: `${28}px`, width: `${100}%`, [`z-index`]: 64}}, DOM[0]]]]]],
-                                [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
+          [`div`, {class: `hold-fiat _gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Funds`],
                                         [`div`, {style: {width: `${70}%`}}, 
@@ -396,13 +463,13 @@ let Models = {
                                                             [
                                                                 [`span`, {style: {[`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0,[`padding-right`]: `${12}px`}}, `0.00`],
                                                                 [`span`, {id: `balance`, style: {[`border-left`]: `${1}px solid #353535`, [`padding-left`]: `${12}px`}}, `BTC`]]]]]]]]]]],
-                                [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
+          [`div`, {class: `hold-fiat _gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Network`],
                                         [`div`, {style: {width: `${70}%`}}, 
                                             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
                                                 [[`a`, {id: `viaSelect`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`font-family`]: `generica`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, `BTC`]]]]]]],
-                                [`div`, {id: `toAddress`, class: `wallet-in _gxM _geQ`, style: {display: (!Arg.wallets.BTC)? `none`: `flex`, [`margin-bottom`]: `${8}px`}}, 
+          [`div`, {id: `toAddress`, class: `hold-fiat wallet-in _gxM _geQ`, style: {display: (!Arg.wallets.BTC)? `none`: `flex`, [`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Deposit to`],
                                         [`div`, {style: {width: `${70}%`}}, 
@@ -413,7 +480,7 @@ let Models = {
                                                     [`a`, {href: `javascript:;`, class: `_gZz`, style: {display: `flex`}}, 
                                                         [[`svg`, {viewbox: `0 0 24 24`, style: {height: `${14}px`, margin: `0 ${8}px`, width: `${14}px`}}, 
                                                             [[`path`, {fill: `none`, stroke: `#5dad69`, [`stroke-width`]: 2, d: `M2 22 16 22 16 6 2 6z M8 6 8 2 22 2 22 18 16 18`}]]]]]]]]]]],
-                                [`div`, {class: `wallet-out _gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
+          [`div`, {class: `hold-fiat wallet-out _gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Withdraw to`],
                                         [`div`, {style: {width: `${70}%`}}, 
@@ -421,7 +488,7 @@ let Models = {
                                                 [[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                                                     [[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
                                                             [[`input`, {id: `walletto`, placeholder: `long press to paste`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `100%`}}]]]]]]]]]]],
-                                [`div`, {class: `wallet-out _gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
+          [`div`, {class: `hold-fiat wallet-out _gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`span`, {style: {width: `${30}%`}}, `Amount`],
                                         [`div`, {style: {width: `${70}%`}}, 
@@ -431,13 +498,13 @@ let Models = {
                                                         [`div`, {class: `_eYG`}],
                                                         [`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
                                                             [[`input`, {id: `amountto`, placeholder: `0.00`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`text-align`]: `right`}}]]]]]]]]]]],
-                                [`div`, {id: `initWallet`, class: `wallet-in _gxM _geQ`, style: {display: (!Arg.wallets.BTC)? `flex`: `none`, [`margin-bottom`]: `${8}px`}}, 
+          [`div`, {id: `initWallet`, class: `hold-fiat wallet-in _gxM _geQ`, style: {display: (!Arg.wallets.BTC)? `flex`: `none`, [`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`div`, {style: {width: `${30}%`}}],
                                         [`div`, {style: {width: `${70}%`}}, 
                                             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
                                                 [[`a`, {for: `${Tools.coats([`BTC`, `BTC`])}`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Generate Deposit Address`]]]]]]],
-                                [`div`, {class: `wallet-out _gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
+          [`div`, {class: `hold-fiat wallet-out  _gxM _geQ`, style: {display: `none`, [`margin-bottom`]: `${8}px`}}, 
                                     [
                                         [`div`, {style: {width: `${30}%`}}],
                                         [`div`, {style: {width: `${70}%`}}, 
@@ -686,7 +753,7 @@ let Models = {
                   [`div`, {class: `_gxM`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
                                             [
                                                 [`a`, {id: `modalWallet`, href: `javascript:;`, class: `v202312301635`, style: {[`align-self`]: `center`, height: `${24}px`, margin: `0 ${12}px`, width: `${24}px`}}], 
-                                                [`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: `none`, [`font-family`]: `qb`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputWallet(Arg)]]]]]]]]]],
+                                                [`div`, {style: {background: `#000`, [`border`]: `${1}px solid #353535`, display: `none`, [`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, position: `absolute`, right: `${-1}px`, top: `${36}px`, width: `${360}px`, [`z-index`]: 54}}, [this.inputWallet(Arg)]]]]]]]]]],
                     [`div`, {id: `mutiple3`, style: {background: `#000`, [`border`]: `${1}px solid #353535`, [`border-left`]: 0, [`border-top`]: 0, display: `none`, position: `absolute`, top: `${38}px`, [`max-width`]: `${400}px`, width: `${100}%`, [`z-index`]: 16}}, 
                         [
                             [`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${12}px ${12}px ${0}`}}, 

@@ -419,6 +419,67 @@ class Route {
       }, 1000);
 
       Polling.on(`az`, Arg => {App.emit(`az`, [Arg[4], Tools.plotXY([Arg[0], Arg[1], Arg[2], Arg[3], Arg[5]])])});
+
+    /**  Polling.on(`toSwap`, Arg => {
+
+        let Swap = [[], [[], []]];
+
+        Tools.OB[`${Arg[0][0]}-${Arg[0][1]}`].forEach(Obj => {
+
+          Arg[1].forEach(Old => {
+
+            if (Obj.mug === Arg[2] && Old[3] === Obj.ts && Obj.status === `close`) { Swap[0].push(Obj) }       
+          });
+        });
+
+        if (Swap[0].length > 0) {
+
+          Sql.pulls(Raw => {
+
+            Swap[0].forEach(Obj => {
+
+              if (Raw.book[1][Obj.md] && Raw.book[1][Obj.md].status === `open`) {
+
+                let md = createHash(`md5`).update(`${Obj.execute}`, `utf8`).digest(`hex`);
+
+                if (Obj.side === `buy`) {
+
+                  Swap[1][0].push({ilk: `trade`, info: {token: Arg[0][0]}, ledge: {[hold]: 0, [Obj.mug]: [0, Obj.info[2]]}, md: md, ts: Obj.execute});
+
+                  Swap[1][0].push({ilk: `trade`, info: {token: Arg[0][1]}, ledge: {[hold]: 0, [Obj.mug]: [0, -(Obj.info[1]*Obj.info[2])]}, md: md, ts: Obj.execute});
+
+                  Swap[1][1].push({info: Obj.info, md: md, mug: Obj.mug, side: `buy`, ts: Obj.execute});
+
+                  let Old = Tools.typen(Tools.coats(Raw.book[1][Obj.md]));
+
+                  Raw.book[1][Obj.md][`execute`] = Obj.execute;
+
+                  Raw.book[1][Obj.md].status = `close`;
+
+                  Sql.places([`book`, Raw.book[1][Obj.md], Old, (Q) => {}]);
+                }
+              }
+            });
+
+            Sql.putlist([`ledge`, Swap[1][0], (Q) => {
+
+              Sql.putlist([`trades`, Swap[1][1], (Q) => {
+
+                Sql.pulls(Raw => {
+
+                  let Old = [];
+
+                  Old[0] = Tools.oldOpen([Raw, Arg[2]])[`${Arg[0][0]}-${Arg[0][1]}`];
+
+                  Old[1] = Tools.oldSwap([Raw, Arg[2]])[`${Arg[0][0]}-${Arg[0][1]}`];
+
+                  App.emit(`toSwap`, [Arg[2], Old]);
+                });
+              }]);
+            }]);
+          });
+        }
+      });**/
     });
   }
 }

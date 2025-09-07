@@ -1106,11 +1106,56 @@ class Event {
       }]);
     });
 
+    this.listen([document.querySelector(`#setVia`), `click`, S => {
+
+      document.querySelector(`#viamultiple`).style.display = (document.querySelector(`#viamultiple`).style.display === `flex`)? `none`: `flex`;
+    }]);
+
+    document.querySelectorAll(`#viamultiple a`).forEach(Child => {
+
+      this.listen([Child, `click`, S => {
+
+        document.querySelectorAll(`#viamultiple a`).forEach(A => {A.style.background = `none`});
+
+        Child.style.background = `#242471`;
+
+        document.querySelector(`#setVia span`).innerText = Child.querySelector(`span`).innerText;
+
+        document.querySelector(`#viamultiple`).style.display = `none`;
+
+        Clients.typeWallet = Child.querySelector(`span`).innerText.toLowerCase();
+
+        if (Clients.typeWallet === `fiat`) {
+
+          document.querySelectorAll(`#holds .hold-fiat`).forEach(A => {A.style.display = `none`});
+
+          View.pop();
+
+          View.DOM([`#plus`, [Models.init.fiatSlot()]]);
+
+          document.querySelector(`#plus`).style.display = `flex`;
+        }
+
+        if (Clients.typeWallet === `crypto`) {
+
+          document.querySelector(`#plus`).style.display = `none`;
+
+          let Bloc = [0, 1, 2, 6]
+
+          Bloc.forEach(a => {document.querySelectorAll(`#holds .hold-fiat`)[a].style.display = `flex`});
+        }
+      }]);
+    });
+
     HL.sort((A, B) => {return B - A});
 
     View.pop();
 
     View.DOM([`#gSwapY`, Models.init.toSwap({HL: HL, Y: Y})]);
+
+    //setInterval(() => { if (Tools.typen(Clients.old)[0].length > 0 && Clients.mug) { io().emit(`toSwap`, [Arg.plot[0], Tools.typen(Clients.old)[0], Clients.mug]) } }, 5000);
+
+    //io().on(`toSwap`, Obj => { if (Clients.mug && Clients.mug === Obj[0]) { Clients.old = Tools.coats(Obj[1]) } });
 
     this.plotState(Arg);
   }
