@@ -181,7 +181,7 @@ let Models = {
             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
               [[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                 [[`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
-                  [[`input`, {id: ``, placeholder: `070123...`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `100%`}}]]]]]]]]]]],
+                  [[`input`, {id: `callSlot`, class: `fiat-float`, placeholder: `eg. 254701234567`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `100%`}}]]]]]]]]]]],
         [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
           [[`span`, {style: {width: `${30}%`}}, `Amount`],
           [`div`, {style: {width: `${70}%`}}, 
@@ -189,12 +189,12 @@ let Models = {
               [[`div`, {class: `_gxM _geQ`, style: {background: `#0b0b48a3`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                 [[`div`, {class: `_eYG`}],
                 [`div`, {class: `_gZz`, style: {[`font-family`]: `insvg`}}, 
-                  [[`input`, {id: ``, placeholder: `0.00`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`text-align`]: `right`}}]]]]]]]]]]],
+                  [[`input`, {id: `floatSlot`, class: `fiat-float`, placeholder: `0.00`, style: {background: `transparent`, [`block-size`]: `${24}px`, border: `none`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: 0, outline: `none`, [`text-align`]: `right`}}]]]]]]]]]]],
         [`div`, {id: ``, class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
           [[`div`, {style: {width: `${30}%`}}],
           [`div`, {style: {width: `${70}%`}}, 
             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-              [[`a`, {href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Deposit with MPESA`]]]]]]]]];
+              [[`a`, {id: `mpesa`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Deposit with MPESA`]]]]]]]]];
     }
   },
 
@@ -433,7 +433,7 @@ let Models = {
                       [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]], DOM[1]]]]]]], 
           [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${8}px`}}, 
             [[`span`, {style: {width: `${30}%`}}, `Action`],
-            [`div`, {style: {[`font-weight`]: 600, width: `${70}%`}}, 
+            [`div`, {style: {width: `${70}%`}}, 
               [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
                 [[`a`, {id: `action`, for: `deposit`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, [`margin-right`]: `${1.5}px`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${50}%`}}, `Deposit`],
                 [`a`, {id: `action`, for: `withdraw`, href: `javascript:;`, style: {background: `#0b0b48`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, [`margin-left`]: `${1.5}px`, width: `${50}%`}}, `Withdraw`]]]]]]],

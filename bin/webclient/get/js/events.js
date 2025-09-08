@@ -1134,6 +1134,62 @@ class Event {
           View.DOM([`#plus`, [Models.init.fiatSlot()]]);
 
           document.querySelector(`#plus`).style.display = `flex`;
+
+          document.querySelectorAll(`.fiat-float`).forEach(DOM => {
+
+            this.listen([DOM, `keyup`, S => {
+
+              let Slot = this.getSource(S);
+
+              if (!parseInt(Slot.value)) Slot.value = 0;
+
+              if (Slot.id === `callSlot` && Slot.value.length > 11) { Slot.value = Slot.value.substr(0, 12) }
+
+              Slot.value = parseInt(Slot.value);
+            }]);
+          });
+
+          this.listen([document.querySelector(`#mpesa`), `click`, S => {
+        
+            if (!Clients.mug) {
+
+              View.pop();
+
+              View.DOM([`#modal`, [Models.inputMug([2])]]);
+
+              this.emailSalt();
+
+              document.querySelector(`#modal`).style.display = `flex`;
+            }
+
+            if (Clients.mug) {
+
+              let Values = [
+                (!Tools.slim(document.querySelector(`#callSlot`).value))? false: Tools.slim(document.querySelector(`#callSlot`).value),
+                (!Tools.slim(document.querySelector(`#floatSlot`).value))? false: Tools.slim(document.querySelector(`#floatSlot`).value)];
+
+              if (Values[0] === false || typeof parseFloat(Values[0]) !== `number` || Values[0].toString().length !== 12) return;
+
+              if (Values[1] === false || typeof parseFloat(Values[1]) !== `number`) return;
+
+              let XHR = [];
+
+              XHR[0] = Tools.pull([
+                `/json/web/`, { 
+                  call: parseFloat(Values[0]),
+                  flag: `incoming`,
+                  float: parseFloat(Values[1]),
+                  mug: Clients.mug, 
+                  pull: `incoming`}]);
+
+              Values = [];
+
+              XHR[0].onload = () => {
+
+                XHR[1] = Tools.typen(XHR[0].response);
+              }
+            }
+          }]);
         }
 
         if (Clients.typeWallet === `crypto`) {

@@ -6,7 +6,9 @@ const {  existsSync, mkdir, readdir, readFile, readFileSync, stat, unlinkSync, w
 
 const { createHash } = require(`crypto`);
 
-const RQ = require(`request`);
+const HR = require(`request`);
+
+const JHR = require(`https`);
 
 const hold = new Date(`1996-01-20`).valueOf();
 
@@ -95,6 +97,48 @@ class Tools {
   }
 
   coats (types) { return JSON.stringify(types) }
+
+  incoming (Arg) {
+
+    Arg[0].forEach(Obj => {
+
+      if (Obj.state === `queue`) {
+
+        let POST = JHR.request({
+          hostname: `backend.payhero.co.ke`,
+          port: 443,
+          path: `/api/v2/transaction-status`,
+          method: `GET`,
+          headers: {
+            Authorization: `Basic ZmRqQjFUbmZJT05qZHFlRHc1Wnc6MHVFZEx3aU5YOTZ4anVodm5PSUNXZjBjUUNNeWFlUDRYMjVrbTFoOA==`,
+            [`Content-Type`]: `application/json`}}, Blob => {
+
+          let blob = ``;
+
+          Blob.on(`data`, (buffer) => {blob += buffer});
+                            
+          Blob.on('end', () => {
+
+            if (blob) {
+
+              if (Tools.typen(blob).status === `SUCCESS`) {
+
+                let Old = Tools.typen(Tools.coats(Obj));
+
+                Obj.state = `complete`;
+                
+                Arg[1]([Obj, Old]);
+              }
+            }
+          });
+        });
+
+        POST.write(Tools.coats({reference: Obj.tx}));
+
+        POST.end();
+      }
+    });
+  }
 
   holding (Arg) {
 
@@ -528,7 +572,7 @@ class Tools {
 
         let key = `${Y[0][0]}-${Y[0][1]}`;
 
-        RQ(`https://api.coinbase.com/v2/prices/${key}/spot`, (flaw, State, value) => {
+        HR(`https://api.coinbase.com/v2/prices/${key}/spot`, (flaw, State, value) => {
 
           if (!flaw && State.statusCode == 200 && this.typen(value) && this.typen(value).data && parseFloat(this.typen(value).data.amount) > 0) {
 

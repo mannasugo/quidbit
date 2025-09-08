@@ -4,7 +4,7 @@ const { readFile, readFileSync, createReadStream, mkdir, stat, writeFile, writeF
 
 const { createHash } = require(`crypto`);
 
-//const RQ = require(`request`);
+const JHR = require(`https`);
 
 const { Constants, Sql, Tools } = require(`./tools`);
 
@@ -78,6 +78,61 @@ class Route {
             Sql.pulls(Raw => {
 
               if (Pulls.pull === `app`) { Arg[1].end(Tools.coats({ago: Tools.plot24(), mug: Pulls.mug, utils: Tools.utils([`index`, `fiat`])})) }
+
+              if (Pulls.pull === `incoming`) {
+
+                if (Raw.mugs[1][Pulls.mug]) {
+
+                  let ts = new Date().valueOf();
+
+                  let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`);
+
+                  let POST = JHR.request({
+                    hostname: `backend.payhero.co.ke`,
+                    port: 443,
+                    path: `/api/v2/payments`,
+                    method: `POST`,
+                    headers: {
+                      Authorization: `Basic ZmRqQjFUbmZJT05qZHFlRHc1Wnc6MHVFZEx3aU5YOTZ4anVodm5PSUNXZjBjUUNNeWFlUDRYMjVrbTFoOA==`,
+                      [`Content-Type`]: `application/json`}}, Blob => {
+
+                      let blob = ``;
+
+                      Blob.on(`data`, (buffer) => {blob += buffer});
+                            
+                      Blob.on('end', () => {
+
+                        if (blob) {console.log(blob)
+
+                          if (Tools.typen(blob).reference) {
+
+                            Sql.puts([`incoming`, {
+                              float: parseFloat(Pulls.float),
+                              id: Pulls.call, 
+                              md: md,
+                              mug: Pulls.mug, 
+                              state: `queue`,
+                              ts: ts,
+                              tx: Tools.typen(blob).reference}, (Bill) => {
+
+                              Arg[1].end(Tools.coats({tx: Tools.typen(blob).reference}));
+                            }]);
+                          }
+                        }
+                      });
+                  });
+
+                  POST.write(Tools.coats({
+                    amount: parseFloat(Pulls.float),
+                    channel_id: 2283,
+                    external_reference: md, 
+                    network_code: `63902`,
+                    phone_number: `0` + Pulls.call.toString().substr(3),
+                    provider: `sasapay`}));
+
+                  POST.end();
+                }
+              }
 
               if (Pulls.pull === `mug`) { 
 
@@ -272,15 +327,15 @@ class Route {
 
               if (Pulls.pull === `wallets`) {
 
-                                                                let Client = {wallets: {}};
+                let Client = {wallets: {}};
 
-                                                                if (Raw.mugs[1][Pulls.mug]) {
+                if (Raw.mugs[1][Pulls.mug]) {
 
-                                                                        let File = Tools.typen(readFileSync(`json/wallets.json`, {encoding: `utf8`}));
+                  let File = Tools.typen(readFileSync(`json/wallets.json`, {encoding: `utf8`}));
 
-                                                                        let Roll = [[], [], []];
+                  let Roll = [[], [], []];
 
-                                                                        if (Pulls.flag === `balance`) {
+                  if (Pulls.flag === `balance`) {
 
                                                                                 let Hold = [[], {}];
 
@@ -317,13 +372,26 @@ class Route {
                                                                                         }
                                                                                 });
 
-                                                                                Sql.putlist([`ledge`, Tofile[1], (SQ) => {
+                    Tools.incoming([Raw.incoming[0], (Obj) => { 
 
-                                                                                        Arg[1].end(Tools.coats({hold: Tools.holding([Raw, Pulls.mug])}));
-                                                                                }]);
-                                                                        }
+                      Sql.places([`invoice`, Obj[0], Obj[1], (Q) => {
 
-                                                                        if (Pulls.flag === `init`) {
+                        Tofile[1].push({
+                          ilk: `deposit`, 
+                          info: {token: `KES`}, 
+                          ledge: {[hold]: 0, [Obj[0].mug]: [0, Obj[0].float]}, 
+                          md: Obj[0].md,
+                          ts: Obj[0].ts});
+                      }]);    
+                    }]);
+
+                    Sql.putlist([`ledge`, Tofile[1], (SQ) => {
+
+                      Arg[1].end(Tools.coats({hold: Tools.holding([Raw, Pulls.mug])}));
+                    }]);
+                  }
+
+                  if (Pulls.flag === `init`) {
 
                                                                                 Raw.wallets[0].forEach(Obj => {
 
