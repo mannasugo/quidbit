@@ -159,7 +159,7 @@ let Models = {
           [[`span`, {style: {width: `${30}%`}}, `Currency`],
           [`div`, {style: {width: `${70}%`}}, 
             [[`a`, {id: `fiatSet`, href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-              [[`img`, {src: `/webclient/get/svg/${Constants.SVG[`KES`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+              [[`img`, {src: `/wa/get/svg/${Constants.SVG[`KES`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
               [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
                 [[`span`, {}, `KES`], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, `Kenya Shilling`]]], 
               [`div`, {class: `_gZz`}, 
@@ -229,7 +229,7 @@ let Models = {
             DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`, [`font-size`]: `${10.88}px`}}, 
                 [[`div`, {class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`ltter-spacing`]: 0, padding: `${2}px ${12}px`}}, 
                     [
-                        [`img`, {src: `/webclient/get/svg/${Constants.SVG[fave]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${12}px`, [`width`]: `${12}px`}}],
+                        [`img`, {src: `/wa/get/svg/${Constants.SVG[fave]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${12}px`, [`width`]: `${12}px`}}],
                         [`span`, {style: {[`font-family`]: `intext`, [`margin-left`]: `${10}px`}}, fave], 
                         [`div`, {class: `_gxM`}, DOM2]]]]]);
         }
@@ -330,7 +330,7 @@ let Models = {
                 [[`a`, {id: `typeSelect`, href: `javascript:;`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                   [[`span`, {}, `Market`], 
                   [`div`, {class: `_gZz`}, 
-                    [[`svg`, {viewbox: `0 0 24 24`, style: {height: `${8}px`, width: `${8}px`}}, 
+                    [[`svg`, {viewbox: `0 0 24 24`, style: {display: `none`, height: `${8}px`, width: `${8}px`}}, 
                       [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 6 12 18 24 6`}]]]]]]], DOM[2]]]]]]],
                                 [`div`, {class: `_gxM _geQ`, style: {[`margin-bottom`]: `${22}px`}}, 
                                     [
@@ -399,7 +399,7 @@ let Models = {
     for (let hold in Constants.wallet) {
 
       DOM[0].push([`a`, {href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-top`]: `1px solid #393939ad`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
-        [[`img`, {src: `/webclient/get/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+        [[`img`, {src: `/wa/get/svg/${Constants.SVG[hold]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
         [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
           [[`span`, {}, hold], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, Constants.wallet[hold][0]]]]]]);
     }
@@ -444,7 +444,7 @@ let Models = {
                                         [`div`, {style: {width: `${70}%`}}, 
                                             [[`a`, {id: `walletSelect`, href: `javascript:;`, class: `_gxM _geQ`, style: {background: `#242471`, color: `#fff`, display: `flex`, [`padding`]: `${2}px ${12}px`, width: `${100}%`}}, 
                                               [
-                                                    [`img`, {src: `/webclient/get/svg/${Constants.SVG[`BTC`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
+                                                    [`img`, {src: `/wa/get/svg/${Constants.SVG[`BTC`]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${14}px`, [`width`]: `${14}px`}}],
                                                     [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`margin-left`]: `${6}px`}}, 
                                                         [[`span`, {}, `BTC`], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, `Bitcoin`]]], 
                                                     [`div`, {class: `_gZz`}, 

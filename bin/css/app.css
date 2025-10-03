@@ -4,28 +4,14 @@
 
 @font-face {
   font-family: 'insvg';
-  src: url('/webclient/get/font/din.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-	font-family: geometria;
-	src: url(/ssl/given/glyphs/v202203251236.geometria.ttf) format('truetype');
-	font-style: normal;
-	font-weight: 100;
-}
-
-@font-face {
-  font-family: 'litera';
-  src: url('/ssl/given/glyphs/litera.ttf') format('truetype');
+  src: url('/wa/get/font/din.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: qb;
-  src: url(/webclient/get/font/63e613c1e565b81f95046014_neworder-medium.otf) format('opentype');
+  src: url(/wa/get/font/63e613c1e565b81f95046014_neworder-medium.otf) format('opentype');
   font-style: normal;
   font-weight: 100;
 }
@@ -34,33 +20,19 @@
   font-family: intext;
   font-style: normal;
   font-weight: 100;  
-  src: url(/webclient/get/font/PFDinTextUniversalLight.otf) format("opentype")
-}
-
-@font-face {
-  font-family: es;
-  font-style: normal;
-  font-weight: 100;
-  src: url(/ssl/given/glyphs/ES.woff2) format("woff2")
+  src: url(/wa/get/font/PFDinTextUniversalLight.otf) format("opentype")
 }
 
 @font-face {
   font-family: generica;
-  src: url(/webclient/get/font/Generica_0.otf) format('opentype');
+  src: url(/wa/get/font/Generica_0.otf) format('opentype');
   font-style: normal;
   font-weight: 100;
 }
 
 @font-face {
   font-family: aspg;
-  src: url(/webclient/get/font/Aspergit.otf) format('opentype');
-  font-style: normal;
-  font-weight: 100;
-}
-
-@font-face {
-  font-family: itc;
-  src: url(/ssl/given/glyphs/ITCAvantGardeStdBk.otf) format('opentype');
+  src: url(/wa/get/font/Aspergit.otf) format('opentype');
   font-style: normal;
   font-weight: 100;
 }
@@ -316,7 +288,7 @@ body {
 
 .v202312231716 {background-image: url(/ssl/given/svg/io_202312231716.svg);}
 
-.v202312301635 {background-image: url(/webclient/get/svg/wallet_202312301635.svg);}
+.v202312301635 {background-image: url(/wa/get/svg/wallet_202312301635.svg);}
 
 .v202312301653 {background-image: url(/ssl/given/svg/vault_202312301653.svg);}
 
@@ -338,7 +310,7 @@ body {
 
 .v202412192124 {background-image: url(/ssl/given/svg/202412192124.svg);}
 
-.v202501181301 {background-image: url(/webclient/get/svg/202501181301.svg);}
+.v202501181301 {background-image: url(/wa/get/svg/202501181301.svg);}
 
 .ival:hover, #row > div > div:hover, #list > div:hover {background: #4848481c}
 

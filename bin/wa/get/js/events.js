@@ -1011,7 +1011,7 @@ class Event {
 
     this.listen([document.querySelector(`#typeSelect`), `click`, S => {
 
-      document.querySelector(`#typelist`).style.display = (document.querySelector(`#typelist`).style.display === `flex`)? `none`: `flex`;
+      //document.querySelector(`#typelist`).style.display = (document.querySelector(`#typelist`).style.display === `flex`)? `none`: `flex`;
     }]);
 
     document.querySelectorAll(`#typelist a`).forEach(Child => {

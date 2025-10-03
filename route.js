@@ -24,7 +24,7 @@ class Route {
 
       if (State[1] === `favicon.ico`) {
 
-        let File = createReadStream(`bin/webclient/get/svg/v202411141235.svg`);
+        let File = createReadStream(`bin/wa/get/svg/v202411141235.svg`);
 
         Arg[1].writeHead(200, {[`Content-Type`]: `image/svg+xml`});
 
@@ -300,26 +300,29 @@ class Route {
 
                       let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`),  value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
 
-                      let Row = [{
-                        ilk: `trade`,
-                        info: {token: Pulls.plot[1]}, 
-                        ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float*value]},
-                        md: md, 
-                        ts: ts}, {
-                        ilk: `trade`,
-                        info: {token: Pulls.plot[0]},
-                        ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]},
-                        md: md, 
-                        ts: ts}];
+                      if (Pulls.type === `market`) {
 
-                      Sql.putlist([`ledge`, Row, (Q) => {
+                        let Row = [{
+                          ilk: `trade`,
+                          info: {token: Pulls.plot[1]}, 
+                          ledge: {[hold]: 0, [Pulls.mug]: [0, Pulls.float*value]},
+                          md: md, 
+                          ts: ts}, {
+                          ilk: `trade`,
+                          info: {token: Pulls.plot[0]},
+                          ledge: {[hold]: 0, [Pulls.mug]: [0, -(Pulls.float)]},
+                          md: md, 
+                          ts: ts}];
 
-                        Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float], md: md, mug: Pulls.mug, side: `sell`, ts: ts}, (Q) => {
+                        Sql.putlist([`ledge`, Row, (Q) => {
 
-                          Tools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float]);
+                          Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float], md: md, mug: Pulls.mug, side: `sell`, ts: ts}, (Q) => {
 
-                          Arg[1].end(Tools.coats({mug: Pulls.mug}))}])
-                      }]);
+                            ools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float]);
+
+                            Arg[1].end(Tools.coats({mug: Pulls.mug}))}])
+                        }]);
+                      }
                     }
                   }
                 }
