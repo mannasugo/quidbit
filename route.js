@@ -300,7 +300,7 @@ class Route {
 
                       let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`),  value = OB[`${Pulls.plot[0]}-${Pulls.plot[1]}`];
 
-                      if (Pulls.type === `market`) {
+                      //if (Pulls.type === `market`) {console.log(new Date())
 
                         let Row = [{
                           ilk: `trade`,
@@ -318,11 +318,11 @@ class Route {
 
                           Sql.puts([`trades`, {info: [`${Pulls.plot[0]}-${Pulls.plot[1]}`, value, Pulls.float], md: md, mug: Pulls.mug, side: `sell`, ts: ts}, (Q) => {
 
-                            ools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float]);
+                            Tools.XY[`${Pulls.plot[0]}-${Pulls.plot[1]}`][X_Z].push([ts, value, Pulls.float]);
 
                             Arg[1].end(Tools.coats({mug: Pulls.mug}))}])
                         }]);
-                      }
+                     // }
                     }
                   }
                 }
