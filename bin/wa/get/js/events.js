@@ -103,7 +103,9 @@ class Event {
 
       let ZY = 0;
 
-      if (Plot[Arg.plot[0].toString().replace(`,`, `-`)]) ZY = Plot[Arg.plot[0].toString().replace(`,`, `-`)];
+      if (Plot[Arg.plot[0].toString().replace(`,`, `-`)]) { ZY = Plot[Arg.plot[0].toString().replace(`,`, `-`)] }
+
+      if (parseFloat(ZY) > 0) { document.title = `QB:${Arg.plot[0].toString().replace(`,`, `/`)} ${ZY}` }
 
       if (RECT.length > 0 && ZY > 0 && document.querySelector(`#ZY`)) {
 
@@ -273,8 +275,8 @@ class Event {
             [
               [`div`, {class: `_geQ _gxM`, style: {[`width`]: `${35}%`}}, 
                 [
-                  [`img`, {src: `/webclient/get/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
-                  [`img`, {src: `/webclient/get/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
+                  [`img`, {src: `/wa/get/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
+                  [`img`, {src: `/wa/get/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
                   [`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
                     [ 
                       [`span`, {style: {[`font-size`]: `${11}px`, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
@@ -314,8 +316,8 @@ class Event {
             [
               [`div`, {class: `_geQ _gxM`, style: {[`width`]: `${35}%`}}, 
                 [
-                  [`img`, {src: `/webclient/get/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
-                  [`img`, {src: `/webclient/get/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
+                  [`img`, {src: `/wa/get/svg/${Constants.SVG[Stat[0].split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`, transform: `translateX(${0}px)`}}],
+                  [`img`, {src: `/wa/get/svg/${Constants.SVG[Stat[0].split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
                   [`a`, {href: `/trade/${Stat[0].replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`margin-left`]: `${6}px`}}, 
                     [ 
                       [`span`, {style: {[`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Stat[0].split(`-`)[0]}`], 
@@ -675,7 +677,7 @@ class Event {
 
         Child.style.background = `#242471`;
 
-        document.querySelector(`#walletSelect img`).src = `/webclient/get/svg/${Constants.SVG[Child.querySelectorAll(`span`)[0].innerHTML]}.svg`;
+        document.querySelector(`#walletSelect img`).src = `/wa/get/svg/${Constants.SVG[Child.querySelectorAll(`span`)[0].innerHTML]}.svg`;
 
         document.querySelectorAll(`#walletSelect span`)[0].innerHTML = Child.querySelectorAll(`span`)[0].innerHTML;
 

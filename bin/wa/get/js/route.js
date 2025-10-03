@@ -65,6 +65,8 @@ class Route {
 
           if (Web.plot) {
 
+            document.title = `QB:${State[4].replace(`_`, `-`) || (0).toFixed(Web.plot[1])}`
+
             Clients.old = Tools.coats(Web.old);
 
             View.DOM([`div`, [Models.plot(Web)]]);
@@ -76,8 +78,6 @@ class Route {
             document.querySelector(`body`).style.background = `#000`;
 
             Event.plot(Web);
-
-            document.title = `${Tools.typen(Clients.plot)[State[4].replace(`_`, `-`)] || (0).toFixed(Web.plot[1])} ${State[4]}`
           }
         } 
       }
