@@ -96,7 +96,9 @@ let Models = {
           [`div`, {style: {width: `${20}%`}}, 
             [[`span`, {id: `COST`, style: {[`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
           [`div`, {style: {width: `${15}%`}}, 
-            [[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]]]);
+            [[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]],
+          [`span`, {style: {[`text-align`]: `right`, width: `${20}%`}}, ``],
+          [`span`, {style: {[`text-align`]: `right`, width: `${15}%`}}, ``]]]]]);
       });
 
       return [`div`, {id: `modalSpot`, style: {background: `#0000008a`, [`font-family`]: `insvg`, hight: `${400}px`, margin: `auto`, [`max-width`]: `${800}px`, width: `${100}%`}}, 

@@ -59,7 +59,7 @@ class Event {
 
     document.querySelector(`#modal`).style.display = `flex`;
 
-    this.listen([document.querySelector(`#modalSpot path`), `click`, S => {
+    this.listen([document.querySelector(`#modalSpot svg`), `click`, S => {
 
       document.querySelector(`#modal`).style.display = `none`;
     }]);
