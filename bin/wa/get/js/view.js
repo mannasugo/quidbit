@@ -94,9 +94,9 @@ let Models = {
             [[`span`, {style: {[`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Obj.split(`-`)[0]}`], 
             [`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Obj.split(`-`)[1]}`]]],
           [`div`, {style: {width: `${20}%`}}, 
-            [[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
+            [[`span`, {id: `COST`, style: {[`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
           [`div`, {style: {width: `${15}%`}}, 
-            [[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]]]);
+            [[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]]]);
       });
 
       return [`div`, {id: `modalSpot`, style: {background: `#0000008a`, [`font-family`]: `insvg`, hight: `${400}px`, margin: `auto`, [`max-width`]: `${800}px`, width: `${100}%`}}, 
