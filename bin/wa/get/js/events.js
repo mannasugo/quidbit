@@ -53,6 +53,17 @@ class Event {
 
   plot (Arg) {
 
+    View.pop();
+
+    View.DOM([`#modal`, [Models.init.modalSpot()]]);
+
+    document.querySelector(`#modal`).style.display = `flex`;
+
+    this.listen([document.querySelector(`#modalSpot path`), `click`, S => {
+
+      document.querySelector(`#modal`).style.display = `none`;
+    }]);
+
     Arg.XY.forEach(K => {
 
       if (K[2].length > 0) {

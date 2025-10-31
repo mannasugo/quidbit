@@ -78,6 +78,42 @@ let Models = {
               [`span`, {style: {overflow: `hidden`, [`text-overflow`]: `ellipsis`}}, `${Arg[2]} ${Arg[3]} at ${Arg[4]}`]]]]]]]]];
     },
 
+    modalSpot: (Arg) => {
+
+      let Plot = [`EUR-CAD`, `EUR-CHF`, `USD-KES`, `USD-NOK`, `USD-SEK`, `USD-ZAR`];
+
+      let DOM = [];
+
+      Plot.forEach((Obj, A) => {
+
+        DOM.push([`div`, {id: Obj, class: `_geQ _gxM`, style: {background: (A%2 !== 1)? `#8888881c`: `none`, padding: `${6}px ${12}px`}}, 
+          [[`div`, {class: `_geQ _gxM`, style: {[`width`]: `${30}%`}}, 
+          [[`img`, {src: `/wa/get/svg/${Constants.SVG[Obj.split(`-`)[0]]}.svg`, style: {height: `${16}px`, [`max-width`]: `${16}px`}}],
+          [`img`, {src: `/wa/get/svg/${Constants.SVG[Obj.split(`-`)[1]]}.svg`, style: {height: `${16}px`,[`max-width`]: `${16}px`, transform: `translateX(${-3.6667}px)`}}], 
+          [`a`, {href: `/trade/${Obj.replace(`-`, `_`)}`, class: `_gxM`, style: {[`align-items`]: `baseline`, color: `#fff`, display: `flex`, [`margin-left`]: `${6}px`}}, 
+            [[`span`, {style: {[`font-size`]: `${11}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `${Obj.split(`-`)[0]}`], 
+            [`span`, {style: {color: `#8e8e8e`, [`font-size`]: `${10}px`, [`font-weight`]: 300, overflow: `hidden`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`}}, `/${Obj.split(`-`)[1]}`]]],
+          [`div`, {style: {width: `${20}%`}}, 
+            [[`span`, {id: `COST`, style: {[`font-family`]: `intext`, [`font-size`]: `${11.88}px`,[`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]], 
+          [`div`, {style: {width: `${15}%`}}, 
+            [[`span`, {id: `MOD`, style: {color: `#02ff02`, [`font-family`]: `intext`, [`font-size`]: `${11.88}px`, [`font-weight`]: 300, [`letter-spacing`]: `${.25}px`, [`text-align`]: `right`}}, ``]]]]]]]);
+      });
+
+      return [`div`, {id: `modalSpot`, style: {background: `#0000008a`, [`font-family`]: `insvg`, hight: `${400}px`, margin: `auto`, [`max-width`]: `${800}px`, width: `${100}%`}}, 
+        [[`div`, {class: `_gxM _geQ`, style: {margin: `${6}px ${12}px`}}, 
+          [[`span`, {style: {[`font-size`]: `${9.88}px`}}, `NEW PAIR LISTINGS`], 
+          [`div`, {class: `_gZz`}, [[`span`, {style: {}}, [[`svg`, {id: ``, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${8}px`, width: `${8}px`}}, 
+            [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 0 24 24 M24 0 0 24 `}]]]]]]]]], 
+        [`div`, {style: {background: `#000000e5`}}, 
+          [[`div`, {class: `_gxM`, style: {[`font-size`]: `${10.88}px`, margin: `${6}px ${12}px`, opacity: .5}}, 
+            [[`span`, {style: {width: `${30}%`}}, `Pair`],
+            [`span`, {style: {[`text-align`]: `right`, width: `${20}%`}}, `Market`],
+            [`span`, {style: {[`text-align`]: `right`, width: `${15}%`}}, `Market/24h`],
+            [`span`, {style: {[`text-align`]: `right`, width: `${20}%`}}, `Volume`],
+            [`span`, {style: {[`text-align`]: `right`, width: `${15}%`}}, `Volume/24h`]]], 
+          [`div`, {style: {margin: `${6}px ${0}px`}}, DOM]]]]]
+    },
+
     oldOpen: () => {
 
       let DOM = [];

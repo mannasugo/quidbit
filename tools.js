@@ -418,7 +418,13 @@ class Tools {
 
       let XY = [[]];
 
-      for (let a = 0; a < (Arg[2]*3600000)/86400000; a++) {
+      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:00`).valueOf();
+
+      //X_D = X_Z
+
+      console.log(X_Z, DAY)
+
+      for (let a = 0; a < parseInt((Arg[2]*3600000)/86400000); a++) {
 
         if (existsSync(`bin/data/spot/klines/json/3600000/${Arg[0][0]}${Arg[0][1]}_-_${X_D - 60000*60*24*a}.json`) === true) {
 
@@ -433,8 +439,6 @@ class Tools {
           }
         }
       }
-
-      let X_Z = new Date(`${new Date(Arg[3]).getFullYear()}-${new Date(Arg[3]).getMonth() + 1}-${new Date(Arg[3]).getDate()} ${new Date(Arg[3]).getHours() }:00`).valueOf();
 
       for (let A = 0; A < Arg[2]; A++) {
 
