@@ -75,6 +75,35 @@ class Event {
       }]);
     }
 
+    this.listen([document.querySelector(`#modalWallet`), `click`, S => {
+
+      let Obj = this.getSource(S).parentNode.querySelector(`div`);
+
+      Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
+
+      if (Clients.mug) {
+
+        let XHR = Tools.pull([
+          `/json/web`, {
+            flag: `balance`,
+            mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`}]);
+
+        XHR.onload = () => {
+
+          let Obj = Tools.typen(XHR.response);
+
+          Clients.hold = Tools.coats(Obj.hold);
+
+          document.querySelectorAll(`#balance`)[1].previousElementSibling.innerText = Obj.hold[document.querySelectorAll(`#balance`)[1].innerText];
+        }
+      }
+    }]);
+
+    this.listen([document.querySelector(`#walletSelect`), `click`, S => {
+
+      document.querySelector(`#walletOptions`).style.display = (document.querySelector(`#walletOptions`).style.display === `flex`)? `none`: `flex`;
+    }]);
+
     Arg.XY.forEach(K => {
 
       if (K[2].length > 0) {
@@ -89,9 +118,12 @@ class Event {
     
     let Y = parseFloat(document.body.clientHeight - 70);
 
-    let RECT = document.querySelectorAll(`#kline rect`);
+    if (document.querySelector(`#kline rect`)) {
 
-    X = RECT[RECT.length - 1].getAttribute(`x`);
+      let RECT = document.querySelectorAll(`#kline rect`);
+
+      X = RECT[RECT.length - 1].getAttribute(`x`);
+    }
 
     io().on(`plotY`, Spot => {
 
@@ -234,35 +266,6 @@ class Event {
       let Obj = this.getSource(S).parentNode.querySelector(`div`);
 
       Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
-    }]);
-
-    this.listen([document.querySelector(`#modalWallet`), `click`, S => {
-
-      let Obj = this.getSource(S).parentNode.querySelector(`div`);
-
-      Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
-
-      if (Clients.mug) {
-
-        let XHR = Tools.pull([
-          `/json/web`, {
-            flag: `balance`,
-            mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`}]);
-
-        XHR.onload = () => {
-
-          let Obj = Tools.typen(XHR.response);
-
-          Clients.hold = Tools.coats(Obj.hold);
-
-          document.querySelectorAll(`#balance`)[1].previousElementSibling.innerText = Obj.hold[document.querySelectorAll(`#balance`)[1].innerText];
-        }
-      }
-    }]);
-
-    this.listen([document.querySelector(`#walletSelect`), `click`, S => {
-
-      document.querySelector(`#walletOptions`).style.display = (document.querySelector(`#walletOptions`).style.display === `flex`)? `none`: `flex`;
     }]);
 
     this.listen([document.querySelector(`#splitX`), `click`, S => {
@@ -1130,6 +1133,8 @@ class Event {
       }]);
     });
 
+    /**
+
     this.listen([document.querySelector(`#setVia`), `click`, S => {
 
       document.querySelector(`#viamultiple`).style.display = (document.querySelector(`#viamultiple`).style.display === `flex`)? `none`: `flex`;
@@ -1226,6 +1231,8 @@ class Event {
         }
       }]);
     });
+
+    **/
 
     HL.sort((A, B) => {return B - A});
 
