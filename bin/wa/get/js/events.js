@@ -53,16 +53,27 @@ class Event {
 
   plot (Arg) {
 
-    View.pop();
+    if (!Clients.modals) {Clients.modals = Tools.coats([])}
 
-    View.DOM([`#modal`, [Models.init.modalSpot()]]);
+    if (Tools.typen(Clients.modals).indexOf(`new`) === -1) {
 
-    document.querySelector(`#modal`).style.display = `flex`;
+      View.pop();
 
-    this.listen([document.querySelector(`#modalSpot svg`), `click`, S => {
+      View.DOM([`#modal`, [Models.init.modalSpot()]]);
 
-      document.querySelector(`#modal`).style.display = `none`;
-    }]);
+      document.querySelector(`#modal`).style.display = `flex`;
+
+      this.listen([document.querySelector(`#modalSpot svg`), `click`, S => {
+
+        document.querySelector(`#modal`).style.display = `none`;
+
+        let Modals = Tools.typen(Clients.modals);
+
+        Modals.push(`new`);
+
+        Clients.modals = Tools.coats(Modals);
+      }]);
+    }
 
     Arg.XY.forEach(K => {
 
