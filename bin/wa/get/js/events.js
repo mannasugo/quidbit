@@ -118,12 +118,12 @@ class Event {
     
     let Y = parseFloat(document.body.clientHeight - 70);
 
-    if (document.querySelector(`#kline rect`)) {
+    //if (document.querySelector(`#kline rect`)) {
 
       let RECT = document.querySelectorAll(`#kline rect`);
 
       X = RECT[RECT.length - 1].getAttribute(`x`);
-    }
+    //}
 
     io().on(`plotY`, Spot => {
 
