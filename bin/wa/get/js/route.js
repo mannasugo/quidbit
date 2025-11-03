@@ -39,7 +39,7 @@ class Route {
           Clients.plot = Tools.coats(Plot)
         });
 
-        /*if (Clients.plot)*/ window.location = `/trade/BTC_USD`;
+        /*if (Clients.plot)*/ window.location = `/trade/EUR_USD`;
       });
     }
 
