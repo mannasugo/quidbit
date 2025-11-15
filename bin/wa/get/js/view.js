@@ -80,7 +80,7 @@ let Models = {
 
     modalSpot: (Arg) => {
 
-      let Plot = [`EUR-CAD`, `EUR-CHF`, `USD-KES`, `USD-NOK`, `USD-SEK`, `USD-ZAR`];
+      let Plot = [`POL-USD`, `NZD-JPY`, `USD-INR`];
 
       let DOM = [];
 
@@ -568,7 +568,7 @@ let Models = {
         [[`span`, {style: {color: `#8e8e8e`, overflow: `hidden`, [`text-align`]: (Feat[2])? `right`: `left`, [`text-overflow`]: `ellipsis`, [`text-transform`]: `uppercase`, [`white-space`]: `nowrap`}}, Feat[0]]]]);
     });
 
-    let Multiple = [`AUD`, `CAD`, `CHF`, `BTC`, `ETH`, `EUR`, `USD`];
+    let Multiple = [`AUD`, `CAD`, `CHF`, `BTC`, `ETH`, `EUR`, `NZD`, `USD`, `USDT`];
 
     Multiple.forEach(A => {
 
@@ -760,7 +760,7 @@ let Models = {
       `main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
         [[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
           [[`div`, {class: `_gxM _geQ`}, 
-            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#fff`, [`font-family`]: `litera`, [`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#6bc679`, [`font-family`]: `qb`, [`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
             [`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
               [[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
             [`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
