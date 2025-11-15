@@ -259,16 +259,16 @@ let Models = {
 
                 DOM2.push([`div`, {id: `${fave}-${b}`, class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`margin-left`]: `${12}px`}}, 
                     [
-                        [`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `intext`, [`letter-spacing`]: `${.88}px`, [`white-space`]: `nowrap`}}, `${fave}/${b}`],
-                        [`span`, {id: `COST`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, /*`${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`*/],
-                        [`span`, {id: `MOD`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`}}, ``]]]);
+                        [`a`, {href: `/trade/${fave}_${b}`, style: {color: `#fff`, [`font-family`]: `insvg`, [`letter-spacing`]: `${.88}px`, [`white-space`]: `nowrap`}}, `${fave}/${b}`],
+                        [`span`, {id: `COST`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `insvg`, [`font-size`]: `${10.48}px`, [`margin`]: `${0}px ${6}px ${0}px`}}, /*`${parseFloat(Tools.typen(Clients.plot)[`${fave}-${b}`][0]).toLocaleString()}`*/],
+                        [`span`, {id: `MOD`, style: {[`letter-spacing`]: `${.65}px`, [`font-family`]: `insvg`, [`font-size`]: `${10.48}px`}}, ``]]]);
             });
 
-            DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`, [`font-size`]: `${10.88}px`}}, 
+            DOM.push([`section`, {class: `_gxM`, style: {[`border-right`]: `${1}px solid #353535`, [`font-size`]: `${10.08}px`}}, 
                 [[`div`, {class: `_gxM _geQ`, style: {[`align-items`]: `baseline`, [`ltter-spacing`]: 0, padding: `${2}px ${12}px`}}, 
                     [
                         [`img`, {src: `/wa/get/svg/${Constants.SVG[fave]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${12}px`, [`width`]: `${12}px`}}],
-                        [`span`, {style: {[`font-family`]: `intext`, [`margin-left`]: `${10}px`}}, fave], 
+                        [`span`, {style: {[`font-family`]: `insvg`, [`margin-left`]: `${10}px`}}, fave], 
                         [`div`, {class: `_gxM`}, DOM2]]]]]);
         }
 
@@ -560,7 +560,7 @@ let Models = {
 
     let DOM = {column: [], multiple: [], split: []};
 
-    let Column = [[`pair`, 35], [`last trade`, 25, true], [`24h`, 40, true]];
+    let Column = [[`pair`, 35], [`market price`, 25, true], [`24h`, 40, true]];
 
     Column.forEach(Feat => {
 
@@ -577,7 +577,7 @@ let Models = {
 
     for (let span in Constants.ival) {
 
-      DOM.split.push([`a`, {href: `javascript:;`, class: `ival`, style: {background: (Clients.plotXSplit === span)? `#8888881C`: `#000`, [`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
+      DOM.split.push([`a`, {href: `javascript:;`, class: `ival`, style: {background: (Clients.plotXSplit === span)? `#8888881C`: `#000`, [`border-top`]: `${1}px solid #353535`, color: `#fff`, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`z-index`]: 16}}, span]);
     }
 
     let HL = [], Vols = [];
@@ -760,7 +760,7 @@ let Models = {
       `main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
         [[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
           [[`div`, {class: `_gxM _geQ`}, 
-            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#fff`, [`font-family`]: `litera`, [`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
             [`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
               [[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
             [`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
@@ -772,13 +772,13 @@ let Models = {
             [[`div`, {id: ``, style: {[`border-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
               [[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
                 [[`div`, {},
-                  [[`a`, {id: `mutiple`, href: `javascript:;`, class: `_gxM _geQ`, style: {color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${11}px`, padding: `${6}px ${12}px`}}, 
+                  [[`a`, {id: `mutiple`, href: `javascript:;`, class: `_gxM _geQ`, style: {color: `#fff`, display: `flex`, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, padding: `${6}px ${12}px`}}, 
                     [[`span`, {}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
                     [`svg`, {viewbox: `0 0 24 24`, style: {height: `${6}px`, [`margin-left`]: `${6}px`, width: `${6}px`}}, 
                       [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 6, d: `M0 6 12 18 24 6`}]]]]], 
                   [`div`, {id: `mutiple2`, style: {background: `#000`, bottom: `${-2}px`, display: `none`, height: `${3}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 36}}]]],
                 [`div`, {style: {}},
-                  [[`a`, {id: `splitX`, href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, display: `flex`, [`font-family`]: `intext`, [`font-size`]: `${10.88}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`text-align`]: `center`}}, 
+                  [[`a`, {id: `splitX`, href: `javascript:;`, class: `_gxM _geQ`, style: {[`border-left`]: `${1}px solid #353535`, [`border-right`]: `${1}px solid #353535`, color: `#fff`, display: `flex`, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`, padding: `${6}px ${12}px`, [`text-align`]: `center`}}, 
                     [[`span`, {}, Clients.plotXSplit],
                     [`svg`, {viewbox: `0 0 24 24`, style: {height: `${6}px`, [`margin-left`]: `${4}px`, width: `${6}px`}}, 
                       [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 6, d: `M0 6 12 18 24 6`}]]]]], 
@@ -800,9 +800,9 @@ let Models = {
                                         [
                                             [`span`, {class: `v202412192124`, style: {height: `${16}px`, width: `${16}px`}}],
                                             [`input`, {id: `quiz`, style: {background: `transparent`, border: `none`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${10}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${4}px ${12}px`, [`text-transform`]: `uppercase`, width: `${100}%`}}]]], 
-                                    [`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${11}px`, [`font-weight`]: 300, margin: `${6}px ${0}px`}}, DOM.multiple]]], 
+                                    [`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`font-weight`]: 300, margin: `${6}px ${0}px`}}, DOM.multiple]]], 
                             [`div`, {style: {margin: `${6}px ${12}px ${0}`}}, 
-                                [[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `intext`, [`font-size`]: `${9}px`}}, DOM.column]]], 
+                                [[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `insvg`, [`font-size`]: `${9}px`}}, DOM.column]]], 
                             [`div`, {id: `list`, style: {[`max-height`]: `${300}px`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}]]],
                     [`section`, {id: ``, class: `_gxM`, style: {width: `${100}%`}}, 
                         [
