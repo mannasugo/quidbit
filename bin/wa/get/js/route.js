@@ -66,7 +66,9 @@ class Route {
 
           if (Web.plot) {
 
-            document.title = `QB:${State[4].replace(`_`, `-`) || (0).toFixed(Web.plot[1])}`
+            document.title = `QB:${State[4].replace(`_`, `-`) || (0).toFixed(Web.plot[1])}`;
+
+            Clients.incoming = Tools.coats(Web.incoming);
 
             Clients.old = Tools.coats(Web.old);
 

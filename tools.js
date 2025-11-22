@@ -10,6 +10,8 @@ const HR = require(`request`);
 
 const JHR = require(`https`);
 
+const INTASEND = require('intasend-node');
+
 const hold = new Date(`1996-01-20`).valueOf();
 
 const DAY = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`).valueOf();
@@ -1118,6 +1120,9 @@ let Constants = {
 module.exports = {
 
   Constants: Constants,
+
+  Pay: {
+    inta: new INTASEND(`ISPubKey_live_be13c375-b61d-4995-8c50-4268c604c335`, `ISSecretKey_live_abfdcb11-7d5b-4fbb-9aec-3fcf153bc5d4`, false)},
   
   Sql : new Sql([{
     host: `127.0.0.1`,

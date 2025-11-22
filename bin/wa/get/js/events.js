@@ -1133,7 +1133,7 @@ class Event {
       }]);
     });
 
-    /**
+    /**/
 
     this.listen([document.querySelector(`#setVia`), `click`, S => {
 
@@ -1213,9 +1213,20 @@ class Event {
 
               Values = [];
 
+              document.querySelector(`#callSlot`).value = ``;
+
               XHR[0].onload = () => {
 
                 XHR[1] = Tools.typen(XHR[0].response);
+
+                if (XHR[1].invoice) {
+
+                  let Yet = Tools.typen(Clients.incoming);
+
+                  Yet.push(XHR[1].invoice.invoice_id);
+
+                  Clients.incoming = Tools.coats(Yet);
+                }
               }
             }
           }]);
@@ -1232,7 +1243,7 @@ class Event {
       }]);
     });
 
-    **/
+    /**/
 
     HL.sort((A, B) => {return B - A});
 

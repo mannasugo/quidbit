@@ -6,7 +6,7 @@ const { createHash } = require(`crypto`);
 
 const JHR = require(`https`);
 
-const { Constants, Sql, Tools } = require(`./tools`);
+const { Constants, Pay, Sql, Tools } = require(`./tools`);
 
 const hold = new Date(`1996-01-20`).valueOf();
 
@@ -87,58 +87,37 @@ class Route {
 
                   let md = createHash(`md5`).update(`${ts}`, `utf8`).digest(`hex`);
 
-                  let POST = JHR.request({
-                    hostname: `backend.payhero.co.ke`,
-                    port: 443,
-                    path: `/api/v2/payments`,
-                    method: `POST`,
-                    headers: {
-                      Authorization: `Basic ZmRqQjFUbmZJT05qZHFlRHc1Wnc6MHVFZEx3aU5YOTZ4anVodm5PSUNXZjBjUUNNeWFlUDRYMjVrbTFoOA==`,
-                      [`Content-Type`]: `application/json`}}, Blob => {
+                  Pay.inta.collection()
+                    .mpesaStkPush({
+                      email: Raw.mugs[1][Pulls.mug].email,
+                      host: `https://quidbit.space`,
+                      amount: parseFloat(Pulls.float),
+                      phone_number: Pulls.call,
+                      api_ref: md})
+                    .then((Blob) => {console.log(Blob)
 
-                      let blob = ``;
+                      if (Blob.id) {
 
-                      Blob.on(`data`, (buffer) => {blob += buffer});
-                            
-                      Blob.on('end', () => {
-
-                        if (blob) {console.log(blob)
-
-                          if (Tools.typen(blob).reference) {
-
-                            Sql.puts([`incoming`, {
-                              float: parseFloat(Pulls.float),
-                              id: Pulls.call, 
-                              md: md,
-                              mug: Pulls.mug, 
-                              state: `queue`,
-                              ts: ts,
-                              tx: Tools.typen(blob).reference}, (Bill) => {
-
-                              Arg[1].end(Tools.coats({tx: Tools.typen(blob).reference}));
-                            }]);
-                          }
+                        Sql.puts([`incoming`, {
+                          float: parseFloat(Pulls.float),
+                          id: Pulls.call, 
+                          invoice: Blob.invoice.invoice_id, 
+                          md: md,
+                          mug: Pulls.mug, 
+                          state: `queue`,
+                          ts: ts,
+                          tx: Blob.id}, (Bill) => {Arg[1].end(Tools.coats(Blob))}]);
                         }
-                      });
-                  });
-
-                  POST.write(Tools.coats({
-                    amount: parseFloat(Pulls.float),
-                    channel_id: 2283,
-                    external_reference: md, 
-                    network_code: `63902`,
-                    phone_number: `0` + Pulls.call.toString().substr(3),
-                    provider: `sasapay`}));
-
-                  POST.end();
+                      })
+                    .catch((flaw) => {console.error(`STK Push blob error:`, flaw)});
                 }
               }
 
               if (Pulls.pull === `mug`) { 
 
-                                                                if (Pulls.flag === `emailAvail`) {
+                if (Pulls.flag === `emailAvail`) {
 
-                                                                        let Mail = [];
+                  let Mail = [];
 
                                                                         Raw.mugs[0].forEach(Mug => {
 
@@ -151,7 +130,7 @@ class Route {
                                                                         }
                                                                 }
 
-                                                                if (Pulls.flag === `emailSalt`) {
+                if (Pulls.flag === `emailSalt`) {
 
                                                                         let Obj = [];
 
@@ -170,7 +149,7 @@ class Route {
                                                                         }
                                                                 }
 
-                                                                if (Pulls.flag === `saltAvail`) {
+                if (Pulls.flag === `saltAvail`) {
 
                                                                         let Mail = [];
 
@@ -211,6 +190,8 @@ class Route {
 
                 let Old = [[], [], []]
 
+                let Via = [];
+
                 if (Raw.mugs[1][Pulls.mug]) {
 
                   Raw.wallets[0].forEach(Obj => {
@@ -223,12 +204,17 @@ class Route {
                     }
                   });
 
+                  Raw.incoming[0].forEach(Obj => {
+
+                    if (Obj.mug === Pulls.mug && Obj.state === `queue`) {Via.push(Obj.invoice)}
+                  });
+
                   Old[0] = Tools.oldOpen([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
 
                   Old[1] = Tools.oldSwap([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
                 }
 
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), old: Old, plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), incoming: Via, old: Old, plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
               }
 
               if (Pulls.pull === `trade`) {
