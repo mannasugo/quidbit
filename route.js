@@ -503,7 +503,7 @@ class Route {
 
           let Queue = [];
 
-          Raw.incoming[0].forEach(Obj => { if (Obj.mug === Pulls.mug && Obj.state === `queue`) { Queue.push(Obj.invoice) } });
+          Raw.incoming[0].forEach(Obj => { if (Obj.mug === Arg[0] && Obj.state === `queue`) { Queue.push(Obj.invoice) } });
 
           App.emit(`incoming`, [Arg[0], Queue])
         });
