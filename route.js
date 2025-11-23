@@ -468,11 +468,10 @@ class Route {
 
             if (Obj.mug === Arg[0] && Arg[1].indexOf(Obj.invoice) > -1 && Obj.state === `queue`) Yet.push([Obj.invoice, Obj.md])
           });
-        });
 
-        Yet.forEach(Obj => {
+          Yet.forEach(Obj => {
 
-          Pay.inta.collection()
+            Pay.inta.collection()
             .status(Obj[0])
             .then((Blob) => {
 
@@ -500,6 +499,13 @@ class Route {
               }
             })
             .catch((flaw) => {console.error(`STATUS:`, flaw)});
+          });
+
+          let Queue = [];
+
+          Raw.incoming[0].forEach(Obj => { if (Obj.mug === Pulls.mug && Obj.state === `queue`) { Queue.push(Obj.invoice) } });
+
+          App.emit(`incoming`, [Arg[0], Queue])
         });
       });
 
