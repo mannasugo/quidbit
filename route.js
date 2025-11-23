@@ -94,7 +94,7 @@ class Route {
                       amount: parseFloat(Pulls.float),
                       phone_number: Pulls.call,
                       api_ref: md})
-                    .then((Blob) => {console.log(Blob)
+                    .then((Blob) => {
 
                       if (Blob.id) {
 
@@ -109,7 +109,7 @@ class Route {
                           tx: Blob.id}, (Bill) => {Arg[1].end(Tools.coats(Blob))}]);
                         }
                       })
-                    .catch((flaw) => {console.error(`STK Push blob error:`, flaw)});
+                    .catch((flaw) => {console.error(`STK FLAW:`, flaw)});
                 }
               }
 
@@ -119,16 +119,10 @@ class Route {
 
                   let Mail = [];
 
-                                                                        Raw.mugs[0].forEach(Mug => {
+                  Raw.mugs[0].forEach(Mug => {if (Mug.email === Pulls.email) Mail.push(Pulls.email)});
 
-                                                                                if (Mug.email === Pulls.email) Mail.push(Pulls.email);
-                                                                        });
-
-                                                                        if (Mail.length === 0) {
-
-                                                                                Arg[1].end(Tools.coats({email: Pulls.email}));
-                                                                        }
-                                                                }
+                  if (Mail.length === 0) {Arg[1].end(Tools.coats({email: Pulls.email}))}
+                }
 
                 if (Pulls.flag === `emailSalt`) {
 
@@ -361,19 +355,6 @@ class Route {
                                                                                         }
                                                                                 });
 
-                    Tools.incoming([Raw.incoming[0], (Obj) => { 
-
-                      Sql.places([`invoice`, Obj[0], Obj[1], (Q) => {
-
-                        Tofile[1].push({
-                          ilk: `deposit`, 
-                          info: {token: `KES`}, 
-                          ledge: {[hold]: 0, [Obj[0].mug]: [0, Obj[0].float]}, 
-                          md: Obj[0].md,
-                          ts: Obj[0].ts});
-                      }]);    
-                    }]);
-
                     Sql.putlist([`ledge`, Tofile[1], (SQ) => {
 
                       Arg[1].end(Tools.coats({hold: Tools.holding([Raw, Pulls.mug])}));
@@ -419,7 +400,7 @@ class Route {
                                                                                 }]);            
                                                                         }
 
-                                                                        if (Pulls.flag === `walletto`) {
+                  if (Pulls.flag === `walletto`) {
 
                                                                                 if (Pulls.float > 0 && Tools.holding([Raw, Pulls.mug])[Pulls.wallet[1][0]] > Pulls.float) {
 
@@ -476,6 +457,51 @@ class Route {
       }, 1000);
 
       Polling.on(`az`, Arg => {App.emit(`az`, [Arg[4], Tools.plotXY([Arg[0], Arg[1], Arg[2], Arg[3], Arg[5]])])});
+
+      Polling.on(`incoming`, Arg => {
+
+        Sql.pulls(Raw => {
+
+          let Yet = []
+
+          Raw.incoming[0].forEach(Obj => {
+
+            if (Obj.mug === Arg[0] && Arg[1].indexOf(Obj.invoice) > -1 && Obj.state === `queue`) Yet.push([Obj.invoice, Obj.md])
+          });
+        });
+
+        Yet.forEach(Obj => {
+
+          Pay.inta.collection()
+            .status(Obj[0])
+            .then((Blob) => {
+
+              if (Blob.invoice.state === `COMPLETE` && !Raw.ledge[1][Obj[1]]) {
+
+                let Old = Tools.typen(Tools.coats(Raw.incoming[1][Obj[1]]));
+
+                Raw.incoming[1][Obj[1]].state = `complete`;
+
+                  Sql.puts([`ledge`, {
+                    ilk: `deposit`, 
+                    info: {token: `KES`}, 
+                    ledge: {[hold]: 0, [Arg[0]]: [0, Raw.incoming[1][Obj[1]].float]}, 
+                    md: Obj[1],
+                    ts: Raw.incoming[1][Obj[1]].ts}, (Q) => { Sql.places([`incoming`, Raw.incoming[1][Obj[1]], Old, (Q) => {}]) }]);
+              }
+
+              if (Blob.invoice.state === `FAILED`) {
+
+                let Old = Tools.typen(Tools.coats(Raw.incoming[1][Obj[1]]));
+
+                Raw.incoming[1][Obj[1]].state = `fail`;
+
+                Sql.places([`incoming`, Raw.incoming[1][Obj[1]], Old, (Q) => {}])
+              }
+            })
+            .catch((flaw) => {console.error(`STATUS:`, flaw)});
+        });
+      });
 
     /**  Polling.on(`toSwap`, Arg => {
 

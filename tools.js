@@ -100,48 +100,6 @@ class Tools {
 
   coats (types) { return JSON.stringify(types) }
 
-  incoming (Arg) {
-
-    Arg[0].forEach(Obj => {
-
-      if (Obj.state === `queue`) {
-
-        let POST = JHR.request({
-          hostname: `backend.payhero.co.ke`,
-          port: 443,
-          path: `/api/v2/transaction-status`,
-          method: `GET`,
-          headers: {
-            Authorization: `Basic ZmRqQjFUbmZJT05qZHFlRHc1Wnc6MHVFZEx3aU5YOTZ4anVodm5PSUNXZjBjUUNNeWFlUDRYMjVrbTFoOA==`,
-            [`Content-Type`]: `application/json`}}, Blob => {
-
-          let blob = ``;
-
-          Blob.on(`data`, (buffer) => {blob += buffer});
-                            
-          Blob.on('end', () => {
-
-            if (blob) {
-
-              if (Tools.typen(blob).status === `SUCCESS`) {
-
-                let Old = Tools.typen(Tools.coats(Obj));
-
-                Obj.state = `complete`;
-                
-                Arg[1]([Obj, Old]);
-              }
-            }
-          });
-        });
-
-        POST.write(Tools.coats({reference: Obj.tx}));
-
-        POST.end();
-      }
-    });
-  }
-
   holding (Arg) {
 
     let Hold = [Constants.fiat.concat(Constants.tokens), {}];

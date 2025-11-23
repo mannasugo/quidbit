@@ -1251,7 +1251,16 @@ class Event {
 
     View.DOM([`#gSwapY`, Models.init.toSwap({HL: HL, Y: Y})]);
 
-    //setInterval(() => { if (Tools.typen(Clients.old)[0].length > 0 && Clients.mug) { io().emit(`toSwap`, [Arg.plot[0], Tools.typen(Clients.old)[0], Clients.mug]) } }, 5000);
+    setInterval(() => { 
+
+      let ts = new Date().valueOf();
+
+      //if (Tools.typen(Clients.old)[0].length > 0 && Clients.mug) { io().emit(`toSwap`, [Arg.plot[0], Tools.typen(Clients.old)[0], Clients.mug]) }
+
+      if (Tools.typen(Clients.incoming).length > 0 && Clients.mug) { io().emit(`incoming`, [Clients.mug, Tools.typen(Clients.incoming)])}
+    }, 5000);
+
+    io().on(`incoming`, Obj => { if (Clients.mug && Clients.mug === Obj[0]) { Clients.incoming = Tools.coats(Obj[1]) } });
 
     //io().on(`toSwap`, Obj => { if (Clients.mug && Clients.mug === Obj[0]) { Clients.old = Tools.coats(Obj[1]) } });
 
