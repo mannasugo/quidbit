@@ -182,7 +182,9 @@ class Route {
 
                 let Client = {wallets: {}};
 
-                let Old = [[], [], []]
+                let Old = [[], [], []];
+
+                let OX = [[], [], []];
 
                 let Via = [];
 
@@ -200,7 +202,12 @@ class Route {
 
                   Raw.incoming[0].forEach(Obj => {
 
-                    if (Obj.mug === Pulls.mug && Obj.state === `queue`) {Via.push(Obj.invoice)}
+                    if (Obj.mug === Pulls.mug && Obj.state === `queue`) {Via.push(Obj.invoice); OX[2].push(Obj)}
+                  });
+
+                  Raw.ledge[0].forEach(Obj => {
+
+                    if (Obj.ledge[Pulls.mug] && Obj.ilk === `deposit`) {OX[0].push([Obj.ts, Obj.ledge[Pulls.mug][1], Obj.info.token])}
                   });
 
                   Old[0] = Tools.oldOpen([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
@@ -208,7 +215,7 @@ class Route {
                   Old[1] = Tools.oldSwap([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
                 }
 
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), incoming: Via, old: Old, plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), incoming: Via, old: Old, ox: OX, plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
               }
 
               if (Pulls.pull === `trade`) {

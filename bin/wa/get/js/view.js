@@ -233,6 +233,25 @@ let Models = {
           [`div`, {style: {width: `${70}%`}}, 
             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
               [[`a`, {id: `mpesa`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Deposit with MPESA`]]]]]]]]];
+    },
+
+    YOX: (Arg) => {
+
+      let DOM = [];
+
+      Arg.forEach(Obj => {console.log(Obj)
+
+        DOM.push([`div`, {class: `_gxM _geQ`, style: {margin: `${1}px ${12}px`,  [`max-height`]: `${24}px`}}, 
+          [[`a`, {href: `javascript:;`, style: {color: `#fff`, overflow: `hidden`, [`text-decoration`]: `underline`, [`text-overflow`]: `ellipsis`, [`white-space`]: `nowrap`, width: `${30}%`}}, new Date(Obj[0]).toISOString()],
+          [`span`, {style: {overflow: `hidden`, [`text-align`]: `right`, [`text-overflow`]: `ellipsis`, width: `${25}%`}}, `${Obj[1]}`],
+          [`div`, {class: `_gxM _geQ`, style: {[`margin-left`]: `${8}px`, width: `${20}%`}}, 
+            [[`img`, {src: `/wa/get/svg/${Constants.SVG[Obj[2]]}.svg`, style: {[`align-self`]: `center`, [`height`]: `${12}px`, [`width`]: `${12}px`}}],
+              [`div`, {class: `_eYG _gxM`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10}px`, [`margin-left`]: `${3}px`}}, 
+                [[`span`, {}, Obj[2]], [`span`, {style: {[`margin-left`]: `${8}px`, opacity: .5}}, ``]]]]],
+          [`span`, {style: {[`text-align`]: `right`, width: `${25}%`}}, `...`]]])
+      });
+
+      return DOM;
     }
   },
 
@@ -454,6 +473,15 @@ let Models = {
         [[`span`, {style: {opacity: .5, [`text-transform`]: `capitalize`}}, type]]]);
     });
 
+    let DOM2 = [[], []];
+
+    let Old = [`deposits`, `withdrawals`, `processing`];
+
+    Old.forEach(old => {
+
+      DOM2[0].push([`a`, {class: `_gxM _geQ wallettab`, href: `javascript:;`, style: {background: (old !== `deposits`)? `#2424718a`: `none`, [`border-bottom`]: (old !== `deposits`)? `${2}px solid #353535`: `none`, [`border-left`]: (Old.indexOf(old) !== 0)? `${1}px solid #353535`: `none`, color: `#fff`, display: `flex`, [`justify-content`]: `center`, opacity: (old !== `deposits`)? .5: 1, padding: `${2}px ${12}px`, [`text-transform`]: `capitalize`}}, old]);
+    });
+
     return [`section`, {id: `holds`, style: {height: `${100}%`}}, 
       [[`div`, {style: {height: `inherit`}}, 
         [[`div`, {style: {[`border-bottom`]: `${1}px solid #353535`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
@@ -547,7 +575,15 @@ let Models = {
                                         [`div`, {style: {width: `${30}%`}}],
                                         [`div`, {style: {width: `${70}%`}}, 
                                             [[`div`, {class: `_gxM _geQ`, style: {width: `${100}%`}}, 
-                                                [[`a`, {id: `walletout`, for: `${Tools.coats([`BTC`, `BTC`])}`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Withdraw`]]]]]]]]]]]]];                                                   
+                                                [[`a`, {id: `walletout`, for: `${Tools.coats([`BTC`, `BTC`])}`, href: `javascript:;`, style: {background: `#00ff001a`, border: `1px solid lime`, color: `#fff`, [`padding`]: `${2}px ${12}px`, [`text-align`]: `center`, width: `${100}%`}}, `Withdraw`]]]]]]]]]]], 
+      [`section`, {style: {[`border-top`]: `${1}px solid #353535`, [`font-family`]: `insvg`}}, 
+        [[`div`, {class: `_gxM _geQ`, style: {}}, DOM2[0]],
+        [`div`, {id: `oldX`, class: `_gxM _geQ`, style: {[`border-bottom`]: `${1}px solid #353535`, [`font-size`]: ``, padding: `${1}px ${12}px`, opacity: .5}}, 
+          [[`span`, {style: {width: `${30}%`}}, `Date`],
+          [`span`, {style: {[`text-align`]: `right`, width: `${25}%`}}, `Quantity`],
+          [`span`, {style: {[`padding-left`]: `${8}px`, [`text-align`]: `left`, width: `${20}%`}}, `Asset`],
+          [`span`, {style: {[`text-align`]: `right`, width: `${25}%`}}, `USD`]]], 
+        [`div`, {id: `oldY`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}, this.init.YOX(Arg.ox[0])]]]]];                                                   
   },
 
   plot: function (Arg) {
