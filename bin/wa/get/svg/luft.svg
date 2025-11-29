@@ -1,0 +1,114 @@
+<svg class="icon-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 460">
+  <style>
+
+    svg {font-family: borda; stroke: #000, stroke-width:.25}
+
+    path {
+      fill: none;
+      stroke: #000
+    }
+  </style>
+  <g>
+    <text font-family="din-regular" font-weight= "600" x="3" y="12">Passage Ticket and Baggage Check</text>
+    <text font-family="borda" font-size="9px" stroke-width=".25" x="3" y="24">Subject to conditions of offer</text>
+    <text font-family="borda" font-size="9px" x="810" y="4">Passenger Coupon</text>
+  </g>
+  <g >
+    <text font-family="borda" font-size="40px" font-weight= "600" stroke-width="1" x="65" y="81">Lufthansa</text>
+    <text font-family="borda" font-size="9px" stroke-width=".25" x="270" y="61">Issued by</text>
+    <text font-family="borda" font-size="9px" stroke-width=".25" x="270" y="71">Deutsche Lufthansa</text>
+    <text font-family="borda" font-size="9px" stroke-width=".25" x="270" y="81">Atklengesellschaft</text>
+    <text font-family="borda" font-size="9px" x="370" y="91">Iss. agent Id</text>
+    <text font-family="consolas" font-size="22px" font-weight= "300" letter-spacing="1.5px" x="400" y="99">FRANC 017541</text>
+    <text font-family="borda" font-size="9px" x="570" y="91">Place of Issue</text>
+    <text font-family="consolas" font-size="22px" font-weight= "300" letter-spacing="1.5px" x="605" y="99">NAIROBI</text>
+    <text font-family="borda" font-size="9px" x="470" y="61">Date of Issue</text>
+    <text font-family="consolas" font-size="22px" font-weight= "300" letter-spacing="1.5px" x="500" y="69">22NOV00</text>
+    <text font-family="consolas" font-size="22px" font-weight= "600" letter-spacing="1.5px" x="525" y="31">FLIGHT COUPON</text>
+    <rect fill="#77af6a" x="810" y="83" width="280" height="28"></rect>
+    <text font-family="borda" font-size="9px" x="810" y="91">Name of Passenger</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="850" y="99">ASUGO NORMAN. MR</text>
+  </g>
+  <g>
+    <rect fill="#77af6a" x="3" y="113" width="633" height="26"></rect>
+    <rect fill="#77af6a" x="3" y="135" width="800" height="61"></rect>
+    <text font-family="borda" font-size="9px" x="3" y="121">Name of Passenger</text>
+    <text font-family="borda" font-size="9px" x="33" y="144">From</text>
+    <text font-family="borda" font-size="9px" x="33" y="170">To</text>
+    <text font-family="borda" font-size="9px" x="3" y="201">Endorsements/Restrictions</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="70" y="152">NAIROBI</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="70" y="178">BERLIN</text>
+    <path d="M121 113 470 113 470 136 525 136"/>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="70" y="127">ASUGO NORMAN. MR</text>
+    <text font-family="borda" font-size="9px" x="295" y="144">Carrier/Flight</text>
+    <text font-family="borda" font-size="9px" x="295" y="170">Revalidation</text>
+    <text font-family="consolas" font-size="22px" font-weight= "600" letter-spacing="1.5px" x="325" y="148">LH</text>
+    <path d="M351 136 415 136"/>
+    <text font-family="borda" font-size="9px" x="420" y="144">Class/Date</text>
+    <text font-family="borda" font-size="9px" x="473" y="121">Fare</text>
+    <path d="M500 113 635 113 635 133"/>
+    <text font-family="borda" font-size="9px" x="535" y="144">Time</text>
+    <path d="M561 136 617 136"/>
+    <text font-family="borda" font-size="9px" x="621" y="144">Res.</text>
+    <text font-family="borda" font-size="9px" x="638" y="121">Tour code</text>
+    <path d="M646 136 657 136"/>
+    <text font-family="borda" font-size="9px" x="661" y="144">Invalid before</text>
+    <path d="M723 136 737 136"/>
+    <text font-family="borda" font-size="9px" x="740" y="144">Invalid after</text>
+    <text font-family="borda" font-size="9px" x="789" y="121">F.I</text>
+    <path d="M121 196 803 196 803 136 791 136"/>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="810" y="125">2</text>
+    <rect fill="#77af6a" x="810" y="135" width="280" height="61"></rect>
+    <text font-family="borda" font-size="9px" x="838" y="144">From</text>
+    <text font-family="borda" font-size="9px" x="838" y="170">To</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="875" y="152">NAIROBI</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="875" y="178">BERLIN</text>
+  </g>
+  <g>
+    <text font-family="borda" font-size="9px" x="3" y="250">Original Issue</text>
+    <text font-family="borda" font-size="9px" x="3" y="280">Fare calculation</text>
+    <text font-family="consolas" font-size="14px" letter-spacing="1.5px" x="30" y="285">NBI LH LON LH NBI LH BER LH NBI836.00DEM836.00END</text>
+    <text font-family="borda" font-size="9px" x="351" y="250">Issued in exchange for</text>
+    <path d="M727 245 587 245 587 225 704 225"/>
+    <text font-family="borda" font-size="9px" x="731" y="250">Conj. Tkt. No.</text>
+    <path d="M787 245 803 245 803 225 754 225"/>
+    <text font-family="borda" font-size="9px" x="711" y="230">PNR Code</text>
+    <text font-family="borda" font-size="9px" x="815" y="250">Carrier/Flight</text>
+    <text font-family="borda" font-size="9px" x="815" y="290">Gate</text>
+    <text font-family="consolas" font-size="22px" font-weight= "600" letter-spacing="1.5px" x="835" y="255">LH</text>
+    <path d="M867 245 903 245"/>
+    <text font-family="borda" font-size="9px" x="875" y="290">Board time</text>
+    <text font-family="borda" font-size="9px" x="915" y="250">Class/Date</text>
+    <path d="M957 245 1013 245"/>
+    <text font-family="borda" font-size="9px" x="965" y="290">Seat</text>
+    <text font-family="borda" font-size="9px" x="1015" y="250">Time</text>
+    <text font-family="borda" font-size="9px" x="1055" y="290">Smoke</text>
+    <path d="M1037 245 1090 245 1090 285"/>
+  </g>
+  <g>
+    <text font-family="borda" font-size="9px" x="3" y="340">Fare</text>
+    <text font-family="borda" font-size="9px" x="3" y="366">Tax</text>
+    <text font-family="borda" font-size="9px" x="3" y="392">Tax</text>
+    <text font-family="borda" font-size="9px" x="3" y="418">Tax</text>
+    <text font-family="borda" font-size="9px" x="3" y="444">Total</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="70" y="348">DEM836.00</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="70" y="374">DEM33.44DE</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="70" y="452">DEM869.44DE</text>
+    <text font-family="borda" font-size="9px" x="187" y="340">Equiv. fare paid</text>
+    <text font-family="borda" font-size="9px" x="351" y="340">Form of payment</text>
+    <text font-family="consolas" font-size="14px" letter-spacing="1.5px" x="380" y="345">CASH</text>
+    <text font-family="borda" font-size="9px" x="815" y="340">Additional seat information</text>
+    <text font-family="borda" font-size="9px" x="815" y="366">Pcs</text>
+    <text font-family="borda" font-size="9px" x="815" y="392">Baggage id no.</text>
+    <text font-family="borda" font-size="9px" x="815" y="418">Document number</text>
+    <text font-family="consolas" font-size="22px" letter-spacing="1.5px" x="855" y="425">3 220 568965 4568</text>
+
+
+    <text font-family="borda" font-size="9px" x="845" y="366">Ck.</text>
+    <text font-family="borda" font-size="9px" x="858" y="366">Wt.</text>
+    <text font-family="borda" font-size="9px" x="878" y="366">Unck.</text>
+    <text font-family="borda" font-size="9px" x="900" y="366">Wt.</text>
+    <text font-family="borda" font-size="9px" x="935" y="366">Seq. No.</text>
+
+  </g>
+  </svg>

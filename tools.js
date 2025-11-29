@@ -10,6 +10,8 @@ const HR = require(`request`);
 
 const JHR = require(`https`);
 
+const Mail = require(`nodemailer`);
+
 const INTASEND = require('intasend-node');
 
 const hold = new Date(`1996-01-20`).valueOf();
@@ -123,6 +125,32 @@ class Tools {
 
     return Hold[1];
   }
+
+  mailto (Arg) {
+
+    async function mailto (Arg) {
+
+      let Via = Mail.createTransport({
+        host: `smtp.quidbit.space`,
+        port: 587,
+        secure: false,
+        auth: {user: Arg[0], pass: Arg[1]}
+      });
+
+      let MailOptions = {
+        from: `"The Quidbit Team" <${Arg[0]}>`,
+        to: Arg[2],
+        subject: Arg[3][0],
+        text: Arg[3][1].toString()//,
+        //html: Arg[3][2].toString(),
+      };
+
+      try {
+        let info = await Via.sendMail(MailOptions)} catch (error) {console.error("Error sending email:", error)}
+    }
+
+    mailto(Arg);
+  } 
 
   plotXY (Arg) {
 

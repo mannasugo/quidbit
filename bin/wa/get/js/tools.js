@@ -2,94 +2,94 @@
 
 class Tools {
 
-	constructor () {
+    constructor () {
 
-		this.call = new XMLHttpRequest;
+        this.call = new XMLHttpRequest;
 
-		this.synonyms = [[`\f`, ``], [`\n`, ``], [`\t`, ``], [`\r`, ``], [`'`, `u0027`], [`"`, `u0022`], [`/`, `u002f`], [`&`, `u0026`]];
-	}
+        this.synonyms = [[`\f`, ``], [`\n`, ``], [`\t`, ``], [`\r`, ``], [`'`, `u0027`], [`"`, `u0022`], [`/`, `u002f`], [`&`, `u0026`]];
+    }
 
-	coats (types) { return JSON.stringify(types); }
+    coats (types) { return JSON.stringify(types); }
 
-	plains (Raw)  {
+    plains (Raw)  {
 
-		this.synonyms.slice(4).forEach(Regex => {
+        this.synonyms.slice(4).forEach(Regex => {
 
-			Raw = Raw.replace(new RegExp(Regex[1], `g`), Regex[0]);
-		});
+            Raw = Raw.replace(new RegExp(Regex[1], `g`), Regex[0]);
+        });
 
-		return Raw;
-	}
+        return Raw;
+    }
 
-	pull (Arg) {
+    pull (Arg) {
 
-		this.call.open(`POST`, Arg[0], true);
+        this.call.open(`POST`, Arg[0], true);
 
-		this.call.setRequestHeader(`Content-Type`, `application/json`);
+        this.call.setRequestHeader(`Content-Type`, `application/json`);
 
-		this.call.send(JSON.stringify(Arg[1]));
+        this.call.send(JSON.stringify(Arg[1]));
 
-		return this.call;
-	}
+        return this.call;
+    }
 
-  	slim (String) {
+    slim (String) {
 
-		if (!String || String.length < 1 || String.match(/^(\s+)$/)) return;
+        if (!String || String.length < 1 || String.match(/^(\s+)$/)) return;
 
-		return String;
-  	}
+        return String;
+    }
 
-  	yScale (Arg) {
+    yScale (Arg) {
 
-  		let AY, B1, B2 = 0, RH;
+        let AY, B1, B2 = 0, RH;
 
-  		Arg[1] = parseFloat(Arg[1]);
+        Arg[1] = parseFloat(Arg[1]);
 
-  		if (Arg[0] < 1 && Arg[0] !== 0) {
+        if (Arg[0] < 1 && Arg[0] !== 0) {
 
-  			let Float = Arg[0].toString().split(`.`);
+            let Float = Arg[0].toString().split(`.`);
 
-  			for (let A = 0; A < Float[1].length; A++) {
+            for (let A = 0; A < Float[1].length; A++) {
 
-  				if (Float[1][A] !== `0`) {B2 = A; break;}
-  			}
+                if (Float[1][A] !== `0`) {B2 = A; break;}
+            }
 
-  			RH = Float[1][B2]/Math.pow(10, B2+1);
+            RH = Float[1][B2]/Math.pow(10, B2+1);
 
-  			AY = parseFloat(Arg[1].toString().substr(0, B2+3));
-  		}
+            AY = parseFloat(Arg[1].toString().substr(0, B2+3));
+        }
 
-  		if (Arg[0] > 1) {
+        if (Arg[0] > 1) {
 
-  			B2 = Arg[0].toFixed().length;
+            B2 = Arg[0].toFixed().length;
 
-  			RH = parseInt(Arg[0].toString()[0])*Math.pow(10, B2-1);
+            RH = parseInt(Arg[0].toString()[0])*Math.pow(10, B2-1);
 
-  			B1 = Arg[1].toFixed().length;
+            B1 = Arg[1].toFixed().length;
 
-  			AY = parseInt(Arg[1].toString().substr(0, B1-B2))*Math.pow(10, B2);
-  		}
+            AY = parseInt(Arg[1].toString().substr(0, B1-B2))*Math.pow(10, B2);
+        }
 
-  		if (Arg[0] === 0) {
+        if (Arg[0] === 0) {
 
-  			RH = 0; 
+            RH = 0; 
 
-  			AY = 0
-  		}
+            AY = 0
+        }
 
-  		return [RH, AY];
-  	}
+        return [RH, AY];
+    }
 
-	typen (coat) { return JSON.parse(coat); }
+    typen (coat) { return JSON.parse(coat); }
 
-	formatplanex (Arg) {
+    formatplanex (Arg) {
 
-		let String = new Date(Arg[0]).toTimeString();
+        let String = new Date(Arg[0]).toTimeString();
 
-		if (Arg[1] === 60000*30 || Arg[1] === 60000*60 || Arg[1] === 60000*60*24) {String = new Date(Arg[0]).toDateString()}
+        if (Arg[1] === 60000*30 || Arg[1] === 60000*60 || Arg[1] === 60000*60*24) {String = new Date(Arg[0]).toDateString()}
 
-		return `${String.substr(Arg[2][0], Arg[2][1])}`;
-	}
+        return `${String.substr(Arg[2][0], Arg[2][1])}`;
+    }
 }
 
 Tools = new Tools();
@@ -98,81 +98,81 @@ let Clients = sessionStorage;
 
 const Constants = {
 
-	ival: {
-		[`1M`]: {
-				abs: 60000,
-				C: 15, 
-				sub: [0, 5],
-				tox: -14 /*text offset x*/},
-		[`3M`]: {
-				abs: 60000*3,
-				C: 20, 
-				sub: [0, 5], 
-				tox: -14},
-		[`5M`]: {
-				abs: 60000*5,
-				C: 24, 
-				sub: [0, 5], 
-				tox: -14},
-		[`15M`]: {
-				abs: 60000*15,
-				C: 24, 
-				sub: [0, 5], 
-				tox: -14},
-		[`30M`]: {
-				abs: 60000*30,
-				C: 24, 
-				sub: [8, 2], 
-				tox: -6},
-		[`1H`]: {
-				abs: 60000*60,
-				C: 24, 
-				sub: [8, 2],
-				tox: -6},
-		[`1D`]: {
-				abs: 60000*60*24,
-				C: 31, 
-				sub: [4, 3],
-				tox: -12}
-	},
+    ival: {
+        [`1M`]: {
+                abs: 60000,
+                C: 15, 
+                sub: [0, 5],
+                tox: -14 /*text offset x*/},
+        [`3M`]: {
+                abs: 60000*3,
+                C: 20, 
+                sub: [0, 5], 
+                tox: -14},
+        [`5M`]: {
+                abs: 60000*5,
+                C: 24, 
+                sub: [0, 5], 
+                tox: -14},
+        [`15M`]: {
+                abs: 60000*15,
+                C: 24, 
+                sub: [0, 5], 
+                tox: -14},
+        [`30M`]: {
+                abs: 60000*30,
+                C: 24, 
+                sub: [8, 2], 
+                tox: -6},
+        [`1H`]: {
+                abs: 60000*60,
+                C: 24, 
+                sub: [8, 2],
+                tox: -6},
+        [`1D`]: {
+                abs: 60000*60*24,
+                C: 31, 
+                sub: [4, 3],
+                tox: -12}
+    },
 
-	SVG: {
-		ADA: `tokens/ada`,
-		AUD: `flags/au`,
-		AVAX: `tokens/avax`,
-		BCH: `tokens/bch`,
-		BTC: `tokens/btc`,
-		BNB: `tokens/bnb`,
-		CAD: `flags/ca`,
-		CHF: `flags/ch`,
-		CNY: `flags/cn`,
-		DOGE: `tokens/doge`,
-		DOT: `tokens/dot`,
-		ETH: `tokens/eth`,
-		EUR: `flags/eu`,
-		FDUSD: `tokens/fdusd`,
-		GBP: `flags/uk`,
-		INR: `flags/in`,
-		JPY: `flags/jp`,
-		KES: `flags/ke`,
-		SOL: `tokens/sol`,
-		LTC: `tokens/ltc`, 
-		NOK: `flags/no`,
-		NZD: `flags/nz`,
-		POL: `tokens/pol`, 
-		SEK: `flags/se`,
-		SHIB: `tokens/shib`,
-		USD: `flags/us`,
-		USDC: `tokens/usdc`,
-		USDT: `tokens/usdt`,
-		XRP: `tokens/xrp`,
-		XTZ: `tokens/xtz`,
-		ZAR: `flags/za`
-	},
+    SVG: {
+        ADA: `tokens/ada`,
+        AUD: `flags/au`,
+        AVAX: `tokens/avax`,
+        BCH: `tokens/bch`,
+        BTC: `tokens/btc`,
+        BNB: `tokens/bnb`,
+        CAD: `flags/ca`,
+        CHF: `flags/ch`,
+        CNY: `flags/cn`,
+        DOGE: `tokens/doge`,
+        DOT: `tokens/dot`,
+        ETH: `tokens/eth`,
+        EUR: `flags/eu`,
+        FDUSD: `tokens/fdusd`,
+        GBP: `flags/uk`,
+        INR: `flags/in`,
+        JPY: `flags/jp`,
+        KES: `flags/ke`,
+        SOL: `tokens/sol`,
+        LTC: `tokens/ltc`, 
+        NOK: `flags/no`,
+        NZD: `flags/nz`,
+        POL: `tokens/pol`, 
+        SEK: `flags/se`,
+        SHIB: `tokens/shib`,
+        USD: `flags/us`,
+        USDC: `tokens/usdc`,
+        USDT: `tokens/usdt`,
+        XRP: `tokens/xrp`,
+        XTZ: `tokens/xtz`,
+        ZAR: `flags/za`
+    },
 
-	wallet: {
-		BTC: [`Bitcoin`, `BTC`], 
-		//ETH: [`Ethereum`, `ERC20`],
-		//POL: [`Matic`, `ERC20`], 
-		USDT: [`TetherUS`, `TRC20`]}
+    wallet: {
+        BTC: [`Bitcoin`, `BTC`], 
+        //ETH: [`Ethereum`, `ERC20`],
+        //POL: [`Matic`, `ERC20`], 
+        USDT: [`TetherUS`, `TRC20`]}
 }

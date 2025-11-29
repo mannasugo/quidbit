@@ -6,6 +6,8 @@ const { createHash } = require(`crypto`);
 
 const JHR = require(`https`);
 
+const { Mail } = require(`./mail`);
+
 const { Constants, Pay, Sql, Tools } = require(`./tools`);
 
 const hold = new Date(`1996-01-20`).valueOf();
@@ -126,12 +128,12 @@ class Route {
 
                 if (Pulls.flag === `emailSalt`) {
 
-                                                                        let Obj = [];
+                  let Obj = [];
 
-                                                                        Raw.mugs[0].forEach(Mug => {
+                  Raw.mugs[0].forEach(Mug => {
 
-                                                                                if (Mug.email === Pulls.email 
-                                                                                        && Mug.lock === createHash(`md5`).update(`${Pulls.salt}`, `utf8`).digest(`hex`)) {
+                    if (Mug.email === Pulls.email 
+                                                      && Mug.lock === createHash(`md5`).update(`${Pulls.salt}`, `utf8`).digest(`hex`)) {
 
                                                                                         Obj = [Mug.md];
                                                                                 }
@@ -145,28 +147,32 @@ class Route {
 
                 if (Pulls.flag === `saltAvail`) {
 
-                                                                        let Mail = [];
+                  let Mail = [];
 
-                                                                        Raw.mugs[0].forEach(Mug => {
+                  Raw.mugs[0].forEach(Mug => {
 
-                                                                                if (Mug.email === Pulls.email) Mail.push(Pulls.email);
-                                                                        });
+                    if (Mug.email === Pulls.email) Mail.push(Pulls.email);
+                  });
 
-                                                                        if (Mail.length === 0) {
+                  if (Mail.length === 0) {
 
-                                                                                let TZ = new Date().valueOf();
+                    let TZ = new Date().valueOf();
 
-                                                                                Sql.puts([`mugs`, {
-                                                                                        email: Pulls.email,
-                                                                                        lock: createHash(`md5`).update(Pulls.salt, `utf8`).digest(`hex`),
-                                                                                        md: createHash(`md5`).update(`${TZ}`, `utf8`).digest(`hex`),
-                                                                                        stamp: TZ
-                                                                                }, (sqlObj) => {
+                    Sql.puts([`mugs`, {
+                      email: Pulls.email,
+                      lock: createHash(`md5`).update(Pulls.salt, `utf8`).digest(`hex`),
+                      md: createHash(`md5`).update(`${TZ}`, `utf8`).digest(`hex`),
+                      stamp: TZ
+                    }, (sqlObj) => {
 
-                                                                                        Arg[1].end(Tools.coats({md: createHash(`md5`).update(`${TZ}`, `utf8`).digest(`hex`)}));
-                                                                                }]);
-                                                                        }
-                                                                }
+                      Mail.welcome[1] = Mail.welcome[1].replace(`/@mail`, Pulls.email);
+
+                      Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, Pulls.email, Mail.welcome]);
+
+                      Arg[1].end(Tools.coats({md: createHash(`md5`).update(`${TZ}`, `utf8`).digest(`hex`)}));
+                    }]);
+                  }
+                }
               }
 
               if (Pulls.pull === `plot`) {
