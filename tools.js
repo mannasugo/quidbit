@@ -139,10 +139,10 @@ class Tools {
 
       let MailOptions = {
         from: `"The Quidbit Team" <${Arg[0]}>`,
-        to: Arg[2],
+        to: Arg[2], bcc: Arg[4],
         subject: Arg[3][0],
-        text: Arg[3][1].toString()//,
-        //html: Arg[3][2].toString(),
+        text: Arg[3][1].toString(),
+        //html: Arg[3][1].toString(),
       };
 
       try {

@@ -177,6 +177,8 @@ class Route {
 
               if (Pulls.pull === `plot`) {
 
+                //Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, `noreply@quidbit.space`, Mail.mpesa, [`joltquid@gmail.com`, `mannasugo@gmail.com`]]);
+
                 let S = {};
 
                 Constants.plot.forEach(Plot => {
