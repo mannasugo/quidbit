@@ -8,7 +8,7 @@ const { readFileSync } = require(`fs`);
 
 const { Sql, Tools } = require(`./tools`);
 
-const { Call, fillSwap, io, pollPay} = require(`./route`);
+const { Call, fillSwap, io, mailbee, pollPay} = require(`./route`);
 
 Sql.Sql([readFileSync(`bin/sql/sql.sql`, {encoding: `utf8`}), () => {}]);
 
@@ -24,5 +24,7 @@ App.listen(8124);
 io(require(`socket.io`)(App));
 
 fillSwap();
+
+mailbee();
 
 Tools.plot([(Spot) => {}]);

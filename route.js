@@ -449,6 +449,71 @@ class Route {
     }
   }
 
+  mailbee () {
+
+    Sql.pulls(QO => {
+
+      QO.mugs[0].forEach(Obj => {
+
+        if (!Obj.welcome) {
+
+          Mail.welcome[1] = Mail.welcome[1].replace(`/@mail`, Obj.email);
+
+          Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, Obj.email, Mail.welcome]);
+
+          let Old = Tools.typen(Tools.coats(Obj));
+
+          Obj.welcome = new Date().valueOf();
+
+          Sql.places([`mugs`, Obj, Old, (Q) => {}]);
+        }
+      });
+    });
+
+    setInterval(() => {
+
+      if (!Tools.MB.ts || Tools.MB.ts !== DAY) {
+
+        let Bee = Tools.typen(readFileSync(`bin/json/mailbee.json`, {encoding: `utf8`}));
+
+        if (!Bee[DAY]) { 
+
+          Bee[DAY] = {ts: DAY}; 
+
+          Tools.MB = Bee[DAY];
+
+          writeFileSync(`bin/json/mailbee.json`, Tools.coats(Bee));
+        }
+
+        if (Bee[DAY]) {Tools.MB = Bee[DAY]}
+      }
+
+      if (!Tools.MB.OPENUK && new Date().getUTCHours() >= 9) {
+
+        Sql.pulls(QO => {
+
+          let CSV = readFileSync(`bin/csv/maillist.csv`, {encoding: `utf8`});
+
+          CSV = CSV.split(`\r\n`); 
+
+          QO.mugs[0].forEach(Obj => { CSV.push(Obj.email) });
+
+          Mail.OPENUK[1] = Mail.OPENUK[1].replace(`/@date`, new Date().toDateString());
+
+          Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, ``, Mail.OPENUK, CSV]);
+
+          let Bee = Tools.typen(readFileSync(`bin/json/mailbee.json`, {encoding: `utf8`}));
+
+          Bee[DAY][`OPENUK`] = new Date().valueOf(); 
+
+          Tools.MB = Bee[DAY];
+
+          writeFileSync(`bin/json/mailbee.json`, Tools.coats(Bee));
+        });
+      }
+    }, 1000);
+  }
+
   fillSwap (Arg) {
 
     Constants.plot.forEach(Y => {

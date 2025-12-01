@@ -14,6 +14,18 @@ module.exports = {
       `\tTrade KES now at: https://quidbit.space/trade/USD_KES`
     ],
 
+    OPENUK: [
+
+      `UK Markets Open Now`,
+
+      `Quidbit UK Commodities, Securities & Option markets are now open for the trading day /@date.\n\n`+ 
+      `Trade now at: https://quidbit.space/trade/GBP_USD\n\n`+
+      `Day trading for UK equities will be available until 4:00 pm GMT\n\n`+
+      `Crypto & UK Sterling(GBP) Forex paired assets/currencies are open for trading 24/7\n\n`+
+      `if you have any questions, please contact us at mailto@quidbit.space`
+
+    ],
+
     welcome: [
 
       `Onboarding Process Successful`,
