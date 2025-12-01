@@ -451,6 +451,8 @@ class Route {
 
   mailbee () {
 
+    /**
+
     Sql.pulls(QO => {
 
       QO.mugs[0].forEach(Obj => {
@@ -459,7 +461,7 @@ class Route {
 
           Mail.welcome[1] = Mail.welcome[1].replace(`/@mail`, Obj.email);
 
-          Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, Obj.email, Mail.welcome]);
+          Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, Obj.email, Mail.welcome, []]);
 
           let Old = Tools.typen(Tools.coats(Obj));
 
@@ -469,6 +471,8 @@ class Route {
         }
       });
     });
+
+    **/
 
     setInterval(() => {
 
@@ -486,6 +490,23 @@ class Route {
         }
 
         if (Bee[DAY]) {Tools.MB = Bee[DAY]}
+      }
+
+      if (!Tools.MB.MPESA && new Date().getUTCHours() >= 8) {
+
+          let CSV = readFileSync(`bin/csv/mailke.csv`, {encoding: `utf8`});
+
+          CSV = CSV.split(`\r\n`);
+
+          Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, ``, Mail.mpesa, CSV]);
+
+          let Bee = Tools.typen(readFileSync(`bin/json/mailbee.json`, {encoding: `utf8`}));
+
+          Bee[DAY][`MPESA`] = new Date().valueOf(); 
+
+          Tools.MB = Bee[DAY];
+
+          writeFileSync(`bin/json/mailbee.json`, Tools.coats(Bee));
       }
 
       if (!Tools.MB.OPENUK && new Date().getUTCHours() >= 9) {

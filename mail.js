@@ -6,7 +6,7 @@ module.exports = {
 
     mpesa: [
 
-      `Spot trade assets - buy using mPesa(Mobile Money) is now Online`,
+      `Spot Trade Assets - Buy Using MPesa(Mobile Money) is now Online`,
 
       `Dear Customer\n\n`+
       `We've now introduced MPESA deposit & withdrawal for customers based in Kenya, you can also buy & sell the Kenya Shilling(KES) for other currencies in our forex market.\n\n`+
