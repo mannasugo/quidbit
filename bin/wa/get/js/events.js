@@ -742,20 +742,34 @@ class Event {
 
     this.listen([document.querySelector(`#initWallet a`), `click`, S => {
 
-      document.querySelector(`#initWallet`).style.display = `none`;
+      if (!Clients.mug) {
 
-      document.querySelector(`#toAddress`).style.display = `flex`;
+        View.pop();
 
-      let XHR = Tools.pull([
-        `/json/web`, {
-          flag: `init`,
-          mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`, wallet: Tools.typen(this.getSource(S).getAttribute(`for`))}]);
+        View.DOM([`#modal`, [Models.inputMug([2])]]);
 
-      XHR.onload = () => {
+        this.emailSalt();
 
-        let Obj = Tools.typen(XHR.response);
+        document.querySelector(`#modal`).style.display = `flex`;
+      }
 
-        if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+      if (Clients.mug) {
+
+        document.querySelector(`#initWallet`).style.display = `none`;
+
+        document.querySelector(`#toAddress`).style.display = `flex`;
+
+        let XHR = Tools.pull([
+          `/json/web`, {
+            flag: `init`,
+            mug: (Clients.mug) ? Clients.mug: false, pull: `wallets`, wallet: Tools.typen(this.getSource(S).getAttribute(`for`))}]);
+
+        XHR.onload = () => {
+
+          let Obj = Tools.typen(XHR.response);
+
+          if (Obj && Obj.address) document.querySelectorAll(`#toAddress span`)[1].innerText = Obj.address;
+        }
       }
     }]);
 

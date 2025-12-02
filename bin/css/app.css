@@ -530,6 +530,10 @@ body {
 
 #tx, #tx:visited {color: #48007c;}
 
+#XA {width: calc(100vw - 360px)}
+
+#XB {width: 360px}
+
 @media (min-width: 600px) {
 
   #mugs {justify-content: center;}
@@ -546,6 +550,13 @@ body {
 		width: 100%; padding: 0 }
 
 	._wrap_202203262208 #coin-meta, ._wrap_202203262208 #pittools, ._wrap_202203262208 #take { margin-top: 45px }
+}
+
+@media (max-width: 720px) {
+
+  #XA {width: 100%}
+
+  #XB {display: none; width: 0;}
 }
 
 @media (max-width: 620px) {

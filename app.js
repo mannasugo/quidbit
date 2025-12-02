@@ -25,6 +25,6 @@ io(require(`socket.io`)(App));
 
 fillSwap();
 
-//mailbee();
+mailbee();
 
 Tools.plot([(Spot) => {}]);
