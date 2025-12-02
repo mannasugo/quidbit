@@ -1361,6 +1361,8 @@ class Event {
         }
       }]);
     }
+
+    this.listen([document.querySelector(`#modalSlot svg`), `click`, S => { document.querySelector(`#modal`).style.display = `none` }]);
   }
 
   altSplit (Arg) {

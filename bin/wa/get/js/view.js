@@ -80,7 +80,7 @@ let Models = {
 
     modalSpot: (Arg) => {
 
-      let Plot = [`POL-USD`, `NZD-JPY`, `USD-INR`];
+      let Plot = [`USD-CNY`, `NZD-JPY`, `USD-INR`];
 
       let DOM = [];
 
@@ -330,11 +330,14 @@ let Models = {
                 [`a`, {id: `emailSalt`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${32}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {id: `modalMugup`, href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign up`]]];
 
-        return [`main`, {style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
-            [[`section`, {style: {[`font-family`]: `qb`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
-                [
-                    [`h1`, {style: {color: `#6bc679`, [`font-family`]: `qb`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
-                    DOM[Arg[0]]]]]]
+    return [`main`, {id: `modalSlot`, style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
+      [[`section`, {style: {[`font-family`]: `qb`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
+        [[`div`, {class: `_geQ _gxM`}, 
+          [[`div`, {}], 
+          [`div`, {class: `_gZz`}, [[`span`, {style: {}}, [[`svg`, {id: ``, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${8}px`, width: `${8}px`}}, 
+            [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 0 24 24 M24 0 0 24 `}]]]]]]]]],
+        [`h1`, {style: {color: `#6bc679`, [`font-family`]: `qb`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
+        DOM[Arg[0]]]]]]
   },
 
   inputSwap: function (Arg) {
