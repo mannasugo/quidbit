@@ -50,7 +50,7 @@ class Route {
         Clients.tSZ = new Date().valueOf();
 
         if (!Clients.plotXSplit) {
-          Clients.plotXSplit = `1D`}
+          Clients.plotXSplit = `1H`}
 
         let Puts = Tools.pull([
           `/json/web/`, {

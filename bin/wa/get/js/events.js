@@ -263,9 +263,13 @@ class Event {
 
     this.listen([document.querySelector(`#modalSwap`), `click`, S => {
 
-      let Obj = this.getSource(S).parentNode.querySelector(`div`);
+      //document.querySelector(`#XAC`).style.display = `none`;
 
-      Obj.style.display = (Obj.style.display === `flex`)? `none`: `flex`;
+      document.querySelector(`#XA`).style.width = `calc(${100}vw - ${360}px)`;
+
+      document.querySelector(`#XB`).style.width = `${360}px`;
+
+      document.querySelector(`#XB`).style.display = `flex`;
     }]);
 
     this.listen([document.querySelector(`#splitX`), `click`, S => {
@@ -1258,6 +1262,23 @@ class Event {
     });
 
     /**/
+
+    this.listen([document.querySelectorAll(`#XBB svg`)[0], `click`, S => {
+
+      if (document.body.clientWidth < 720) {
+
+        document.querySelector(`#XA`).style.width = `calc(${100}vw)`;
+      }
+
+      if (document.body.clientWidth > 720) {
+
+        document.querySelector(`#XA`).style.width = `calc(${100}vw - ${36}px)`;
+
+        document.querySelector(`#XB`).style.width = `${36}px`;
+
+        document.querySelector(`#XBB`).style.display = `none`;
+      }
+    }]);
 
     HL.sort((A, B) => {return B - A});
 

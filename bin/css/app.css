@@ -534,6 +534,8 @@ body {
 
 #XB {width: 360px}
 
+#XAC {display: none}
+
 @media (min-width: 600px) {
 
   #mugs {justify-content: center;}
@@ -542,6 +544,8 @@ body {
 
   #clientSlot h2, #mugin h2, #vowCoin h2 {letter-spacing: -.5px;font-size: 28px;font-weight:normal;line-height: 36px;color:#000;}
 }
+
+@media (min-width: 720px) {  }
 
 @media (max-width: 920px) {
 
@@ -556,7 +560,9 @@ body {
 
   #XA {width: 100%}
 
-  #XB {display: none; width: 0;}
+  #XB {display: none; width: 0}
+
+  #XAC {display: flex}
 }
 
 @media (max-width: 620px) {
