@@ -509,7 +509,7 @@ class Route {
           writeFileSync(`bin/json/mailbee.json`, Tools.coats(Bee));
       }
 
-      if (!Tools.MB.OPENUK && new Date().getUTCHours() >= 9) {
+      if (!Tools.MB.OPENUK && new Date().getUTCHours() >= 9 && new Date().getUTCDay() < 6) {
 
         Sql.pulls(QO => {
 
