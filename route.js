@@ -497,7 +497,7 @@ class Route {
           let CSV = readFileSync(`bin/csv/mailke.csv`, {encoding: `utf8`});
 
           CSV = CSV.split(`\r\n`);
-
+          
           Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, ``, Mail.mpesa, CSV]);
 
           let Bee = Tools.typen(readFileSync(`bin/json/mailbee.json`, {encoding: `utf8`}));
@@ -533,7 +533,7 @@ class Route {
         });
       }
 
-      if (!Tools.MB.OPENUK && new Date().getUTCHours() >= 14 && new Date().getUTCDay() < 6) {
+      if (!Tools.MB.OPENUS && new Date().getUTCHours() >= 14 && new Date().getUTCDay() < 6) {
 
         Sql.pulls(QO => {
 
