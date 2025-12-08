@@ -532,6 +532,30 @@ class Route {
           writeFileSync(`bin/json/mailbee.json`, Tools.coats(Bee));
         });
       }
+
+      if (!Tools.MB.OPENUK && new Date().getUTCHours() >= 14 && new Date().getUTCDay() < 6) {
+
+        Sql.pulls(QO => {
+
+          let CSV = readFileSync(`bin/csv/maillist.csv`, {encoding: `utf8`});
+
+          CSV = CSV.split(`\r\n`); 
+
+          QO.mugs[0].forEach(Obj => { CSV.push(Obj.email) });
+
+          Mail.OPENUS[1] = Mail.OPENUS[1].replace(`/@date`, new Date().toDateString());
+
+          Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, ``, Mail.OPENUS, CSV]);
+
+          let Bee = Tools.typen(readFileSync(`bin/json/mailbee.json`, {encoding: `utf8`}));
+
+          Bee[DAY][`OPENUS`] = new Date().valueOf(); 
+
+          Tools.MB = Bee[DAY];
+
+          writeFileSync(`bin/json/mailbee.json`, Tools.coats(Bee));
+        });
+      }
     }, 1000);
   }
 

@@ -26,6 +26,18 @@ module.exports = {
 
     ],
 
+    OPENUS: [
+
+      `USA Markets Open Now`,
+
+      `Quidbit US Commodities, Securities & Option markets are now open for the trading day /@date.\n\n`+ 
+      `Day trading for US equities will be available until 4:00 pm ET\n\n`+
+      `Crypto & US Dollar(USD) Forex paired assets/currencies are open for trading 24/7\n\n`+
+      `Trade now at: https://quidbit.space/trade/BTC_USD\n\n`+
+      `if you have any questions, please contact us at mailto@quidbit.space`
+
+    ],
+
     welcome: [
 
       `Onboarding Process Successful`,
