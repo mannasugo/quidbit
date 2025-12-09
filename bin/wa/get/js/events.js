@@ -273,11 +273,11 @@ class Event {
 
         document.querySelectorAll(`#gSwap g`).forEach(DOM => {
 
-          this.listen([DOM, `mouseover`, S => { SWAPX2Y = 1;
+          this.listen([DOM, `mouseover`, S => { SWAPX2Y = 1;ZY = parseFloat(ZY)
 
             let Swap = this.getSource(S);
 
-            let Stat = Tools.typen(Swap.parentNode.id);
+            let Stat = Tools.typen(Swap.parentNode.id);//}]);})
 
             document.querySelector(`#SWAPX2Y path`).setAttribute(`stroke`, (Stat[2] > ZY)? `#e3415d`: `#6bc679`);
 
@@ -291,7 +291,7 @@ class Event {
 
             document.querySelector(`#SWAPZY text`).setAttribute(`y`, (.15*Y + ((HL[0] - (Stat[2] + ZY)/2)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5) + 3.5);
 
-            document.querySelector(`#SWAPZY text`).innerHTML = (((ZY - Stat[2])*100)/Stat[2]).toFixed(2) + `%`;
+            document.querySelector(`#SWAPZY text`).innerHTML = (((ZY - Stat[2])*100)/Stat[2]).toFixed(2) + `%`;console.log((((ZY - Stat[2])*100)/Stat[2]).toFixed(2))
 
             document.querySelector(`#SWAPZY text`).setAttribute(`stroke`, (Stat[2] > ZY)? `#e3415d`: `#6bc679`);
 
