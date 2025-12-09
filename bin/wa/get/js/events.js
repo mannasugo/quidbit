@@ -4,6 +4,8 @@ const DAY = new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-$
 
 let HL = [], Vols = [], X;
 
+let SWAPX2Y = 0;
+
 class Event {
 
   listen (Arg) { 
@@ -161,6 +163,16 @@ class Event {
 
       if (parseFloat(ZY) > 0) { document.title = `QB:${Arg.plot[0].toString().replace(`,`, `/`)} ${ZY}` }
 
+      /**
+
+      let YStat = document.querySelectorAll(`#kline rect`);
+
+      let ZStat =  Tools.typen(YStat[YStat.length - 1].id);
+
+      ZY = ZStat[1][1]
+
+      **/
+
       if (RECT.length > 0 && ZY > 0 && document.querySelector(`#ZY`)) {
 
         HL.push(ZY);
@@ -258,6 +270,44 @@ class Event {
             document.querySelector(`#ya`).setAttribute(`y`, (.15*Y + ((HL[0] - HL[HL.length - 1])*.35*Y)/(HL[0] - HL[HL.length - 1])) + 20);
           }
         });
+
+        document.querySelectorAll(`#gSwap g`).forEach(DOM => {
+
+          this.listen([DOM, `mouseover`, S => { SWAPX2Y = 1;
+
+            let Swap = this.getSource(S);
+
+            let Stat = Tools.typen(Swap.parentNode.id);
+
+            document.querySelector(`#SWAPX2Y path`).setAttribute(`stroke`, (Stat[2] > ZY)? `#e3415d`: `#6bc679`);
+
+            document.querySelector(`#SWAPX2Y path`).setAttribute(`d`, `M${parseFloat(document.querySelector(`#g${Stat[3]}`).getAttribute(`x1`)) + 8} ${.15*Y + ((HL[0] - Stat[2])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${4000} ${.15*Y + ((HL[0] - Stat[2])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`)
+
+            document.querySelector(`#SWAPX2Y`).style.display = `flex`;
+
+            document.querySelector(`#SWAPZY path`).setAttribute(`d`, `M${12} ${.15*Y + ((HL[0] - Stat[2])*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5} ${12} ${.15*Y + ((HL[0] - ZY)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5}`);
+
+            document.querySelector(`#SWAPZY path`).setAttribute(`stroke`, (Stat[2] > ZY)? `#e3415d`: `#6bc679`);
+
+            document.querySelector(`#SWAPZY text`).setAttribute(`y`, (.15*Y + ((HL[0] - (Stat[2] + ZY)/2)*.35*Y)/(HL[0] - HL[HL.length - 1]) + .5) + 3.5);
+
+            document.querySelector(`#SWAPZY text`).innerHTML = (((ZY - Stat[2])*100)/Stat[2]).toFixed(2) + `%`;
+
+            document.querySelector(`#SWAPZY text`).setAttribute(`stroke`, (Stat[2] > ZY)? `#e3415d`: `#6bc679`);
+
+            document.querySelector(`#SWAPZY`).style.display = `flex`;
+
+            document.querySelector(`#pin path`).style.display = `none`;
+
+            document.querySelector(`#floatY`).style.display = `none`;
+          }]);
+        });
+
+        document.querySelectorAll(`#gSwap g`).forEach(DOM => { 
+
+          this.listen([DOM, `mouseout`, S => { SWAPX2Y = 0
+
+            document.querySelector(`#SWAPX2Y`).style.display = `none`; document.querySelector(`#SWAPZY`).style.display = `none`; document.querySelector(`#pin path`).style.display = `flex`; document.querySelector(`#floatY`).style.display = `flex`; }]) });
       }
     });
 
@@ -416,7 +466,7 @@ class Event {
   
       document.querySelector(`#floatVol`).style.display = `none`;
   
-      document.querySelector(`#floatY`).style.display = `unset`;    
+      if (SWAPX2Y === 0) { document.querySelector(`#floatY`).style.display = `unset` }   
     }]);
 
     this.listen([document.querySelector(`#vol`), `mousemove`, S => {

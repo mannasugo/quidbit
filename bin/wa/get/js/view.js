@@ -180,7 +180,7 @@ let Models = {
       Tools.typen(Clients.old)[0].forEach(Obj => {
 
         DOM.push([`g`, {style: {cursor: `pointer`}}, 
-          [[`circle`, {r: 8, cx: 8, cy: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+          [[`circle`, {r: 8, cx: 8, cy: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1, style: {cursor: `pointer`}}], 
           [`circle`, {r: 4, cx: 8, cy: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}],
           [`text`, {fill: `#fff`, x: 20, y: .15*Arg.Y + ((Arg.HL[0] - Obj[2])*.35*Arg.Y)/(Arg.HL[0] - Arg.HL[Arg.HL.length - 1]) + 3.5, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, `${Obj[2]}`]]]);     
       });
@@ -757,8 +757,8 @@ let Models = {
 
         if (Obj.indexOf(K[0]) > -1) {
 
-          G[1].push([`g`, {style: {cursor: `pointer`}}, 
-            [[`circle`, {r: 8, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1}], 
+          G[1].push([`g`, {id: Tools.coats(Obj), style: {cursor: `pointer`}}, 
+            [[`circle`, {r: 8, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), stroke: `#fff`, [`stroke-width`]: 1, style: {cursor: `pointer`}}], 
             [`circle`, {r: 4, cx: i*7.12, cy: .15*Y + ((HL[0] - Obj[2])*.35*Y)/(HL[0] - HL[HL.length - 1]), style: {cursor: `pointer`}, fill: (Obj[0] === `sell`)? `#e3415d`: `#6bc679`, stroke: `none`, [`stroke-width`]: 1}]]]);
         }
       });
@@ -861,7 +861,8 @@ let Models = {
                                         [`g`, {id: `g`}, G[0]], [`g`, {id: `gSwap`}, G[1]],
                                         [`text`, {id: `ya`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``],
                                         [`text`, {id: `yz`, fill: `#fff`, x: ``, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`, [`text-anchor`]: `middle`}, ``], 
-                                        [`g`, {id: `limitSetline`, style: {display: `none`}}, [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 2}]]]]]]], 
+                                        [`g`, {id: `limitSetline`, style: {display: `none`}}, [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 2}]]],
+                                        [`g`, {id: `SWAPX2Y`, style: {display: `none`}}, [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 3}]]]]]]], 
                             [`div`, {style: {width: `${20}%`}}, 
                                 [
                                     [`svg`, {style: {background: `#000`, [`border-left`]: `${1}px solid #353535`, height: `${100}%`, width: `${100}%`}}, 
@@ -882,7 +883,10 @@ let Models = {
                                         [`g`, {id: `limitSet`, style: {display: `none`}}, 
                                           [[`circle`, {cx: 8, r: 8, fill: `none`, stroke: `#fff`, [`stroke-dasharray`]: 3.5}], 
                                           [`circle`, {cx: 8, r: 4}],
-                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
+                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]],
+                                        [`g`, {id: `SWAPZY`, style: {display: `none`}}, 
+                                          [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 3}],
+                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
                     [`div`, {id: ``, style: {background: `#000000c9`, top: `${37}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
                         [[`span`, {id: `info`, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
                     [`div`, {id: ``, class: `_gxM ival-alt`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${80}px`, position: `absolute`, width: `${100}%`}}, 
