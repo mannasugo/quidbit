@@ -8,8 +8,6 @@ const { createHash } = require(`crypto`);
 
 const HR = require(`request`);
 
-const JHR = require(`https`);
-
 const Mail = require(`nodemailer`);
 
 const INTASEND = require('intasend-node');

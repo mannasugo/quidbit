@@ -300,7 +300,7 @@ let Models = {
 
     DOM[0] = [`section`, {}, 
             [
-                [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Quidbit`],
+                [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Sojava`],
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
@@ -310,7 +310,7 @@ let Models = {
 
         DOM[1] = [`section`, {}, 
             [
-                [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Quidbit`],
+                [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Welcome to Sojava`],
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Password`], 
@@ -320,7 +320,7 @@ let Models = {
 
         DOM[2] = [`section`, {}, 
             [
-                [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Sign in to Quidbit`],
+                [`h2`, {style: {[`font-size`]: `${19}px`, [`margin-top`]: `${28}px`}}, `Sign in to Sojava`],
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
@@ -814,7 +814,7 @@ let Models = {
               [[`div`, {class: `_gxM _geQ`, style: {[`font-size`]: `${11}px`}}, 
                 [[`div`, {},
                   [[`a`, {id: `mutiple`, href: `javascript:;`, class: `_gxM _geQ`, style: {color: `#fff`, display: `flex`, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, padding: `${6}px ${12}px`}}, 
-                    [[`span`, {}, `QUIDBIT:${Arg.plot[0].toString().replace(`,`, `/`)}`],
+                    [[`span`, {}, `SOJAVA:${Arg.plot[0].toString().replace(`,`, `/`)}`],
                     [`svg`, {viewbox: `0 0 24 24`, style: {height: `${6}px`, [`margin-left`]: `${6}px`, width: `${6}px`}}, 
                       [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 6, d: `M0 6 12 18 24 6`}]]]]], 
                   [`div`, {id: `mutiple2`, style: {background: `#000`, bottom: `${-2}px`, display: `none`, height: `${3}px`, position: `absolute`, width: `${100}%`, [`z-index`]: 36}}]]],

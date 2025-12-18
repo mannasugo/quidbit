@@ -4,7 +4,7 @@ const { readFile, readFileSync, createReadStream, mkdir, stat, writeFile, writeF
 
 const { createHash } = require(`crypto`);
 
-const JHR = require(`https`);
+const XHR = require(`https`);
 
 const { Mail } = require(`./mail`);
 
@@ -92,11 +92,11 @@ class Route {
                   Pay.inta.collection()
                     .mpesaStkPush({
                       email: Raw.mugs[1][Pulls.mug].email,
-                      host: `https://quidbit.space`,
+                      host: `https://sojava.xyz`,
                       amount: parseFloat(Pulls.float),
                       phone_number: Pulls.call,
                       api_ref: md})
-                    .then((Blob) => {
+                    .then((Blob) => {//console.log(Blob)
 
                       if (Blob.id) {
 
