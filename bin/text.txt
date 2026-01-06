@@ -25,6 +25,575 @@ asugo von mann
 
 as maga shrinks by the day it becomes more ideological(dysfucntional) & less practical, wiles remedies the latter for outside perception. trump cant afford her exit, i'd be shocked if she were canned.
 
+https://developer.android.com/guide/topics/manifest/activity-element#exported
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" ...>
+    <application ...>
+
+        <!-- Main Launcher Activity (must be exported="true") -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Internal Activity (should be exported="false") -->
+        <activity
+            android:name=".InternalDetailActivity"
+            android:exported="false" />
+
+    </application>
+</manifest>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bingoGrid"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rowCount="5"
+    android:columnCount="5"
+    android:alignmentMode="alignBounds"
+    android:useDefaultMargins="true">
+    <!-- Children will be added here programmatically -->
+</GridLayout>
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.Button;
+import android.widget.GridLayout;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        GridLayout gridLayout = findViewById(R.id.bingoGrid);
+        int numColumns = gridLayout.getColumnCount();
+        int numRows = gridLayout.getRowCount();
+        int totalCells = numColumns * numRows;
+
+        for (int i = 0; i < totalCells; i++) {
+            Button button = new Button(this);
+            button.setText(String.valueOf(i + 1));
+            button.setGravity(Gravity.CENTER);
+
+            // Define LayoutParams with weights and 0dp dimensions
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+
+            // Set column weight to 1 for even horizontal distribution
+            params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f); 
+            // Set row weight to 1 for even vertical distribution
+            params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
+
+            // Set width and height to 0 to allow the weight to control the size
+            params.width = 0;
+            params.height = 0;
+
+            // Optional: Add margins (e.g., 4dp converted to pixels)
+            float density = getResources().getDisplayMetrics().density;
+            int marginPx = (int) (4 * density);
+            params.setMargins(marginPx, marginPx, marginPx, marginPx);
+
+            gridLayout.addView(button, params);
+        }
+    }
+}
+
+To evenly distribute items in an Android GridLayout using Java, you need to set the layout_width and layout_height of each child to 0dp and assign a layout_weight to the rowSpec and columnSpec in the GridLayout.LayoutParams. 
+
+// Source - https://stackoverflow.com/a
+// Posted by MaCoda, modified by community. See post 'Timeline' for change history
+// Retrieved 2025-12-27, License - CC BY-SA 4.0
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<Button
+    android:id="@+id/button1"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="1"
+    app:layout_constraintEnd_toStartOf="@id/button2"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/button2"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button2"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="2"
+    app:layout_constraintBottom_toTopOf="@id/button5"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button3"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="3"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toEndOf="@id/button2"
+    app:layout_constraintTop_toTopOf="@id/button2"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button4"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="4"
+    app:layout_constraintEnd_toStartOf="@id/button5"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/button5"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button5"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="5"
+    app:layout_constraintBottom_toTopOf="@id/button8"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/button2"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button6"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="6"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toEndOf="@id/button5"
+    app:layout_constraintTop_toTopOf="@id/button5"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button7"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="7"
+    app:layout_constraintEnd_toStartOf="@id/button8"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/button8"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button8"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="8"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button9"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="9"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toEndOf="@id/button8"
+    app:layout_constraintTop_toTopOf="@id/button8"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button10"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="X"
+    app:layout_constraintEnd_toStartOf="@id/button11"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/button11"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button11"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="0"
+    app:layout_constraintBottom_toTopOf="@id/button13"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/button8"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button12"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="OK"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toEndOf="@id/button11"
+    app:layout_constraintTop_toTopOf="@id/button11"
+    app:layout_constraintWidth_percent="0.3" />
+
+<Button
+    android:id="@+id/button13"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="back"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHeight_percent="0.19"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/button11"
+    app:layout_constraintWidth_percent="0.95" />
+
+Step 2: Adding required dependency
+Navigate to app > Gradle Scripts > build.gradle.kts(module) and add the following dependency in it.
+
+implementation("com.google.android.material:material:1.12.0")
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is a Modal BottomSheet"
+        android:textSize="25sp" />
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/button_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button 1" />
+
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/button_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button 2" />
+
+</LinearLayout>
+
+package org.geeksforgeeks.demo;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+public class BottomSheetDialog extends BottomSheetDialogFragment {
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Inflate the bottom sheet layout
+        View view = inflater.inflate(R.layout.bottom_sheet_layout, container, false);
+
+        // Find buttons from the layout
+        Button algoButton = view.findViewById(R.id.button_1);
+        Button courseButton = view.findViewById(R.id.button_2);
+
+        // Set click listener for Algorithm button
+        algoButton.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "First Button Clicked", Toast.LENGTH_SHORT).show();
+            dismiss(); // Close the bottom sheet
+        });
+
+        // Set click listener for Course button
+        courseButton.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Second Button Clicked", Toast.LENGTH_SHORT).show();
+            dismiss(); // Close the bottom sheet
+        });
+
+        return view;
+    }
+}
+
+package org.geeksforgeeks.demo;
+
+import android.os.Bundle;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Find the button in the layout
+        Button openBottomSheet = findViewById(R.id.open_bottom_sheet);
+
+        // Set click listener on the button
+        openBottomSheet.setOnClickListener(v -> {
+            // Create an instance of BottomSheetDialog
+            BottomSheetDialog bottomSheet = new BottomSheetDialog();
+
+            // Show the bottom sheet
+            bottomSheet.show(getSupportFragmentManager(), "ModalBottomSheet");
+        });
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:id="@+id/open_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Modal Bottom Sheet" />
+</LinearLayout>
+
+// Source - https://stackoverflow.com/a
+// Posted by pRaNaY, modified by community. See post 'Timeline' for change history
+// Retrieved 2025-12-29, License - CC BY-SA 4.0
+
+public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
+
+public interface OnItemClickListener {
+    void onItemClick(ContentItem item);
+}
+
+private final List<ContentItem> items;
+private final OnItemClickListener listener;
+
+public ContentAdapter(List<ContentItem> items, OnItemClickListener listener) {
+    this.items = items;
+    this.listener = listener;
+}
+
+@Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_item, parent, false);
+    return new ViewHolder(v);
+}
+
+@Override public void onBindViewHolder(ViewHolder holder, int position) {
+    holder.bind(items.get(position), listener);
+}
+
+@Override public int getItemCount() {
+    return items.size();
+}
+
+static class ViewHolder extends RecyclerView.ViewHolder {
+
+    private TextView name;
+    private ImageView image;
+
+    public ViewHolder(View itemView) {
+        super(itemView);
+        name = (TextView) itemView.findViewById(R.id.name);
+        image = (ImageView) itemView.findViewById(R.id.image);
+    }
+
+    public void bind(final ContentItem item, final OnItemClickListener listener) {
+        name.setText(item.name);
+        Picasso.with(itemView.getContext()).load(item.imageUrl).into(image);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                listener.onItemClick(item);
+            }
+        });
+    }
+}
+
+/*
+Source - https://stackoverflow.com/a
+Posted by pRaNaY, modified by community. See post 'Timeline' for change history
+Retrieved 2025-12-29, License - CC BY-SA 4.0
+*/
+
+recycler.setAdapter(new ContentAdapter(items, new ContentAdapter.OnItemClickListener() {
+@Override public void onItemClick(ContentItem item) {
+    Toast.makeText(getContext(), "Item Clicked", Toast.LENGTH_LONG).show();
+}
+}));
+
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <!--For image src we have used ic_launcher 
+        and for text "courseName" they are used
+        only for reference how it will looks"-->
+    <ImageView
+        android:id="@+id/courseImg"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:padding="8dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/courseName"
+            android:text="courseName"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+
+// Extends the Adapter class to RecyclerView.Adapter
+// and implement the unimplemented methods
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+    ArrayList courseImg, courseName;
+    Context context;
+
+    // Constructor for initialization
+    public Adapter(Context context, ArrayList courseImg, ArrayList courseName) {
+        this.context = context;
+        this.courseImg = courseImg;
+        this.courseName = courseName;
+    }
+
+    @NonNull
+    @Override
+    public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflating the Layout(Instantiates list_item.xml
+          // layout file into View object)
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+
+        // Passing view to ViewHolder
+        Adapter.ViewHolder viewHolder = new Adapter.ViewHolder(view);
+        return viewHolder;
+    }
+
+    // Binding data to the into specified position
+    @Override
+    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+        // TypeCast Object to int type
+        int res = (int) courseImg.get(position);
+        holder.images.setImageResource(res);
+        holder.text.setText((String) courseName.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        // Returns number of items 
+          // currently available in Adapter
+        return courseImg.size();
+    }
+
+    // Initializing the Views
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView images;
+        TextView text;
+
+        public ViewHolder(View view) {
+            super(view);
+            images = (ImageView) view.findViewById(R.id.courseImg);
+            text = (TextView) view.findViewById(R.id.courseName);
+        }
+    }
+}
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+
+    // Using ArrayList to store images data
+    ArrayList courseImg = new ArrayList<>(Arrays.asList(R.drawable.data_structure, R.drawable.c_plus_plus,
+                                                        R.drawable.c_hash, R.drawable.java_script, 
+                                                        R.drawable.java, R.drawable.c,
+                                                        R.drawable.html, R.drawable.css));
+    ArrayList courseName = new ArrayList<>(Arrays.asList("Data Structure", "C++", "C#", "JavaScript", "Java",
+                                                         "C-Language", "HTML 5", "CSS"));
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Getting reference of recyclerView
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        // Setting the layout as linear 
+          // layout for vertical orientation
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        // Sending reference and data to Adapter
+        Adapter adapter = new Adapter(MainActivity.this, courseImg, courseName);
+
+        // Setting Adapter to RecyclerView
+        recyclerView.setAdapter(adapter);
+    }
+}
+
+
 [`points`] [
 
   `ai is facade boosting a weak economy, short to trigger recession to reveal incumbent culpability`,

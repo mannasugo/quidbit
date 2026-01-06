@@ -26,9 +26,9 @@ class Route {
 
       if (State[1] === `favicon.ico`) {
 
-        let File = createReadStream(`bin/wa/get/svg/v202411141235.svg`);
+        let File = createReadStream(`bin/ico/202601061542.png`);
 
-        Arg[1].writeHead(200, {[`Content-Type`]: `image/svg+xml`});
+        Arg[1].writeHead(200, {[`Content-Type`]: `image/png`});
 
         File.on(`data`, Arg[1].write.bind(Arg[1]));
 
@@ -223,7 +223,8 @@ class Route {
                   Old[1] = Tools.oldSwap([Raw, Pulls.mug])[S.plot[0].toString().replace(`,`, `-`)];
                 }
 
-                Arg[1].end(Tools.coats({ago: Tools.plot24(), incoming: Via, old: Old, ox: OX, plot: S.plot, wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
+                Arg[1].end(Tools.coats({ago: Tools.plot24(), incoming: Via, old: Old, ox: OX, plot: S.plot, synom: [Tools.synoms()[S.plot[0][0]][3], Tools.synoms()[S.plot[0][1]][3]], 
+                  wallets: Client.wallets, XY: Tools.plotXY([S.plot[0], Pulls.splitX, Pulls.x, Pulls.ts, Pulls.tsDay])}));
               }
 
               if (Pulls.pull === `trade`) {

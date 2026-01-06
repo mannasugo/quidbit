@@ -304,7 +304,7 @@ let Models = {
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
-                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
                 [`a`, {id: `emailAvail`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {id: `modalMugin`, href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]];
 
@@ -314,7 +314,7 @@ let Models = {
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Password`], 
-                        [`input`, {id: `lock`, placeholder: `Create password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+                        [`input`, {id: `lock`, placeholder: `Create password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
                 [`a`, {id: `saltAvail`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {href: `javascript:;`, style: {color: `#6bc679`, display: `none`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]];
 
@@ -324,19 +324,19 @@ let Models = {
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
-                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}], 
+                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}], 
                         [`label`, {style: {[`font-size`]: `${10.88}px`, [`margin-top`]: `${16}px`}}, `Password`], 
-                        [`input`, {id: `salt`, placeholder: `Password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+                        [`input`, {id: `salt`, placeholder: `Password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
                 [`a`, {id: `emailSalt`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${32}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {id: `modalMugup`, href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign up`]]];
 
     return [`main`, {id: `modalSlot`, style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
-      [[`section`, {style: {[`font-family`]: `qb`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
+      [[`section`, {style: {[`font-family`]: `ba`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
         [[`div`, {class: `_geQ _gxM`}, 
           [[`div`, {}], 
           [`div`, {class: `_gZz`}, [[`span`, {style: {}}, [[`svg`, {id: ``, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${8}px`, width: `${8}px`}}, 
             [[`path`, {fill: `none`, stroke: `#fff`, [`stroke-width`]: 2, d: `M0 0 24 24 M24 0 0 24 `}]]]]]]]]],
-        [`h1`, {style: {color: `#6bc679`, [`font-family`]: `qb`, [`font-size`]: `${28}px`}}, `Qb`], //2525ff
+        [`h1`, {style: {color: `#6bc679`, [`font-family`]: `aspg`, [`font-size`]: `${28}px`}}, `SOJAVA`], //2525ff
         DOM[Arg[0]]]]]]
   },
 
@@ -798,14 +798,15 @@ let Models = {
     SVG[12] = [`line`, {x1: 0, x2: 8, y1: `${102.5 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, y2: `${102.5 - (Tools.yScale([.75*Vols[0], Vols[0]])[0]*100)/Vols[0]}%`, stroke: `#fff`, [`stroke-dasharray`]: 0, [`stroke-width`]: 1}];
             
     return [
-      `main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, [`font-family`]: `litera`, height: `${100}%`}}, 
+      `main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, height: `${100}%`}}, 
         [[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
           [[`div`, {class: `_gxM _geQ`}, 
-            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#6bc679`, [`font-family`]: `qb`, [`font-size`]: `15px`, [`font-weight`]: 300, heght: `${20}px`, wdth: `${20}px`}}, `Qb`], 
+            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#6bc679`, [`font-family`]: `aspg`, [`font-size`]: `15px`, [`font-weight`]: 300}}, 
+                [[`h1`, {}, `SOJAVA`]]], 
             [`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
               [[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
-            [`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`, [`font-weight`]: 600}}, 
-              (!Clients.mug)? [[`a`, {id: `modalMug`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, color: `#000`, display: `inline-grid`, [`font-family`]: `qb`, [`font-size`]: `${11.88}px`, padding: `${2}px ${16}px`, [`text-align`]: `center`}}, `Sign in`]]: []]]]]],
+            [`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`}}, 
+              (!Clients.mug)? [[`a`, {id: `modalMug`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, color: `#000`, display: `inline-grid`, [`font-family`]: `aspg`, [`font-size`]: `${10.88}px`, padding: `${2}px ${16}px`, [`text-align`]: `center`}}, `LOG IN`]]: []]]]]],
         [`div`, {id: `collapsible`, style: {[`boder-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
           [[`div`, {id: `faves`, class: `_gxM _geQ`, style: {[`border-bottom`]: `${1}px solid #353535`, cursor: `grab`, [`font-size`]: `${11}px`}}, this.faveplots()]]], 
         [`section`, {class: `_gxM`, style: {height: `${100}%`, width: `${100}%`}}, 

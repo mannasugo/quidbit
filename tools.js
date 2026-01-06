@@ -850,6 +850,18 @@ class Tools {
 
     writeFileSync(`json/wallets.json`, this.coats(File));
   }
+
+  synoms () {
+
+    let Synoms = {};
+
+    Constants.fiat.concat(Constants.tokens).forEach(Obj => {
+
+      Synoms[Obj[0]] = Obj;
+    });
+
+    return Synoms;
+  }
 }
 
 let Constants = {

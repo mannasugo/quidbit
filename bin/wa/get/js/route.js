@@ -39,7 +39,7 @@ class Route {
           Clients.plot = Tools.coats(Plot)
         });
 
-        /*if (Clients.plot)*/ window.location = `/trade/EUR_USD`;
+        /*if (Clients.plot)*/ //window.location = `/trade/EUR_USD`;
       });
     }
 
@@ -66,7 +66,7 @@ class Route {
 
           if (Web.plot) {
 
-            document.title = `QB:${State[4].replace(`_`, `-`) || (0).toFixed(Web.plot[1])}`;
+            document.title = `SOJAVA:${State[4].replace(`_`, `/`)}`;
 
             Clients.incoming = Tools.coats(Web.incoming);
 
