@@ -2,16 +2,16 @@
 
 class Tools {
 
-    constructor () {
+  constructor () {
 
         this.call = new XMLHttpRequest;
 
         this.synonyms = [[`\f`, ``], [`\n`, ``], [`\t`, ``], [`\r`, ``], [`'`, `u0027`], [`"`, `u0022`], [`/`, `u002f`], [`&`, `u0026`]];
-    }
+  }
 
-    coats (types) { return JSON.stringify(types); }
+  coats (types) { return JSON.stringify(types); }
 
-    plains (Raw)  {
+  plains (Raw)  {
 
         this.synonyms.slice(4).forEach(Regex => {
 
@@ -19,9 +19,9 @@ class Tools {
         });
 
         return Raw;
-    }
+  }
 
-    pull (Arg) {
+  pull (Arg) {
 
         this.call.open(`POST`, Arg[0], true);
 
@@ -30,24 +30,24 @@ class Tools {
         this.call.send(JSON.stringify(Arg[1]));
 
         return this.call;
-    }
+  }
 
-    slim (String) {
+  slim (String) {
 
         if (!String || String.length < 1 || String.match(/^(\s+)$/)) return;
 
         return String;
-    }
+  }
 
-    yScale (Arg) {
+  yScale (Arg) {
 
-        let AY, B1, B2 = 0, RH;
+    let AY, B1, B2 = 0, RH;
 
-        Arg[1] = parseFloat(Arg[1]);
+    Arg[1] = parseFloat(Arg[1]);
 
-        if (Arg[0] < 1 && Arg[0] !== 0) {
+    if (Arg[0] < 1 && Arg[0] !== 0) {
 
-            let Float = Arg[0].toString().split(`.`);
+      let Float = Arg[0].toString().split(`.`);
 
             for (let A = 0; A < Float[1].length; A++) {
 
@@ -65,7 +65,9 @@ class Tools {
 
             RH = parseInt(Arg[0].toString()[0])*Math.pow(10, B2-1);
 
-            B1 = Arg[1].toFixed().length;
+            B1 = Arg[1].toFixed().length; 
+
+            if (B1 === B2) { B2 = B2-1 } //PATCH WORK ALERT!
 
             AY = parseInt(Arg[1].toString().substr(0, B1-B2))*Math.pow(10, B2);
         }
@@ -78,13 +80,13 @@ class Tools {
         }
 
         return [RH, AY];
-    }
+  }
 
-    typen (coat) { return JSON.parse(coat); }
+  typen (coat) { return JSON.parse(coat); }
 
-    formatplanex (Arg) {
+  formatplanex (Arg) {
 
-        let String = new Date(Arg[0]).toTimeString();
+    let String = new Date(Arg[0]).toTimeString();
 
         if (Arg[1] === 60000*30 || Arg[1] === 60000*60 || Arg[1] === 60000*60*24) {String = new Date(Arg[0]).toDateString()}
 
