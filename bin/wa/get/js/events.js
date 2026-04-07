@@ -161,7 +161,7 @@ class Event {
 
       if (Plot[Arg.plot[0].toString().replace(`,`, `-`)]) { ZY = Plot[Arg.plot[0].toString().replace(`,`, `-`)] }
 
-      if (parseFloat(ZY) > 0) { document.title = `${ZY} | SOJAVA:${Arg.plot[0].toString().replace(`,`, `/`)}` }
+      if (parseFloat(ZY) > 0) { document.title = `${ZY} | SJV:${Arg.plot[0].toString().replace(`,`, `/`)} | Sojava` }
 
       /**
 

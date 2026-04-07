@@ -66,7 +66,7 @@ class Route {
 
           if (Web.plot) {
 
-            document.title = `SOJAVA:${State[4].replace(`_`, `/`)}`;
+            document.title = `SJV:${State[4].replace(`_`, `/`)} | Sojava`;
 
             Clients.incoming = Tools.coats(Web.incoming);
 

@@ -304,7 +304,7 @@ let Models = {
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
-                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `aspg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
                 [`a`, {id: `emailAvail`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {id: `modalMugin`, href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]];
 
@@ -314,7 +314,7 @@ let Models = {
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Password`], 
-                        [`input`, {id: `lock`, placeholder: `Create password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+                        [`input`, {id: `lock`, placeholder: `Create password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `aspg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
                 [`a`, {id: `saltAvail`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {href: `javascript:;`, style: {color: `#6bc679`, display: `none`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign in`]]];
 
@@ -324,14 +324,14 @@ let Models = {
                 [`div`, {style: {[`margin-top`]: `${22}px`}}, 
                     [
                         [`label`, {style: {[`font-size`]: `${10.88}px`}}, `Email`], 
-                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}], 
+                        [`input`, {id: `email`, placeholder: `Email`, type: `email`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `aspg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}], 
                         [`label`, {style: {[`font-size`]: `${10.88}px`, [`margin-top`]: `${16}px`}}, `Password`], 
-                        [`input`, {id: `salt`, placeholder: `Password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `ba`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
+                        [`input`, {id: `salt`, placeholder: `Password`, type: `password`, style: {background: `#66666629`, [`block-size`]: `${32}px`, border: `${1}px solid #3a3a3a`, color: `#fff`, [`font-family`]: `aspg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${1.2}px`, outline: `none`, padding: `${8}px ${12}px`}}]]], 
                 [`a`, {id: `emailSalt`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, [`block-size`]: `${32}px`, color: `#000`, display: `inline-grid`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${32}px`, [`text-align`]: `center`}}, `Continue`],
                 [`a`, {id: `modalMugup`, href: `javascript:;`, style: {color: `#6bc679`, [`font-size`]: `${11.88}px`, [`margin-top`]: `${16}px`, [`text-align`]: `center`}}, `Sign up`]]];
 
     return [`main`, {id: `modalSlot`, style: {background: `#000`, border: `${1}px solid #3a3a3a`, margin: `auto`, [`max-width`]: `${400}px`, width: `${100}%`}}, 
-      [[`section`, {style: {[`font-family`]: `ba`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
+      [[`section`, {style: {[`font-family`]: `aspg`, margin: `${24}px`, [`max-width`]: `${100}%`}}, 
         [[`div`, {class: `_geQ _gxM`}, 
           [[`div`, {}], 
           [`div`, {class: `_gZz`}, [[`span`, {style: {}}, [[`svg`, {id: ``, viewbox: `0 0 24 24`, style: {cursor: `pointer`, height: `${8}px`, width: `${8}px`}}, 
@@ -449,7 +449,7 @@ let Models = {
           [[`span`, {style: {width: `${40}%`}}, `Side`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Quantity`],
           [`span`, {style: {[`text-align`]: `right`, width: `${30}%`}}, `Price`]]], 
-        [`div`, {id: `oldObj`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}, DOM[1]]]]]];                                                   
+        [`div`, {id: `oldObj`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `none`}}, DOM[1]]]]]];                                                   
   },
 
   inputWallet: function (Arg) {
@@ -588,7 +588,7 @@ let Models = {
           [`span`, {style: {[`text-align`]: `right`, width: `${25}%`}}, `Quantity`],
           [`span`, {style: {[`padding-left`]: `${8}px`, [`text-align`]: `left`, width: `${20}%`}}, `Asset`],
           [`span`, {style: {[`text-align`]: `right`, width: `${25}%`}}, `USD`]]], 
-        [`div`, {id: `oldY`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}, this.init.YOX(Arg.ox[0])]]]]];                                                   
+        [`div`, {id: `oldY`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, height: `calc(${100}vh)`, [`max-height`]: `calc(${100}vh - ${525}px)`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `none`}}, this.init.YOX(Arg.ox[0])]]]]];                                                   
   },
 
   plot: function (Arg) {
@@ -801,12 +801,12 @@ let Models = {
       `main`, {id: `plot`, class: `_tY0`, style: {background: `#000`, color: `#fff`, height: `${100}%`}}, 
         [[`div`, {style: {background: `#000`, [`border-bottom`]: `${1}px solid #353535`, height: `${40}px`, padding: `${0}px ${12}px`, width: `${100}%`}}, 
           [[`div`, {class: `_gxM _geQ`}, 
-            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#6bc679`, [`font-family`]: `aspg`, [`font-size`]: `15px`, [`font-weight`]: 300}}, 
+            [[`a`, {href: `/`, class: `202411161551`, style: {color: `#6bc679`, [`font-family`]: `aspg`, [`font-size`]: `15px`, [`font-weight`]: 600}}, 
                 [[`h1`, {}, `SOJAVA`]]], 
             [`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
               [[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
             [`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`}}, 
-              (!Clients.mug)? [[`a`, {id: `modalMug`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, color: `#000`, display: `inline-grid`, [`font-family`]: `aspg`, [`font-size`]: `${10.88}px`, padding: `${2}px ${16}px`, [`text-align`]: `center`}}, `LOG IN`]]: []]]]]],
+              (!Clients.mug)? [[`a`, {id: `modalMug`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, color: `#000`, display: `inline-grid`, [`font-family`]: `insvg`, [`font-weight`]: 600, [`font-size`]: `${10.88}px`, padding: `${2}px ${16}px`, [`text-align`]: `center`}}, `SIGN IN`]]: []]]]]],
         [`div`, {id: `collapsible`, style: {[`boder-bottom`]: `${1}px solid #353535`, width: `${100}%`}}, 
           [[`div`, {id: `faves`, class: `_gxM _geQ`, style: {[`border-bottom`]: `${1}px solid #353535`, cursor: `grab`, [`font-size`]: `${11}px`}}, this.faveplots()]]], 
         [`section`, {class: `_gxM`, style: {height: `${100}%`, width: `${100}%`}}, 
@@ -845,7 +845,7 @@ let Models = {
                                     [`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`font-weight`]: 300, margin: `${6}px ${0}px`}}, DOM.multiple]]], 
                             [`div`, {style: {margin: `${6}px ${12}px ${0}`}}, 
                                 [[`div`, {class: `_gxM _geQ`, style: {[`font-family`]: `insvg`, [`font-size`]: `${9}px`}}, DOM.column]]], 
-                            [`div`, {id: `list`, style: {[`max-height`]: `${300}px`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `thin`}}]]],
+                            [`div`, {id: `list`, style: {[`max-height`]: `${300}px`, [`overflow-y`]: `scroll`, [`scrollbar-width`]: `none`}}]]],
                     [`section`, {id: ``, class: `_gxM`, style: {width: `${100}%`}}, 
                         [
                             [`div`, {class: `ival-alt`, style: {overflow: `hidden`, width: `${80}%`}}, 
@@ -889,7 +889,7 @@ let Models = {
                                           [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 3}],
                                           [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
                     [`div`, {id: ``, style: {background: `#000000c9`, top: `${37}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
-                        [[`span`, {id: `info`, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
+                        [[`span`, {id: `info`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
                     [`div`, {id: ``, class: `_gxM ival-alt`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${80}px`, position: `absolute`, width: `${100}%`}}, 
                         [
                             [`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 

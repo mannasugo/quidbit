@@ -593,6 +593,42 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
+function updateMapCenter(newLongitude, newLatitude) {
+    projection.center([newLongitude, newLatitude]);
+    // Select all paths and update their 'd' attribute with the new projection
+    d3.selectAll("path")
+      .attr("d", path);
+}
+
+var projection = d3.geoMercator();
+// ... other setup
+
+d3.json("us.json", function(error, us) {
+    // Center and scale the map to fit the US GeoJSON object within a 960x500 area
+    projection.fitSize([960, 500], us); 
+    
+    // ... draw your paths using the 'path' generator which uses the configured projection
+});
+
+
+meta 37.48116, -122.15308
+
+google 37.4231, -122.0842
+
+svangel 37.792405, -122.409746
+
+abnb  37.7719568, -122.4054484
+
+block 37.808955, -122.268986
+
+saleforce 37.7897845, -122.3969288
+
+apple 37.334956, -122.012701
+
+linkedin 37.392702, -122.042018
+
+the problem with the people who've only known freedom is that they tend to take it for granted, whilst the 
+problem with trying to take that from them is that they eventually remember what freedon felt like. the former is america's dilemna while the latter's maga's
 
 [`points`] [
 
@@ -600,3 +636,22 @@ public class MainActivity extends AppCompatActivity {
   `progressive civilization affordability & growth for population attraction`,
   `non-voter recruitment especially female non-voter`
 ]
+
+elckheadoffice03@gmail.com
+daniel@jnncpa.com
+
+"254710624737"
+"254716549777"
+254115070913
+
+json: {"email":"mannasugo@gmail.com","lock":"a1b16e16fb483b9f51d7e3d0c1c953d0","md":"e55051e75a089b614bc043a01736f65a","stamp":1765886148729}
+*************************** 2. row ***************************
+json: {"email":"wralingsjerry31@gmail.com","lock":"027ad1e82aa7d30b0c7caf38ae468b2e","md":"2ea9ad0e92e5d83439890b619a7e8991","stamp":1766501906189}
+*************************** 3. row ***************************
+json: {"email":"asugobenson@gmail.com","lock":"38f5a3a959799c6841b49f6c3952226c","md":"8c6e135441881222197ea675258dde8c","stamp":1766502534560}
+*************************** 4. row ***************************
+json: {"email":"josephbrian986@gmail.com","lock":"f17fc0062374ebc63747d687e1072c69","md":"94c015e087a109acde74fd529ce17d8a","stamp":1769166174417}
+*************************** 5. row ***************************
+json: {"email":"kevinejurah001@gmail.com","lock":"7da38d17fa79a0b62472c0ecd12d184c","md":"25f66aec5b12a4ae6457420792e4a6cc","stamp":1774451390776}
+*************************** 6. row ***************************
+json: {"email":"brianotieno.odhiambo@4g-capital.com","lock":"d526f1c8ef6c1e4e980e2b8471352d23","md":"b013bd72e17fd820bda0098bd5c06322","stamp":1774633412481}
