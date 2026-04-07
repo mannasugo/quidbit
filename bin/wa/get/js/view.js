@@ -61,6 +61,20 @@ let Models = {
 
   init: {
 
+    detail: (Arg) => {
+
+      return [`p`, {style: {display: `flex`, padding: 0}}, 
+        [[`span`, {style: {[`font-weight`]: 600, opacity: 1, [`margin-right`]: `${4}px`}}, Arg[0]], 
+        [`span`, {}, `Open:`], 
+        [`span`, {class: `dA`}, `${Arg[1]}`], 
+        [`span`, {}, `High:`], 
+        [`span`, {class: `dA`}, `${Arg[2]}`], 
+        [`span`, {}, `Low:`], 
+        [`span`, {class: `dA`}, `${Arg[3]}`], 
+        [`span`, {}, `Close:`], 
+        [`span`, {class: `dA`}, `${Arg[4]}`], [`span`, {class: `dA`, style: {color: (Arg[5] <= 0)? `#E3415D`: `#6BC679`}}, `${Arg[5]}%`]]];
+    },
+
     fill: (Arg) => {
 
       return [`div`, {id: ``, style: {[`font-family`]: `qb`, [`font-size`]: `${10.88}px`, margin: `${69}px ${0}px ${0}px ${12}px`, [`max-width`]: `${80}%`}}, 
@@ -803,7 +817,7 @@ let Models = {
           [[`div`, {class: `_gxM _geQ`}, 
             [[`a`, {href: `/`, class: `202411161551`, style: {color: `#6bc679`, [`font-family`]: `aspg`, [`font-size`]: `15px`, [`font-weight`]: 600}}, 
                 [[`h1`, {}, `SOJAVA`]]], 
-            [`div`, {class: `_eYG`, style: {[`border-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
+            [`div`, {class: `_eYG`, style: {[`brder-left`]: `${1}px solid #353535`, height: `${100}%`}}, 
               [[`span`, {style: {[`font-family`]: ``, [`font-size`]: `${12}px`, [`font-weight`]: 300}}, ``]]], 
             [`div`, {class: `_gZz`, style: {[`font-size`]: `${12}px`}}, 
               (!Clients.mug)? [[`a`, {id: `modalMug`, href: `javascript:;`, style: {[`align-content`]: `center`, background: `#6bc679`, color: `#000`, display: `inline-grid`, [`font-family`]: `insvg`, [`font-weight`]: 600, [`font-size`]: `${10.88}px`, padding: `${2}px ${16}px`, [`text-align`]: `center`}}, `SIGN IN`]]: []]]]]],
@@ -889,7 +903,7 @@ let Models = {
                                           [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 3}],
                                           [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
                     [`div`, {id: ``, style: {background: `#000000c9`, top: `${37}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
-                        [[`span`, {id: `info`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
+                        [[`div`, {id: `info`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
                     [`div`, {id: ``, class: `_gxM ival-alt`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${80}px`, position: `absolute`, width: `${100}%`}}, 
                         [
                             [`div`, {style: {overflow: `hidden`, width: `${80}%`}}, 

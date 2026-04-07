@@ -719,7 +719,11 @@ class Event {
 
                 document.querySelector(`#info`).style.display = `flex`;
 
-                document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
+        View.pop();
+
+        View.DOM([`#info`, [Models.init.detail([new Date(Stat[0]).toString().substr(4, 17), Stat[1][0], Stat[2][0], Stat[2][1], Stat[1][1], ((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)])]]);
+
+        //document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
       
                 document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
 
@@ -1827,7 +1831,11 @@ class Event {
 
         document.querySelector(`#info`).style.display = `flex`;
 
-        document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
+        View.pop();
+
+        View.DOM([`#info`, [Models.init.detail([new Date(Stat[0]).toString().substr(4, 17), Stat[1][0], Stat[2][0], Stat[2][1], Stat[1][1], ((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)])]]);
+
+        //document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
       
         document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
 
@@ -1929,7 +1937,11 @@ class Event {
 
         document.querySelector(`#info`).style.display = `flex`;
 
-        document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
+        View.pop();
+
+        View.DOM([`#info`, [Models.init.detail([new Date(Stat[0]).toString().substr(4, 17), Stat[1][0], Stat[2][0], Stat[2][1], Stat[1][1], ((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)])]]);
+
+        //document.querySelector(`#info`).innerHTML = `${new Date(Stat[0]).toString().substr(4, 17)} Open: ${Stat[1][0]} High: ${Stat[2][0]} Low: ${Stat[2][1]} Close: ${Stat[1][1]} ${((Stat[1][1] - Stat[1][0])/Stat[1][0]*100).toFixed(2)}%`;
       
         document.querySelector(`#volbase`).style.color = (Stat[1][0] > Stat[1][1])? `#E3415D`: `#6BC679`;
 

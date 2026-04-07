@@ -434,7 +434,7 @@ body {
 
 ._limit_202203261823 + ._limit_202203261823 {border-top: 1px solid #f4f4f4}
 
-._wrap_202203262208 {
+._wrap_202203262208, #info p {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -542,6 +542,10 @@ body {
 #XB {width: 360px}
 
 #XAC {display: none}
+
+p > span + span {margin-right: 4px; opacity: .45}
+
+.dA {font-weight: 600; opacity: 1}
 
 @media (min-width: 600px) {
 
