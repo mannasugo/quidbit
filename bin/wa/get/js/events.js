@@ -770,7 +770,7 @@ class Event {
 
         document.querySelector(`#holds #balance`).innerHTML = Child.querySelectorAll(`span`)[0].innerText;
 
-        document.querySelector(`#holds #balance`).previousElementSibling.innerText = Tools.typen(Clients.hold)[document.querySelector(`#holds #balance`).innerText];
+        if (Clients.hold) { document.querySelector(`#holds #balance`).previousElementSibling.innerText = Tools.typen(Clients.hold)[document.querySelector(`#holds #balance`).innerText]; }
 
         document.querySelector(`#viaSelect`).innerHTML = Constants.wallet[Child.querySelectorAll(`span`)[0].innerHTML][1];
 
@@ -1233,75 +1233,109 @@ class Event {
           View.pop();
 
           View.DOM([`#plus`, [Models.init.fiatSlot()]]);
-
+          
           document.querySelector(`#plus`).style.display = `flex`;
 
-          document.querySelectorAll(`.fiat-float`).forEach(DOM => {
+          this.listen([document.querySelector(`#fiatSet`), `click`, S => {
 
-            this.listen([DOM, `keyup`, S => {
+            document.querySelector(`#fiatSlot #multi`).style.display = (document.querySelector(`#fiatSlot #multi`).style.display === `flex`)? `none`: `flex`;
+          }]);
 
-              let Slot = this.getSource(S);
+          document.querySelectorAll(`#fiatSlot #multi a`).forEach(Child => {
 
-              if (!parseInt(Slot.value)) Slot.value = 0;
+            this.listen([Child, `click`, S => {
 
-              if (Slot.id === `callSlot` && Slot.value.length > 11) { Slot.value = Slot.value.substr(0, 12) }
+              document.querySelectorAll(`#fiatSlot #multi a`).forEach(A => {A.style.background = `none`});
 
-              Slot.value = parseInt(Slot.value);
+              Child.style.background = `#242471`;
+
+              document.querySelector(`#fiatSlot #multi`).style.display = `none`;
+
+              document.querySelector(`#fiatSet img`).src = `/wa/get/svg/${Constants.SVG[Child.querySelectorAll(`span`)[0].innerHTML]}.svg`;
+
+              document.querySelectorAll(`#fiatSet span`)[0].innerHTML = Child.querySelectorAll(`span`)[0].innerHTML;
+
+              document.querySelectorAll(`#fiatSet span`)[1].innerHTML = Child.querySelectorAll(`span`)[1].innerHTML;
+
+              if (Clients.hold) { document.querySelector(`#fiatSlot .ABBR`).previousElementSibling.innerText = Tools.typen(Clients.hold)[document.querySelector(`#fiatSlot .ABBR`).innerText]; }
+
+              document.querySelector(`#fiatSlot .ABBR`).innerHTML = Child.querySelectorAll(`span`)[0].innerText;
+
+              document.querySelectorAll(`.FV`).forEach(A => {A.style.display = `none`});
+
+              if (Child.querySelectorAll(`span`)[0].innerHTML === `KES`) {
+
+                document.querySelectorAll(`.FV`).forEach(A => {A.style.display = `flex`});
+
+                document.querySelectorAll(`.fiat-float`).forEach(DOM => {
+
+                  this.listen([DOM, `keyup`, S => {
+
+                    let Slot = this.getSource(S);
+
+                    if (!parseInt(Slot.value)) Slot.value = 0;
+
+                    if (Slot.id === `callSlot` && Slot.value.length > 11) { Slot.value = Slot.value.substr(0, 12) }
+
+                    Slot.value = parseInt(Slot.value);
+                  }]);
+                });
+
+                this.listen([document.querySelector(`#mpesa`), `click`, S => {
+        
+                  if (!Clients.mug) {
+
+                    View.pop();
+
+                    View.DOM([`#modal`, [Models.inputMug([2])]]);
+
+                    this.emailSalt();
+
+                    document.querySelector(`#modal`).style.display = `flex`;
+                  }
+
+                  if (Clients.mug) {
+
+                    let Values = [
+                      (!Tools.slim(document.querySelector(`#callSlot`).value))? false: Tools.slim(document.querySelector(`#callSlot`).value),
+                      (!Tools.slim(document.querySelector(`#floatSlot`).value))? false: Tools.slim(document.querySelector(`#floatSlot`).value)];
+
+                    if (Values[0] === false || typeof parseFloat(Values[0]) !== `number` || Values[0].toString().length !== 12) return;
+
+                    if (Values[1] === false || typeof parseFloat(Values[1]) !== `number`) return;
+
+                    let XHR = [];
+
+                    XHR[0] = Tools.pull([
+                      `/json/web/`, { 
+                        call: parseFloat(Values[0]),
+                        flag: `incoming`,
+                        float: parseFloat(Values[1]),
+                        mug: Clients.mug, 
+                        pull: `incoming`}]);
+
+                    Values = [];
+
+                    document.querySelector(`#callSlot`).value = ``;
+
+                    XHR[0].onload = () => {
+
+                      XHR[1] = Tools.typen(XHR[0].response);
+
+                      if (XHR[1].invoice) {
+
+                        let Yet = Tools.typen(Clients.incoming);
+
+                        Yet.push(XHR[1].invoice.invoice_id);
+
+                        Clients.incoming = Tools.coats(Yet);
+                      }
+                    }
+                  }
+                }]);
+              }
             }]);
           });
-
-          this.listen([document.querySelector(`#mpesa`), `click`, S => {
-        
-            if (!Clients.mug) {
-
-              View.pop();
-
-              View.DOM([`#modal`, [Models.inputMug([2])]]);
-
-              this.emailSalt();
-
-              document.querySelector(`#modal`).style.display = `flex`;
-            }
-
-            if (Clients.mug) {
-
-              let Values = [
-                (!Tools.slim(document.querySelector(`#callSlot`).value))? false: Tools.slim(document.querySelector(`#callSlot`).value),
-                (!Tools.slim(document.querySelector(`#floatSlot`).value))? false: Tools.slim(document.querySelector(`#floatSlot`).value)];
-
-              if (Values[0] === false || typeof parseFloat(Values[0]) !== `number` || Values[0].toString().length !== 12) return;
-
-              if (Values[1] === false || typeof parseFloat(Values[1]) !== `number`) return;
-
-              let XHR = [];
-
-              XHR[0] = Tools.pull([
-                `/json/web/`, { 
-                  call: parseFloat(Values[0]),
-                  flag: `incoming`,
-                  float: parseFloat(Values[1]),
-                  mug: Clients.mug, 
-                  pull: `incoming`}]);
-
-              Values = [];
-
-              document.querySelector(`#callSlot`).value = ``;
-
-              XHR[0].onload = () => {
-
-                XHR[1] = Tools.typen(XHR[0].response);
-
-                if (XHR[1].invoice) {
-
-                  let Yet = Tools.typen(Clients.incoming);
-
-                  Yet.push(XHR[1].invoice.invoice_id);
-
-                  Clients.incoming = Tools.coats(Yet);
-                }
-              }
-            }
-          }]);
         }
 
         if (Clients.typeWallet === `crypto`) {

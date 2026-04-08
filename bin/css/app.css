@@ -547,6 +547,8 @@ p > span + span {margin-right: 4px; opacity: .45}
 
 .dA {font-weight: 300; opacity: 1}
 
+#fiatSlot .FV {display: none}
+
 @media (min-width: 600px) {
 
   #mugs {justify-content: center;}

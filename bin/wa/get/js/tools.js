@@ -100,7 +100,17 @@ let Clients = sessionStorage;
 
 const Constants = {
 
-    ival: {
+  fiat: [
+    [`AUD`, `australian dollar`], 
+    [`CAD`, `canadian dollar`], 
+    [`CHF`, `swiss franc`], 
+    [`GBP`, `sterling pound`], 
+    [`EUR`, `Euro`], 
+    [`KES`, `kenya shilling`], 
+    [`NOK`, `norwegian krone`], [`SEK`, `swedish krone`],
+    [`ZAR`, `south african rand`]],
+
+  ival: {
         [`1M`]: {
                 abs: 60000,
                 C: 15, 
@@ -136,9 +146,9 @@ const Constants = {
                 C: 31, 
                 sub: [4, 3],
                 tox: -12}
-    },
+  },
 
-    SVG: {
+  SVG: {
         ADA: `tokens/ada`,
         AUD: `flags/au`,
         AVAX: `tokens/avax`,
@@ -170,11 +180,11 @@ const Constants = {
         XRP: `tokens/xrp`,
         XTZ: `tokens/xtz`,
         ZAR: `flags/za`
-    },
+  },
 
-    wallet: {
+  wallet: {
         BTC: [`Bitcoin`, `BTC`], 
         //ETH: [`Ethereum`, `ERC20`],
-        //POL: [`Matic`, `ERC20`], 
+        POL: [`Matic`, `ERC20`], 
         USDT: [`TetherUS`, `TRC20`]}
 }
