@@ -545,7 +545,7 @@ body {
 
 p > span + span {margin-right: 4px; opacity: .45}
 
-.dA {font-weight: 600; opacity: 1}
+.dA {font-weight: 300; opacity: 1}
 
 @media (min-width: 600px) {
 
