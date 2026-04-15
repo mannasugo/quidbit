@@ -165,9 +165,9 @@ class Route {
                       stamp: TZ
                     }, (sqlObj) => {
 
-                      Mail.welcome[1] = Mail.welcome[1].replace(`/@mail`, Pulls.email);
+                      //Mail.welcome[1] = Mail.welcome[1].replace(`/@mail`, Pulls.email);
 
-                      Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, Pulls.email, Mail.welcome]);
+                      //Tools.mailto([`mailbee@quidbit.space`, `Mann2asugo`, Pulls.email, Mail.welcome]);
 
                       Arg[1].end(Tools.coats({md: createHash(`md5`).update(`${TZ}`, `utf8`).digest(`hex`)}));
                     }]);

@@ -846,7 +846,7 @@ class Tools {
       if (!File[Obj[1]]) {File[Obj[1]] = []}
 
       File[Obj[1]].push(Obj);
-    });
+    });console.log(File)
 
     writeFileSync(`json/wallets.json`, this.coats(File));
   }

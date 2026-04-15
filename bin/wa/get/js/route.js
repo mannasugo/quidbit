@@ -9,13 +9,18 @@ class Route {
 
   getState () {
 
-      let url = (`./${window.location}`).replace(`//`, `/`).replace(/%(..)/g, function (match, hex) {
-          return String.fromCharCode(parseInt(hex, 16))
-      });
+    let url = (`./${window.location}`).replace(`//`, `/`).replace(/%(..)/g, function (match, hex) {
+      return String.fromCharCode(parseInt(hex, 16))
+    });
 
-      this.State = url;
+    if (url.indexOf(`?`) > 0) {
 
-      this.State = url.split(`/`);
+      url = url.split(`?`)[0];
+    }
+
+    this.State = url;
+
+    this.State = url.split(`/`);
   }
 
   Call () {
