@@ -909,7 +909,7 @@ let Models = {
                                           [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${11.88}px`, [`letter-spacing`]: `${.25}px`}, ``]]],
                                         [`g`, {id: `SWAPZY`, style: {display: `none`}}, 
                                           [[`path`, {stroke: `#fff`, [`stroke-dasharray`]: 3}],
-                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `insvg`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
+                                          [`text`, {fill: `#fff`, x: 20, y: ``, [`font-family`]: `intext`, [`font-size`]: `${10.08}px`, [`letter-spacing`]: `${.25}px`}, ``]]]]]]]]], 
                     [`div`, {id: ``, style: {background: `#000000c9`, top: `${37}px`, height: `${30}px`, padding: `${6}px ${12}px`, position: `absolute`, width: `${80}%`, [`z-index`]: 11}}, 
                         [[`div`, {id: `info`, style: {[`font-family`]: `insvg`, [`font-size`]: `${10.88}px`, [`line-height`]: `${14}px`}}]]], 
                     [`div`, {id: ``, class: `_gxM ival-alt`, style: {background: `#000`, [`border-top`]: `${1}px solid #6a6a6a`, bottom: `${80}px`, position: `absolute`, width: `${100}%`}}, 

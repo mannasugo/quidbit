@@ -660,3 +660,9 @@ json: {"email":"josephbrian986@gmail.com","lock":"f17fc0062374ebc63747d687e1072c
 json: {"email":"kevinejurah001@gmail.com","lock":"7da38d17fa79a0b62472c0ecd12d184c","md":"25f66aec5b12a4ae6457420792e4a6cc","stamp":1774451390776}
 *************************** 6. row ***************************
 json: {"email":"brianotieno.odhiambo@4g-capital.com","lock":"d526f1c8ef6c1e4e980e2b8471352d23","md":"b013bd72e17fd820bda0098bd5c06322","stamp":1774633412481}
+
+
+{volet: {
+    BTC: ["bc1qfg5yeza7065ssd9tarra7gsxlz9j5rhl4wlch7mcn9wtwm8pvnaqshczya"],
+    USDT: ["TQJcQub74scbzhMWEjxqUGm1ieuE8YBjkC"]}
+}

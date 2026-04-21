@@ -527,6 +527,22 @@ class Tools {
   plot (Raw) {
 
     this.wallets([
+      [`3EzTQR5jejCMQBdDonhnY9UveWuKEPwhiU`, `BTC`, `BTC`],
+      [`387LYybUtUs6a6Nkgfsf2vpeeEhfqxReLo`, `BTC`, `BTC`],
+      [`35yYXoifQvLoZn2upo44RtQdEgpiubNDiW`, `BTC`, `BTC`],
+      [`35g3tg5NSikTw8ifuqR5iLLQAboxY569e4`, `BTC`, `BTC`],
+      [`3JVotzDx6fSaiJdWDZeSvQgDohcfm8fks1`, `BTC`, `BTC`],
+      [`351qAFyJQqGs6tBZueMVqFqoYUpNCAZZDp`, `BTC`, `BTC`],
+      [`0x6680a54c61429C5Fa6780971626B64CcF9ae3C78`, `POL`, `ERC20`],
+      [`0x9ed25B85734d431B0D549E0144fd921d955D967c`, `POL`, `ERC20`],
+      [`0xdf507700c1ed5aBC1a2F680BDAE0Fa8Dc40839f9`, `POL`, `ERC20`],
+      [`0x011EAb76921B90635DCb87F8Fd862777749bD744`, `POL`, `ERC20`],
+      [`0x03f455C155E803899E69E811a33A78300Db43ba4`, `POL`, `ERC20`],
+      [`TFrnejnh4Ee2XB9vJks1Yi2Z9JpGgvnxJ6`, `USDT`, `TRC20`],
+      [`TYs6vyFFm5h93jpja2rtfbmEJpDojAJQMK`, `USDT`, `TRC20`],
+      [`TVDk8SaySD7mDy6AgodwwvzrUVnZRVCzAb`, `USDT`, `TRC20`],
+      [`TAwUssPgZwjqktMeuTKK9fcTyeJzNG7X4D`, `USDT`, `TRC20`],
+      [`TQJcQub74scbzhMWEjxqUGm1ieuE8YBjkC`, `USDT`, `TRC20`],
       [`THGN8p5Hx4GNCLJM7Mtq8kFG7T9qwqX5K3`, `USDT`, `TRC20`],
       [`1BDEtH9AufT4pZiJuaVuQ4G5RvXwKPYfwa`, `BTC`, `BTC`],
       [`TWxNVYYtFWuZygwW346mqAZKfpmW6nU4mG`, `USDT`, `TRC20`],
