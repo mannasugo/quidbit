@@ -713,6 +713,8 @@ class Tools {
           });
         }
       });
+
+      writeFileSync(`../sqmaps/bin/json/index.json`, this.coats([this.Y, this.plot24()]));
     }, 5000);
   }
 
